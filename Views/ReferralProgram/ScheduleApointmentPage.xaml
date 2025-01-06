@@ -1,0 +1,191 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Youth.Views.ReferralProgram.ScheduleApointmentPage"
+             Title="{Binding Title}"
+             xmlns:local="clr-namespace:Youth.ViewModels"
+             xmlns:model="clr-namespace:Youth.Models"
+             xmlns:utils="clr-namespace:Youth.Utils"
+             Shell.NavBarIsVisible="False"
+             Shell.FlyoutItemIsVisible="False"
+             Shell.FlyoutBehavior="Disabled"
+             Shell.PresentationMode="Animated"
+             Shell.TabBarIsVisible="False"
+             xmlns:ios="clr-namespace:Microsoft.Maui.Controls.PlatformConfiguration.iOSSpecific;assembly=Microsoft.Maui.Controls"
+             ios:Page.UseSafeArea="true"
+             xmlns:renderers="clr-namespace:Youth.CustomRenderers">
+
+    <ContentPage.Resources>
+        <Style TargetType="Frame">
+            <Setter Property="HasShadow" Value="False"/>
+            <Setter Property="Padding" Value="0"/>
+            <Setter Property="CornerRadius" Value="20"/>
+            <Setter Property="IsClippedToBounds" Value="True"/>
+        </Style>
+        <ResourceDictionary>
+            <utils:MultiplierConverter x:Key="MultiplierConverter"/>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <ContentPage.Content>
+        <StackLayout>
+            <StackLayout
+                Orientation="Horizontal"
+                VerticalOptions="Center"
+                Spacing="10"
+                Grid.Row="0"
+                Margin="10,20,10,0">
+
+                <Image
+                    HorizontalOptions="Start"
+                    HeightRequest="30"
+                    Source="back.png"
+                    BackgroundColor="transparent"
+                    VerticalOptions="CenterAndExpand">
+                    <Image.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="Btn_Back"/>
+                    </Image.GestureRecognizers>
+                </Image>
+
+                <Label Text="{Binding Title}"
+                        HorizontalOptions="CenterAndExpand"
+                        VerticalOptions="CenterAndExpand"
+                        Style="{StaticResource TabHeader}"/>
+                <Image Source="check_big_black.png"
+                        HorizontalOptions="End"
+                        HeightRequest="30">
+                    <Image.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding SetNewScheduleCommand}"/>
+                    </Image.GestureRecognizers>
+                </Image>
+            </StackLayout>
+
+            <StackLayout>
+                <Grid HeightRequest="300">
+                    <Image Source="appointment.jpg"
+                            Aspect="AspectFill"
+                            HorizontalOptions="FillAndExpand"
+                            VerticalOptions="FillAndExpand"/>
+                </Grid>
+
+                <Frame
+                    HorizontalOptions="CenterAndExpand"
+                    Margin="30,-80,30,10"
+                    Padding="5,5,5,5"
+                    CornerRadius="20"
+                    HasShadow="True"
+                    BackgroundColor="{AppThemeBinding Light={StaticResource LightGray}, Dark={StaticResource Background_Mid}}">
+
+                    <StackLayout Orientation="Vertical">
+
+                        <Image
+                            Margin="15"
+                            HorizontalOptions="CenterAndExpand"
+                            Source="schedule.png"
+                            VerticalOptions="Center"
+                            HeightRequest="70"
+                            WidthRequest="70"/>
+
+                        <Frame Margin="5"
+                                Padding="5"
+                                BackgroundColor="Transparent"
+                                BorderColor="{StaticResource BorderColor}"
+                                CornerRadius="20"
+                                HasShadow="False">
+                            <Grid Padding="5">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+
+                                <Image
+                                    Margin="10,0,0,0"
+                                    HorizontalOptions="Center"
+                                    Source="calendar_tick.png"
+                                    VerticalOptions="Center"
+                                    HeightRequest="30"
+                                    WidthRequest="30">
+                                    <Image.Triggers>
+                                        <DataTrigger
+                                            Binding="{Binding isDateFilled}"
+                                            TargetType="Image"
+                                            Value="True">
+                                            <Setter Property="Source"
+                                                    Value="calendar_green.png"/>
+                                        </DataTrigger>
+                                    </Image.Triggers>
+                                </Image>
+                                <DatePicker
+                                    x:Name="dobDatePicker"
+                                    Grid.Column="1"
+                                    Margin="5,0,0,0"
+                                    VerticalOptions="Center"
+                                    
+                                    Format="D"
+                                    DateSelected="OnDateSelected"/>
+                                <Image
+                                    Grid.Column="2"
+                                    Margin="0,0,0,0"
+                                    HorizontalOptions="End"
+                                    Source="right_arrow.png"
+                                    VerticalOptions="Center"
+                                    HeightRequest="20"
+                                    WidthRequest="20"/>
+                            </Grid>
+                        </Frame>
+
+                        <Frame Margin="5,5,5,25"
+                                Padding="5"
+                                BackgroundColor="Transparent"
+                                BorderColor="{StaticResource BorderColor}"
+                                CornerRadius="20"
+                                HasShadow="False">
+                            <Grid Padding="5">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+
+                                <Image
+                                    Margin="10,0,0,0"
+                                    HorizontalOptions="Center"
+                                    Source="alarm.png"
+                                    VerticalOptions="Center"
+                                    HeightRequest="30"
+                                    WidthRequest="30">
+                                    <Image.Triggers>
+                                        <DataTrigger
+                                            Binding="{Binding isTimeFilled}"
+                                            TargetType="Image"
+                                            Value="True">
+                                            <Setter Property="Source"
+                                                    Value="alarm_green.png"/>
+                                        </DataTrigger>
+                                    </Image.Triggers>
+                                </Image>
+                                <TimePicker
+                                    x:Name="myTimePicker"
+                                    Grid.Column="1"
+                                    Margin="5,0,0,0"
+                                    VerticalOptions="Center"
+                                    
+                                    Format="HH:mm:ss"
+                                    Time="{Binding MyTime}"/>
+                                <Image
+                                    Grid.Column="2"
+                                    Margin="0,0,0,0"
+                                    HorizontalOptions="End"
+                                    Source="right_arrow.png"
+                                    VerticalOptions="Center"
+                                    HeightRequest="20"
+                                    WidthRequest="20"/>
+                            </Grid>
+                        </Frame>
+                    </StackLayout>
+                </Frame>
+            </StackLayout>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

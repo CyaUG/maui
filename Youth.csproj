@@ -1,0 +1,614 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFrameworks>net8.0-ios;net8.0-maccatalyst;net8.0-android</TargetFrameworks>
+		<TargetFrameworks Condition="$([MSBuild]::IsOSPlatform('windows'))">$(TargetFrameworks);net8.0-windows10.0.19041.0</TargetFrameworks>
+		<!-- Uncomment to also build the tizen app. You will need to install tizen by following this: https://github.com/Samsung/Tizen.NET -->
+		<!-- <TargetFrameworks>$(TargetFrameworks);net8.0-tizen</TargetFrameworks> -->
+
+		<!-- Note for MacCatalyst:
+		The default runtime is maccatalyst-x64, except in Release config, in which case the default is maccatalyst-x64;maccatalyst-arm64.
+		When specifying both architectures, use the plural <RuntimeIdentifiers> instead of the singular <RuntimeIdentifier>.
+		The Mac App Store will NOT accept apps with ONLY maccatalyst-arm64 indicated;
+		either BOTH runtimes must be indicated or ONLY macatalyst-x64. -->
+		<!-- For example: <RuntimeIdentifiers>maccatalyst-x64;maccatalyst-arm64</RuntimeIdentifiers> -->
+
+		<OutputType>Exe</OutputType>
+		<RootNamespace>Youth</RootNamespace>
+		<UseMaui>true</UseMaui>
+		<SingleProject>true</SingleProject>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>enable</Nullable>
+
+		<!-- Display name -->
+		<ApplicationTitle>CYA</ApplicationTitle>
+
+		<!-- App Identifier -->
+		<ApplicationId>org.creativeyouthagency.app</ApplicationId>
+
+		<!-- Versions -->
+		<ApplicationDisplayVersion>1.0</ApplicationDisplayVersion>
+		<ApplicationVersion>1</ApplicationVersion>
+
+		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'ios'">11.0</SupportedOSPlatformVersion>
+		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'maccatalyst'">13.1</SupportedOSPlatformVersion>
+		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'android'">21.0</SupportedOSPlatformVersion>
+		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">10.0.17763.0</SupportedOSPlatformVersion>
+		<TargetPlatformMinVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">10.0.17763.0</TargetPlatformMinVersion>
+		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'tizen'">6.5</SupportedOSPlatformVersion>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<!-- App Icon -->
+		<MauiIcon Include="Resources\AppIcon\cya_icon.svg" ForegroundFile="Resources\AppIcon\cya_icon.svg" Color="#2E1913" />
+
+		<!-- Splash Screen -->
+		<MauiSplashScreen Include="Resources\Splash\cya_icon.svg" Color="#2E1913" BaseSize="128,128" />
+
+		<!-- Images -->
+		<MauiImage Include="Resources\Images\*" />
+		<MauiImage Update="Resources\Images\dotnet_bot.png" Resize="True" BaseSize="300,185" />
+
+		<!-- Custom Fonts -->
+		<MauiFont Include="Resources\Fonts\*" />
+
+		<!-- Raw Assets (also remove the "Resources\Raw" prefix) -->
+		<MauiAsset Include="Resources\Raw\**" LogicalName="%(RecursiveDir)%(Filename)%(Extension)" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <None Remove="Resources\Fonts\fa-solid-900.ttf" />
+	  <None Remove="Resources\Images\access_time.png" />
+	  <None Remove="Resources\Images\account_plus.png" />
+	  <None Remove="Resources\Images\add.png" />
+	  <None Remove="Resources\Images\address.png" />
+	  <None Remove="Resources\Images\address_location.png" />
+	  <None Remove="Resources\Images\add_contact.png" />
+	  <None Remove="Resources\Images\add_user.png" />
+	  <None Remove="Resources\Images\alarm.png" />
+	  <None Remove="Resources\Images\alarm_green.png" />
+	  <None Remove="Resources\Images\alert.png" />
+	  <None Remove="Resources\Images\anonymous.png" />
+	  <None Remove="Resources\Images\appointment.jpg" />
+	  <None Remove="Resources\Images\arrow.png" />
+	  <None Remove="Resources\Images\arrow_drop_down.png" />
+	  <None Remove="Resources\Images\arrow_drop_down_white.png" />
+	  <None Remove="Resources\Images\attachment.png" />
+	  <None Remove="Resources\Images\back.png" />
+	  <None Remove="Resources\Images\back_round.png" />
+	  <None Remove="Resources\Images\bag.png" />
+	  <None Remove="Resources\Images\bag30.png" />
+	  <None Remove="Resources\Images\ballot.png" />
+	  <None Remove="Resources\Images\bg_trophy.jpg" />
+	  <None Remove="Resources\Images\bin.png" />
+	  <None Remove="Resources\Images\block.png" />
+	  <None Remove="Resources\Images\calendar.png" />
+	  <None Remove="Resources\Images\calendar_green.png" />
+	  <None Remove="Resources\Images\calendar_tick.png" />
+	  <None Remove="Resources\Images\calendar_white.png" />
+	  <None Remove="Resources\Images\camera.png" />
+	  <None Remove="Resources\Images\camera_black.png" />
+	  <None Remove="Resources\Images\camera_border_capture_transparent.png" />
+	  <None Remove="Resources\Images\camera_green.png" />
+	  <None Remove="Resources\Images\camera_wt.png" />
+	  <None Remove="Resources\Images\chat.png" />
+	  <None Remove="Resources\Images\chat_disabled.png" />
+	  <None Remove="Resources\Images\chat_enabled.png" />
+	  <None Remove="Resources\Images\check.png" />
+	  <None Remove="Resources\Images\check_big_black.png" />
+	  <None Remove="Resources\Images\check_big_white.png" />
+	  <None Remove="Resources\Images\check_circle.png" />
+	  <None Remove="Resources\Images\city.png" />
+	  <None Remove="Resources\Images\close.png" />
+	  <None Remove="Resources\Images\close_round.png" />
+	  <None Remove="Resources\Images\close_tab.png" />
+	  <None Remove="Resources\Images\confirm_nin.png" />
+	  <None Remove="Resources\Images\contact.png" />
+	  <None Remove="Resources\Images\corporates.png" />
+	  <None Remove="Resources\Images\crown.png" />
+	  <None Remove="Resources\Images\cyber_security.png" />
+	  <None Remove="Resources\Images\dollar.png" />
+	  <None Remove="Resources\Images\email.png" />
+	  <None Remove="Resources\Images\email_address.png" />
+	  <None Remove="Resources\Images\error_red.png" />
+	  <None Remove="Resources\Images\expand_button.png" />
+	  <None Remove="Resources\Images\facebook_messenger_white.png" />
+	  <None Remove="Resources\Images\fb.png" />
+	  <None Remove="Resources\Images\file.png" />
+	  <None Remove="Resources\Images\fingerprint.png" />
+	  <None Remove="Resources\Images\gallery.png" />
+	  <None Remove="Resources\Images\gender.png" />
+	  <None Remove="Resources\Images\google.png" />
+	  <None Remove="Resources\Images\gps_green.png" />
+	  <None Remove="Resources\Images\gps_point.png" />
+	  <None Remove="Resources\Images\gps_white.png" />
+	  <None Remove="Resources\Images\graduation.png" />
+	  <None Remove="Resources\Images\health_insurance.png" />
+	  <None Remove="Resources\Images\hide.png" />
+	  <None Remove="Resources\Images\high_school.png" />
+	  <None Remove="Resources\Images\home.png" />
+	  <None Remove="Resources\Images\home30.png" />
+	  <None Remove="Resources\Images\icon.png" />
+	  <None Remove="Resources\Images\icon_about.png" />
+	  <None Remove="Resources\Images\icon_feed.png" />
+	  <None Remove="Resources\Images\ic_maps_indicator_current_position.png" />
+	  <None Remove="Resources\Images\identity_card.png" />
+	  <None Remove="Resources\Images\identity_card_green.png" />
+	  <None Remove="Resources\Images\info.png" />
+	  <None Remove="Resources\Images\iphone.jpg" />
+	  <None Remove="Resources\Images\language.png" />
+	  <None Remove="Resources\Images\like.png" />
+	  <None Remove="Resources\Images\liked.png" />
+	  <None Remove="Resources\Images\login_wt.png" />
+	  <None Remove="Resources\Images\logo.png" />
+	  <None Remove="Resources\Images\logo1024.png" />
+	  <None Remove="Resources\Images\logo512.png" />
+	  <None Remove="Resources\Images\love.png" />
+	  <None Remove="Resources\Images\love30.png" />
+	  <None Remove="Resources\Images\love_false.png" />
+	  <None Remove="Resources\Images\love_true.png" />
+	  <None Remove="Resources\Images\mace.png" />
+	  <None Remove="Resources\Images\map.png" />
+	  <None Remove="Resources\Images\map_point.png" />
+	  <None Remove="Resources\Images\menu.png" />
+	  <None Remove="Resources\Images\messenger.png" />
+	  <None Remove="Resources\Images\messenger30.png" />
+	  <None Remove="Resources\Images\minus_circle.png" />
+	  <None Remove="Resources\Images\moon.png" />
+	  <None Remove="Resources\Images\more_horizontal.png" />
+	  <None Remove="Resources\Images\mountain_dark.png" />
+	  <None Remove="Resources\Images\mountain_light.png" />
+	  <None Remove="Resources\Images\nav_left_white.png" />
+	  <None Remove="Resources\Images\package_delivery.jpg" />
+	  <None Remove="Resources\Images\paper_plane.png" />
+	  <None Remove="Resources\Images\passport.png" />
+	  <None Remove="Resources\Images\passport_green.png" />
+	  <None Remove="Resources\Images\pause.png" />
+	  <None Remove="Resources\Images\pause_white.png" />
+	  <None Remove="Resources\Images\pencil.png" />
+	  <None Remove="Resources\Images\pencil_wt.png" />
+	  <None Remove="Resources\Images\phone_number.png" />
+	  <None Remove="Resources\Images\play.png" />
+	  <None Remove="Resources\Images\play_white.png" />
+	  <None Remove="Resources\Images\plus_circle.png" />
+	  <None Remove="Resources\Images\portfolio.png" />
+	  <None Remove="Resources\Images\power.png" />
+	  <None Remove="Resources\Images\profile.png" />
+	  <None Remove="Resources\Images\profile_circular.png" />
+	  <None Remove="Resources\Images\profile_disabled.png" />
+	  <None Remove="Resources\Images\profile_enabled.png" />
+	  <None Remove="Resources\Images\profile_icon.png" />
+	  <None Remove="Resources\Images\qrcode.png" />
+	  <None Remove="Resources\Images\qr_code_bg.jpg" />
+	  <None Remove="Resources\Images\question.png" />
+	  <None Remove="Resources\Images\questionnaire.png" />
+	  <None Remove="Resources\Images\questionnaire_green.png" />
+	  <None Remove="Resources\Images\quiz_stats_black.png" />
+	  <None Remove="Resources\Images\recycle.png" />
+	  <None Remove="Resources\Images\report.png" />
+	  <None Remove="Resources\Images\right_arrow.png" />
+	  <None Remove="Resources\Images\ringing.png" />
+	  <None Remove="Resources\Images\ringing30.png" />
+	  <None Remove="Resources\Images\save.png" />
+	  <None Remove="Resources\Images\scan_qr_code.png" />
+	  <None Remove="Resources\Images\schedule.png" />
+	  <None Remove="Resources\Images\search.png" />
+	  <None Remove="Resources\Images\search_user.png" />
+	  <None Remove="Resources\Images\search_user_green.png" />
+	  <None Remove="Resources\Images\send_disabled.png" />
+	  <None Remove="Resources\Images\send_enabled.png" />
+	  <None Remove="Resources\Images\send_message.png" />
+	  <None Remove="Resources\Images\settings.png" />
+	  <None Remove="Resources\Images\settings_mesh.png" />
+	  <None Remove="Resources\Images\settings_w30.png" />
+	  <None Remove="Resources\Images\settings_white.png" />
+	  <None Remove="Resources\Images\share.png" />
+	  <None Remove="Resources\Images\share_color.png" />
+	  <None Remove="Resources\Images\share_wt.png" />
+	  <None Remove="Resources\Images\shopping_cart.png" />
+	  <None Remove="Resources\Images\show.png" />
+	  <None Remove="Resources\Images\smart_phone.png" />
+	  <None Remove="Resources\Images\star.png" />
+	  <None Remove="Resources\Images\store.png" />
+	  <None Remove="Resources\Images\store30.png" />
+	  <None Remove="Resources\Images\ui_ux_design.png" />
+	  <None Remove="Resources\Images\user.png" />
+	  <None Remove="Resources\Images\user_dark.png" />
+	  <None Remove="Resources\Images\user_light.png" />
+	  <None Remove="Resources\Images\video.png" />
+	  <None Remove="Resources\Images\visualization.png" />
+	  <None Remove="Resources\Images\wagaana.png" />
+	  <None Remove="Resources\Images\wagaana_wt.png" />
+	  <None Remove="Resources\Images\website_click.png" />
+	  <None Remove="Resources\Images\youtube.png" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <EmbeddedResource Include="Resources\countries.json" />
+	</ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Maui.Controls" Version="$(MauiVersion)" />
+    <PackageReference Include="Microsoft.Maui.Controls.Compatibility" Version="$(MauiVersion)" />
+    <PackageReference Include="Microsoft.Maui.Controls.Build.Tasks" Version="$(MauiVersion)" />
+    <PackageReference Include="Microsoft.Maui.Controls.Maps" Version="$(MauiVersion)" />
+    <PackageReference Include="Microsoft.Maui.Controls.Xaml" Version="$(MauiVersion)" />
+	<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="8.0.0" />
+
+    <PackageReference Include="Microsoft.Maui.Core" Version="$(MauiVersion)" />
+    <PackageReference Include="Microsoft.Maui.Essentials" Version="$(MauiVersion)" />
+    <PackageReference Include="Microsoft.Maui.Graphics" Version="$(MauiVersion)" />
+    <PackageReference Include="Microsoft.Maui.Maps" Version="$(MauiVersion)" />
+    <PackageReference Include="Microsoft.Maui.Resizetizer" Version="$(MauiVersion)" />
+    <PackageReference Include="Microsoft.Toolkit.Uwp.Notifications" Version="7.1.3" />
+
+    <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="9.0.0-rc.1.24431.7" />
+    <PackageReference Include="Microsoft.Extensions.Configuration" Version="9.0.0-rc.1.24431.7" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="9.0.0-rc.1.24431.7" />
+    <PackageReference Include="Microsoft.Extensions.Logging" Version="9.0.0-rc.1.24431.7" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="9.0.0-rc.1.24431.7" />
+
+
+    <PackageReference Include="CommunityToolkit.Maui" Version="9.0.3" />
+    <PackageReference Include="CommunityToolkit.Maui.Maps" Version="2.0.3" />
+    <PackageReference Include="CommunityToolkit.Maui.MediaElement" Version="4.1.1" />
+    <PackageReference Include="CommunityToolkit.Common" Version="8.3.2" />
+    <PackageReference Include="CommunityToolkit.Diagnostics" Version="8.3.2" />
+    <PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.2" />
+
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+    <PackageReference Include="Newtonsoft.Json.Bson" Version="1.0.3-beta1" />
+    <PackageReference Include="Portable.BouncyCastle" Version="1.9.0" />
+    <PackageReference Include="QRCoder" Version="1.6.0" />
+    <PackageReference Include="Refractored.MvvmHelpers" Version="1.6.2" />
+    <PackageReference Include="ZXing.Net.Maui" Version="0.4.0" />
+    <PackageReference Include="ZXing.Net.Maui.Controls" Version="0.4.0" />
+
+    <PackageReference Include="Microsoft.IdentityModel.JsonWebTokens" Version="8.0.2" />
+    <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="8.0.2" />
+    <PackageReference Include="System.Private.Uri" Version="4.3.2" />
+    <PackageReference Include="PInvoke.User32" Version="0.7.104" />
+  </ItemGroup>
+  
+  <PropertyGroup>
+		<SkipValidateMauiImplicitPackageReferences>true</SkipValidateMauiImplicitPackageReferences>
+	</PropertyGroup>
+
+  
+	<ItemGroup Condition="'$(TargetFramework)' == 'net8.0-windows10.0.19041.0'">
+	  <PackageReference Include="CommunityToolkit.WinUI.UI.Media">
+	    <Version>7.1.2</Version>
+	  </PackageReference>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <MauiXaml Update="Resources\Styles\DefaultTheme.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\Tools\CountryCodePickerPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\Account\LanguageProviderPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\Account\LocationPickerPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\Account\MyAccountPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\Account\NameEditorPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\Account\PhoneEditorPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\Account\UserProfilePage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\Auth\ChangePasswordPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\Auth\DeleteMyAccountPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\Auth\LoginPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\Auth\RegisterPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\Auth\ResetPassPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\Auth\WelcomePage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\ContactsProviderPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\Events\CartEventsPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\Events\CreateEventPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\Events\EventApplicationPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\Events\EventCategoryEventsPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\Events\EventCategoryProviderPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\Events\EventConfigPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\Events\EventDetailsPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\Events\EventDiscussionPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\Events\EventDiscussionRepliesPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\Events\EventMgmtPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\Events\EventOrderDetailsPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\Events\EventOrderTicetsPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\Events\EventPosPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\Events\EventTicketsProviderPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\Events\MainEventsPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\Events\MyActiveListedEventsPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\Events\MyEventOrdersPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\Events\MySavedEventsPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\Events\TicketDetailsPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\jobs\AddCustomQuestionPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\jobs\CreateJobPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\jobs\JobAppCustomQnsPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\jobs\JobApplicantsPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\jobs\JobApplicationDetailsPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\jobs\JobApplicationFormPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\jobs\JobCategoryJobsPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\jobs\JobCategoryPickerPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\jobs\JobDetailsPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\jobs\JobDiscussionPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\jobs\JobDiscussionRepliesPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\jobs\MainJobsPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\jobs\MyActiveListedJobsPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\jobs\MyJobApplicationsPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\jobs\MySavedJobsPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\jobs\PickJobTypePage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\jobs\QuestionSuggestionsPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\Main\ChatsPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\Main\HomePage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\Main\MessagesPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\Main\NotificationsPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\Main\SettingsPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\Plastics\MainPlasticsPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\Plastics\ServiceCenterInfoPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\Quizzes\MainQuizzesPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\Quizzes\QuizCategoryQuizzesPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\Quizzes\QuizLeaderBoardPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\Quizzes\QuizQuestionsPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\ReferralProgram\CitizenshipPickerPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\ReferralProgram\CreateNewReferralAccountPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\ReferralProgram\CreateNewReferralPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\ReferralProgram\CreateReferralProfilePage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\ReferralProgram\GenderPickerPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\ReferralProgram\HealthCenterProviderPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\ReferralProgram\HealthCenterStaffMemberProviderPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\ReferralProgram\LinkReferralProfilePage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\ReferralProgram\MainReferralPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\ReferralProgram\ReferralAccountCategoryPickerPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\ReferralProgram\ReferralAccountProviderPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\ReferralProgram\ReferralAccountQrCodePage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\ReferralProgram\ReferralDetailsHealthWorkerPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\ReferralProgram\ReferralDetailsPatientPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\ReferralProgram\ReferralDetailsPeerEducatorPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\ReferralProgram\ReferralDistrictProviderPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\ReferralProgram\ReferralServicesProviderPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\ReferralProgram\ScanReferralCardPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\ReferralProgram\ScheduleApointmentPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\ReferralProgram\SearchSymptomsPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\ReferralProgram\SymptomDetailsPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\SafeSpace\ComposePostPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\SafeSpace\PostDetailsPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\SafeSpace\SafeSpaceMainPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\SearchUsersPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\Shopping\AddToCartPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\Shopping\CheckOutPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\Shopping\ChildSubCategoriesPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\Shopping\DeliveryInfoProviderPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\Shopping\MainShoppingPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\Shopping\ProductColorProviderPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\Shopping\ProductDetailsPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\Shopping\ProductSizeProviderPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\Shopping\SearchProductsPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\Shopping\ShopingSubCategoryBrandsProviderPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\Shopping\ShoppingBrandModelsPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\Shopping\ShoppingCartPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\Shopping\ShoppingCategoriesPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\Shopping\ShoppingOrderProductsPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\Shopping\ShoppingOrdersPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\Shopping\ShoppingProductDiscussionPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\Shopping\ShoppingProductDiscussionRepliesPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\Shopping\ShoppingSubCategoriesPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\Shopping\ShoppingWishListPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\Shopping\SubCategoryItemsCustomPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\Shopping\SubCategoryItemsDefaultPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\Widgets\LoginToContinueWidget.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	</ItemGroup>
+
+</Project>

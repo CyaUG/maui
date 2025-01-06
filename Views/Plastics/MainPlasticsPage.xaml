@@ -1,0 +1,202 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Youth.Views.Plastics.MainPlasticsPage"
+             Title="{Binding Title}"
+             xmlns:local="clr-namespace:Youth.Helpers.Converters"
+             xmlns:model="clr-namespace:Youth.Models"
+             xmlns:renderers="clr-namespace:Youth.CustomRenderers"
+             Shell.NavBarIsVisible="False"
+             Shell.FlyoutItemIsVisible="False"
+             Shell.FlyoutBehavior="Disabled"
+             Shell.PresentationMode="Animated"
+             Shell.TabBarIsVisible="False"
+             xmlns:ios="clr-namespace:Microsoft.Maui.Controls.PlatformConfiguration.iOSSpecific;assembly=Microsoft.Maui.Controls"
+             xmlns:maps="clr-namespace:Microsoft.Maui.Controls.Maps;assembly=Microsoft.Maui.Controls.Maps"
+             ios:Page.UseSafeArea="true">
+
+    <ContentPage.Resources>
+        <Style TargetType="Label">
+            <Setter Property="TextColor"/>
+        </Style>
+        <Style TargetType="Frame">
+            <Setter Property="HasShadow"
+                    Value="False"/>
+            <Setter Property="BackgroundColor"/>
+            <Setter Property="Padding"
+                    Value="0"/>
+            <Setter Property="CornerRadius"
+                    Value="20"/>
+            <Setter Property="IsClippedToBounds"
+                    Value="True"/>
+        </Style>
+
+        <ResourceDictionary>
+            <local:IsImageSourceConverter x:Key="isImageSourceConverter"/>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <ContentPage.Content>
+        <StackLayout>
+            <StackLayout
+                Orientation="Horizontal"
+                VerticalOptions="Center"
+                Spacing="10"
+                Grid.Row="0"
+                Margin="10,20,10,10">
+
+                <Image
+                    HorizontalOptions="Start"
+                    HeightRequest="30"
+                    Source="back.png"
+                    BackgroundColor="transparent"
+                    VerticalOptions="CenterAndExpand">
+                    <Image.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="Btn_Back"/>
+                    </Image.GestureRecognizers>
+                </Image>
+
+                <Label Text="{Binding Title}"
+                        HorizontalOptions="CenterAndExpand"
+                        VerticalOptions="CenterAndExpand"
+                        Style="{StaticResource TabHeader}"/>
+                <Image Source="close_tab.png"
+                        HorizontalOptions="End"
+                        HeightRequest="30">
+                    <Image.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="Btn_Back"/>
+                    </Image.GestureRecognizers>
+                </Image>
+            </StackLayout>
+
+            <Grid VerticalOptions="FillAndExpand">
+                <!--
+                <ContentView Content="{Binding ServicePointMap}"
+                        VerticalOptions="FillAndExpand"
+                        HorizontalOptions="FillAndExpand"/>
+
+                <WebView Source="{Binding MapSource}"
+                        VerticalOptions="FillAndExpand"
+                        HorizontalOptions="FillAndExpand" />
+                -->
+
+                <WebView VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" Margin="0">
+                    <WebView.Source>
+                        <HtmlWebViewSource Html="{Binding MapSource}" />
+                    </WebView.Source>
+                </WebView>
+            </Grid>
+
+            <StackLayout Padding="15,5">
+                <Grid Margin="5,0,5,0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Label
+                        FontAttributes="Bold"
+                        FontSize="Medium"
+                        HorizontalOptions="Start"
+                        Text="Nearest Service Point"
+                        
+                        VerticalOptions="CenterAndExpand"/>
+
+                    <Label
+                        Grid.Column="1"
+                        FontAttributes="Bold"
+                        FontSize="Medium"
+                        HorizontalOptions="End"
+                        Text="Done"
+                        
+                        VerticalOptions="CenterAndExpand"
+                            IsVisible="True">
+                        <Label.Triggers>
+                            <DataTrigger Binding="{Binding IsBusy}"
+                                    TargetType="Label"
+                                    Value="True">
+                                <Setter Property="IsVisible"
+                                        Value="False"/>
+                            </DataTrigger>
+                        </Label.Triggers>
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="Btn_Back"/>
+                        </Label.GestureRecognizers>
+                    </Label>
+
+                    <ActivityIndicator
+                        Grid.Column="1"
+                        x:Name="ActivityIndicator"
+                        IsRunning="{Binding IsBusy}"
+                        HeightRequest="30"
+                        WidthRequest="30"
+                        HorizontalOptions="End"
+                        Color="{StaticResource PrimaryDarkColor}"
+                        IsVisible="False">
+                        <ActivityIndicator.Triggers>
+                            <DataTrigger Binding="{Binding IsBusy}"
+                                    TargetType="ActivityIndicator"
+                                    Value="True">
+                                <Setter Property="IsVisible"
+                                        Value="True"/>
+                            </DataTrigger>
+                        </ActivityIndicator.Triggers>
+                    </ActivityIndicator>
+                </Grid>
+                <BoxView Color="Gray"
+                        HeightRequest="1"
+                        HorizontalOptions="FillAndExpand"
+                        Margin="0,5,0,0"/>
+
+                <Frame CornerRadius="5"
+                        BackgroundColor="{AppThemeBinding Light={StaticResource LightGray}, Dark={StaticResource Background_Mid}}"
+                        HasShadow="True"
+                        Padding="5"
+                        Margin="0,5,0,5">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+
+                        <StackLayout>
+                            <Label
+                                Margin="5"
+                                FontAttributes="Bold"
+                                FontSize="Small"
+                                Text="{Binding ActiveServicePoint.address}"
+                                VerticalOptions="CenterAndExpand"
+                                MaxLines="1"/>
+
+                            <Label
+                                x:Name="LocationLabel"
+                                Grid.Column="1"
+                                Margin="5"
+                                FontAttributes="Bold"
+                                FontSize="Medium"
+                                VerticalOptions="CenterAndExpand"
+                                Text="{Binding ActiveServicePoint.label}"
+                                MaxLines="1"/>
+                        </StackLayout>
+
+                        <Image
+                            x:Name="ProfileImge"
+                            Grid.Column="1"
+                            HeightRequest="60"
+                            WidthRequest="60"
+                            HorizontalOptions="Center"
+                            Source="{Binding ActiveServicePoint.imageUrl, Converter={StaticResource isImageSourceConverter}}"
+                            VerticalOptions="Center"
+                            Aspect="AspectFill"/>
+                    </Grid>
+                </Frame>
+
+                <Button
+                    Text="Explore Service Point"
+                    Command="{Binding ExploreServicePointCommand}"
+                    Margin="15,5,15,0"/>
+            </StackLayout>
+
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

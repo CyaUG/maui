@@ -1,0 +1,62 @@
+[
+  {
+    "name": "Burundi",
+    "nameCode": "BI",
+    "callingCode": "+257",
+    "flagUrl": "https://flagcdn.com/w320/bi.png"
+  },
+  {
+    "name": "Congo (D.R.C)",
+    "nameCode": "CD",
+    "callingCode": "+243",
+    "flagUrl": "https://flagcdn.com/w320/cd.png"
+  },
+  {
+    "name": "Eritrea",
+    "nameCode": "ER",
+    "callingCode": "+291",
+    "flagUrl": "https://flagcdn.com/w320/er.png"
+  },
+  {
+    "name": "Ethiopia",
+    "nameCode": "ET",
+    "callingCode": "+251",
+    "flagUrl": "https://flagcdn.com/w320/et.png"
+  },
+  {
+    "name": "Kenya",
+    "nameCode": "KE",
+    "callingCode": "+254",
+    "flagUrl": "https://flagcdn.com/w320/ke.png"
+  },
+  {
+    "name": "Rwanda",
+    "nameCode": "RW",
+    "callingCode": "+250",
+    "flagUrl": "https://flagcdn.com/w320/rw.png"
+  },
+  {
+    "name": "Somalia",
+    "nameCode": "SO",
+    "callingCode": "+252",
+    "flagUrl": "https://flagcdn.com/w320/so.png"
+  },
+  {
+    "name": "South Sudan",
+    "nameCode": "SS",
+    "callingCode": "+211",
+    "flagUrl": "https://flagcdn.com/w320/ss.png"
+  },
+  {
+    "name": "Tanzania",
+    "nameCode": "TZ",
+    "callingCode": "+255",
+    "flagUrl": "https://flagcdn.com/w320/tz.png"
+  },
+  {
+    "name": "Uganda",
+    "nameCode": "UG",
+    "callingCode": "+256",
+    "flagUrl": "https://flagcdn.com/w320/ug.png"
+  }
+]

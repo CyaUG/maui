@@ -1,0 +1,273 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Youth.Views.Shopping.CheckOutPage"
+             Title="{Binding Title}"
+             xmlns:local="clr-namespace:Youth.ViewModels"
+             xmlns:model="clr-namespace:Youth.Models"
+             xmlns:renderers="clr-namespace:Youth.CustomRenderers"
+             Shell.NavBarIsVisible="False"
+             Shell.FlyoutItemIsVisible="False"
+             Shell.FlyoutBehavior="Disabled"
+             NavigationPage.HasNavigationBar="False"
+             Shell.PresentationMode="Animated"
+             Shell.TabBarIsVisible="False"
+             xmlns:ios="clr-namespace:Microsoft.Maui.Controls.PlatformConfiguration.iOSSpecific;assembly=Microsoft.Maui.Controls"
+             ios:Page.UseSafeArea="true">
+
+    <ContentPage.Resources>
+        <Style TargetType="Frame">
+            <Setter Property="HasShadow"
+                    Value="False"/>
+            <Setter Property="Padding"
+                    Value="0"/>
+            <Setter Property="CornerRadius"
+                    Value="20"/>
+            <Setter Property="IsClippedToBounds"
+                    Value="True"/>
+        </Style>
+    </ContentPage.Resources>
+
+    <ContentPage.Content>
+        <StackLayout>
+            <StackLayout
+                Orientation="Horizontal"
+                VerticalOptions="Center"
+                Spacing="10"
+                Grid.Row="0"
+                Margin="10,20,10,0">
+
+                <Image
+                    HorizontalOptions="StartAndExpand"
+                    HeightRequest="30"
+                    Source="back.png"
+                    BackgroundColor="transparent"
+                    VerticalOptions="CenterAndExpand">
+                    <Image.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="Btn_Back"/>
+                    </Image.GestureRecognizers>
+                </Image>
+
+                <Image Source="Search"
+                        HorizontalOptions="EndAndExpand"
+                        HeightRequest="30">
+                    <Image.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OpenSearchPage"/>
+                    </Image.GestureRecognizers>
+                </Image>
+            </StackLayout>
+
+            <RefreshView x:DataType="local:CheckOutViewModel"
+                    Command="{Binding LoadMainCommand}"
+                    IsRefreshing="{Binding IsBusy}">
+                <ScrollView VerticalScrollBarVisibility="Never">
+                    <StackLayout Padding="10,10,10,10"
+                            Spacing="10">
+
+                        <Label
+                            TextColor="Red"
+                            FontSize="17"
+                            Text="Total"
+                            HorizontalOptions="CenterAndExpand"
+                            FontAttributes="Bold"/>
+
+                        <Label
+                            FontSize="34"
+                            HorizontalOptions="CenterAndExpand"
+                            FontAttributes="Bold">
+                            <Label.Text>
+                                <MultiBinding StringFormat="{}{0} {1}">
+                                    <Binding Path="systemSettings.currency"/>
+                                    <Binding Path="TotalAmmount"/>
+                                </MultiBinding>
+                            </Label.Text>
+                        </Label>
+
+                        <Label
+                            Text="Where do you want us to deliver"
+                            FontAttributes="Bold"
+                            FontSize="25"
+                            HorizontalOptions="CenterAndExpand"
+                            HorizontalTextAlignment="Center"/>
+
+                        <Frame
+                            Margin="0,15,0,15"
+                            Padding="5,5,5,5"
+                            BackgroundColor="Transparent"
+                            BorderColor="{StaticResource BorderColor}"
+                            CornerRadius="20"
+                            HasShadow="False">
+                            <Frame.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding OpenDeliveryInfoProviderPageCommand}"/>
+                            </Frame.GestureRecognizers>
+                            <Grid Padding="5">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+
+                                <Image
+                                    Margin="10,0,0,0"
+                                    HorizontalOptions="Center"
+                                    Source="gps_point.png"
+                                    VerticalOptions="Center"
+                                    HeightRequest="40"
+                                    WidthRequest="40"/>
+
+                                <Label
+                                    Grid.Column="1"
+                                    Margin="20,0,0,0"
+                                    Style="{StaticResource SubTextSemiBold}"
+                                    Text="{Binding LocationAddress}"
+                                    VerticalOptions="Center"/>
+                                <Image
+                                    Grid.Column="2"
+                                    Margin="0,0,10,0"
+                                    HorizontalOptions="Center"
+                                    Source="right_arrow.png"
+                                    VerticalOptions="Center"
+                                    HeightRequest="20"
+                                    WidthRequest="20"/>
+                            </Grid>
+                        </Frame>
+
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="150"/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+
+                            <BoxView/>
+                            <Frame CornerRadius="0"
+                                    Padding="2">
+                                <Frame CornerRadius="0"
+                                       Padding="10"
+                                       BackgroundColor="White"
+                                       HasShadow="True">
+                                    <Label Text="Delivery Fee"
+                                            FontSize="14"
+                                            TextColor="{StaticResource PrimaryDarkColor}"
+                                            FontAttributes="Bold"
+                                            VerticalOptions="Center"
+                                            HorizontalOptions="Center"/>
+                                </Frame>
+                            </Frame>
+
+                            <BoxView Grid.Column="1"/>
+                            <Frame CornerRadius="0"
+                                    Grid.Column="1"
+                                    Padding="2">
+                                <Frame CornerRadius="0"
+                                       Padding="10"
+                                       BackgroundColor="White"
+                                       HasShadow="True">
+                                    <Label
+                                        FontSize="14"
+                                        TextColor="{StaticResource PrimaryDarkColor}"
+                                        FontAttributes="Bold"
+                                        VerticalOptions="Center"
+                                        HorizontalOptions="Start">
+                                        <Label.Text>
+                                            <MultiBinding StringFormat="{}{0} {1}">
+                                                <Binding Path="systemSettings.currency"/>
+                                                <Binding Path="mDeliveryFee.deliveryFee"/>
+                                            </MultiBinding>
+                                        </Label.Text>
+                                    </Label>
+                                </Frame>
+                            </Frame>
+
+                            <BoxView Grid.Row="1"/>
+                            <Frame CornerRadius="0"
+                                    Grid.Row="1"
+                                    Padding="2">
+                                <Frame CornerRadius="0"
+                                       Padding="10"
+                                       BackgroundColor="White"
+                                       HasShadow="True">
+                                    <Label Text="Total Fee"
+                                            FontSize="14"
+                                            TextColor="{StaticResource PrimaryDarkColor}"
+                                            FontAttributes="Bold"
+                                            VerticalOptions="Center"
+                                            HorizontalOptions="Center"/>
+                                </Frame>
+                            </Frame>
+
+                            <BoxView Grid.Row="1"
+                                    Grid.Column="1"/>
+                            <Frame CornerRadius="0"
+                                    Grid.Row="1"
+                                    Grid.Column="1"
+                                    Padding="2">
+                                <Frame CornerRadius="0"
+                                       Padding="10"
+                                       BackgroundColor="White"
+                                       HasShadow="True">
+                                    <Label
+                                        FontSize="14"
+                                        TextColor="{StaticResource PrimaryDarkColor}"
+                                        FontAttributes="Bold"
+                                        VerticalOptions="Center"
+                                        HorizontalOptions="Start">
+                                        <Label.Text>
+                                            <MultiBinding StringFormat="{}{0} {1}">
+                                                <Binding Path="systemSettings.currency"/>
+                                                <Binding Path="TotalSum"/>
+                                            </MultiBinding>
+                                        </Label.Text>
+                                    </Label>
+                                </Frame>
+                            </Frame>
+                        </Grid>
+
+                        <Label Text="Payments"
+                                HorizontalOptions="Center"
+                                FontSize="12"
+                                FontAttributes="Bold"
+                                
+                                Margin="15,0,0,0"/>
+                        <Frame HorizontalOptions="FillAndExpand"
+                                 BackgroundColor="{AppThemeBinding Light={StaticResource LightGray}, Dark={StaticResource Background_Mid}}"
+                                HeightRequest="50">
+                            <Frame.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding PayOnDeliveryCommand}"/>
+                            </Frame.GestureRecognizers>
+                            <Label Text="Pay On Delivery"
+                                    FontSize="14"
+                                    
+                                    FontAttributes="Bold"
+                                    VerticalOptions="Center"
+                                    HorizontalOptions="Center"/>
+                        </Frame>
+
+                        <Label Text="OR"
+                                HorizontalOptions="Center"
+                                FontSize="12"
+                                FontAttributes="Bold"
+                                
+                                Margin="15,0,0,0"/>
+                        <Frame HorizontalOptions="FillAndExpand"
+                                 BackgroundColor="{AppThemeBinding Light={StaticResource LightGray}, Dark={StaticResource Background_Mid}}"
+                                HeightRequest="50">
+                            <Frame.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding PayWithExchangeCommand}"/>
+                            </Frame.GestureRecognizers>
+                            <Label Text="Pay With Exchange"
+                                    FontSize="14"
+                                    
+                                    FontAttributes="Bold"
+                                    VerticalOptions="Center"
+                                    HorizontalOptions="Center"/>
+                        </Frame>
+                    </StackLayout>
+                </ScrollView>
+            </RefreshView>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

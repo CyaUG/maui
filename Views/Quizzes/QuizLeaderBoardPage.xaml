@@ -1,0 +1,600 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Youth.Views.Quizzes.QuizLeaderBoardPage"
+             Title="{Binding Title}"
+             xmlns:local="clr-namespace:Youth.ViewModels"
+             xmlns:model="clr-namespace:Youth.Models"
+             xmlns:utils="clr-namespace:Youth.Utils"
+             Shell.NavBarIsVisible="False"
+             Shell.FlyoutItemIsVisible="False"
+             Shell.FlyoutBehavior="Disabled"
+             Shell.PresentationMode="Animated"
+             Shell.TabBarIsVisible="False"
+             xmlns:ios="clr-namespace:Microsoft.Maui.Controls.PlatformConfiguration.iOSSpecific;assembly=Microsoft.Maui.Controls"
+             xmlns:toolkitViews="clr-namespace:CommunityToolkit.Maui.Views;assembly=CommunityToolkit.Maui"
+             ios:Page.UseSafeArea="true"
+             xmlns:renderers="clr-namespace:Youth.CustomRenderers"
+             xmlns:converters="clr-namespace:Youth.Helpers.Converters">
+
+    <ContentPage.Resources>
+        <Style TargetType="Frame">
+            <Setter Property="HasShadow"
+                    Value="False"/>
+            <Setter Property="Padding"
+                    Value="0"/>
+            <Setter Property="CornerRadius"
+                    Value="20"/>
+            <Setter Property="IsClippedToBounds"
+                    Value="True"/>
+        </Style>
+        <ResourceDictionary>
+            <utils:MultiplierConverter x:Key="MultiplierConverter"/>
+            <converters:IsImageSourceConverter x:Key="isImageSourceConverter"/>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <ContentPage.Content>
+        <ScrollView VerticalScrollBarVisibility="Never">
+            <StackLayout>
+                <Grid HeightRequest="240">
+                    <Image Source="bg_trophy.jpg"
+                            Aspect="Fill"
+                            HorizontalOptions="FillAndExpand"
+                            VerticalOptions="FillAndExpand"/>
+                    <StackLayout Orientation="Vertical">
+                        <Grid HeightRequest="240">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <StackLayout
+                                Orientation="Horizontal"
+                                VerticalOptions="Center"
+                                Spacing="10"
+                                Grid.Row="0"
+                                Grid.ColumnSpan="3"
+                                Margin="10,20,10,0">
+
+                                <Image
+                                    HorizontalOptions="Start"
+                                    HeightRequest="30"
+                                    Source="nav_left_white.png"
+                                    BackgroundColor="transparent"
+                                    VerticalOptions="CenterAndExpand">
+                                    <Image.GestureRecognizers>
+                                        <TapGestureRecognizer Tapped="Btn_Back"/>
+                                    </Image.GestureRecognizers>
+                                </Image>
+
+                                <Label Text="{Binding Title}"
+                                        HorizontalOptions="CenterAndExpand"
+                                        VerticalOptions="CenterAndExpand"
+                                        Style="{StaticResource TabHeader}"/>
+                                <Image Source="settings_white.png"
+                                        HorizontalOptions="End"
+                                        HeightRequest="30"/>
+                            </StackLayout>
+
+                            <StackLayout Grid.Row="1"
+                                    Grid.Column="0"
+                                    Orientation="Vertical"
+                                    HorizontalOptions="Start"
+                                    Margin="10,0,0,0">
+                                <Label
+                                    Text="2"
+                                    FontSize="{StaticResource Heading5}"
+                                    FontAttributes="Bold"
+                                    HorizontalTextAlignment="Center"
+                                    VerticalTextAlignment="Center"/>
+
+                                <StackLayout
+                                    Orientation="Vertical"
+                                    HorizontalOptions="Center">
+
+                                    <toolkitViews:AvatarView x:Name="secondPlayer" BorderWidth="0" HeightRequest="80" WidthRequest="80" BackgroundColor="Transparent" CornerRadius="10"
+                                                                 ImageSource="{Binding quizLeaderBoard2.profile_picture, Converter={StaticResource isImageSourceConverter}}">
+                                        <toolkitViews:AvatarView.Shadow>
+                                            <Shadow Opacity="0.3"/>
+                                        </toolkitViews:AvatarView.Shadow>
+
+                                    </toolkitViews:AvatarView>
+
+                                    <Label
+                                        Text="{Binding quizLeaderBoard2.totalPoints}"
+                                        FontSize="{StaticResource BaseFontSize-}"
+                                        FontAttributes="Bold"
+                                        HorizontalTextAlignment="Center"
+                                        VerticalTextAlignment="Center"/>
+
+                                    <Label
+                                        Text="{Binding quizLeaderBoard2.name}"
+                                        FontSize="{StaticResource BaseFontSize-}"
+                                        FontAttributes="Bold"
+                                        HorizontalTextAlignment="Center"
+                                        VerticalTextAlignment="Center"/>
+                                </StackLayout>
+                            </StackLayout>
+
+                            <StackLayout
+                                Grid.Row="1"
+                                    Grid.Column="1"
+                                Orientation="Vertical"
+                                HorizontalOptions="FillAndExpand"
+                                VerticalOptions="FillAndExpand">
+
+                                <Image
+                                    x:Name="crown"
+                                    WidthRequest="100"
+                                    HeightRequest="30"
+                                    Source="crown.png"
+                                    Aspect="AspectFill"
+                                    HorizontalOptions="Center"/>
+
+                                <StackLayout Orientation="Vertical"
+                                        HorizontalOptions="Center">
+
+                                    <toolkitViews:AvatarView x:Name="topPlayer" BorderWidth="0" HeightRequest="100" WidthRequest="100" BackgroundColor="Transparent" CornerRadius="10"
+                                                                 ImageSource="{Binding quizLeaderBoard1.profile_picture, Converter={StaticResource isImageSourceConverter}}">
+                                        <toolkitViews:AvatarView.Shadow>
+                                            <Shadow Opacity="0.3"/>
+                                        </toolkitViews:AvatarView.Shadow>
+
+                                    </toolkitViews:AvatarView>
+
+                                    <Label
+                                        Text="{Binding quizLeaderBoard1.totalPoints}"
+                                        FontSize="{StaticResource BaseFontSize-}"
+                                        FontAttributes="Bold"
+                                        HorizontalTextAlignment="Center"
+                                        VerticalTextAlignment="Center"/>
+
+                                    <Label
+                                        Text="{Binding quizLeaderBoard1.name}"
+                                        FontSize="{StaticResource BaseFontSize-}"
+                                        FontAttributes="Bold"
+                                        HorizontalTextAlignment="Center"
+                                        VerticalTextAlignment="Center"/>
+                                </StackLayout>
+                            </StackLayout>
+
+                            <StackLayout
+                                Grid.Row="1"
+                                    Grid.Column="2"
+                                Orientation="Vertical"
+                                HorizontalOptions="End"
+                                Margin="0,0,10,0">
+
+                                <Label
+                                    Text="3"
+                                    FontSize="{StaticResource Heading5}"
+                                    FontAttributes="Bold"
+                                    HorizontalTextAlignment="Center"
+                                    VerticalTextAlignment="Center"/>
+
+                                <StackLayout Orientation="Vertical"
+                                        HorizontalOptions="Center">
+
+                                    <toolkitViews:AvatarView x:Name="secondPlayer3" BorderWidth="0" HeightRequest="80" WidthRequest="80" BackgroundColor="Transparent" CornerRadius="10"
+                                                                 ImageSource="{Binding quizLeaderBoard3.profile_picture, Converter={StaticResource isImageSourceConverter}}">
+                                        <toolkitViews:AvatarView.Shadow>
+                                            <Shadow Opacity="0.3"/>
+                                        </toolkitViews:AvatarView.Shadow>
+
+                                    </toolkitViews:AvatarView>
+
+                                    <Label
+                                        Text="{Binding quizLeaderBoard3.totalPoints}"
+                                        FontSize="{StaticResource BaseFontSize-}"
+                                        FontAttributes="Bold"
+                                        HorizontalTextAlignment="Center"
+                                        VerticalTextAlignment="Center"/>
+
+                                    <Label
+                                        Text="{Binding quizLeaderBoard3.name}"
+                                        FontSize="{StaticResource BaseFontSize-}"
+                                        FontAttributes="Bold"
+                                        HorizontalTextAlignment="Center"
+                                        VerticalTextAlignment="Center"/>
+                                </StackLayout>
+                            </StackLayout>
+                        </Grid>
+                    </StackLayout>
+                </Grid>
+
+                <StackLayout Orientation="Vertical">
+                    <Frame
+                        Margin="10"
+                        Padding="10"
+                        BackgroundColor="Transparent"
+                        BorderColor="{StaticResource BorderColor}"
+                        CornerRadius="20"
+                        HasShadow="False">
+                        <Grid>
+                            <Grid.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding EventsGridTappedCommand}"
+                                        CommandParameter="{Binding .}"/>
+                            </Grid.GestureRecognizers>
+
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Label
+                                Grid.Column="0"
+                                Margin="5,0,0,0"
+                                VerticalOptions="Center"
+                                HorizontalOptions="Start"
+                                Style="{StaticResource TabHeader}"
+                                Text="4"/>
+
+                            <toolkitViews:AvatarView Margin="10,0,0,0" VerticalOptions="Center" HorizontalOptions="Start" Grid.Column="1" BorderWidth="0" HeightRequest="60" WidthRequest="60" BackgroundColor="Transparent" CornerRadius="10"
+                                                                 ImageSource="{Binding quizLeaderBoard4.profile_picture, Converter={StaticResource isImageSourceConverter}}">
+                                <toolkitViews:AvatarView.Shadow>
+                                    <Shadow Opacity="0.3"/>
+                                </toolkitViews:AvatarView.Shadow>
+
+                            </toolkitViews:AvatarView>
+                            
+                            <Label
+                                Grid.Column="2"
+                                Margin="15,0,0,0"
+                                VerticalOptions="CenterAndExpand"
+                                Style="{StaticResource TabHeader}"
+                                Text="{Binding quizLeaderBoard4.name}"
+                                HorizontalOptions="StartAndExpand"/>
+                            <Label
+                                Grid.Column="3"
+                                Margin="0,0,10,0"
+                                HorizontalOptions="Center"
+                                Style="{StaticResource TabHeader}"
+                                Text="{Binding quizLeaderBoard4.totalPoints}"
+                                VerticalOptions="CenterAndExpand"/>
+                        </Grid>
+                    </Frame>
+
+                    <Frame
+                        Margin="10"
+                        Padding="10"
+                        BackgroundColor="Transparent"
+                        BorderColor="{StaticResource BorderColor}"
+                        CornerRadius="20"
+                        HasShadow="False">
+                        <Grid>
+                            <Grid.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding EventsGridTappedCommand}"
+                                        CommandParameter="{Binding .}"/>
+                            </Grid.GestureRecognizers>
+
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Label
+                                Grid.Column="0"
+                                Margin="5,0,0,0"
+                                VerticalOptions="Center"
+                                HorizontalOptions="Start"
+                                Style="{StaticResource TabHeader}"
+                                
+                                Text="5"/>
+
+                            <toolkitViews:AvatarView Margin="10,0,0,0" VerticalOptions="Center" HorizontalOptions="Start" Grid.Column="1" BorderWidth="0" HeightRequest="60" WidthRequest="60" BackgroundColor="Transparent" CornerRadius="10"
+                                                                 ImageSource="{Binding quizLeaderBoard5.profile_picture, Converter={StaticResource isImageSourceConverter}}">
+                                <toolkitViews:AvatarView.Shadow>
+                                    <Shadow Opacity="0.3"/>
+                                </toolkitViews:AvatarView.Shadow>
+
+                            </toolkitViews:AvatarView>
+                            <Label
+                                Grid.Column="2"
+                                Margin="15,0,0,0"
+                                VerticalOptions="CenterAndExpand"
+                                Style="{StaticResource TabHeader}"
+                                Text="{Binding quizLeaderBoard5.name}"
+                                HorizontalOptions="StartAndExpand"
+                                />
+                            <Label
+                                Grid.Column="3"
+                                Margin="0,0,10,0"
+                                HorizontalOptions="Center"
+                                Style="{StaticResource TabHeader}"
+                                Text="{Binding quizLeaderBoard5.totalPoints}"
+                                
+                                VerticalOptions="CenterAndExpand"/>
+                        </Grid>
+                    </Frame>
+
+                    <Frame
+                        Margin="10"
+                        Padding="10"
+                        BackgroundColor="Transparent"
+                        BorderColor="{StaticResource BorderColor}"
+                        CornerRadius="20"
+                        HasShadow="False">
+                        <Grid>
+                            <Grid.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding EventsGridTappedCommand}"
+                                        CommandParameter="{Binding .}"/>
+                            </Grid.GestureRecognizers>
+
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Label
+                                Grid.Column="0"
+                                Margin="5,0,0,0"
+                                VerticalOptions="Center"
+                                HorizontalOptions="Start"
+                                Style="{StaticResource TabHeader}"
+                                
+                                Text="6"/>
+
+                            <toolkitViews:AvatarView Margin="10,0,0,0" VerticalOptions="Center" HorizontalOptions="Start" Grid.Column="1" BorderWidth="0" HeightRequest="60" WidthRequest="60" BackgroundColor="Transparent" CornerRadius="10"
+                                                                 ImageSource="{Binding quizLeaderBoard6.profile_picture, Converter={StaticResource isImageSourceConverter}}">
+                                <toolkitViews:AvatarView.Shadow>
+                                    <Shadow Opacity="0.3"/>
+                                </toolkitViews:AvatarView.Shadow>
+
+                            </toolkitViews:AvatarView>
+                            <Label
+                                Grid.Column="2"
+                                Margin="15,0,0,0"
+                                VerticalOptions="CenterAndExpand"
+                                Style="{StaticResource TabHeader}"
+                                Text="{Binding quizLeaderBoard6.name}"
+                                HorizontalOptions="StartAndExpand"
+                                />
+                            <Label
+                                Grid.Column="3"
+                                Margin="0,0,10,0"
+                                HorizontalOptions="Center"
+                                Style="{StaticResource TabHeader}"
+                                Text="{Binding quizLeaderBoard6.totalPoints}"
+                                
+                                VerticalOptions="CenterAndExpand"/>
+                        </Grid>
+                    </Frame>
+
+                    <Frame
+                        Margin="10"
+                        Padding="10"
+                        BackgroundColor="Transparent"
+                        BorderColor="{StaticResource BorderColor}"
+                        CornerRadius="20"
+                        HasShadow="False">
+                        <Grid>
+                            <Grid.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding EventsGridTappedCommand}"
+                                        CommandParameter="{Binding .}"/>
+                            </Grid.GestureRecognizers>
+
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Label
+                                Grid.Column="0"
+                                Margin="5,0,0,0"
+                                VerticalOptions="Center"
+                                HorizontalOptions="Start"
+                                Style="{StaticResource TabHeader}"
+                                
+                                Text="7"/>
+
+                            <toolkitViews:AvatarView Margin="10,0,0,0" VerticalOptions="Center" HorizontalOptions="Start" Grid.Column="1" BorderWidth="0" HeightRequest="60" WidthRequest="60" BackgroundColor="Transparent" CornerRadius="10"
+                                                                 ImageSource="{Binding quizLeaderBoard7.profile_picture, Converter={StaticResource isImageSourceConverter}}">
+                                <toolkitViews:AvatarView.Shadow>
+                                    <Shadow Opacity="0.3"/>
+                                </toolkitViews:AvatarView.Shadow>
+
+                            </toolkitViews:AvatarView>
+                            <Label
+                                Grid.Column="2"
+                                Margin="15,0,0,0"
+                                VerticalOptions="CenterAndExpand"
+                                Style="{StaticResource TabHeader}"
+                                Text="{Binding quizLeaderBoard7.name}"
+                                HorizontalOptions="StartAndExpand"
+                                />
+                            <Label
+                                Grid.Column="3"
+                                Margin="0,0,10,0"
+                                HorizontalOptions="Center"
+                                Style="{StaticResource TabHeader}"
+                                Text="{Binding quizLeaderBoard7.totalPoints}"
+                                
+                                VerticalOptions="CenterAndExpand"/>
+                        </Grid>
+                    </Frame>
+
+                    <Frame
+                        Margin="10"
+                        Padding="10"
+                        BackgroundColor="Transparent"
+                        BorderColor="{StaticResource BorderColor}"
+                        CornerRadius="20"
+                        HasShadow="False">
+                        <Grid>
+                            <Grid.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding EventsGridTappedCommand}"
+                                        CommandParameter="{Binding .}"/>
+                            </Grid.GestureRecognizers>
+
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Label
+                                Grid.Column="0"
+                                Margin="5,0,0,0"
+                                VerticalOptions="Center"
+                                HorizontalOptions="Start"
+                                Style="{StaticResource TabHeader}"
+                                
+                                Text="8"/>
+
+                            <toolkitViews:AvatarView Margin="10,0,0,0" VerticalOptions="Center" HorizontalOptions="Start" Grid.Column="1" BorderWidth="0" HeightRequest="60" WidthRequest="60" BackgroundColor="Transparent" CornerRadius="10"
+                                                                 ImageSource="{Binding quizLeaderBoard8.profile_picture, Converter={StaticResource isImageSourceConverter}}">
+                                <toolkitViews:AvatarView.Shadow>
+                                    <Shadow Opacity="0.3"/>
+                                </toolkitViews:AvatarView.Shadow>
+
+                            </toolkitViews:AvatarView>
+                            <Label
+                                Grid.Column="2"
+                                Margin="15,0,0,0"
+                                VerticalOptions="CenterAndExpand"
+                                Style="{StaticResource TabHeader}"
+                                Text="{Binding quizLeaderBoard8.name}"
+                                HorizontalOptions="StartAndExpand"
+                                />
+                            <Label
+                                Grid.Column="3"
+                                Margin="0,0,10,0"
+                                HorizontalOptions="Center"
+                                Style="{StaticResource TabHeader}"
+                                Text="{Binding quizLeaderBoard8.totalPoints}"
+                                
+                                VerticalOptions="CenterAndExpand"/>
+                        </Grid>
+                    </Frame>
+
+                    <Frame
+                        Margin="10"
+                        Padding="10"
+                        BackgroundColor="Transparent"
+                        BorderColor="{StaticResource BorderColor}"
+                        CornerRadius="20"
+                        HasShadow="False">
+                        <Grid>
+                            <Grid.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding EventsGridTappedCommand}"
+                                        CommandParameter="{Binding .}"/>
+                            </Grid.GestureRecognizers>
+
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Label
+                                Grid.Column="0"
+                                Margin="5,0,0,0"
+                                VerticalOptions="Center"
+                                HorizontalOptions="Start"
+                                Style="{StaticResource TabHeader}"
+                                
+                                Text="9"/>
+
+                            <toolkitViews:AvatarView Margin="10,0,0,0" VerticalOptions="Center" HorizontalOptions="Start" Grid.Column="1" BorderWidth="0" HeightRequest="60" WidthRequest="60" BackgroundColor="Transparent" CornerRadius="10"
+                                                                 ImageSource="{Binding quizLeaderBoard9.profile_picture, Converter={StaticResource isImageSourceConverter}}">
+                                <toolkitViews:AvatarView.Shadow>
+                                    <Shadow Opacity="0.3"/>
+                                </toolkitViews:AvatarView.Shadow>
+
+                            </toolkitViews:AvatarView>
+                            <Label
+                                Grid.Column="2"
+                                Margin="15,0,0,0"
+                                VerticalOptions="CenterAndExpand"
+                                Style="{StaticResource TabHeader}"
+                                Text="{Binding quizLeaderBoard9.name}"
+                                HorizontalOptions="StartAndExpand"
+                                />
+                            <Label
+                                Grid.Column="3"
+                                Margin="0,0,10,0"
+                                HorizontalOptions="Center"
+                                Style="{StaticResource TabHeader}"
+                                Text="{Binding quizLeaderBoard9.totalPoints}"
+                                
+                                VerticalOptions="CenterAndExpand"/>
+                        </Grid>
+                    </Frame>
+
+                    <Frame
+                        Margin="10"
+                        Padding="10"
+                        BackgroundColor="Transparent"
+                        BorderColor="{StaticResource BorderColor}"
+                        CornerRadius="20"
+                        HasShadow="False">
+                        <Grid>
+                            <Grid.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding EventsGridTappedCommand}"
+                                        CommandParameter="{Binding .}"/>
+                            </Grid.GestureRecognizers>
+
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Label
+                                Grid.Column="0"
+                                Margin="5,0,0,0"
+                                VerticalOptions="Center"
+                                HorizontalOptions="Start"
+                                Style="{StaticResource TabHeader}"
+                                
+                                Text="10"/>
+
+                            <toolkitViews:AvatarView Margin="10,0,0,0" VerticalOptions="Center" HorizontalOptions="Start" Grid.Column="1" BorderWidth="0" HeightRequest="60" WidthRequest="60" BackgroundColor="Transparent" CornerRadius="10"
+                                                                 ImageSource="{Binding quizLeaderBoard10.profile_picture, Converter={StaticResource isImageSourceConverter}}">
+                                <toolkitViews:AvatarView.Shadow>
+                                    <Shadow Opacity="0.3"/>
+                                </toolkitViews:AvatarView.Shadow>
+
+                            </toolkitViews:AvatarView>
+                            <Label
+                                Grid.Column="2"
+                                Margin="15,0,0,0"
+                                VerticalOptions="CenterAndExpand"
+                                Style="{StaticResource TabHeader}"
+                                Text="{Binding quizLeaderBoard10.name}"
+                                HorizontalOptions="StartAndExpand"
+                                />
+                            <Label
+                                Grid.Column="3"
+                                Margin="0,0,10,0"
+                                HorizontalOptions="Center"
+                                Style="{StaticResource TabHeader}"
+                                Text="{Binding quizLeaderBoard10.totalPoints}"
+                                
+                                VerticalOptions="CenterAndExpand"/>
+                        </Grid>
+                    </Frame>
+
+                </StackLayout>
+            </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>

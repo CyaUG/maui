@@ -1,0 +1,80 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Youth.Views.Account.LocationPickerPage"
+             Title="{Binding Title}"
+             xmlns:local="clr-namespace:Youth.Helpers.Converters"
+             xmlns:model="clr-namespace:Youth.Models"
+             xmlns:renderers="clr-namespace:Youth.CustomRenderers"
+             Shell.NavBarIsVisible="False"
+             Shell.FlyoutItemIsVisible="False"
+             Shell.FlyoutBehavior="Disabled"
+             Shell.PresentationMode="Animated"
+             Shell.TabBarIsVisible="False"
+             xmlns:ios="clr-namespace:Microsoft.Maui.Controls.PlatformConfiguration.iOSSpecific;assembly=Microsoft.Maui.Controls"
+             xmlns:maps="clr-namespace:Microsoft.Maui.Controls.Maps;assembly=Microsoft.Maui.Controls.Maps"
+             ios:Page.UseSafeArea="true">
+
+    <ContentPage.Content>
+        <StackLayout>
+            <Grid VerticalOptions="FillAndExpand">
+                <maps:Map
+                    x:Name="MyMap"
+                    MapType="Hybrid"
+                    VerticalOptions="FillAndExpand"
+                    PropertyChanged="MyMap_PropertyChanged"/>
+                <Image x:Name="pinImage" Source="ic_maps_indicator_current_position.png" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" HeightRequest="50" />
+            </Grid>
+
+            <StackLayout Padding="15">
+                <Grid Margin="5,0,5,0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+
+
+                    <Label
+                        FontAttributes="Bold"
+                        FontSize="Medium"
+                        HorizontalOptions="Start"
+                        Text="Select Location"
+                        VerticalOptions="CenterAndExpand" />
+
+                    <Label
+                         Grid.Column="1"
+                        FontAttributes="Bold"
+                        FontSize="Medium"
+                        HorizontalOptions="End"
+                        Text="Cancel"
+                        VerticalOptions="CenterAndExpand">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="Btn_Back"/>
+                        </Label.GestureRecognizers>
+                    </Label>
+                </Grid>
+                <BoxView Color="Gray" HeightRequest="1" HorizontalOptions="FillAndExpand" Margin="5,5,5,0"/>
+
+                <Label Margin="5"
+                        FontAttributes="Bold"
+                        FontSize="Small"
+                        Text="Location"
+                        TextColor="#424242"
+                        VerticalOptions="CenterAndExpand" />
+
+                <Label x:Name="LocationLabel"
+                         Grid.Column="1" Margin="5"
+                        FontAttributes="Bold"
+                        FontSize="Medium"
+                        TextColor="#424242"
+                        VerticalOptions="CenterAndExpand"
+                        Text="◦◦◦"
+                       MaxLines="1"/>
+                <BoxView Color="Gray" HeightRequest="1" HorizontalOptions="FillAndExpand" Margin="5,5,5,0"/>
+
+                <Button Text="Confirm Location" Clicked="OnConfirmLocationClicked" Margin="15,5,15,0" BackgroundColor="{StaticResource Primary}"/>
+            </StackLayout>
+
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

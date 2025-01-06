@@ -1,0 +1,344 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Youth.Views.Events.CreateEventPage"
+             Title="{Binding Title}"
+             xmlns:local="clr-namespace:Youth.ViewModels"
+             xmlns:model="clr-namespace:Youth.Models"
+             xmlns:utils="clr-namespace:Youth.Utils"
+             Shell.NavBarIsVisible="False"
+             Shell.FlyoutItemIsVisible="False"
+             Shell.FlyoutBehavior="Disabled"
+             Shell.PresentationMode="Animated"
+             Shell.TabBarIsVisible="False"
+             xmlns:ios="clr-namespace:Microsoft.Maui.Controls.PlatformConfiguration.iOSSpecific;assembly=Microsoft.Maui.Controls"
+             ios:Page.UseSafeArea="true"
+             xmlns:renderers="clr-namespace:Youth.CustomRenderers"
+             xmlns:converters="clr-namespace:Youth.Helpers.Converters">
+
+    <ContentPage.Resources>
+        <Style TargetType="Frame">
+            <Setter Property="HasShadow"
+                    Value="False"/>
+            <Setter Property="Padding"
+                    Value="0"/>
+            <Setter Property="CornerRadius"
+                    Value="20"/>
+            <Setter Property="IsClippedToBounds"
+                    Value="True"/>
+        </Style>
+        <ResourceDictionary>
+            <utils:MultiplierConverter x:Key="MultiplierConverter"/>
+            <converters:IsImageSourceConverter x:Key="isImageSourceConverter"/>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <ContentPage.Content>
+
+        <StackLayout Orientation="Vertical">
+            <StackLayout Orientation="Horizontal" VerticalOptions="Center" Spacing="10" Grid.Row="0" Margin="10,20,10,0">
+
+                <Image HorizontalOptions="Start" HeightRequest="30" Source="back.png" BackgroundColor="transparent" VerticalOptions="CenterAndExpand">
+                    <Image.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="Btn_Back"/>
+                    </Image.GestureRecognizers>
+                </Image>
+
+                <Label Text="{Binding Title}" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Style="{StaticResource TabHeader}"/>
+                <Image Source="settings.png" HorizontalOptions="End" HeightRequest="30"/>
+            </StackLayout>
+
+            <ScrollView VerticalScrollBarVisibility="Never" Margin="10" VerticalOptions="FillAndExpand">
+                <StackLayout Orientation="Vertical">
+
+                    <Frame Margin="5" Padding="5,5,5,5" BackgroundColor="Transparent" BorderColor="{StaticResource BorderColor}" CornerRadius="20" HasShadow="False">
+                        <Grid Padding="5">
+                            <Grid.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="GoToEventCategoryProviderPage"/>
+                            </Grid.GestureRecognizers>
+
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Image
+                                Margin="10,0,0,0"
+                                HorizontalOptions="Center"
+                                   Source="{Binding mEventCategory.imageUrl, Converter={StaticResource isImageSourceConverter}}"
+                                VerticalOptions="Center"
+                                HeightRequest="40"
+                                WidthRequest="40"
+                                Aspect="AspectFill"/>
+
+                            <Label
+                                Grid.Column="1"
+                                Margin="20,0,0,0"
+                                Style="{StaticResource SubTextSemiBold}"
+                                Text="{Binding mEventCategory.label}"
+                                VerticalOptions="Center"/>
+                            <Image
+                                Grid.Column="2"
+                                Margin="0,0,10,0"
+                                HorizontalOptions="Center"
+                                Source="right_arrow.png"
+                                VerticalOptions="Center"
+                                HeightRequest="20"
+                                WidthRequest="20"/>
+                        </Grid>
+                    </Frame>
+
+                    <Frame CornerRadius="5"
+                            Margin="5">
+                        <Grid HeightRequest="170">
+                            <Image Source="{Binding picturePath}"
+                                    Aspect="AspectFill"
+                                    HorizontalOptions="FillAndExpand"
+                                    VerticalOptions="FillAndExpand"/>
+                            <Grid HeightRequest="170">
+                                <Frame CornerRadius="5" VerticalOptions="Center" HorizontalOptions="Center" BackgroundColor="{AppThemeBinding Light={StaticResource LightGray}, Dark={StaticResource Background_Mid}}">
+                                    <Frame.GestureRecognizers>
+                                        <TapGestureRecognizer Command="{Binding PickPictureAttachmentCommand}"/>
+                                    </Frame.GestureRecognizers>
+                                    <Grid Padding="15">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="Auto"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                        </Grid.ColumnDefinitions>
+
+                                        <Image
+                                            Margin="10,0,0,0"
+                                            HorizontalOptions="Center"
+                                            Source="camera.png"
+                                            VerticalOptions="Center"
+                                            HeightRequest="30"
+                                            WidthRequest="30">
+                                            <Image.Triggers>
+                                                <DataTrigger
+                                                    Binding="{Binding picSelected}"
+                                                    TargetType="Image"
+                                                    Value="True">
+                                                    <Setter Property="Source"
+                                                            Value="camera_green.png"/>
+                                                </DataTrigger>
+                                            </Image.Triggers>
+                                        </Image>
+                                        <Label
+                                            Grid.Column="1"
+                                            Margin="10,0,10,0"
+                                            Style="{StaticResource SubTextSemiBold}"
+                                            Text="Attach A Picture"
+                                            VerticalOptions="Center"/>
+                                    </Grid>
+                                </Frame>
+                            </Grid>
+                        </Grid>
+                    </Frame>
+
+                    <Frame CornerRadius="5"
+                            BackgroundColor="{AppThemeBinding Light={StaticResource LightGray}, Dark={StaticResource Background_Mid}}"
+                            HasShadow="True"
+                            Margin="5"
+                            Padding="5">
+                        <StackLayout Orientation="Horizontal">
+                            <Image Source="profile_icon.png"
+                                    Scale="0.7"
+                                    WidthRequest="40"
+                                    HeightRequest="40"></Image>
+                            <Entry Placeholder="Event Title"
+                                    HorizontalOptions="FillAndExpand"
+                                    Text="{Binding EventTitle}"></Entry>
+                        </StackLayout>
+                    </Frame>
+
+                    <Frame CornerRadius="5"
+                            BackgroundColor="{AppThemeBinding Light={StaticResource LightGray}, Dark={StaticResource Background_Mid}}"
+                            HasShadow="True"
+                            Margin="5"
+                            Padding="5">
+                        <StackLayout Orientation="Horizontal">
+
+                            <Editor
+                                BackgroundColor="Transparent"
+                                Placeholder="Event Description"
+                                VerticalOptions="StartAndExpand"
+                                HorizontalOptions="FillAndExpand"
+                                HeightRequest="100"
+                                Text="{Binding EventDescription}"/>
+                        </StackLayout>
+                    </Frame>
+
+                    <Frame Margin="5"
+                            Padding="5"
+                            BackgroundColor="Transparent"
+                            BorderColor="{StaticResource BorderColor}"
+                            CornerRadius="20"
+                            HasShadow="False">
+                        <Grid Padding="5">
+                            <Grid.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="Handle_Clicked"/>
+                            </Grid.GestureRecognizers>
+
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Image
+                                Margin="10,0,0,0"
+                                HorizontalOptions="Center"
+                                Source="gps_point.png"
+                                VerticalOptions="Center"
+                                HeightRequest="30"
+                                WidthRequest="30">
+                                <Image.Triggers>
+                                    <DataTrigger
+                                        Binding="{Binding isQuestionareFilled}"
+                                        TargetType="Image"
+                                        Value="True">
+                                        <Setter Property="Source"
+                                                Value="gps_green.png"/>
+                                    </DataTrigger>
+                                </Image.Triggers>
+                            </Image>
+                            <Label
+                                Grid.Column="1"
+                                Margin="20,0,0,0"
+                                Style="{StaticResource SubTextSemiBold}"
+                                Text="{Binding LocationAddress}"
+                                VerticalOptions="Center"/>
+                            <Image
+                                Grid.Column="2"
+                                Margin="0,0,10,0"
+                                HorizontalOptions="End"
+                                Source="right_arrow.png"
+                                VerticalOptions="Center"
+                                HeightRequest="20"
+                                WidthRequest="20"/>
+                        </Grid>
+                    </Frame>
+
+                    <Frame Margin="5"
+                            Padding="5"
+                            BackgroundColor="Transparent"
+                            BorderColor="{StaticResource BorderColor}"
+                            CornerRadius="20"
+                            HasShadow="False">
+                        <Frame.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="GoToScheduleApointmentPage"/>
+                        </Frame.GestureRecognizers>
+                        <Grid Padding="5">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Image
+                                Margin="10,0,0,0"
+                                HorizontalOptions="Center"
+                                Source="calendar_tick.png"
+                                VerticalOptions="Center"
+                                HeightRequest="30"
+                                WidthRequest="30">
+                                <Image.Triggers>
+                                    <DataTrigger
+                                        Binding="{Binding isQuestionareFilled}"
+                                        TargetType="Image"
+                                        Value="True">
+                                        <Setter Property="Source"
+                                                Value="calendar_green.png"/>
+                                    </DataTrigger>
+                                </Image.Triggers>
+                            </Image>
+                            <Label
+                                Grid.Column="1"
+                                Margin="20,0,0,0"
+                                Text="{Binding RemindDate}"
+                                VerticalOptions="Center"/>
+                            <Image
+                                Grid.Column="2"
+                                Margin="0,0,10,0"
+                                HorizontalOptions="End"
+                                Source="right_arrow.png"
+                                VerticalOptions="Center"
+                                HeightRequest="20"
+                                WidthRequest="20"/>
+                        </Grid>
+                    </Frame>
+
+                    <Frame CornerRadius="5"
+                            BackgroundColor="{AppThemeBinding Light={StaticResource LightGray}, Dark={StaticResource Background_Mid}}"
+                            HasShadow="True"
+                            Margin="5"
+                            Padding="5">
+                        <StackLayout Orientation="Horizontal">
+
+                            <StackLayout HorizontalOptions="FillAndExpand"
+                                    Padding="5">
+
+                                <Label
+                                    Text="Is this event free?."
+                                    HorizontalOptions="Start"
+                                    
+                                    Style="{StaticResource TabHeader}"/>
+
+                                <Label
+                                    Style="{StaticResource SubTextSemiBold}"
+                                    Text="If the event is free, you will still be required to add a ticket with zero amount."/>
+                            </StackLayout>
+
+                            <Switch IsToggled="{Binding isFreeEvent}"
+                                    HeightRequest="35"
+                                    WidthRequest="50"
+                                    Margin="5"
+                                    HorizontalOptions="End"/>
+                        </StackLayout>
+                    </Frame>
+                </StackLayout>
+            </ScrollView>
+
+            <StackLayout Orientation="Horizontal"
+                    Spacing="14"
+                    Margin="0,0,0,0"
+                    VerticalOptions="End"
+                    BackgroundColor="Transparent">
+                <Image x:Name="CloseImage"
+                        Source="close_tab"
+                        HeightRequest="35"
+                        WidthRequest="35"
+                        Margin="5"
+                        HorizontalOptions="Center"
+                        VerticalOptions="CenterAndExpand">
+                    <Image.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="Btn_Back"/>
+                    </Image.GestureRecognizers>
+                </Image>
+                <ActivityIndicator
+                    x:Name="ActivityIndicator"
+                    IsRunning="False"
+                    HeightRequest="35"
+                    WidthRequest="35"
+                    HorizontalOptions="Center"
+                    VerticalOptions="CenterAndExpand"
+                    IsVisible="False"/>
+
+                <Frame HorizontalOptions="FillAndExpand"
+                        BackgroundColor="{AppThemeBinding Light={StaticResource LightGray}, Dark={StaticResource Background_Mid}}"
+                        HeightRequest="50"
+                        Margin="0,0,5,5">
+                    <Frame.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding SubmitEventCommand}"/>
+                    </Frame.GestureRecognizers>
+                    <Label Text="Submit Event"
+                            FontSize="14"
+                            FontAttributes="Bold"
+                            VerticalOptions="Center"
+                            HorizontalOptions="Center"/>
+                </Frame>
+            </StackLayout>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

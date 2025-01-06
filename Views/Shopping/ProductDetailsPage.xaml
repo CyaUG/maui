@@ -1,0 +1,379 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Youth.Views.Shopping.ProductDetailsPage"
+             Title="{Binding Title}"
+             xmlns:local="clr-namespace:Youth.ViewModels"
+             xmlns:model="clr-namespace:Youth.Models"
+             xmlns:renderers="clr-namespace:Youth.CustomRenderers"
+             Shell.NavBarIsVisible="False"
+             Shell.FlyoutItemIsVisible="False"
+             Shell.FlyoutBehavior="Disabled"
+             NavigationPage.HasNavigationBar="False"
+             Shell.PresentationMode="Animated"
+             Shell.TabBarIsVisible="False"
+             xmlns:ios="clr-namespace:Microsoft.Maui.Controls.PlatformConfiguration.iOSSpecific;assembly=Microsoft.Maui.Controls"
+             ios:Page.UseSafeArea="true"
+             xmlns:converters="clr-namespace:Youth.Helpers.Converters">
+
+    <ContentPage.Resources>
+        <Style TargetType="Frame">
+            <Setter Property="HasShadow" Value="False"/>
+            <Setter Property="Padding" Value="0"/>
+            <Setter Property="CornerRadius" Value="20"/>
+            <Setter Property="IsClippedToBounds" Value="True"/>
+        </Style>
+        <ResourceDictionary>
+            <converters:IsImageSourceConverter x:Key="isImageSourceConverter"/>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <ContentPage.Content>
+            <StackLayout>
+                <StackLayout Orientation="Horizontal" VerticalOptions="Center" Spacing="10" Grid.Row="0" Margin="10,20,10,0">
+
+                    <Image
+                    HorizontalOptions="StartAndExpand"
+                    HeightRequest="30"
+                    Source="back.png"
+                    BackgroundColor="transparent"
+                    VerticalOptions="CenterAndExpand">
+                        <Image.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding ArrowGoBackCommand}"/>
+                        </Image.GestureRecognizers>
+                    </Image>
+
+                    <Image Source="Search" HorizontalOptions="EndAndExpand" HeightRequest="30">
+                        <Image.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="OpenSearchPage"/>
+                        </Image.GestureRecognizers>
+                    </Image>
+                    <Image Source="shopping_cart" HorizontalOptions="End" HeightRequest="30">
+                        <Image.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="OpenShoppingCart"/>
+                        </Image.GestureRecognizers>
+                    </Image>
+                </StackLayout>
+
+        <RefreshView x:DataType="local:ProductDetailsViewModel" Command="{Binding LoadShoppingProductCommand}" IsRefreshing="{Binding IsBusy}">
+
+                <Grid>
+                    <ScrollView VerticalScrollBarVisibility="Never">
+                        <StackLayout Orientation="Vertical">
+
+                            <CarouselView ItemsSource="{Binding ShoppingProductGalleryImages}" x:Name="CarouselZoos" HeightRequest="200" IndicatorView="indicatorView">
+                                <CarouselView.ItemTemplate>
+                                    <DataTemplate x:DataType="model:ShoppingProductGallery">
+                                        <Grid>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="*"/>
+                                                <RowDefinition Height="Auto"/>
+                                            </Grid.RowDefinitions>
+                                            <Image Grid.RowSpan="2" HeightRequest="150" Aspect="AspectFill"
+                                                Source="{Binding imageUrl, Converter={StaticResource isImageSourceConverter}}"/>
+                                            <StackLayout Grid.Row="1" BackgroundColor="#80000000" Padding="12">
+                                                <!--<Label 
+                                                
+                                                Text="{Binding label}"
+                                                FontSize="16" HorizontalOptions="Center"
+                                                VerticalOptions="CenterAndExpand"/>-->
+                                            </StackLayout>
+                                        </Grid>
+                                    </DataTemplate>
+                                </CarouselView.ItemTemplate>
+                            </CarouselView>
+
+                            <IndicatorView x:Name="indicatorView" IndicatorColor="LightGray" SelectedIndicatorColor="DarkGray" HorizontalOptions="Center"/>
+
+                            <StackLayout Orientation="Vertical" Padding="10">
+                                <Label Text="{Binding shoppingProduct.label}" FontAttributes="Bold" FontSize="34"/>
+
+                                <Grid ColumnSpacing="5">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition/>
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition/>
+                                        <ColumnDefinition/>
+                                        <ColumnDefinition/>
+                                    </Grid.ColumnDefinitions>
+
+                                    <BoxView/>
+                                    <Frame BackgroundColor="{AppThemeBinding Light={StaticResource LightGray}, Dark={StaticResource Background_Mid}}" CornerRadius="10"
+                                                Padding="10"
+                                                HasShadow="True">
+                                            <Frame.GestureRecognizers>
+                                                <TapGestureRecognizer Command="{Binding ShareProductCommand}"/>
+                                            </Frame.GestureRecognizers>
+                                            <Grid>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="Auto"/>
+                                                    <ColumnDefinition Width="*"/>
+                                                </Grid.ColumnDefinitions>
+
+                                                <Image
+                                                    Margin="5,0,0,0"
+                                                    HorizontalOptions="Center"
+                                                    Source="share.png"
+                                                    HeightRequest="20"
+                                                        WidthRequest="20"
+                                                    VerticalOptions="Center"/>
+                                                <Label
+                                                    Grid.Column="1"
+                                                    Margin="5,0,0,0"
+                                                    VerticalOptions="Center"
+                                                    MaxLines="1"
+                                                    Text="Share"
+                                                    />
+                                            </Grid>
+                                        </Frame>
+                                    
+
+                                    <BoxView Grid.Column="1"/>
+                                    <Frame Grid.Column="1" BackgroundColor="{AppThemeBinding Light={StaticResource LightGray}, Dark={StaticResource Background_Mid}}" CornerRadius="10"
+                                                Padding="10"
+                                                HasShadow="True">
+                                            <Frame.GestureRecognizers>
+                                                <TapGestureRecognizer Command="{Binding OpenCommentsCommand}"/>
+                                            </Frame.GestureRecognizers>
+                                            <Grid>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="Auto"/>
+                                                    <ColumnDefinition Width="*"/>
+                                                </Grid.ColumnDefinitions>
+
+                                                <Image
+                                                    Margin="5,0,0,0"
+                                                    HorizontalOptions="Center"
+                                                    Source="chat.png"
+                                                    HeightRequest="20"
+                                                        WidthRequest="20"
+                                                    VerticalOptions="Center"/>
+                                                <Label
+                                                    Grid.Column="1"
+                                                    Margin="5,0,0,0"
+                                                    VerticalOptions="Center"
+                                                    Text="Comment"
+                                                    MaxLines="1"
+                                                    />
+                                            </Grid>
+                                        </Frame>
+
+
+                                    <BoxView Grid.Column="2"/>
+                                    <Frame Grid.Column="2" BackgroundColor="{AppThemeBinding Light={StaticResource LightGray}, Dark={StaticResource Background_Mid}}" CornerRadius="10"
+                                                Padding="10"
+                                                HasShadow="True">
+                                            <Frame.GestureRecognizers>
+                                                <TapGestureRecognizer Command="{Binding OpenContactUsPage}"/>
+                                            </Frame.GestureRecognizers>
+                                            <Grid>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="Auto"/>
+                                                    <ColumnDefinition Width="*"/>
+                                                </Grid.ColumnDefinitions>
+
+                                                <Image
+                                                    Margin="5,0,0,0"
+                                                    HorizontalOptions="Center"
+                                                    Source="alert.png"
+                                                    HeightRequest="20"
+                                                        WidthRequest="20"
+                                                    VerticalOptions="Center"/>
+                                                <Label
+                                                    Grid.Column="1"
+                                                    Margin="5,0,0,0"
+                                                    VerticalOptions="Center"
+                                                    Text="Report"
+                                                    MaxLines="1"
+                                                    />
+                                            </Grid>
+                                        </Frame>
+                                    
+                                </Grid>
+
+                                <StackLayout Spacing="15">
+                                    <Label
+                                        IsVisible="{Binding shoppingProduct.onDiscount}"
+                                        TextColor="Red"
+                                        FontSize="17"
+                                        TextDecorations="Strikethrough"
+                                        FontAttributes="Bold">
+                                        <Label.Text>
+                                            <MultiBinding StringFormat="{}{0} {1}">
+                                                <Binding Path="shoppingProduct.currency"/>
+                                                <Binding Path="shoppingProduct.sellPrice"/>
+                                            </MultiBinding>
+                                        </Label.Text>
+                                    </Label>
+
+                                    <Label
+                                        IsVisible="{Binding shoppingProduct.onDiscount}"
+                                        FontSize="25"
+                                        FontAttributes="Bold">
+                                        <Label.Text>
+                                            <MultiBinding StringFormat="{}{0} {1}">
+                                                <Binding Path="shoppingProduct.currency"/>
+                                                <Binding Path="shoppingProduct.discountPrice"/>
+                                            </MultiBinding>
+                                        </Label.Text>
+                                    </Label>
+
+                                    <Label
+                                        IsVisible="False"
+                                        FontSize="25"
+                                        FontAttributes="Bold">
+                                        <Label.Triggers>
+                                            <DataTrigger
+                                                Binding="{Binding shoppingProduct.onDiscount}"
+                                                TargetType="Label"
+                                                Value="False">
+                                                <Setter Property="IsVisible"
+                                                        Value="True"/>
+                                            </DataTrigger>
+                                        </Label.Triggers>
+                                        <Label.Text>
+                                            <MultiBinding StringFormat="{}{0} {1}">
+                                                <Binding Path="shoppingProduct.currency"/>
+                                                <Binding Path="shoppingProduct.sellPrice"/>
+                                            </MultiBinding>
+                                        </Label.Text>
+                                    </Label>
+
+                                    <Label IsVisible="{Binding isColorOptionsVisible}"
+                                            Text="COLORS"
+                                            FontSize="12"
+                                            FontAttributes="Bold"
+                                            />
+
+                                    <ScrollView
+                                        Orientation="Horizontal"
+                                        HorizontalScrollBarVisibility="Never"
+                                        IsVisible="{Binding isColorOptionsVisible}">
+                                        <StackLayout BindableLayout.ItemsSource="{Binding ShoppingProductColorOptions}"
+                                                     Orientation="Horizontal"
+                                                Spacing="15">
+                                            <BindableLayout.ItemTemplate>
+                                                <DataTemplate x:DataType="model:ShoppingProductColorOption">
+                                                    <Frame BackgroundColor="{AppThemeBinding Light={StaticResource LightGray}, Dark={StaticResource Background_Mid}}" HasShadow="False"
+                                                            CornerRadius="5"
+                                                            Padding="3">
+                                                        <!--
+                                                        <Frame.Triggers>
+                                                            <DataTrigger
+                                                                Binding="{Binding isDefault}"
+                                                                TargetType="Frame"
+                                                                Value="True">
+                                                                <Setter Property="BackgroundColor" Value="{StaticResource PrimaryColor}" />
+                                                            </DataTrigger>
+                                                        </Frame.Triggers>
+
+                                                        <Frame.GestureRecognizers>
+                                                            <TapGestureRecognizer
+                                                                NumberOfTapsRequired="1"
+                                                                Command="{Binding Source={RelativeSource AncestorType={x:Type local:ProductDetailsViewModel}}, Path=ColorOptionTapped}"
+                                                                CommandParameter="{Binding .}" />
+                                                        </Frame.GestureRecognizers>
+                                                        -->
+
+                                                        <Frame
+                                                            HasShadow="True"
+                                                            CornerRadius="5"
+                                                            Margin="2"
+                                                            WidthRequest="45"
+                                                            HeightRequest="45">
+                                                            <Image
+                                                                Source="{Binding imageUrl, Converter={StaticResource isImageSourceConverter}}"
+                                                                HorizontalOptions="FillAndExpand"
+                                                                VerticalOptions="FillAndExpand"
+                                                                Aspect="AspectFill"/>
+                                                        </Frame>
+                                                    </Frame>
+                                                </DataTemplate>
+                                            </BindableLayout.ItemTemplate>
+                                        </StackLayout>
+                                    </ScrollView>
+
+                                    <Label IsVisible="{Binding isSizeOptionsVisible}" Text="SIZES" FontSize="12" FontAttributes="Bold" />
+
+                                    <ScrollView IsVisible="{Binding isSizeOptionsVisible}" Orientation="Horizontal" HorizontalScrollBarVisibility="Never">
+                                        <StackLayout BindableLayout.ItemsSource="{Binding ShoppingProductSizeOptions}" Orientation="Horizontal" Spacing="15">
+                                            <BindableLayout.ItemTemplate>
+                                                <DataTemplate x:DataType="model:ShoppingProductSizeOption">
+                                                    <Frame BackgroundColor="{AppThemeBinding Light={StaticResource LightGray}, Dark={StaticResource Background_Mid}}" HasShadow="False" CornerRadius="5" Padding="3">
+                                                        <!--
+                                                        <Frame.Triggers>
+                                                            <DataTrigger
+                                                                Binding="{Binding isDefault}"
+                                                                TargetType="Frame"
+                                                                Value="True">
+                                                                <Setter Property="BackgroundColor" Value="{StaticResource PrimaryColor}" />
+                                                            </DataTrigger>
+                                                        </Frame.Triggers>
+
+                                                        <Frame.GestureRecognizers>
+                                                            <TapGestureRecognizer
+                                                                Command="{Binding Source={RelativeSource AncestorType={x:Type local:ProductDetailsViewModel}}, Path=SizeOptionTapped}"
+                                                                CommandParameter="{Binding .}" />
+                                                        </Frame.GestureRecognizers>
+                                                        -->
+
+                                                        <Frame BackgroundColor="{AppThemeBinding Light={StaticResource LightGray}, Dark={StaticResource Background_Mid}}" HasShadow="True" CornerRadius="5" Margin="2">
+                                                            <Label Text="{Binding label}" FontSize="16" Padding="3"/>
+                                                        </Frame>
+                                                    </Frame>
+                                                </DataTemplate>
+                                            </BindableLayout.ItemTemplate>
+                                        </StackLayout>
+                                    </ScrollView>
+
+                                    <Label Text="{Binding shoppingProduct.description}" FontSize="14"/>
+
+                                    <Label Text="SPECIFICATIONS" FontSize="12" FontAttributes="Bold" />
+
+                                    <VerticalStackLayout Padding="0,0,0,70">
+                                        <CollectionView ItemsSource="{Binding ShoppingProductSpecifications}" ItemsLayout="VerticalGrid, 3">
+                                            <CollectionView.ItemTemplate>
+                                                <DataTemplate x:DataType="model:ShoppingProductSpecification">
+                                                    <Frame BackgroundColor="{AppThemeBinding Light={StaticResource LightGray}, Dark={StaticResource Background_Mid}}" HasShadow="False" CornerRadius="10" Margin="2">
+                                                        <StackLayout Orientation="Vertical" Padding="2">
+                                                            <Label Text="{Binding label}" FontSize="10"/>
+                                                            <Label Text="{Binding value}" FontSize="12"/>
+                                                        </StackLayout>
+                                                    </Frame>
+                                                </DataTemplate>
+                                            </CollectionView.ItemTemplate>
+                                        </CollectionView>
+                                    </VerticalStackLayout>
+                                </StackLayout>
+                            </StackLayout>
+                        </StackLayout>
+                    </ScrollView>
+
+                    <StackLayout Orientation="Horizontal"
+                            Spacing="14"
+                            BackgroundColor="Transparent"  VerticalOptions="End" Margin="10,15" HorizontalOptions="FillAndExpand">
+                        <Image Source="love_false"
+                                WidthRequest="50"
+                                HorizontalOptions="Center"
+                                VerticalOptions="CenterAndExpand"/>
+
+                        <Frame BackgroundColor="{AppThemeBinding Light={StaticResource LightGray}, Dark={StaticResource Background_Mid}}" HorizontalOptions="FillAndExpand"
+                                HeightRequest="50"
+                                Margin="0,0,5,5">
+                            <Frame.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding LoadAddToCartPageCommand}"/>
+                            </Frame.GestureRecognizers>
+                            <Label Text="Add To Cart"
+                                    FontSize="14"
+                                    
+                                    FontAttributes="Bold"
+                                    VerticalOptions="Center"
+                                    HorizontalOptions="Center"/>
+                        </Frame>
+                    </StackLayout>
+                </Grid>
+            </RefreshView>
+            </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

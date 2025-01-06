@@ -1,0 +1,443 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Youth.Views.Account.UserProfilePage"
+             Title="{Binding Title}"
+             xmlns:local="clr-namespace:Youth.ViewModels"
+             xmlns:model="clr-namespace:Youth.Models"
+             xmlns:utils="clr-namespace:Youth.Utils"
+             xmlns:converters="clr-namespace:Youth.Helpers.Converters"
+             Shell.NavBarIsVisible="False"
+             Shell.FlyoutItemIsVisible="False"
+             Shell.FlyoutBehavior="Disabled"
+             Shell.PresentationMode="Animated"
+             Shell.TabBarIsVisible="False"
+             xmlns:ios="clr-namespace:Microsoft.Maui.Controls.PlatformConfiguration.iOSSpecific;assembly=Microsoft.Maui.Controls"
+             ios:Page.UseSafeArea="true"
+             xmlns:zxing="clr-namespace:ZXing.Net.Maui.Controls;assembly=ZXing.Net.MAUI.Controls"
+             xmlns:renderers="clr-namespace:Youth.CustomRenderers">
+
+    <ContentPage.Resources>
+        <Style TargetType="Frame">
+            <Setter Property="HasShadow"
+                    Value="False"/>
+            <Setter Property="Padding"
+                    Value="0"/>
+            <Setter Property="CornerRadius"
+                    Value="20"/>
+            <Setter Property="IsClippedToBounds"
+                    Value="True"/>
+        </Style>
+        <ResourceDictionary>
+            <utils:MultiplierConverter x:Key="MultiplierConverter"/>
+            <converters:IsStringNullConverter x:Key="isStringNullConverter"/>
+            <converters:IsMyAccountConverter x:Key="isMyAccountConverter"/>
+            <converters:IsImageSourceConverter x:Key="isImageSourceConverter"/>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <ContentPage.Content>
+        <StackLayout>
+            <StackLayout
+                Orientation="Horizontal"
+                VerticalOptions="Center"
+                Spacing="10"
+                Grid.Row="0"
+                Margin="10,20,10,0">
+
+                <Image
+                    HorizontalOptions="Start"
+                    HeightRequest="30"
+                    Source="back.png"
+                    BackgroundColor="transparent"
+                    VerticalOptions="CenterAndExpand">
+                    <Image.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="Btn_Back"/>
+                    </Image.GestureRecognizers>
+                </Image>
+
+                <Label Text="{Binding Title}"
+                        HorizontalOptions="CenterAndExpand"
+                        VerticalOptions="CenterAndExpand"
+                        Style="{StaticResource TabHeader}"/>
+
+                <Image Source="check_big_black.png"
+                        HorizontalOptions="End"
+                        HeightRequest="30"
+                        IsVisible="True">
+                    <Image.Triggers>
+                        <DataTrigger Binding="{Binding isRunning}"
+                                TargetType="Image"
+                                Value="True">
+                            <Setter Property="IsVisible"
+                                    Value="False"/>
+                        </DataTrigger>
+                    </Image.Triggers>
+                    <Image.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="Btn_Back"/>
+                    </Image.GestureRecognizers>
+                </Image>
+
+                <ActivityIndicator
+                    x:Name="ActivityIndicator"
+                    IsRunning="{Binding isRunning}"
+                    HeightRequest="30"
+                    WidthRequest="30"
+                    HorizontalOptions="End"
+                    Color="{StaticResource PrimaryDarkColor}"
+                    IsVisible="False">
+                    <ActivityIndicator.Triggers>
+                        <DataTrigger Binding="{Binding isRunning}"
+                                TargetType="ActivityIndicator"
+                                Value="True">
+                            <Setter Property="IsVisible"
+                                    Value="True"/>
+                        </DataTrigger>
+                    </ActivityIndicator.Triggers>
+                </ActivityIndicator>
+            </StackLayout>
+
+
+            <ScrollView
+                VerticalScrollBarVisibility="Never"
+                VerticalOptions="FillAndExpand"
+                BackgroundColor="Transparent">
+                <StackLayout>
+                    <Grid HeightRequest="200">
+                        <Image 
+                                   Source="{Binding userAccount.cover_picture, Converter={StaticResource isImageSourceConverter}}"
+                                Aspect="AspectFill"
+                                HorizontalOptions="FillAndExpand"
+                                VerticalOptions="FillAndExpand"/>
+                    </Grid>
+                    <StackLayout Orientation="Vertical"
+                            BackgroundColor="Transparent"
+                            Margin="10">
+                        <Frame
+                            Margin="30,-100,30,10"
+                            HorizontalOptions="CenterAndExpand"
+                            CornerRadius="20"
+                            HasShadow="True">
+
+                            <StackLayout Orientation="Vertical">
+                                <Image
+                                    WidthRequest="170"
+                                    HeightRequest="170"
+                                   Source="{Binding userAccount.profile_picture, Converter={StaticResource isImageSourceConverter}}"
+                                    Aspect="AspectFill"/>
+                            </StackLayout>
+                        </Frame>
+
+                        <Label
+                            Text="{Binding userAccount.name}"
+                            FontAttributes="Bold"
+                            HorizontalOptions="CenterAndExpand"
+                            HorizontalTextAlignment="Center"
+                            FontSize="22"/>
+
+                        <Label
+                            Text="{Binding userAccount.user_name, StringFormat='@{0}'}"
+                            FontAttributes="Bold"
+                            FontSize="16"
+                            HorizontalOptions="CenterAndExpand"
+                            HorizontalTextAlignment="Center"/>
+
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+
+                            <StackLayout Margin="5"
+                                    Grid.Column="0">
+                                <StackLayout.Triggers>
+                                    <DataTrigger
+                                        Binding="{Binding userAccount, Converter={StaticResource isMyAccountConverter}}"
+                                        TargetType="StackLayout"
+                                        Value="True">
+                                        <Setter Property="IsVisible"
+                                                Value="False"/>
+                                    </DataTrigger>
+                                </StackLayout.Triggers>
+                                <Frame
+                                    BackgroundColor="{StaticResource PrimaryDarkColor}"
+                                    CornerRadius="10"
+                                    HeightRequest="50"
+                                    IsVisible="False">
+                                    <Frame.Triggers>
+                                        <DataTrigger
+                                            Binding="{Binding contactModule.blocked}"
+                                            TargetType="Frame"
+                                            Value="False">
+                                            <Setter Property="IsVisible"
+                                                    Value="True"/>
+                                        </DataTrigger>
+                                    </Frame.Triggers>
+
+                                    <Frame.GestureRecognizers>
+                                        <TapGestureRecognizer Command="{Binding SendMessageCommand}"/>
+                                    </Frame.GestureRecognizers>
+
+                                    <StackLayout Orientation="Horizontal"
+                                            Padding="15">
+                                        <Image Source="facebook_messenger_white.png"
+                                                HeightRequest="24"
+                                                WidthRequest="24"/>
+                                        <Label Text="Send Message"
+                                                TextColor="White"
+                                                FontAttributes="Bold"
+                                                Margin="5,0,0,0"/>
+                                    </StackLayout>
+                                </Frame>
+
+                                <Frame
+                                    BackgroundColor="{StaticResource PrimaryDarkColor}"
+                                    CornerRadius="10"
+                                    HeightRequest="50"
+                                    IsVisible="True">
+                                    <Frame.Triggers>
+                                        <DataTrigger
+                                            Binding="{Binding contactModule.blocked}"
+                                            TargetType="Frame"
+                                            Value="False">
+                                            <Setter Property="IsVisible"
+                                                    Value="False"/>
+                                        </DataTrigger>
+                                    </Frame.Triggers>
+
+                                    <Frame.GestureRecognizers>
+                                        <TapGestureRecognizer Command="{Binding AddContactCommand}"/>
+                                    </Frame.GestureRecognizers>
+
+                                    <StackLayout Orientation="Horizontal"
+                                            Padding="15">
+                                        <Image Source="add_contact.png"
+                                                HeightRequest="24"
+                                                WidthRequest="24"/>
+                                        <Label Text="Add Contact"
+                                                TextColor="White"
+                                                FontAttributes="Bold"
+                                                Margin="5,0,0,0"/>
+                                    </StackLayout>
+                                </Frame>
+                            </StackLayout>
+
+                            <Frame
+                                Margin="5"
+                                Grid.Column="0"
+                                BackgroundColor="{StaticResource PrimaryDarkColor}"
+                                CornerRadius="10"
+                                HeightRequest="50"
+                                IsVisible="False">
+
+                                <Frame.Triggers>
+                                    <DataTrigger
+                                        Binding="{Binding userAccount, Converter={StaticResource isMyAccountConverter}}"
+                                        TargetType="Frame"
+                                        Value="True">
+                                        <Setter Property="IsVisible"
+                                                Value="True"/>
+                                    </DataTrigger>
+                                </Frame.Triggers>
+
+                                <Frame.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding UpdateProfileCommand}"/>
+                                </Frame.GestureRecognizers>
+
+                                <StackLayout Orientation="Horizontal"
+                                        Padding="15">
+                                    <Image Source="settings_white.png"
+                                            HeightRequest="24"
+                                            WidthRequest="24"/>
+                                    <Label Text="Update Prifile"
+                                            TextColor="White"
+                                            FontAttributes="Bold"
+                                            Margin="5,0,0,0"/>
+                                </StackLayout>
+                            </Frame>
+
+                            <Frame Grid.Column="1"
+                                    Margin="5"
+                                    BackgroundColor="White"
+                                    CornerRadius="5"
+                                    HasShadow="True">
+                                <StackLayout Padding="5"
+                                        Orientation="Horizontal"
+                                        Margin="30,0,30,0">
+                                    <Image Source="more_horizontal.png"
+                                            HeightRequest="24"
+                                            WidthRequest="24"/>
+                                </StackLayout>
+                            </Frame>
+                        </Grid>
+
+                        <BoxView Color="Gray"
+                                HeightRequest="1"
+                                HorizontalOptions="FillAndExpand"
+                                Margin="5,5,5,0"/>
+                        <StackLayout Margin="5,0,0,0">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="40"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <Image Source="city.png"
+                                        Grid.Column="0"
+                                        VerticalOptions="StartAndExpand"
+                                        Margin="5,0,0,0"/>
+                                <Label Text="{Binding userAccount.location_label, StringFormat='Lives In {0}'}"
+                                        Grid.Column="1"
+                                        VerticalOptions="CenterAndExpand"
+                                        Margin="5,0,0,0">
+                                    <Label.Triggers>
+                                        <DataTrigger
+                                            Binding="{Binding userAccount.location_label, Converter={StaticResource isStringNullConverter}}"
+                                            TargetType="Label"
+                                            Value="True">
+                                            <Setter Property="Text"
+                                                    Value="Lives In  Kampala, Uganda"/>
+                                        </DataTrigger>
+                                    </Label.Triggers>
+                                </Label>
+                            </Grid>
+                            <BoxView Color="Gray"
+                                    HeightRequest="1"
+                                    HorizontalOptions="FillAndExpand"
+                                    Margin="5,5,5,0"/>
+                        </StackLayout>
+
+                        <StackLayout Margin="5,0,0,0">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="40"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <Image Source="calendar.png"
+                                        Grid.Column="0"
+                                        VerticalOptions="StartAndExpand"
+                                        Margin="5,0,0,0"/>
+                                <Label Text="{Binding userAccount.created_at, StringFormat='Joined {0}'}"
+                                        Grid.Column="1"
+                                        VerticalOptions="CenterAndExpand"
+                                        Margin="5,0,0,0"/>
+                            </Grid>
+                            <BoxView Color="Gray"
+                                    HeightRequest="1"
+                                    HorizontalOptions="FillAndExpand"
+                                    Margin="5,5,5,0"/>
+                        </StackLayout>
+
+                        <StackLayout Margin="5,0,0,0">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="40"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <Image Source="chat.png"
+                                        Grid.Column="0"
+                                        VerticalOptions="StartAndExpand"
+                                        Margin="5,0,0,0"/>
+                                <Label Text="{Binding userAccount.about}"
+                                        Grid.Column="1"
+                                        VerticalOptions="CenterAndExpand"
+                                        Margin="5,0,0,0">
+                                    <Label.Triggers>
+                                        <DataTrigger
+                                            Binding="{Binding userAccount.about, Converter={StaticResource isStringNullConverter}}"
+                                            TargetType="Label"
+                                            Value="True">
+                                            <Setter Property="Text"
+                                                    Value="I look at it from a completely different lense."/>
+                                        </DataTrigger>
+                                    </Label.Triggers>
+                                </Label>
+                            </Grid>
+                            <BoxView Color="Gray"
+                                    HeightRequest="1"
+                                    HorizontalOptions="FillAndExpand"
+                                    Margin="5,5,5,0"/>
+                        </StackLayout>
+
+                        <Label
+                            Text="Files and media"
+                            FontAttributes="Bold"
+                            FontSize="16"
+                            HorizontalOptions="StartAndExpand"
+                            HorizontalTextAlignment="Start"
+                            Margin="10,0,0,0"/>
+
+                        <ScrollView Orientation="Horizontal"
+                                HorizontalScrollBarVisibility="Never"
+                                Margin="10,0,10,0">
+                            <StackLayout BindableLayout.ItemsSource="{Binding Conversations}"
+                                    Orientation="Horizontal"
+                                    Spacing="15">
+                                <BindableLayout.ItemTemplate>
+                                    <DataTemplate x:DataType="model:Conversation">
+                                        <StackLayout WidthRequest="100">
+                                            <Frame>
+                                                <Image
+                                   Source="{Binding message, Converter={StaticResource isImageSourceConverter}}"
+                                                    HeightRequest="100"
+                                                    WidthRequest="100"
+                                                    Aspect="AspectFill">
+                                                </Image>
+                                            </Frame>
+                                        </StackLayout>
+                                    </DataTemplate>
+                                </BindableLayout.ItemTemplate>
+                            </StackLayout>
+                        </ScrollView>
+                        <BoxView Color="Gray"
+                                HeightRequest="1"
+                                HorizontalOptions="FillAndExpand"
+                                Margin="5,5,5,0"/>
+
+                        <Frame
+                            Margin="5"
+                            BackgroundColor="{StaticResource PrimaryDarkColor}"
+                            CornerRadius="10"
+                            HeightRequest="50">
+                            <Frame.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding BlockUserCommand}"/>
+                            </Frame.GestureRecognizers>
+
+                            <StackLayout Orientation="Horizontal"
+                                    Padding="15">
+                                <Image Source="block.png"
+                                        HeightRequest="24"
+                                        WidthRequest="24"/>
+                                <Label Text="Block User"
+                                        TextColor="White"
+                                        FontAttributes="Bold"
+                                        Margin="5,0,0,0"/>
+                            </StackLayout>
+                        </Frame>
+
+                        <Frame
+                            Margin="5"
+                            BackgroundColor="{StaticResource PrimaryDarkColor}"
+                            CornerRadius="10"
+                            HeightRequest="50">
+
+                            <Frame.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding OpenContactUsPage}"/>
+                            </Frame.GestureRecognizers>
+
+                            <StackLayout Orientation="Horizontal"
+                                    Padding="15">
+                                <Image Source="report.png"
+                                        HeightRequest="24"
+                                        WidthRequest="24"/>
+                                <Label Text="Report User"
+                                        TextColor="White"
+                                        FontAttributes="Bold"
+                                        Margin="5,0,0,0"/>
+                            </StackLayout>
+                        </Frame>
+                    </StackLayout>
+                </StackLayout>
+            </ScrollView>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ImageAsset Include="C:\Users\dell\workspace\MAUI\Youth\obj\Release\net8.0-maccatalyst\resizetizer\r\Assets.xcassets\cya_icon.appiconset\Contents.json" />
+    <ImageAsset Include="C:\Users\dell\workspace\MAUI\Youth\obj\Release\net8.0-maccatalyst\resizetizer\r\Assets.xcassets\cya_icon.appiconset\cya_icon20x20@2x.png" />
+    <ImageAsset Include="C:\Users\dell\workspace\MAUI\Youth\obj\Release\net8.0-maccatalyst\resizetizer\r\Assets.xcassets\cya_icon.appiconset\cya_icon20x20@3x.png" />
+    <ImageAsset Include="C:\Users\dell\workspace\MAUI\Youth\obj\Release\net8.0-maccatalyst\resizetizer\r\Assets.xcassets\cya_icon.appiconset\cya_icon29x29@2x.png" />
+    <ImageAsset Include="C:\Users\dell\workspace\MAUI\Youth\obj\Release\net8.0-maccatalyst\resizetizer\r\Assets.xcassets\cya_icon.appiconset\cya_icon29x29@3x.png" />
+    <ImageAsset Include="C:\Users\dell\workspace\MAUI\Youth\obj\Release\net8.0-maccatalyst\resizetizer\r\Assets.xcassets\cya_icon.appiconset\cya_icon40x40@2x.png" />
+    <ImageAsset Include="C:\Users\dell\workspace\MAUI\Youth\obj\Release\net8.0-maccatalyst\resizetizer\r\Assets.xcassets\cya_icon.appiconset\cya_icon40x40@3x.png" />
+    <ImageAsset Include="C:\Users\dell\workspace\MAUI\Youth\obj\Release\net8.0-maccatalyst\resizetizer\r\Assets.xcassets\cya_icon.appiconset\cya_icon60x60@2x.png" />
+    <ImageAsset Include="C:\Users\dell\workspace\MAUI\Youth\obj\Release\net8.0-maccatalyst\resizetizer\r\Assets.xcassets\cya_icon.appiconset\cya_icon60x60@3x.png" />
+    <ImageAsset Include="C:\Users\dell\workspace\MAUI\Youth\obj\Release\net8.0-maccatalyst\resizetizer\r\Assets.xcassets\cya_icon.appiconset\cya_icon76x76@2x.png" />
+    <ImageAsset Include="C:\Users\dell\workspace\MAUI\Youth\obj\Release\net8.0-maccatalyst\resizetizer\r\Assets.xcassets\cya_icon.appiconset\cya_icon83.5x83.5@2x.png" />
+    <ImageAsset Include="C:\Users\dell\workspace\MAUI\Youth\obj\Release\net8.0-maccatalyst\resizetizer\r\Assets.xcassets\cya_icon.appiconset\cya_iconItunesArtwork.png" />
+  </ItemGroup>
+</Project>

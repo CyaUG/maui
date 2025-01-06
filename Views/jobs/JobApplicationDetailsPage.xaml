@@ -1,0 +1,614 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Youth.Views.jobs.JobApplicationDetailsPage"
+             Title="{Binding Title}"
+             xmlns:local="clr-namespace:Youth.ViewModels"
+             xmlns:model="clr-namespace:Youth.Models"
+             xmlns:utils="clr-namespace:Youth.Utils"
+             Shell.NavBarIsVisible="False"
+             Shell.FlyoutItemIsVisible="False"
+             Shell.FlyoutBehavior="Disabled"
+             Shell.PresentationMode="Animated"
+             Shell.TabBarIsVisible="False"
+             xmlns:ios="clr-namespace:Microsoft.Maui.Controls.PlatformConfiguration.iOSSpecific;assembly=Microsoft.Maui.Controls"
+             xmlns:toolkitViews="clr-namespace:CommunityToolkit.Maui.Views;assembly=CommunityToolkit.Maui"
+             ios:Page.UseSafeArea="true"
+             xmlns:renderers="clr-namespace:Youth.CustomRenderers"
+             xmlns:converters="clr-namespace:Youth.Helpers.Converters">
+
+    <ContentPage.Resources>
+        <Style TargetType="Frame">
+            <Setter Property="HasShadow"
+                    Value="False"/>
+            <Setter Property="Padding"
+                    Value="0"/>
+            <Setter Property="CornerRadius"
+                    Value="20"/>
+            <Setter Property="IsClippedToBounds"
+                    Value="True"/>
+        </Style>
+        <ResourceDictionary>
+            <utils:MultiplierConverter x:Key="MultiplierConverter"/>
+            <converters:IsImageSourceConverter x:Key="isImageSourceConverter"/>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <ContentPage.Content>
+
+        <StackLayout>
+            <StackLayout
+                Orientation="Horizontal"
+                VerticalOptions="Center"
+                Spacing="10"
+                Grid.Row="0"
+                Margin="10,20,10,10">
+
+                <Image
+                    HorizontalOptions="Start"
+                    HeightRequest="30"
+                    Source="back.png"
+                    BackgroundColor="transparent"
+                    VerticalOptions="CenterAndExpand">
+                    <Image.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="Btn_Back"/>
+                    </Image.GestureRecognizers>
+                </Image>
+
+                <Label Text="{Binding Title}"
+                        HorizontalOptions="CenterAndExpand"
+                        VerticalOptions="CenterAndExpand"
+                        
+                        Style="{StaticResource TabHeader}"/>
+                <Image Source="settings.png"
+                        HorizontalOptions="End"
+                        HeightRequest="30"/>
+            </StackLayout>
+
+            <RefreshView x:DataType="local:JobApplicationDetailsViewModel"
+                    Command="{Binding LoadJobDetailsCommand}"
+                    IsRefreshing="{Binding IsBusy}">
+                <ScrollView VerticalScrollBarVisibility="Never" Padding="0,0,0,12">
+
+                    <StackLayout Orientation="Vertical">
+
+                        <Image Source="{Binding jobModel.imageUrl, Converter={StaticResource isImageSourceConverter}}"
+                               HorizontalOptions="FillAndExpand"
+                               VerticalOptions="CenterAndExpand"
+                               Aspect="AspectFill"
+                               Margin="0"/>
+
+                        <StackLayout Orientation="Vertical"
+                                Padding="10">
+                            <Label Text="{Binding jobModel.jobTitle}"
+                                    FontAttributes="Bold"
+                                    FontSize="34"/>
+
+                            <StackLayout Spacing="15">
+
+                                <Label Text="{Binding jobModel.businessName}"
+                                       
+                                       FontAttributes="Bold"
+                                       FontSize="17"/>
+
+                                <Grid ColumnSpacing="5">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition/>
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                    </Grid.ColumnDefinitions>
+
+                                    <BoxView/>
+                                    <Frame CornerRadius="10"
+                                                Padding="10"
+                                               BackgroundColor="{AppThemeBinding Light={StaticResource LightGray}, Dark={StaticResource Background_Mid}}"
+                                                HasShadow="True">
+                                            <Frame.GestureRecognizers>
+                                                <TapGestureRecognizer Command="{Binding SaveJobCommand}"/>
+                                            </Frame.GestureRecognizers>
+                                            <Grid>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="Auto"/>
+                                                    <ColumnDefinition Width="*"/>
+                                                </Grid.ColumnDefinitions>
+
+                                                <Image
+                                                    Margin="5,0,0,0"
+                                                    HorizontalOptions="Center"
+                                                    Source="save.png"
+                                                    HeightRequest="20"
+                                                        WidthRequest="20"
+                                                    VerticalOptions="Center"/>
+                                                <Label
+                                                    Grid.Column="1"
+                                                    Margin="5,0,0,0"
+                                                    
+                                                    VerticalOptions="Center"
+                                                    MaxLines="1"
+                                                    Text="Save"
+                                                    />
+                                            </Grid>
+                                        </Frame>
+
+
+                                    <BoxView Grid.Column="1"/>
+                                    <Frame CornerRadius="10"
+                                            Grid.Column="1"
+                                                Padding="10"
+                                               BackgroundColor="{AppThemeBinding Light={StaticResource LightGray}, Dark={StaticResource Background_Mid}}"
+                                                HasShadow="True">
+                                            <Frame.GestureRecognizers>
+                                                <TapGestureRecognizer Command="{Binding OpenCommentsCommand}"/>
+                                            </Frame.GestureRecognizers>
+                                            <Grid>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="Auto"/>
+                                                    <ColumnDefinition Width="*"/>
+                                                </Grid.ColumnDefinitions>
+
+                                                <Image
+                                                    Margin="5,0,0,0"
+                                                    HorizontalOptions="Center"
+                                                    Source="chat.png"
+                                                    HeightRequest="20"
+                                                        WidthRequest="20"
+                                                    VerticalOptions="Center"/>
+                                                <Label
+                                                    Grid.Column="1"
+                                                    Margin="5,0,0,0"
+                                                    
+                                                    VerticalOptions="Center"
+                                                    Text="Comments"
+                                                    MaxLines="1"
+                                                    />
+                                            </Grid>
+                                        </Frame>
+
+                                    <BoxView Grid.Column="2"/>
+                                    <Frame CornerRadius="10"
+                                            Grid.Column="2"
+                                                Padding="10"
+                                               BackgroundColor="{AppThemeBinding Light={StaticResource LightGray}, Dark={StaticResource Background_Mid}}"
+                                                HasShadow="True">
+                                            <Frame.GestureRecognizers>
+                                                <TapGestureRecognizer Command="{Binding OpenContactUsPage}"/>
+                                            </Frame.GestureRecognizers>
+                                            <Grid>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="Auto"/>
+                                                    <ColumnDefinition Width="*"/>
+                                                </Grid.ColumnDefinitions>
+
+                                                <Image
+                                                    Margin="5,0,0,0"
+                                                    HorizontalOptions="Center"
+                                                    Source="alert.png"
+                                                    HeightRequest="20"
+                                                        WidthRequest="20"
+                                                    VerticalOptions="Center"/>
+                                                <Label
+                                                    Grid.Column="1"
+                                                    Margin="5,0,0,0"
+                                                    VerticalOptions="Center"
+                                                    
+                                                    Text="Report"
+                                                    MaxLines="1"
+                                                    />
+                                            </Grid>
+                                        </Frame>
+                                   
+                                </Grid>
+
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition/>
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition/>
+                                        <ColumnDefinition/>
+                                    </Grid.ColumnDefinitions>
+
+                                    <BoxView/>
+                                    <Frame CornerRadius="10" Padding="2,0,2,0" BackgroundColor="Transparent">
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="Auto"/>
+                                                <ColumnDefinition Width="*"/>
+                                            </Grid.ColumnDefinitions>
+
+                                            <Image
+                                                IsVisible="{Binding jobModel.isUnLiked}"
+                                                Margin="0,0,0,0"
+                                                HorizontalOptions="Center"
+                                                Source="like.png"
+                                                HeightRequest="20"
+                                                    WidthRequest="20"
+                                                VerticalOptions="CenterAndExpand">
+                                                <Image.GestureRecognizers>
+                                                    <TapGestureRecognizer Command="{Binding LikeJobCommand}"/>
+                                                </Image.GestureRecognizers>
+                                            </Image>
+
+                                            <Image
+                                                IsVisible="{Binding jobModel.likedIt}"
+                                                Margin="0,0,0,0"
+                                                HorizontalOptions="Center"
+                                                Source="liked.png"
+                                                HeightRequest="20"
+                                                    WidthRequest="20"
+                                                VerticalOptions="CenterAndExpand">
+                                                <Image.GestureRecognizers>
+                                                    <TapGestureRecognizer Command="{Binding UnLikeJobCommand}"/>
+                                                </Image.GestureRecognizers>
+                                            </Image>
+
+                                            <Label
+                                                Grid.Column="1"
+                                                Margin="5,0,0,0"
+                                                
+                                                VerticalOptions="CenterAndExpand"
+                                                Text="{Binding jobModel.likes}"
+                                                />
+                                        </Grid>
+                                    </Frame>
+
+                                    <BoxView Grid.Column="2"
+                                            HorizontalOptions="End"/>
+                                    <Frame CornerRadius="10"
+                                            Grid.Column="2"
+                                            Padding="2,0,2,0"
+                                            HorizontalOptions="End" BackgroundColor="Transparent">
+                                        <Grid>
+                                            <Grid.GestureRecognizers>
+                                                <TapGestureRecognizer Command="{Binding OpenCommentsCommand}"/>
+                                            </Grid.GestureRecognizers>
+
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="Auto"/>
+                                                <ColumnDefinition Width="*"/>
+                                            </Grid.ColumnDefinitions>
+
+                                            <Label
+                                                Margin="0,0,0,0"
+                                                VerticalOptions="Center"
+                                                
+                                                Text="{Binding jobModel.totalComments}"
+                                                
+                                                HorizontalOptions="End"/>
+                                            <Label
+                                                Grid.Column="1"
+                                                Margin="5,0,0,0"
+                                                VerticalOptions="Center"
+                                                
+                                                Text="Comment"
+                                                HorizontalOptions="End"/>
+                                        </Grid>
+                                    </Frame>
+                                </Grid>
+
+                                <Label Text="Job Description"
+                                        FontSize="12"
+                                        FontAttributes="Bold"
+                                        />
+
+                                <Label Text="{Binding jobModel.jobDescription}"
+                                        FontSize="14"/>
+
+                                <Label Text="Address"
+                                        FontSize="12"
+                                        FontAttributes="Bold"
+                                        />
+
+                                <Frame CornerRadius="10"
+                                        HasShadow="True">
+                                    <Frame.GestureRecognizers>
+                                        <TapGestureRecognizer Command="{Binding JobAddressTap}"
+                                                CommandParameter="{Binding jobModel}"/>
+                                    </Frame.GestureRecognizers>
+                                    <Grid>
+                                        <Image Source="{Binding jobModel.address_image, Converter={StaticResource isImageSourceConverter}}"
+                                            HeightRequest="170"
+                                            HorizontalOptions="FillAndExpand"
+                                            Aspect="AspectFill">
+                                        </Image>
+                                    </Grid>
+                                </Frame>
+
+                                <StackLayout Orientation="Horizontal"
+                                        Spacing="14">
+                                    <StackLayout.GestureRecognizers>
+                                        <TapGestureRecognizer Command="{Binding JobAddressTap}"
+                                                CommandParameter="{Binding jobModel}"/>
+                                    </StackLayout.GestureRecognizers>
+                                    <Image Source="address.png"
+                                            WidthRequest="30"
+                                            HorizontalOptions="Start"/>
+                                    <Label Text="{Binding jobModel.address_label}"
+                                            FontSize="14"
+                                            VerticalOptions="Center"/>
+                                </StackLayout>
+
+                                <BoxView HeightRequest="1"
+                                        Color="LightGray"
+                                        HorizontalOptions="FillAndExpand"/>
+
+                                <!--contact information-->
+                                <Frame CornerRadius="5"
+                                       BackgroundColor="{AppThemeBinding Light={StaticResource LightGray}, Dark={StaticResource Background_Mid}}"
+                                        HasShadow="True"
+                                        Margin="5"
+                                        Padding="5">
+                                    <StackLayout Orientation="Horizontal">
+                                        <Image Source="profile_icon.png"
+                                                Scale="0.7"
+                                                WidthRequest="40"
+                                                HeightRequest="40"></Image>
+                                        <StackLayout Orientation="Vertical"
+                                                VerticalOptions="CenterAndExpand"
+                                                HorizontalOptions="FillAndExpand">
+                                            <Label Text="Name"
+                                                    FontAttributes="Bold"
+                                                    />
+                                            <Label HorizontalOptions="FillAndExpand"
+                                                    Text="{Binding mJobApplication.applicantName}"></Label>
+                                        </StackLayout>
+                                    </StackLayout>
+                                </Frame>
+
+                                <Frame CornerRadius="5"
+                                       BackgroundColor="{AppThemeBinding Light={StaticResource LightGray}, Dark={StaticResource Background_Mid}}"
+                                        HasShadow="True"
+                                        Margin="5"
+                                        Padding="5">
+                                    <StackLayout Orientation="Horizontal">
+                                        <Image Source="city.png"
+                                                Scale="0.7"
+                                                WidthRequest="40"
+                                                HeightRequest="40"></Image>
+                                        <StackLayout Orientation="Vertical"
+                                                VerticalOptions="CenterAndExpand"
+                                                HorizontalOptions="FillAndExpand">
+                                            <Label Text="City"
+                                                    FontAttributes="Bold"
+                                                    />
+                                            <Label HorizontalOptions="FillAndExpand"
+                                                    Text="{Binding mJobApplication.applicantCity}"></Label>
+                                        </StackLayout>
+                                    </StackLayout>
+                                </Frame>
+
+                                <Frame CornerRadius="5"
+                                       BackgroundColor="{AppThemeBinding Light={StaticResource LightGray}, Dark={StaticResource Background_Mid}}"
+                                        HasShadow="True"
+                                        Margin="5"
+                                        Padding="5">
+                                    <StackLayout Orientation="Horizontal">
+                                        <Image Source="email.png"
+                                                Scale="0.7"
+                                                WidthRequest="40"
+                                                HeightRequest="40"></Image>
+                                        <StackLayout Orientation="Vertical"
+                                                VerticalOptions="CenterAndExpand"
+                                                HorizontalOptions="FillAndExpand">
+                                            <Label Text="Email"
+                                                    FontAttributes="Bold"
+                                                    />
+                                            <Label HorizontalOptions="FillAndExpand"
+                                                    Text="{Binding mJobApplication.applicantEmail}"></Label>
+                                        </StackLayout>
+                                    </StackLayout>
+                                </Frame>
+
+                                <Frame CornerRadius="5"
+                                       BackgroundColor="{AppThemeBinding Light={StaticResource LightGray}, Dark={StaticResource Background_Mid}}"
+                                        HasShadow="True"
+                                        Margin="5"
+                                        Padding="5">
+                                    <StackLayout Orientation="Horizontal">
+                                        <Image Source="phone_number.png"
+                                                Scale="0.7"
+                                                WidthRequest="40"
+                                                HeightRequest="40"></Image>
+                                        <StackLayout Orientation="Vertical"
+                                                VerticalOptions="CenterAndExpand"
+                                                HorizontalOptions="FillAndExpand">
+                                            <Label Text="Phone"
+                                                    FontAttributes="Bold"
+                                                    />
+                                            <Label HorizontalOptions="FillAndExpand"
+                                                    Text="{Binding mJobApplication.applicantPhone}"></Label>
+                                        </StackLayout>
+                                    </StackLayout>
+                                </Frame>
+
+                                <StackLayout Margin="5"
+                                        Padding="5"
+                                        Orientation="Vertical">
+                                    <StackLayout Orientation="Horizontal"
+                                            HorizontalOptions="FillAndExpand">
+                                        <Label Text="Job Description"
+                                                FontSize="18"
+                                                FontAttributes="Bold"/>
+                                        <Label Text="Required"
+                                                FontSize="14"
+                                                FontAttributes="Bold"
+                                                
+                                                HorizontalOptions="EndAndExpand"/>
+                                    </StackLayout>
+
+                                    <StackLayout Orientation="Horizontal">
+                                        <StackLayout.GestureRecognizers>
+                                            <TapGestureRecognizer Command="{Binding WorkExperienceLoadCommand}"/>
+                                        </StackLayout.GestureRecognizers>
+                                        <Image Source="portfolio.png"
+                                                Scale="0.7"
+                                                WidthRequest="50"
+                                                HeightRequest="50"></Image>
+                                        <StackLayout Orientation="Vertical"
+                                                VerticalOptions="CenterAndExpand"
+                                                HorizontalOptions="FillAndExpand">
+                                            <Label Text="Add Work Experience"
+                                                    FontAttributes="Bold"
+                                                    />
+                                            <Label Text="Tap to read this document"
+                                                    FontSize="12"/>
+                                        </StackLayout>
+                                    </StackLayout>
+
+                                    <BoxView HeightRequest="1"
+                                            Color="LightGray"
+                                            HorizontalOptions="FillAndExpand"/>
+                                </StackLayout>
+
+                                <StackLayout Margin="5"
+                                        Padding="5"
+                                        Orientation="Vertical">
+                                    <StackLayout Orientation="Horizontal"
+                                            HorizontalOptions="FillAndExpand">
+                                        <Label Text="Education History"
+                                                FontSize="18"
+                                                FontAttributes="Bold"/>
+                                        <Label Text="Required"
+                                                FontSize="14"
+                                                FontAttributes="Bold"
+                                                
+                                                HorizontalOptions="EndAndExpand"/>
+                                    </StackLayout>
+
+                                    <StackLayout Orientation="Horizontal">
+                                        <StackLayout.GestureRecognizers>
+                                            <TapGestureRecognizer Command="{Binding CollegeLoadCommand}"/>
+                                        </StackLayout.GestureRecognizers>
+                                        <Image Source="graduation.png"
+                                                Scale="0.7"
+                                                WidthRequest="50"
+                                                HeightRequest="50"></Image>
+                                        <StackLayout Orientation="Vertical"
+                                                VerticalOptions="CenterAndExpand"
+                                                HorizontalOptions="FillAndExpand">
+                                            <Label Text="Add Collage"
+                                                    FontAttributes="Bold"
+                                                    />
+                                            <Label Text="Tap to read this document"
+                                                    FontSize="12"/>
+                                        </StackLayout>
+                                    </StackLayout>
+
+                                    <StackLayout Orientation="Horizontal">
+                                        <StackLayout.GestureRecognizers>
+                                            <TapGestureRecognizer Command="{Binding HighSchoolLoadCommand}"/>
+                                        </StackLayout.GestureRecognizers>
+                                        <Image Source="high_school.png"
+                                                Scale="0.7"
+                                                WidthRequest="50"
+                                                HeightRequest="50"></Image>
+                                        <StackLayout Orientation="Vertical"
+                                                VerticalOptions="CenterAndExpand"
+                                                HorizontalOptions="FillAndExpand">
+                                            <Label Text="Add High School"
+                                                    FontAttributes="Bold"
+                                                    />
+                                            <Label Text="Tap to read this document"
+                                                    FontSize="12"/>
+                                        </StackLayout>
+                                    </StackLayout>
+
+                                    <BoxView HeightRequest="1"
+                                            Color="LightGray"
+                                            HorizontalOptions="FillAndExpand"/>
+                                </StackLayout>
+                                <!--end contact information-->
+
+                                <Label Text="Questions"
+                                        FontSize="12"
+                                        FontAttributes="Bold"
+                                        />
+
+                                <!--Start custom questions-->
+                                <CollectionView ItemsSource="{Binding JobQuestionAnswers}">
+                                    <CollectionView.ItemTemplate>
+                                        <DataTemplate x:DataType="model:JobQuestionAnswer">
+                                            <StackLayout Padding="0,0,0,0">
+                                                <Frame CornerRadius="10"
+                                                       BackgroundColor="{AppThemeBinding Light={StaticResource LightGray}, Dark={StaticResource Background_Mid}}"
+                                                        HasShadow="True"
+                                                        Margin="5">
+
+                                                    <Frame.GestureRecognizers>
+                                                        <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type local:JobApplicationDetailsViewModel}}, Path=JobModelNavTap}" CommandParameter="{Binding .}" />
+                                                    </Frame.GestureRecognizers>
+
+                                                    <StackLayout Orientation="Vertical"
+                                                            Padding="5">
+                                                        <Grid RowDefinitions="Auto, *"
+                                                                ColumnDefinitions="Auto, *">
+
+                                                            <StackLayout Orientation="Horizontal">
+                                                                <Image Source="question.png"
+                                                                        Scale="0.7"
+                                                                        WidthRequest="50"
+                                                                        HeightRequest="50"></Image>
+                                                                <StackLayout Orientation="Vertical"
+                                                                        VerticalOptions="CenterAndExpand"
+                                                                        HorizontalOptions="FillAndExpand">
+                                                                    <Label Text="{Binding question}"
+                                                                            FontAttributes="Bold"
+                                                                            />
+                                                                    <Label Text="{Binding answer}"
+                                                                            FontSize="12"/>
+                                                                </StackLayout>
+                                                            </StackLayout>
+                                                        </Grid>
+                                                    </StackLayout>
+                                                </Frame>
+                                            </StackLayout>
+                                        </DataTemplate>
+                                    </CollectionView.ItemTemplate>
+                                </CollectionView>
+                                <!--end ccustom questions-->
+
+                                <Label Text="Listed By"
+                                        FontSize="12"
+                                        FontAttributes="Bold"
+                                        />
+
+                                <StackLayout Orientation="Horizontal">
+                                    <StackLayout Margin="5,0,20,0">
+                                        <toolkitViews:AvatarView BorderWidth="0" HeightRequest="50" WidthRequest="50" BackgroundColor="Transparent" CornerRadius="10" ImageSource="{Binding jobModel.profile_picture, Converter={StaticResource isImageSourceConverter}}"
+                                                                HorizontalOptions="FillAndExpand"
+                                                                VerticalOptions="FillAndExpand"
+                                                                Margin="5">
+                                            <toolkitViews:AvatarView.Shadow>
+                                                <Shadow Opacity="0.3"/>
+                                            </toolkitViews:AvatarView.Shadow>
+                                        </toolkitViews:AvatarView>
+                                    </StackLayout>
+
+                                    <StackLayout VerticalOptions="Center">
+                                        <Label
+                                            FontAttributes="Bold"
+                                            FontSize="Small"
+                                            Text="{Binding jobModel.name}"
+                                            
+                                            VerticalOptions="Center">
+                                        </Label>
+                                        <Label
+                                            FontSize="Small"
+                                            Text="{Binding jobModel.user_name, StringFormat='@{0}'}"
+                                            
+                                            VerticalOptions="Center">
+                                        </Label>
+                                    </StackLayout>
+                                </StackLayout>
+
+                            </StackLayout>
+                        </StackLayout>
+                    </StackLayout>
+                </ScrollView>
+            </RefreshView>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

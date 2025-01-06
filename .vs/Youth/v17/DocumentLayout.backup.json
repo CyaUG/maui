@@ -1,0 +1,155 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\dell\\workspace\\MAUI\\Youth\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{31A8B0CC-8ED8-4652-BFA9-DD86FE8EDD60}|Youth.csproj|c:\\users\\dell\\workspace\\maui\\youth\\views\\events\\eventpospage.xaml.cs||{8B382828-6202-11D1-8870-0000F87579D2}|",
+      "RelativeMoniker": "D:0:0:{31A8B0CC-8ED8-4652-BFA9-DD86FE8EDD60}|Youth.csproj|solutionrelative:views\\events\\eventpospage.xaml.cs||{8B382828-6202-11D1-8870-0000F87579D2}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{31A8B0CC-8ED8-4652-BFA9-DD86FE8EDD60}|Youth.csproj|c:\\users\\dell\\workspace\\maui\\youth\\viewmodels\\interfaces\\ieventposviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{31A8B0CC-8ED8-4652-BFA9-DD86FE8EDD60}|Youth.csproj|solutionrelative:viewmodels\\interfaces\\ieventposviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{31A8B0CC-8ED8-4652-BFA9-DD86FE8EDD60}|Youth.csproj|c:\\users\\dell\\workspace\\maui\\youth\\viewmodels\\eventposviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{31A8B0CC-8ED8-4652-BFA9-DD86FE8EDD60}|Youth.csproj|solutionrelative:viewmodels\\eventposviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{31A8B0CC-8ED8-4652-BFA9-DD86FE8EDD60}|Youth.csproj|c:\\users\\dell\\workspace\\maui\\youth\\views\\events\\eventpospage.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{31A8B0CC-8ED8-4652-BFA9-DD86FE8EDD60}|Youth.csproj|solutionrelative:views\\events\\eventpospage.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{31A8B0CC-8ED8-4652-BFA9-DD86FE8EDD60}|Youth.csproj|c:\\users\\dell\\workspace\\maui\\youth\\platforms\\android\\androidmanifest.xml||{FA3CD31E-987B-443A-9B81-186104E8DAC1}",
+      "RelativeMoniker": "D:0:0:{31A8B0CC-8ED8-4652-BFA9-DD86FE8EDD60}|Youth.csproj|solutionrelative:platforms\\android\\androidmanifest.xml||{FA3CD31E-987B-443A-9B81-186104E8DAC1}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{31A8B0CC-8ED8-4652-BFA9-DD86FE8EDD60}|Youth.csproj|c:\\users\\dell\\workspace\\maui\\youth\\views\\jobs\\myactivelistedjobspage.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{31A8B0CC-8ED8-4652-BFA9-DD86FE8EDD60}|Youth.csproj|solutionrelative:views\\jobs\\myactivelistedjobspage.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{31A8B0CC-8ED8-4652-BFA9-DD86FE8EDD60}|Youth.csproj|c:\\users\\dell\\workspace\\maui\\youth\\views\\events\\eventconfigpage.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{31A8B0CC-8ED8-4652-BFA9-DD86FE8EDD60}|Youth.csproj|solutionrelative:views\\events\\eventconfigpage.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 8,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:128:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{01321f1c-6c9e-3b5b-9c0f-66d2a373c254}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{7d1a5679-04f2-3f4a-851f-855baa54731c}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "EventPosViewModel.cs",
+              "DocumentMoniker": "C:\\Users\\dell\\workspace\\MAUI\\Youth\\ViewModels\\EventPosViewModel.cs",
+              "RelativeDocumentMoniker": "ViewModels\\EventPosViewModel.cs",
+              "ToolTip": "C:\\Users\\dell\\workspace\\MAUI\\Youth\\ViewModels\\EventPosViewModel.cs",
+              "RelativeToolTip": "ViewModels\\EventPosViewModel.cs",
+              "ViewState": "AgIAANoAAAAAAAAAAAAAAPcAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-09T13:36:33.273Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "IEventPosViewModel.cs",
+              "DocumentMoniker": "C:\\Users\\dell\\workspace\\MAUI\\Youth\\ViewModels\\Interfaces\\IEventPosViewModel.cs",
+              "RelativeDocumentMoniker": "ViewModels\\Interfaces\\IEventPosViewModel.cs",
+              "ToolTip": "C:\\Users\\dell\\workspace\\MAUI\\Youth\\ViewModels\\Interfaces\\IEventPosViewModel.cs",
+              "RelativeToolTip": "ViewModels\\Interfaces\\IEventPosViewModel.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAhAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-09T13:36:17.033Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "AndroidManifest.xml",
+              "DocumentMoniker": "C:\\Users\\dell\\workspace\\MAUI\\Youth\\Platforms\\Android\\AndroidManifest.xml",
+              "RelativeDocumentMoniker": "Platforms\\Android\\AndroidManifest.xml",
+              "ToolTip": "C:\\Users\\dell\\workspace\\MAUI\\Youth\\Platforms\\Android\\AndroidManifest.xml",
+              "RelativeToolTip": "Platforms\\Android\\AndroidManifest.xml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAALAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003576|",
+              "WhenOpened": "2024-11-08T15:52:23.575Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "EventConfigPage.xaml",
+              "DocumentMoniker": "C:\\Users\\dell\\workspace\\MAUI\\Youth\\Views\\Events\\EventConfigPage.xaml",
+              "RelativeDocumentMoniker": "Views\\Events\\EventConfigPage.xaml",
+              "ToolTip": "C:\\Users\\dell\\workspace\\MAUI\\Youth\\Views\\Events\\EventConfigPage.xaml",
+              "RelativeToolTip": "Views\\Events\\EventConfigPage.xaml",
+              "ViewState": "AgIAABsAAAAAAAAAAAAAACUAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2024-11-07T12:24:27.232Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "MyActiveListedJobsPage.xaml",
+              "DocumentMoniker": "C:\\Users\\dell\\workspace\\MAUI\\Youth\\Views\\jobs\\MyActiveListedJobsPage.xaml",
+              "RelativeDocumentMoniker": "Views\\jobs\\MyActiveListedJobsPage.xaml",
+              "ToolTip": "C:\\Users\\dell\\workspace\\MAUI\\Youth\\Views\\jobs\\MyActiveListedJobsPage.xaml",
+              "RelativeToolTip": "Views\\jobs\\MyActiveListedJobsPage.xaml",
+              "ViewState": "AgIAAEsAAAAAAAAAAAAAAB8AAABEAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2024-11-07T12:06:07.646Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "EventPosPage.xaml.cs",
+              "DocumentMoniker": "C:\\Users\\dell\\workspace\\MAUI\\Youth\\Views\\Events\\EventPosPage.xaml.cs",
+              "RelativeDocumentMoniker": "Views\\Events\\EventPosPage.xaml.cs",
+              "ToolTip": "C:\\Users\\dell\\workspace\\MAUI\\Youth\\Views\\Events\\EventPosPage.xaml.cs",
+              "RelativeToolTip": "Views\\Events\\EventPosPage.xaml.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAiwAsAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-07T11:53:40.854Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "EventPosPage.xaml",
+              "DocumentMoniker": "C:\\Users\\dell\\workspace\\MAUI\\Youth\\Views\\Events\\EventPosPage.xaml",
+              "RelativeDocumentMoniker": "Views\\Events\\EventPosPage.xaml",
+              "ToolTip": "C:\\Users\\dell\\workspace\\MAUI\\Youth\\Views\\Events\\EventPosPage.xaml",
+              "RelativeToolTip": "Views\\Events\\EventPosPage.xaml",
+              "ViewState": "AgIAACEAAAAAAAAAAAAAACsAAAAgAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2024-11-07T11:51:33.456Z"
+            }
+          ]
+        },
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": -1,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{6324226f-61b6-4f28-92ee-18d4b5fe1e48}"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,358 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Youth.Views.Shopping.SubCategoryItemsCustomPage"
+             Title="{Binding Title}"
+             xmlns:local="clr-namespace:Youth.ViewModels"
+             xmlns:model="clr-namespace:Youth.Models"
+             xmlns:renderers="clr-namespace:Youth.CustomRenderers"
+             Shell.NavBarIsVisible="False"
+             Shell.FlyoutItemIsVisible="False"
+             Shell.FlyoutBehavior="Disabled"
+             NavigationPage.HasNavigationBar="False"
+             Shell.PresentationMode="Animated"
+             Shell.TabBarIsVisible="False"
+             xmlns:ios="clr-namespace:Microsoft.Maui.Controls.PlatformConfiguration.iOSSpecific;assembly=Microsoft.Maui.Controls"
+             ios:Page.UseSafeArea="true"
+             xmlns:converters="clr-namespace:Youth.Helpers.Converters">
+
+    <ContentPage.Resources>
+        <Style TargetType="Frame">
+            <Setter Property="HasShadow"
+                    Value="False"/>
+            <Setter Property="Padding"
+                    Value="0"/>
+            <Setter Property="CornerRadius"
+                    Value="20"/>
+            <Setter Property="IsClippedToBounds"
+                    Value="True"/>
+        </Style>
+        <ResourceDictionary>
+            <converters:IsImageSourceConverter x:Key="isImageSourceConverter"/>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <ContentPage.Content>
+        <StackLayout>
+
+            <StackLayout
+                Orientation="Horizontal"
+                VerticalOptions="Center"
+                Spacing="10"
+                Grid.Row="0"
+                Margin="10,20,10,0">
+
+                <Image
+                    HorizontalOptions="StartAndExpand"
+                    HeightRequest="30"
+                    Source="back.png"
+                    BackgroundColor="transparent"
+                    VerticalOptions="CenterAndExpand">
+                    <Image.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="Btn_Back"/>
+                    </Image.GestureRecognizers>
+                </Image>
+
+                <Image Source="Search"
+                        HorizontalOptions="EndAndExpand"
+                        HeightRequest="30">
+                    <Image.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OpenSearchPage"/>
+                    </Image.GestureRecognizers>
+                </Image>
+                <Image Source="shopping_cart"
+                        HorizontalOptions="End"
+                        HeightRequest="30">
+                    <Image.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OpenShoppingCart"/>
+                    </Image.GestureRecognizers>
+                </Image>
+            </StackLayout>
+
+            <ScrollView VerticalScrollBarVisibility="Never">
+                <StackLayout
+                    Padding="10,10,10,10"
+                    Spacing="10">
+
+                    <StackLayout
+                        Orientation="Horizontal"
+                        Spacing="20">
+                    </StackLayout>
+
+                    <Label Text="{Binding shoppingQueryParameter.label}"
+                            FontAttributes="Bold"
+                            FontSize="25"/>
+
+                    <Grid HeightRequest="200">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <Frame CornerRadius="10"
+                               Padding="10"
+                               BackgroundColor="{AppThemeBinding Light={StaticResource LightGray}, Dark={StaticResource Background_Mid}}"
+                               HasShadow="True"
+                                Grid.Row="0"
+                                Grid.Column="0"
+                                Margin="5,5,5,5">
+                            <Frame.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding SetSubCategoriesTapCommand}"
+                                        CommandParameter="{Binding shoppingSubCategory1}"/>
+                            </Frame.GestureRecognizers>
+                            <StackLayout>
+                                <Image Source="{Binding shoppingSubCategory1.imageUrl, Converter={StaticResource isImageSourceConverter}}"
+                                        HeightRequest="40"
+                                        WidthRequest="40"/>
+                                <Label Text="{Binding shoppingSubCategory1.label}"
+                                        VerticalOptions="EndAndExpand"
+                                        HorizontalTextAlignment="Center"/>
+                            </StackLayout>
+                        </Frame>
+                        <Frame CornerRadius="10"
+                               Padding="10"
+                               BackgroundColor="{AppThemeBinding Light={StaticResource LightGray}, Dark={StaticResource Background_Mid}}"
+                               HasShadow="True"
+                                Grid.Row="0"
+                                Grid.Column="1"
+                                Margin="5,5,5,5">
+                            <Frame.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding SetSubCategoriesTapCommand}"
+                                        CommandParameter="{Binding shoppingSubCategory2}"/>
+                            </Frame.GestureRecognizers>
+                            <StackLayout>
+                                <Image HeightRequest="40"
+                                        WidthRequest="40"
+                                        Source="{Binding shoppingSubCategory2.imageUrl, Converter={StaticResource isImageSourceConverter}}"/>
+                                <Label Text="{Binding shoppingSubCategory2.label}"
+                                        VerticalOptions="EndAndExpand"
+                                        HorizontalTextAlignment="Center"/>
+                            </StackLayout>
+                        </Frame>
+                        <Frame CornerRadius="10"
+                               Padding="10"
+                               BackgroundColor="{AppThemeBinding Light={StaticResource LightGray}, Dark={StaticResource Background_Mid}}"
+                               HasShadow="True"
+                                Grid.Row="0"
+                                Grid.Column="2"
+                                Margin="5,5,5,5">
+                            <Frame.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding SetSubCategoriesTapCommand}"
+                                        CommandParameter="{Binding shoppingSubCategory3}"/>
+                            </Frame.GestureRecognizers>
+                            <StackLayout>
+                                <Image Source="{Binding shoppingSubCategory3.imageUrl, Converter={StaticResource isImageSourceConverter}}"
+                                        HeightRequest="40"
+                                        WidthRequest="40"/>
+                                <Label Text="{Binding shoppingSubCategory3.label}"
+                                        VerticalOptions="EndAndExpand"
+                                        HorizontalTextAlignment="Center"/>
+                            </StackLayout>
+                        </Frame>
+                        <Frame CornerRadius="10"
+                               Padding="10"
+                               BackgroundColor="{AppThemeBinding Light={StaticResource LightGray}, Dark={StaticResource Background_Mid}}"
+                               HasShadow="True"
+                                Grid.Row="1"
+                                Grid.Column="0"
+                                Margin="5,5,5,5">
+                            <Frame.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding SetSubCategoriesTapCommand}"
+                                        CommandParameter="{Binding shoppingSubCategory4}"/>
+                            </Frame.GestureRecognizers>
+                            <StackLayout>
+                                <Image Source="{Binding shoppingSubCategory4.imageUrl, Converter={StaticResource isImageSourceConverter}}"
+                                        HeightRequest="40"
+                                        WidthRequest="40"/>
+                                <Label Text="{Binding shoppingSubCategory4.label}"
+                                        VerticalOptions="EndAndExpand"
+                                        HorizontalTextAlignment="Center"/>
+                            </StackLayout>
+                        </Frame>
+                        <Frame CornerRadius="10"
+                               Padding="10"
+                               BackgroundColor="{AppThemeBinding Light={StaticResource LightGray}, Dark={StaticResource Background_Mid}}"
+                               HasShadow="True"
+                                Grid.Row="1"
+                                Grid.Column="1"
+                                Margin="5,5,5,5">
+                            <Frame.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding SetSubCategoriesTapCommand}"
+                                        CommandParameter="{Binding shoppingSubCategory5}"/>
+                            </Frame.GestureRecognizers>
+                            <StackLayout>
+                                <Image Source="{Binding shoppingSubCategory5.imageUrl, Converter={StaticResource isImageSourceConverter}}"
+                                        HeightRequest="40"
+                                        WidthRequest="40"/>
+                                <Label Text="{Binding shoppingSubCategory5.label}"
+                                        VerticalOptions="EndAndExpand"
+                                        HorizontalTextAlignment="Center"/>
+                            </StackLayout>
+                        </Frame>
+                        <Frame CornerRadius="10"
+                               Padding="10"
+                               BackgroundColor="{AppThemeBinding Light={StaticResource LightGray}, Dark={StaticResource Background_Mid}}"
+                               HasShadow="True"
+                                Grid.Row="1"
+                                Grid.Column="2"
+                                Margin="5,5,5,5">
+                            <Frame.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding OpenMoreShoppingSubCategoriesLoadCommand}"
+                                        CommandParameter="{Binding .}"/>
+                            </Frame.GestureRecognizers>
+                            <StackLayout>
+                                <Image Source="visualization.png"
+                                        HeightRequest="40"
+                                        WidthRequest="40"/>
+                                <Label Text="More"
+                                        VerticalOptions="EndAndExpand"
+                                        HorizontalTextAlignment="Center"/>
+                            </StackLayout>
+                        </Frame>
+
+                    </Grid>
+
+
+                    <ScrollView Orientation="Horizontal"
+                            HorizontalScrollBarVisibility="Never">
+                        <StackLayout Orientation="Horizontal"
+                                Spacing="20"
+                                Margin="5">
+                            <StackLayout Orientation="Horizontal">
+                                <Label Text="{Binding FormattedLabel}"
+                                        FontAttributes="Bold"
+                                        FontSize="18"/>
+                                <Image Source="expand_button.png"
+                                        HeightRequest="15"
+                                        WidthRequest="15"/>
+                                <StackLayout.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding OpenMoreShoppingSubCategoriesLoadCommand}"
+                                            CommandParameter="{Binding .}"/>
+                                </StackLayout.GestureRecognizers>
+                            </StackLayout>
+                            <StackLayout Orientation="Horizontal">
+                                <Label Text="{Binding FormattedBrandLabel}"
+                                        FontAttributes="Bold"
+                                        FontSize="18"/>
+                                <Image Source="expand_button.png"
+                                        HeightRequest="15"
+                                        WidthRequest="15"/>
+                                <StackLayout.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding OpenShopingSubCategoryBrandsProviderCommand}"
+                                            CommandParameter="{Binding .}"/>
+                                </StackLayout.GestureRecognizers>
+                            </StackLayout>
+                            <StackLayout Orientation="Horizontal">
+                                <Label Text="{Binding FormattedBrandModelLabel}"
+                                        FontAttributes="Bold"
+                                        FontSize="18"/>
+                                <Image Source="expand_button.png"
+                                        HeightRequest="15"
+                                        WidthRequest="15"/>
+                                <StackLayout.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding OpenShoppingBrandModelsCommand}"
+                                            CommandParameter="{Binding .}"/>
+                                </StackLayout.GestureRecognizers>
+                            </StackLayout>
+                        </StackLayout>
+                    </ScrollView>
+
+                    <StackLayout Spacing="30">
+                        <RefreshView IsRefreshing="{Binding IsBusy}">
+                            <CollectionView ItemsSource="{Binding ShoppingProducts}"
+                                    SelectionMode="Single">
+                                <CollectionView.ItemTemplate>
+                                    <DataTemplate x:DataType="model:ShoppingProduct">
+                                        <StackLayout>
+                                            <Frame Margin="5"
+                                                    CornerRadius="10"
+                                                   BackgroundColor="{AppThemeBinding Light={StaticResource LightGray}, Dark={StaticResource Background_Mid}}"
+                                                   HasShadow="True">
+
+                                                <Frame.GestureRecognizers>
+                                                    <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type local:SubCategoryItemsCustomViewModel}}, Path=ShoppingProductTapCommand}" CommandParameter="{Binding .}" />
+                                                </Frame.GestureRecognizers>
+
+                                                <Grid Padding="10"
+                                                      RowDefinitions="Auto, *"
+                                                      ColumnDefinitions="Auto, *">
+
+                                                    <Frame Grid.RowSpan="3"
+                                                           HeightRequest="60"
+                                                           WidthRequest="60"
+                                                           CornerRadius="5">
+                                                        <Image
+                                                            Source="{Binding imageUrl, Converter={StaticResource isImageSourceConverter}}"
+                                                            HeightRequest="60"
+                                                            WidthRequest="60"
+                                                            Aspect="AspectFill"/>
+                                                    </Frame>
+
+                                                    <Label Grid.Row="1"
+                                                            Grid.Column="1"
+                                                            Grid.ColumnSpan="2"
+                                                            Text="{Binding label}"
+                                                            FontAttributes="Bold"
+                                                            Padding="10,0,0,0"/>
+
+                                                    <Label IsVisible="{Binding onDiscount}"
+                                                            TextDecorations="Strikethrough"
+                                                            Grid.Row="2"
+                                                            Grid.Column="1"
+                                                            VerticalOptions="End"
+                                                            Padding="10,0,0,0"
+                                                            TextColor="Red"
+                                                            FontSize="10">
+                                                        <Label.Text>
+                                                            <MultiBinding StringFormat="{}{0} {1}">
+                                                                <Binding Path="currency"/>
+                                                                <Binding Path="sellPrice"/>
+                                                            </MultiBinding>
+                                                        </Label.Text>
+                                                    </Label>
+
+                                                    <Label IsVisible="{Binding onDiscount}"
+                                                            Grid.Row="2"
+                                                            Grid.Column="2"
+                                                            VerticalOptions="End"
+                                                            Padding="10,0,0,0"
+                                                            FontSize="14">
+                                                        <Label.Text>
+                                                            <MultiBinding StringFormat="{}{0} {1}">
+                                                                <Binding Path="currency"/>
+                                                                <Binding Path="discountPrice"/>
+                                                            </MultiBinding>
+                                                        </Label.Text>
+                                                    </Label>
+
+                                                    <Label IsVisible="{Binding offerDiscount}"
+                                                            Grid.Row="2"
+                                                            Grid.ColumnSpan="2"
+                                                            VerticalOptions="End"
+                                                            Padding="10,0,0,0"
+                                                            FontSize="14">
+                                                        <Label.Text>
+                                                            <MultiBinding StringFormat="{}{0} {1}">
+                                                                <Binding Path="currency"/>
+                                                                <Binding Path="sellPrice"/>
+                                                            </MultiBinding>
+                                                        </Label.Text>
+                                                    </Label>
+                                                </Grid>
+                                            </Frame>
+                                        </StackLayout>
+                                    </DataTemplate>
+                                </CollectionView.ItemTemplate>
+                            </CollectionView>
+                        </RefreshView>
+                    </StackLayout>
+                </StackLayout>
+            </ScrollView>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

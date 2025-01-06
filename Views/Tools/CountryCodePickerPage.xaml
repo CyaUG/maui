@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewModels="clr-namespace:Youth.ViewModels"
+             xmlns:toolkitViews="clr-namespace:CommunityToolkit.Maui.Views;assembly=CommunityToolkit.Maui"
+             x:Class="Youth.Views.Tools.CountryCodePickerPage"
+             Title="CountryCodePickerPage"
+             xmlns:v="clr-namespace:Youth.Views"
+             Shell.NavBarIsVisible="False"
+             Shell.PresentationMode="Animated"
+             x:DataType="viewModels:CountryCodePickerViewModel"
+             Shell.FlyoutItemIsVisible="False"
+             Shell.FlyoutBehavior="Disabled"
+             NavigationPage.HasNavigationBar="False"
+             Shell.TabBarIsVisible="False"
+             xmlns:models="clr-namespace:Youth.Models"
+             xmlns:icons="clr-namespace:Youth.Resources.Styles">
+
+    <ContentPage.Resources>
+        <Style TargetType="Frame">
+            <Setter Property="HasShadow" Value="False"/>
+            <Setter Property="Padding" Value="0"/>
+            <Setter Property="CornerRadius" Value="20"/>
+            <Setter Property="IsClippedToBounds" Value="True"/>
+        </Style>
+    </ContentPage.Resources>
+
+    <ScrollView>
+        <VerticalStackLayout Padding="5,0,5,20" Spacing="10">
+            <Grid Margin="10">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="50" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
+                <Border HeightRequest="40" WidthRequest="40" Padding="8" BackgroundColor="{AppThemeBinding Light={StaticResource Background_Dark}, Dark={StaticResource White}}" Opacity="0.8" StrokeThickness="0" VerticalOptions="CenterAndExpand" HorizontalOptions="Start">
+                    <Border.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="TapGestureRecognizer_OnTapped"/>
+                    </Border.GestureRecognizers>
+                    <Border.StrokeShape>
+                        <RoundRectangle CornerRadius="10"/>
+                    </Border.StrokeShape>
+                    <Border.Shadow>
+                        <Shadow Opacity="0.3"/>
+                    </Border.Shadow>
+                    <Image HeightRequest="20">
+                        <Image.Source>
+                            <FontImageSource FontFamily="{StaticResource FontAwesome}" Glyph="{Static icons:IconFont.ArrowLeft}" Color="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource Background_Dark}}" />
+                        </Image.Source>
+                    </Image>
+                </Border>
+
+                <Frame Padding="0" Grid.Column="1" HorizontalOptions="FillAndExpand" CornerRadius="20" HasShadow="False" BackgroundColor="{AppThemeBinding Light={StaticResource LightGray}, Dark={StaticResource Background_Mid}}">
+                    <StackLayout Orientation="Horizontal" Spacing="10" Padding="10" MinimumHeightRequest="50" VerticalOptions="CenterAndExpand">
+                        <Image HeightRequest="17" HorizontalOptions="Center" VerticalOptions="CenterAndExpand">
+                            <Image.Source>
+                                <FontImageSource FontFamily="{StaticResource FontAwesome}" Glyph="{Static icons:IconFont.Search}" Color="{AppThemeBinding Light={StaticResource Background_Dark}, Dark={StaticResource White}}" />
+                            </Image.Source>
+                        </Image>
+                        <Entry Text="{Binding InputValue}" HorizontalOptions="FillAndExpand" Placeholder="Search countries..." VerticalOptions="FillAndExpand" />
+                        <Image HeightRequest="17" VerticalOptions="CenterAndExpand">
+                            <Image.Source>
+                                <FontImageSource FontFamily="{StaticResource FontAwesome}" Glyph="{Static icons:IconFont.Filter}" Color="{AppThemeBinding Light={StaticResource Background_Dark}, Dark={StaticResource White}}" />
+                            </Image.Source>
+                        </Image>
+                    </StackLayout>
+                </Frame>
+            </Grid>
+
+            <VerticalStackLayout>
+                <!-- addresses below -->
+                <StackLayout BindableLayout.ItemsSource="{Binding Countries}">
+                    <BindableLayout.ItemTemplate>
+                        <DataTemplate x:DataType="models:Country">
+                            <Frame HasShadow="False" CornerRadius="10" Margin="5" Padding="5" BackgroundColor="{AppThemeBinding Light={StaticResource LightGray}, Dark={StaticResource Background_Mid}}">
+                                <Frame.GestureRecognizers>
+                                    <TapGestureRecognizer NumberOfTapsRequired="1" Command="{Binding Source={RelativeSource AncestorType={x:Type viewModels:CountryCodePickerViewModel}}, Path=CountryTappedCommand}" CommandParameter="{Binding .}"/>
+                                </Frame.GestureRecognizers>
+
+                                <Grid Padding="5" Margin="4">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="{OnIdiom Phone='50', Default='60'}" />
+                                        <ColumnDefinition Width="*" />
+                                    </Grid.ColumnDefinitions>
+                                    <Image Margin="0,0,10,0" Source="{Binding FlagUrl}" WidthRequest="30" HeightRequest="30" />
+                                    <Label x:Name="name" Grid.Column="1" FontFamily="{StaticResource MediumFontFamily}" VerticalOptions="CenterAndExpand" FontSize="18" LineBreakMode="TailTruncation" MaxLines="1" Text="{Binding Name}" />
+                                </Grid>
+                            </Frame>
+                        </DataTemplate>
+                    </BindableLayout.ItemTemplate>
+                </StackLayout>
+            </VerticalStackLayout>
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

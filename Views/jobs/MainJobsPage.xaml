@@ -1,0 +1,378 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Youth.Views.jobs.MainJobsPage"
+             Title="{Binding Title}"
+             xmlns:local="clr-namespace:Youth.ViewModels"
+             xmlns:model="clr-namespace:Youth.Models"
+             xmlns:utils="clr-namespace:Youth.Utils"
+             Shell.NavBarIsVisible="False"
+             Shell.FlyoutItemIsVisible="False"
+             Shell.FlyoutBehavior="Disabled"
+             Shell.PresentationMode="Animated"
+             Shell.TabBarIsVisible="False"
+             xmlns:ios="clr-namespace:Microsoft.Maui.Controls.PlatformConfiguration.iOSSpecific;assembly=Microsoft.Maui.Controls"
+             xmlns:behaviors="clr-namespace:CommunityToolkit.Maui.Behaviors;assembly=CommunityToolkit.Maui"
+             xmlns:toolkitViews="clr-namespace:CommunityToolkit.Maui.Views;assembly=CommunityToolkit.Maui"
+             ios:Page.UseSafeArea="true"
+             xmlns:renderers="clr-namespace:Youth.CustomRenderers"
+             xmlns:converters="clr-namespace:Youth.Helpers.Converters">
+
+    <ContentPage.Resources>
+        <Style TargetType="Frame">
+            <Setter Property="HasShadow"
+                    Value="False"/>
+            <Setter Property="Padding"
+                    Value="0"/>
+            <Setter Property="CornerRadius"
+                    Value="20"/>
+            <Setter Property="IsClippedToBounds"
+                    Value="True"/>
+        </Style>
+        <ResourceDictionary>
+            <utils:MultiplierConverter x:Key="MultiplierConverter"/>
+            <converters:ShowEventCartCountConverter x:Key="showEventCartCountConverter"/>
+            <converters:IsImageSourceConverter x:Key="isImageSourceConverter"/>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <ContentPage.Content>
+        <Grid x:Name="gridParent">
+            <StackLayout>
+                <StackLayout
+                    Orientation="Horizontal"
+                    VerticalOptions="Center"
+                    Spacing="10"
+                    Grid.Row="0"
+                    Margin="10,20,10,0">
+
+                    <Image
+                        HorizontalOptions="Start"
+                        HeightRequest="30"
+                        Source="back.png"
+                        BackgroundColor="transparent"
+                        VerticalOptions="CenterAndExpand">
+                        <Image.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="Btn_Back"/>
+                        </Image.GestureRecognizers>
+                    </Image>
+
+                    <Label Text="{Binding Title}"
+                            HorizontalOptions="CenterAndExpand"
+                            VerticalOptions="CenterAndExpand"
+                            Style="{StaticResource TabHeader}"/>
+                    <Grid HorizontalOptions="End"
+                            WidthRequest="50">
+                        <Grid.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="ShowMenu"/>
+                        </Grid.GestureRecognizers>
+
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="65"/>
+                        </Grid.ColumnDefinitions>
+                        <Image Source="settings.png"
+                                HeightRequest="30"
+                                Grid.Column="0"/>
+
+                        <Button
+                            Text="{Binding dashboardSummary.eventCartCount}"
+                            Grid.Column="0"
+                            BackgroundColor="Red"
+                            TextColor="White"
+                            CornerRadius="20"
+                            HorizontalOptions="End"
+                            Margin="20,5,5,5"
+                            Padding="5"
+                            WidthRequest="30"
+                            HeightRequest="30"
+                            TranslationY="-15"
+                            Clicked="ShowMenu"
+                            IsVisible="False"/>
+                    </Grid>
+                </StackLayout>
+
+                <RefreshView x:DataType="local:MainJobsViewModel"
+                        Command="{Binding LoadJobCategoriesCommand}"
+                        IsRefreshing="{Binding IsBusy}">
+                    <ScrollView VerticalScrollBarVisibility="Never">
+                        <StackLayout Orientation="Vertical"
+                                Spacing="15">
+                            <Label FontSize="35"
+                                    Text="Let's Find Your Job"
+                                    Margin="10,50,60,0"/>
+
+                            <Frame
+                                Margin="10,0,10,0"
+                                Padding="10"
+                                BackgroundColor="Transparent"
+                                BorderColor="{StaticResource BorderColor}"
+                                CornerRadius="20"
+                                HasShadow="False">
+                                <Grid>
+                                    <Grid.GestureRecognizers>
+                                        <TapGestureRecognizer Command="{Binding SearchGridTappedCommand}"
+                                                CommandParameter="{Binding .}"/>
+                                    </Grid.GestureRecognizers>
+
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                    </Grid.ColumnDefinitions>
+
+                                    <Image
+                                        Margin="10,0,0,0"
+                                        HorizontalOptions="Center"
+                                        Source="search.png"
+                                        VerticalOptions="Center"
+                                        HeightRequest="30"
+                                        WidthRequest="30">
+                                        <Image.Behaviors>
+                                            <behaviors:IconTintColorBehavior TintColor="{AppThemeBinding Light={StaticResource DarkGray}, Dark={StaticResource White}}"/>
+                                        </Image.Behaviors>
+                                    </Image>
+                                    <Label
+                                        Grid.Column="1"
+                                        Margin="20,0,0,0"
+                                        Text="Search"
+                                        VerticalOptions="Center"/>
+                                    <Image
+                                        Grid.Column="2"
+                                        Margin="0,0,10,0"
+                                        HorizontalOptions="Center"
+                                        Source="settings_mesh.png"
+                                        VerticalOptions="Center"
+                                        HeightRequest="30"
+                                        WidthRequest="30"/>
+                                </Grid>
+                            </Frame>
+
+                            <Label Text="Popular Categories"
+                                    Margin="10,10,10,0"
+                                    HorizontalOptions="Start"
+                                    VerticalOptions="Center"/>
+
+                            <CollectionView Margin="10,0,10,0" ItemsSource="{Binding JobCategories}">
+                                <CollectionView.ItemsLayout>
+                                    <LinearItemsLayout Orientation="Horizontal" ItemSpacing="8"/>
+                                </CollectionView.ItemsLayout>
+                                <CollectionView.ItemTemplate>
+                                    <DataTemplate x:DataType="model:JobCategory">
+                                        <StackLayout WidthRequest="160">
+
+                                            <StackLayout.GestureRecognizers>
+                                                <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type local:MainJobsViewModel}}, Path=JobCategoryNavTap}" CommandParameter="{Binding .}" />
+                                            </StackLayout.GestureRecognizers>
+
+                                            <Frame>
+                                                <Frame.GestureRecognizers>
+                                                    <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type local:MainJobsViewModel}}, Path=JobCategoryNavTap}" CommandParameter="{Binding .}" />
+                                                </Frame.GestureRecognizers>
+                                                <Image
+                                                Source="{Binding imageUrl, Converter={StaticResource isImageSourceConverter}}"
+                                                        HeightRequest="170"
+                                                        WidthRequest="130"
+                                                        Aspect="AspectFill">
+                                                </Image>
+                                            </Frame>
+                                            <Label Text="{Binding label}"
+                                                        FontAttributes="Bold"/>
+                                            <Label Text="{Binding jobsCount, StringFormat='{0} Jobs'}"
+                                                        FontSize="12"
+                                                        />
+                                        </StackLayout>
+                                    </DataTemplate>
+                                </CollectionView.ItemTemplate>
+                            </CollectionView>
+
+                            <Label Text="Jobs For You"
+                                    Margin="10,10,10,0"
+                                    HorizontalOptions="Start"
+                                    VerticalOptions="Center"/>
+
+                            <CollectionView ItemsSource="{Binding JobModeles}">
+                                <CollectionView.ItemTemplate>
+                                    <DataTemplate x:DataType="model:JobModel">
+                                        <StackLayout Padding="0,0,0,0">
+                                            <Frame CornerRadius="10"
+                                                    BackgroundColor="{AppThemeBinding Light={StaticResource LightGray}, Dark={StaticResource Background_Mid}}"
+                                                    HasShadow="True"
+                                                    Margin="5">
+
+                                                <Frame.GestureRecognizers>
+                                                    <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type local:MainJobsViewModel}}, Path=JobModelNavTap}" CommandParameter="{Binding .}" />
+                                                </Frame.GestureRecognizers>
+
+                                                <StackLayout Orientation="Vertical"
+                                                        Padding="5">
+                                                    <Grid RowDefinitions="Auto, *"
+                                                            ColumnDefinitions="Auto, *">
+
+                                                        <StackLayout Grid.RowSpan="3"
+                                                                Orientation="Horizontal"
+                                                                VerticalOptions="CenterAndExpand"
+                                                                HeightRequest="60"
+                                                                WidthRequest="60">
+
+
+                                                            <toolkitViews:AvatarView BorderWidth="0" HeightRequest="50" WidthRequest="50" BackgroundColor="Transparent" CornerRadius="10" ImageSource="{Binding profile_picture, Converter={StaticResource isImageSourceConverter}}"
+                                                                HorizontalOptions="Start"
+                                                                VerticalOptions="Start"
+                                                                Margin="0,0,0,0">
+                                                                <toolkitViews:AvatarView.Shadow>
+                                                                    <Shadow Opacity="0.3"/>
+                                                                </toolkitViews:AvatarView.Shadow>
+                                                            </toolkitViews:AvatarView>
+
+                                                            <toolkitViews:AvatarView BorderWidth="0" HeightRequest="50" WidthRequest="50" BackgroundColor="Transparent" CornerRadius="10" ImageSource="{Binding imageUrl, Converter={StaticResource isImageSourceConverter}}"
+                                                                HorizontalOptions="Start"
+                                                                VerticalOptions="End"
+                                                                Margin="-35,0,0,0">
+                                                                <toolkitViews:AvatarView.Shadow>
+                                                                    <Shadow Opacity="0.3"/>
+                                                                </toolkitViews:AvatarView.Shadow>
+                                                            </toolkitViews:AvatarView>
+                                                        </StackLayout>
+
+                                                        <StackLayout Orientation="Vertical"
+                                                                Grid.Column="1"
+                                                                Padding="15,0,0,0">
+                                                            <Label Text="{Binding jobTitle}"
+                                                                    FontAttributes="Bold"/>
+                                                            <Label Text="{Binding businessName}"
+                                                                    FontSize="10"/>
+                                                            <Label Text="{Binding app_deadline, StringFormat='Deadline: {0}'}"
+                                                                    FontSize="8"/>
+                                                            <Label Text="{Binding job_type}"
+                                                                    FontAttributes="Bold"
+                                                                    FontSize="10"/>
+                                                        </StackLayout>
+                                                    </Grid>
+                                                </StackLayout>
+                                            </Frame>
+                                        </StackLayout>
+                                    </DataTemplate>
+                                </CollectionView.ItemTemplate>
+                            </CollectionView>
+                        </StackLayout>
+                    </ScrollView>
+                </RefreshView>
+            </StackLayout>
+
+            <Frame
+               BackgroundColor="{AppThemeBinding Light={StaticResource LightGray}, Dark={StaticResource Background_Mid}}"
+                VerticalOptions="EndAndExpand"
+                x:Name="MyDraggableView"
+                HorizontalOptions="FillAndExpand"
+                HeightRequest="0">
+
+                <!--<StackLayout HeightRequest="{Binding Source={x:Reference gridParent}, Path=Height, Converter={StaticResource MultiplierConverter}, ConverterParameter=0.5}">-->
+                <StackLayout Orientation="Vertical">
+                    <Grid Grid.Row="0"
+                            Margin="15">
+                        <Image Source="close_tab.png"
+                                HeightRequest="30"
+                                WidthRequest="30"/>
+                        <Grid.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped"/>
+                        </Grid.GestureRecognizers>
+                    </Grid>
+
+                    <!--Menu here-->
+
+                    <StackLayout Margin="10"
+                            Orientation="Vertical">
+                        <Label
+                            Text="Manage Jobs"
+                            HorizontalOptions="CenterAndExpand"/>
+
+                        <StackLayout Margin="5,0,0,0">
+                            <StackLayout.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="GoToCreateJobPage"/>
+                            </StackLayout.GestureRecognizers>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="40"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <Image Source="portfolio.png"
+                                        Grid.Column="0"
+                                        VerticalOptions="StartAndExpand"
+                                        Margin="5,0,0,0"/>
+                                <Label Text="Create New Job"
+                                        Grid.Column="1"
+                                        VerticalOptions="CenterAndExpand"
+                                        Margin="5,0,0,0"/>
+                            </Grid>
+                        </StackLayout>
+
+                        <StackLayout Margin="5,15,0,0">
+                            <StackLayout.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="GoToMyActiveListedJobsPage"/>
+                            </StackLayout.GestureRecognizers>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="40"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <Image Source="ballot.png"
+                                        Grid.Column="0"
+                                        VerticalOptions="StartAndExpand"
+                                        Margin="5,0,0,0"/>
+                                <Label Text="My Listed Jobs"
+                                        Grid.Column="1"
+                                        VerticalOptions="CenterAndExpand"
+                                        Margin="5,0,0,0"/>
+                            </Grid>
+                        </StackLayout>
+
+                        <BoxView Color="Gray"
+                                HeightRequest="1"
+                                HorizontalOptions="FillAndExpand"
+                                Margin="10"/>
+
+                        <StackLayout Margin="5,15,0,0">
+                            <StackLayout.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="GoToMyJobApplicationsPage"/>
+                            </StackLayout.GestureRecognizers>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="40"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <Image Source="graduation.png"
+                                        Grid.Column="0"
+                                        VerticalOptions="StartAndExpand"
+                                        Margin="5,0,0,0"/>
+                                <Label Text="My Job Applications"
+                                        Grid.Column="1"
+                                        VerticalOptions="CenterAndExpand"
+                                        Margin="5,0,0,0"/>
+                            </Grid>
+                        </StackLayout>
+
+                        <StackLayout Margin="0,15,0,0">
+                            <StackLayout.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="GoToMySavedJobsPage"/>
+                            </StackLayout.GestureRecognizers>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="40"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <Image Source="save.png"
+                                        Grid.Column="0"
+                                        VerticalOptions="StartAndExpand"
+                                        Margin="5,0,0,0"/>
+                                <Label Text="My Saved Jobs"
+                                        Grid.Column="1"
+                                        VerticalOptions="CenterAndExpand"
+                                        Margin="5,0,0,0"/>
+                            </Grid>
+                        </StackLayout>
+                    </StackLayout>
+                </StackLayout>
+            </Frame>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

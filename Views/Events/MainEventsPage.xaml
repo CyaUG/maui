@@ -1,0 +1,349 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Youth.Views.Events.MainEventsPage"
+             Title="{Binding Title}"
+             xmlns:local="clr-namespace:Youth.ViewModels"
+             xmlns:model="clr-namespace:Youth.Models"
+             xmlns:utils="clr-namespace:Youth.Utils"
+             Shell.NavBarIsVisible="False"
+             Shell.FlyoutItemIsVisible="False"
+             Shell.FlyoutBehavior="Disabled"
+             Shell.PresentationMode="Animated"
+             Shell.TabBarIsVisible="False"
+             xmlns:ios="clr-namespace:Microsoft.Maui.Controls.PlatformConfiguration.iOSSpecific;assembly=Microsoft.Maui.Controls"
+             ios:Page.UseSafeArea="true"
+             xmlns:renderers="clr-namespace:Youth.CustomRenderers"
+             xmlns:converters="clr-namespace:Youth.Helpers.Converters">
+
+    <ContentPage.Resources>
+        <Style TargetType="Frame">
+            <Setter Property="HasShadow" Value="False"/>
+            <Setter Property="Padding" Value="0"/>
+            <Setter Property="CornerRadius" Value="20"/>
+            <Setter Property="IsClippedToBounds" Value="True"/>
+        </Style>
+        <ResourceDictionary>
+            <converters:ShowEventCartCountConverter x:Key="showEventCartCountConverter"/>
+            <converters:IsTicketUsedConverter x:Key="isTicketUsedConverter"/>
+            <converters:IsImageSourceConverter x:Key="isImageSourceConverter"/>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <ContentPage.Content>
+        <Grid x:Name="gridParent">
+            <StackLayout>
+                <StackLayout Orientation="Horizontal" VerticalOptions="Center" Spacing="10" Grid.Row="0" Margin="10,10,10,0">
+                    <Image HorizontalOptions="Start" HeightRequest="30" Source="back.png" BackgroundColor="transparent" VerticalOptions="CenterAndExpand">
+                        <Image.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="Btn_Back"/>
+                        </Image.GestureRecognizers>
+                    </Image>
+
+                    <Label Text="{Binding Title}" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" />
+                    <Grid HorizontalOptions="End" WidthRequest="50">
+                        <Grid.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="ShowMenu"/>
+                        </Grid.GestureRecognizers>
+
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="65"/>
+                        </Grid.ColumnDefinitions>
+                        <Image Source="settings.png" HeightRequest="30" Grid.Column="0"/>
+
+                        <Button
+                            Text="{Binding dashboardSummary.eventCartCount}"
+                            Grid.Column="0"
+                            BackgroundColor="Red"
+                            TextColor="White"
+                            CornerRadius="20"
+                            HorizontalOptions="End"
+                            Margin="20,5,5,5"
+                            Padding="5"
+                            WidthRequest="30"
+                            HeightRequest="30"
+                            TranslationY="-15"
+                            Clicked="ShowMenu"
+                            IsVisible="{Binding dashboardSummary, Converter={StaticResource showEventCartCountConverter}}"/>
+                    </Grid>
+                </StackLayout>
+
+                <RefreshView x:DataType="local:MainEventsViewModel"
+                        Command="{Binding LoadEventCategoriesCommand}"
+                        IsRefreshing="{Binding IsBusy}">
+                    <ScrollView VerticalScrollBarVisibility="Never">
+                        <StackLayout Orientation="Vertical">
+                            <Label Style="{StaticResource Header}" FontSize="35" Text="Want to hung out?." Margin="10,30,60,20"/>
+
+                            <Frame Margin="10,0,10,0" Padding="10" BackgroundColor="Transparent" BorderColor="{StaticResource BorderColor}" CornerRadius="20" HasShadow="False">
+                                <Grid>
+                                    <Grid.GestureRecognizers>
+                                        <TapGestureRecognizer Command="{Binding SearchGridTappedCommand}"
+                                                CommandParameter="{Binding .}"/>
+                                    </Grid.GestureRecognizers>
+
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                    </Grid.ColumnDefinitions>
+
+                                    <Image
+                                        Margin="10,0,0,0"
+                                        HorizontalOptions="Center"
+                                        Source="search.png"
+                                        VerticalOptions="Center"
+                                        HeightRequest="30"
+                                        WidthRequest="30"/>
+                                    <Label
+                                        Grid.Column="1"
+                                        Margin="20,0,0,0"
+                                        Style="{StaticResource SubTextSemiBold}"
+                                        Text="Search"
+                                        VerticalOptions="Center"/>
+                                    <Image
+                                        Grid.Column="2"
+                                        Margin="0,0,10,0"
+                                        HorizontalOptions="Center"
+                                        Source="settings_mesh.png"
+                                        VerticalOptions="Center"
+                                        HeightRequest="30"
+                                        WidthRequest="30"/>
+                                </Grid>
+                            </Frame>
+
+                            <Label Text="Popular Categories"
+                                    Margin="10,10,10,10"
+                                    HorizontalOptions="Start"
+                                    VerticalOptions="Center"
+                                    Style="{StaticResource SubHeader}"/>
+
+                            <CollectionView Margin="10,0,10,0" ItemsSource="{Binding eventCategories}">
+                                <CollectionView.ItemsLayout>
+                                    <LinearItemsLayout Orientation="Horizontal" ItemSpacing="8"/>
+                                </CollectionView.ItemsLayout>
+                                <CollectionView.ItemTemplate>
+                                    <DataTemplate x:DataType="model:EventCategory">
+                                        <StackLayout WidthRequest="160">
+                                            <StackLayout.GestureRecognizers>
+                                                <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type local:MainEventsViewModel}}, Path=EventCategoryNavTap}" CommandParameter="{Binding .}" />
+                                            </StackLayout.GestureRecognizers>
+                                            <Frame>
+                                                <Frame.GestureRecognizers>
+                                                    <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type local:MainEventsViewModel}}, Path=EventCategoryNavTap}" CommandParameter="{Binding .}" />
+                                                </Frame.GestureRecognizers>
+                                                <Image Source="{Binding imageUrl, Converter={StaticResource isImageSourceConverter}}"
+                                                        HeightRequest="170"
+                                                        WidthRequest="130"
+                                                        Aspect="AspectFill">
+                                                </Image>
+                                            </Frame>
+                                            <Label Text="{Binding label}" FontAttributes="Bold"/>
+                                            <Label Text="{Binding eventsCount, StringFormat='{0} Events'}" FontSize="12"/>
+                                        </StackLayout>
+                                    </DataTemplate>
+                                </CollectionView.ItemTemplate>
+                            </CollectionView>
+
+                            <Label Text="Events For You"
+                                    Margin="10,10,10,10"
+                                    HorizontalOptions="Start"
+                                    VerticalOptions="Center"
+                                    Style="{StaticResource SubHeader}"/>
+
+                            <CollectionView ItemsSource="{Binding Events}">
+                                <CollectionView.ItemTemplate>
+                                    <DataTemplate x:DataType="model:Event">
+                                        <StackLayout Padding="0,0,0,0">
+                                            <Frame CornerRadius="10"
+                                                    BackgroundColor="{AppThemeBinding Light={StaticResource LightGray}, Dark={StaticResource Background_Mid}}"
+                                                    HasShadow="True"
+                                                    Margin="5">
+                                                <Frame.GestureRecognizers>
+                                                    <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type local:MainEventsViewModel}}, Path=EventNavTap}" CommandParameter="{Binding .}" />
+                                                </Frame.GestureRecognizers>
+                                                <StackLayout Orientation="Vertical"
+                                                        Padding="5">
+                                                    <Grid RowDefinitions="Auto, *"
+                                                            ColumnDefinitions="Auto, *">
+                                                        <StackLayout Grid.RowSpan="3"
+                                                                Orientation="Horizontal"
+                                                                VerticalOptions="CenterAndExpand"
+                                                                HeightRequest="60"
+                                                                WidthRequest="60">
+                                                            <Frame CornerRadius="10">
+                                                                <Frame.GestureRecognizers>
+                                                                    <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type local:MainEventsViewModel}}, Path=EventNavTap}" CommandParameter="{Binding .}" />
+                                                                </Frame.GestureRecognizers>
+                                                                <Image Source="{Binding imageUrl, Converter={StaticResource isImageSourceConverter}}"
+                                                                    HeightRequest="70"
+                                                                    WidthRequest="70"
+                                                                    Aspect="AspectFill">
+                                                                </Image>
+                                                            </Frame>
+                                                        </StackLayout>
+
+                                                        <StackLayout Orientation="Vertical"
+                                                                Grid.Column="1"
+                                                                Padding="15,0,0,0">
+                                                            <Label Text="{Binding eventTitle}"
+                                                                    FontAttributes="Bold"/>
+                                                            <Label Text="{Binding event_address}"
+                                                                    FontSize="10"/>
+                                                            <StackLayout Orientation="Horizontal">
+                                                                <Label Text="{Binding eventDate, StringFormat='Date: {0:MMMM dd, yyyy}'}"
+                                                                        FontAttributes="Bold"
+                                                                        FontSize="10"/>
+                                                                <Label Text="{Binding interested, StringFormat='{0} Going'}"
+                                                                        HorizontalOptions="EndAndExpand"
+                                                                        FontAttributes="Bold"
+                                                                        FontSize="10"/>
+                                                            </StackLayout>
+                                                        </StackLayout>
+                                                    </Grid>
+                                                </StackLayout>
+                                            </Frame>
+                                        </StackLayout>
+                                    </DataTemplate>
+                                </CollectionView.ItemTemplate>
+                            </CollectionView>
+                        </StackLayout>
+                    </ScrollView>
+                </RefreshView>
+            </StackLayout>
+
+            <Frame
+                BackgroundColor="{AppThemeBinding Light={StaticResource LightGray}, Dark={StaticResource Background_Mid}}"
+                VerticalOptions="EndAndExpand"
+                x:Name="MyDraggableView"
+                HorizontalOptions="FillAndExpand"
+                HeightRequest="0">
+
+                <!--<StackLayout HeightRequest="{Binding Source={x:Reference gridParent}, Path=Height, Converter={StaticResource MultiplierConverter}, ConverterParameter=0.5}">-->
+                <StackLayout Orientation="Vertical">
+                    <Grid Grid.Row="0" Margin="15">
+                        <Image Source="close_tab.png" HeightRequest="30" WidthRequest="30"/>
+                        <Grid.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped"/>
+                        </Grid.GestureRecognizers>
+                    </Grid>
+
+                    <!--Menu here-->
+
+                    <StackLayout Margin="10"
+                            Orientation="Vertical">
+                        <Label
+                            Text="Manage Events"
+                            HorizontalOptions="CenterAndExpand"
+                            Style="{StaticResource SubHeader}"/>
+
+                        <StackLayout Margin="5,0,0,0">
+                            <StackLayout.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="GoToCart"/>
+                            </StackLayout.GestureRecognizers>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="40"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+                                <Image Source="shopping_cart.png"
+                                        Grid.Column="0"
+                                        VerticalOptions="StartAndExpand"
+                                        Margin="5,0,0,0"/>
+                                <Label Text="My Cart"
+                                        Grid.Column="1"
+                                        VerticalOptions="CenterAndExpand"
+                                        Margin="5,0,0,0"/>
+
+                                <Button
+                                    Text="{Binding dashboardSummary.eventCartCount}"
+                                    Grid.Column="2"
+                                    BackgroundColor="Red"
+                                    TextColor="White"
+                                    CornerRadius="20"
+                                    HorizontalOptions="End"
+                                    Padding="3"
+                                    WidthRequest="30"
+                                    HeightRequest="30"
+                                    IsVisible="{Binding dashboardSummary, Converter={StaticResource showEventCartCountConverter}}"/>
+                            </Grid>
+                        </StackLayout>
+
+                        <BoxView Color="Gray" HeightRequest="1" HorizontalOptions="FillAndExpand" Margin="10"/>
+
+                        <StackLayout Margin="5,0,0,0">
+                            <StackLayout.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="GoToCreateEventPage"/>
+                            </StackLayout.GestureRecognizers>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="40"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <Image Source="calendar.png" Grid.Column="0" VerticalOptions="StartAndExpand" Margin="5,0,0,0"/>
+                                <Label Text="Add New Event" Grid.Column="1" VerticalOptions="CenterAndExpand" Margin="5,0,0,0"/>
+                            </Grid>
+                        </StackLayout>
+
+                        <StackLayout Margin="5,15,0,0">
+                            <StackLayout.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="GoToMyActiveListedEventsPage"/>
+                            </StackLayout.GestureRecognizers>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="40"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+                                <Image Source="qrcode.png" Grid.Column="0" VerticalOptions="StartAndExpand" Margin="5,0,0,0"/>
+                                <Label Text="My Listed Events" Grid.Column="1" VerticalOptions="CenterAndExpand" Margin="5,0,0,0"/>
+
+                                <Button
+                                    Text="{Binding dashboardSummary.eventsCount}"
+                                    Grid.Column="2"
+                                    CornerRadius="20"
+                                    HorizontalOptions="End"
+                                    Padding="3"
+                                    WidthRequest="30"
+                                    HeightRequest="30"
+                                    Command="{Binding OpenReferralAccountProviderCommand}"
+                                    IsVisible="{Binding showPeerEducatorReferrals}"/>
+                            </Grid>
+                        </StackLayout>
+
+                        <BoxView Color="Gray" HeightRequest="1" HorizontalOptions="FillAndExpand" Margin="10"/>
+
+                        <StackLayout Margin="5,15,0,0">
+                            <StackLayout.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="GoToMyEventOrdersPage"/>
+                            </StackLayout.GestureRecognizers>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="40"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <Image Source="ballot.png" Grid.Column="0" VerticalOptions="StartAndExpand" Margin="5,0,0,0"/>
+                                <Label Text="My Event Orders" Grid.Column="1" VerticalOptions="CenterAndExpand" Margin="5,0,0,0"/>
+                            </Grid>
+                        </StackLayout>
+
+                        <StackLayout Margin="0,15,0,0">
+                            <StackLayout.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="GoToMySavedEventsPage"/>
+                            </StackLayout.GestureRecognizers>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="40"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <Image Source="questionnaire.png" Grid.Column="0" VerticalOptions="StartAndExpand" Margin="5,0,0,0"/>
+                                <Label Text="My Saved Events" Grid.Column="1" VerticalOptions="CenterAndExpand" Margin="5,0,0,0"/>
+                            </Grid>
+                        </StackLayout>
+                    </StackLayout>
+                </StackLayout>
+            </Frame>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

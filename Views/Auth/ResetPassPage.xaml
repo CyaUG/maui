@@ -1,0 +1,135 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             x:Class="Youth.Views.Auth.ResetPassPage"
+             xmlns:local="clr-namespace:Youth"
+             xmlns:cr="clr-namespace:Youth.CustomRenderers"
+             Shell.NavBarIsVisible="False"
+             Shell.FlyoutItemIsVisible="False"
+             Shell.FlyoutBehavior="Disabled"
+             Shell.PresentationMode="Animated"
+             Shell.TabBarIsVisible="False"
+             xmlns:ios="clr-namespace:Microsoft.Maui.Controls.PlatformConfiguration.iOSSpecific;assembly=Microsoft.Maui.Controls"
+             ios:Page.UseSafeArea="true">
+
+    <ContentPage.Resources>
+        <Style TargetType="Frame">
+            <Setter Property="HasShadow"
+                    Value="False"/>
+            <Setter Property="Padding"
+                    Value="0"/>
+            <Setter Property="CornerRadius"
+                    Value="20"/>
+            <Setter Property="IsClippedToBounds"
+                    Value="True"/>
+        </Style>
+    </ContentPage.Resources>
+
+    <StackLayout>
+
+        <StackLayout
+            Grid.Row="0"
+            Margin="10,20,10,0"
+            Orientation="Horizontal">
+            <StackLayout
+                HorizontalOptions="StartAndExpand"
+                Orientation="Horizontal"
+                VerticalOptions="Center">
+
+                <Image
+                    BackgroundColor="transparent"
+                    HeightRequest="30"
+                    HorizontalOptions="StartAndExpand"
+                    Source="back.png"
+                    VerticalOptions="CenterAndExpand"/>
+                <Label
+                    FontAttributes="Bold"
+                    FontSize="Small"
+                    HorizontalOptions="EndAndExpand"
+                    Text="Back"
+                    
+                    VerticalOptions="CenterAndExpand"/>
+
+                <StackLayout.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="Btn_Back"/>
+                </StackLayout.GestureRecognizers>
+            </StackLayout>
+
+        </StackLayout>
+
+        <StackLayout
+                Grid.Row="0"
+                Grid.Column="0"
+                Margin="0,-100,0,0"
+                HorizontalOptions="FillAndExpand"
+                VerticalOptions="CenterAndExpand">
+            <Grid
+                    Padding="20,20,20,20"
+                    HorizontalOptions="FillAndExpand"
+                    RowSpacing="20"
+                    VerticalOptions="FillAndExpand">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Label
+                        Grid.Row="0"
+                        FontAttributes="Bold"
+                        FontSize="24"
+                        HorizontalOptions="CenterAndExpand"
+                        Text="Reset Password"
+                        />
+
+                <Label
+                        Grid.Row="1"
+                        Margin="0,-15,0,0"
+                        FontSize="Small"
+                        HorizontalOptions="CenterAndExpand"
+                        Text="Enter your email address."
+                        />
+
+                <Frame
+                        x:Name="emailFrame"
+                        Grid.Row="2"
+                        Padding="5"
+                        BackgroundColor="Transparent"
+                        BorderColor="#bdbdbd"
+                        CornerRadius="20"
+                        HorizontalOptions="FillAndExpand">
+                    <StackLayout Padding="20,5,20,5"
+                                Orientation="Horizontal">
+                        <cr:CustomEntry
+                                x:Name="EmailEntry"
+                                Focused="Focused_Email"
+                                FontSize="Medium"
+                                HorizontalOptions="FillAndExpand"
+                                Keyboard="Email"
+                                Placeholder="Email"
+                                VerticalOptions="FillAndExpand"
+                                />
+                    </StackLayout>
+                </Frame>
+
+                <cr:CustomButton
+                        Grid.Row="3"
+                        BackgroundColor="#e91e63"
+                        Clicked="Btn_Reset"
+                        CornerRadius="20"
+                        Text="Send Reset Link"
+                        TextColor="White"/>
+            </Grid>
+
+
+            <ActivityIndicator
+                    x:Name="ActivityIndicator"
+                    AbsoluteLayout.LayoutFlags="PositionProportional"
+                    HorizontalOptions="CenterAndExpand"
+                    IsRunning="False"
+                    VerticalOptions="CenterAndExpand"/>
+        </StackLayout>
+
+    </StackLayout>
+</ContentPage>

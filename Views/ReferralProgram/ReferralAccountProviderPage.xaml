@@ -1,0 +1,159 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Youth.Views.ReferralProgram.ReferralAccountProviderPage"
+             Title="{Binding Title}"
+             xmlns:local="clr-namespace:Youth.ViewModels"
+             xmlns:model="clr-namespace:Youth.Models"
+             xmlns:utils="clr-namespace:Youth.Utils"
+             Shell.NavBarIsVisible="False"
+             Shell.FlyoutItemIsVisible="False"
+             Shell.FlyoutBehavior="Disabled"
+             Shell.PresentationMode="Animated"
+             Shell.TabBarIsVisible="False"
+             xmlns:ios="clr-namespace:Microsoft.Maui.Controls.PlatformConfiguration.iOSSpecific;assembly=Microsoft.Maui.Controls"
+             ios:Page.UseSafeArea="true"
+             xmlns:renderers="clr-namespace:Youth.CustomRenderers"
+             xmlns:cr="clr-namespace:Youth.CustomRenderers"
+             xmlns:converters="clr-namespace:Youth.Helpers.Converters">
+
+    <ContentPage.Resources>
+        <Style TargetType="Frame">
+            <Setter Property="HasShadow"
+                    Value="False"/>
+            <Setter Property="Padding"
+                    Value="0"/>
+            <Setter Property="CornerRadius"
+                    Value="20"/>
+            <Setter Property="IsClippedToBounds"
+                    Value="True"/>
+        </Style>
+        <ResourceDictionary>
+            <utils:MultiplierConverter x:Key="MultiplierConverter"/>
+            <converters:IsImageSourceConverter x:Key="isImageSourceConverter"/>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <ContentPage.Content>
+        <Grid>
+            <StackLayout>
+                <StackLayout
+                    Orientation="Horizontal"
+                    VerticalOptions="Center"
+                    Spacing="10"
+                    Grid.Row="0"
+                    Margin="10,20,10,0">
+
+                    <Image
+                        HorizontalOptions="Start"
+                        HeightRequest="30"
+                        Source="back.png"
+                        BackgroundColor="transparent"
+                        VerticalOptions="CenterAndExpand">
+                        <Image.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="Btn_Back"/>
+                        </Image.GestureRecognizers>
+                    </Image>
+
+                    <Label Text="{Binding Title}"
+                            HorizontalOptions="CenterAndExpand"
+                            VerticalOptions="CenterAndExpand"
+                            Style="{StaticResource TabHeader}"/>
+                    <Image Source="qrcode.png"
+                            HorizontalOptions="End"
+                            HeightRequest="30">
+                        <Image.GestureRecognizers>
+                            <TapGestureRecognizer NumberOfTapsRequired="1"
+                                    Command="{Binding ScanReferralCardPageCommand}"/>
+                        </Image.GestureRecognizers>
+                    </Image>
+                </StackLayout>
+
+                <RefreshView x:DataType="local:ReferralAccountProviderViewModel"
+                        Command="{Binding LoadReferralAccountsCommand}"
+                        IsRefreshing="{Binding IsBusy}">
+                    <ScrollView VerticalScrollBarVisibility="Never">
+                        <StackLayout Orientation="Vertical"
+                                VerticalOptions="StartAndExpand">
+                            <!--  Search Bar  -->
+                            <StackLayout
+                                x:Name="SearchBar"
+                                Grid.Row="0"
+                                IsVisible="true"
+                                VerticalOptions="Start">
+                                <Frame
+                                    Margin="20,20,20,0"
+                                    Padding="10"
+                                     BackgroundColor="{AppThemeBinding Light={StaticResource LightGray}, Dark={StaticResource Background_Mid}}"
+                                    CornerRadius="10">
+
+                                    <cr:CustomSearchBar
+                                        FontSize="Small"
+                                        Placeholder="Search Users"
+                                        Text="{Binding SearchText}"/>
+                                </Frame>
+                            </StackLayout>
+
+                            <CollectionView ItemsSource="{Binding ReferralAccounts}"
+                                    Margin="10">
+                                <CollectionView.ItemTemplate>
+                                    <DataTemplate x:DataType="model:ReferralAccount">
+                                        <Frame HasShadow="True" BackgroundColor="{AppThemeBinding Light={StaticResource LightGray}, Dark={StaticResource Background_Mid}}"
+                                                CornerRadius="10"
+                                                Margin="2">
+                                            <Frame.GestureRecognizers>
+                                                <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type local:ReferralAccountProviderViewModel}}, Path=ReferralAccountNavTap}" CommandParameter="{Binding .}" />
+                                            </Frame.GestureRecognizers>
+                                            <StackLayout Padding="5">
+
+                                                <Grid>
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition Width="Auto"/>
+                                                        <ColumnDefinition Width="*"/>
+                                                        <ColumnDefinition Width="30"/>
+                                                    </Grid.ColumnDefinitions>
+                                                    <Image
+                                                        x:Name="ProfileImge"
+                                                        Grid.Column="0"
+                                                        VerticalOptions="StartAndExpand"
+                                                        Margin="5,0,0,0"
+                                                        HeightRequest="40"
+                                                        HorizontalOptions="Center"
+                                                        Source="{Binding profile_picture, Converter={StaticResource isImageSourceConverter}}"
+                                                        WidthRequest="40"
+                                                        Aspect="AspectFill"/>
+
+                                                    <Label Text="{Binding name}"
+                                                            Grid.Column="1"
+                                                            VerticalOptions="CenterAndExpand"
+                                                            Margin="5,0,0,0"/>
+                                                    <Image
+                                                        Grid.Column="2"
+                                                        VerticalOptions="CenterAndExpand"
+                                                        Margin="5,0,5,0"
+                                                        Source="right_arrow.png"
+                                                        HeightRequest="30"/>
+                                                </Grid>
+                                            </StackLayout>
+                                        </Frame>
+                                    </DataTemplate>
+                                </CollectionView.ItemTemplate>
+                            </CollectionView>
+                        </StackLayout>
+                    </ScrollView>
+                </RefreshView>
+            </StackLayout>
+
+            <Button Text="+"
+                     BackgroundColor="{AppThemeBinding Light={StaticResource LightGray}, Dark={StaticResource Background_Mid}}"
+                    CornerRadius="30"
+                    HorizontalOptions="End"
+                    VerticalOptions="End"
+                    Margin="10"
+                    WidthRequest="60"
+                    HeightRequest="60"
+                    TranslationY="-30"
+                    Command="{Binding CreateNewReferralAccountCommand}"/>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

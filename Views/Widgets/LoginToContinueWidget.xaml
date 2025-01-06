@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<VerticalStackLayout xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+                     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                     xmlns:icons="clr-namespace:Youth.Resources.Styles"
+                     xmlns:behaviors="clr-namespace:CommunityToolkit.Maui.Behaviors;assembly=CommunityToolkit.Maui"
+                     x:Class="Youth.Views.Widgets.LoginToContinueWidget">
+
+    <Frame HorizontalOptions="FillAndExpand"
+            HasShadow="False"
+            CornerRadius="10"
+            Padding="15"
+            BackgroundColor="{AppThemeBinding Light={StaticResource LightGray}, Dark={StaticResource Background_Mid}}">
+        <Grid Margin="0"
+                HorizontalOptions="FillAndExpand">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="25"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <Image Grid.Column="0"
+                    VerticalOptions="CenterAndExpand"
+                    Margin="10,0,0,0"
+                    WidthRequest="25">
+                <Image.Source>
+                    <FontImageSource FontFamily="{StaticResource FontAwesome}"
+                            Glyph="{Static icons:IconFont.Lock}"
+                            Color="{AppThemeBinding Light={StaticResource DarkGray}, Dark={StaticResource White}}"/>
+                </Image.Source>
+            </Image>
+            <Label Text="You are not signed in"
+                    HorizontalOptions="FillAndExpand"
+                    Grid.Column="1"
+                    VerticalOptions="CenterAndExpand"
+                    Margin="15,0,0,0"/>
+
+            <Button Text="Login"
+                    Clicked="LoginToContinue"
+                    Grid.Column="2"
+                    VerticalOptions="CenterAndExpand"
+                    Margin="5,0,0,0"
+                    HorizontalOptions="EndAndExpand"/>
+        </Grid>
+    </Frame>
+</VerticalStackLayout>

@@ -1,0 +1,296 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Youth.Views.Shopping.ShoppingCartPage"
+             Title="{Binding Title}"
+             xmlns:local="clr-namespace:Youth.ViewModels"
+             xmlns:model="clr-namespace:Youth.Models"
+             xmlns:renderers="clr-namespace:Youth.CustomRenderers"
+             xmlns:converters="clr-namespace:Youth.Helpers.Converters"
+             Shell.NavBarIsVisible="False"
+             Shell.FlyoutItemIsVisible="False"
+             Shell.FlyoutBehavior="Disabled"
+             NavigationPage.HasNavigationBar="False"
+             Shell.PresentationMode="Animated"
+             Shell.TabBarIsVisible="False"
+             xmlns:ios="clr-namespace:Microsoft.Maui.Controls.PlatformConfiguration.iOSSpecific;assembly=Microsoft.Maui.Controls"
+             ios:Page.UseSafeArea="true">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converters:CartSubTotalConverter x:Key="cartSubTotalConverter"/>
+        </ResourceDictionary>
+        <Style TargetType="Frame">
+            <Setter Property="HasShadow" Value="False"/>
+            <Setter Property="Padding" Value="0"/>
+            <Setter Property="CornerRadius" Value="20"/>
+            <Setter Property="IsClippedToBounds" Value="True"/>
+        </Style>
+    </ContentPage.Resources>
+
+    <ContentPage.Content>
+
+        <StackLayout>
+            <StackLayout Orientation="Horizontal" VerticalOptions="Center" Spacing="10" Grid.Row="0" Margin="10,20,10,0">
+
+                <Image
+                    HorizontalOptions="Start"
+                    HeightRequest="30"
+                    Source="back.png"
+                    BackgroundColor="transparent"
+                    VerticalOptions="CenterAndExpand">
+                    <Image.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="Btn_Back"/>
+                    </Image.GestureRecognizers>
+                </Image>
+
+                <Label
+                    HorizontalOptions="CenterAndExpand"
+                    VerticalOptions="CenterAndExpand"
+                    Style="{StaticResource TabHeader}">
+                    <Label.Text>
+                        <MultiBinding StringFormat="{}{0} {1}">
+                            <Binding Path="systemSettings.currency"/>
+                            <Binding Path="TotalAmmount"/>
+                        </MultiBinding>
+                    </Label.Text>
+                </Label>
+                <Image Source="Search"
+                        HorizontalOptions="End"
+                        HeightRequest="30">
+                    <Image.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OpenSearchPage"/>
+                    </Image.GestureRecognizers>
+                </Image>
+            </StackLayout>
+
+            <RefreshView
+                x:DataType="local:ShoppingCartViewModel"
+                Command="{Binding LoadMainCommand}"
+                IsRefreshing="{Binding IsBusy}">
+                <StackLayout Orientation="Vertical"
+                        VerticalOptions="FillAndExpand">
+                    <ScrollView VerticalScrollBarVisibility="Never"
+                            VerticalOptions="FillAndExpand">
+                        <StackLayout Padding="10,10,10,10"
+                                Spacing="30">
+                            <Label Text="{Binding Title}"
+                                    FontAttributes="Bold"
+                                    FontSize="45"/>
+                            <StackLayout BindableLayout.ItemsSource="{Binding ShoppingCarts}">
+                                <BindableLayout.ItemTemplate>
+                                    <DataTemplate x:DataType="model:ShoppingCart">
+                                        <StackLayout  Margin="5">
+                                            <Frame CornerRadius="10"
+                                                    BackgroundColor="{AppThemeBinding Light={StaticResource LightGray}, Dark={StaticResource Background_Mid}}"
+                                                    HasShadow="True">
+                                                <StackLayout Orientation="Vertical">
+                                                    <Grid Padding="10,10,10,0"
+                                                          RowDefinitions="Auto, *"
+                                                          ColumnDefinitions="Auto, *">
+
+                                                        <Frame Grid.RowSpan="2"
+                                                               HeightRequest="60"
+                                                               WidthRequest="60"
+                                                               CornerRadius="5">
+
+                                                            <Grid HeightRequest="60">
+                                                                <Image
+                                                                    Source="{Binding imageUrl, Converter={StaticResource isImageSourceConverter}}"
+                                                                    Aspect="AspectFill"
+                                                                    HorizontalOptions="Fill"
+                                                                    VerticalOptions="Fill"
+                                                                    HeightRequest="60"
+                                                                    WidthRequest="60"/>
+                                                            </Grid>
+                                                        </Frame>
+
+                                                        <Label Grid.Column="1"
+                                                               Text="{Binding label}"
+                                                               FontAttributes="Bold"
+                                                               Padding="10,0,0,0"/>
+
+                                                        <Grid
+                                                            Grid.Row="1"
+                                                            Grid.Column="1"
+                                                            VerticalOptions="End"
+                                                            Padding="10,0,0,0">
+                                                            <Grid.ColumnDefinitions>
+                                                                <ColumnDefinition Width="*"/>
+                                                                <ColumnDefinition Width="AUTO"/>
+                                                            </Grid.ColumnDefinitions>
+                                                            <StackLayout Orientation="Vertical">
+
+                                                                <Label IsVisible="{Binding onDiscount}"
+                                                                        TextColor="Red"
+                                                                        FontSize="10"
+                                                                        TextDecorations="Strikethrough">
+                                                                    <Label.Text>
+                                                                        <MultiBinding StringFormat="{}{0} {1}">
+                                                                            <Binding Path="currency"/>
+                                                                            <Binding Path="sellPrice"/>
+                                                                        </MultiBinding>
+                                                                    </Label.Text>
+                                                                </Label>
+
+                                                                <Label IsVisible="{Binding onDiscount}"
+                                                                        FontAttributes="Bold"
+                                                                        FontSize="14">
+                                                                    <Label.Text>
+                                                                        <MultiBinding StringFormat="{}{0} {1}">
+                                                                            <Binding Path="currency"/>
+                                                                            <Binding Path="discountPrice"/>
+                                                                        </MultiBinding>
+                                                                    </Label.Text>
+                                                                </Label>
+
+                                                                <Label IsVisible="{Binding offerDiscount}"
+                                                                        FontSize="14">
+                                                                    <Label.Text>
+                                                                        <MultiBinding StringFormat="{}{0} {1}">
+                                                                            <Binding Path="currency"/>
+                                                                            <Binding Path="sellPrice"/>
+                                                                        </MultiBinding>
+                                                                    </Label.Text>
+                                                                </Label>
+                                                            </StackLayout>
+                                                            <StackLayout Grid.Column="1"
+                                                                    Orientation="Vertical">
+                                                                <Label TextColor="Red"
+                                                                        FontSize="10"
+                                                                        Text="{Binding colorLabel}"/>
+
+                                                                <Image Source="bin.png"
+                                                                        HeightRequest="25"
+                                                                        WidthRequest="25">
+                                                                    <Image.GestureRecognizers>
+                                                                        <TapGestureRecognizer Tapped="OnDeleteItem"/>
+                                                                    </Image.GestureRecognizers>
+                                                                </Image>
+                                                            </StackLayout>
+                                                        </Grid>
+                                                    </Grid>
+
+                                                    <Grid Margin="5,5,5,5">
+                                                        <Grid.RowDefinitions>
+                                                            <RowDefinition/>
+                                                        </Grid.RowDefinitions>
+                                                        <Grid.ColumnDefinitions>
+                                                            <ColumnDefinition Width="*"/>
+                                                            <ColumnDefinition Width="*"/>
+                                                        </Grid.ColumnDefinitions>
+
+                                                        <StackLayout  Grid.Column="0"
+                                                                Padding="2">
+                                                            <Label VerticalOptions="CenterAndExpand"
+                                                                    >
+                                                                <Label.Text>
+                                                                    <MultiBinding StringFormat="{}{0} {1}">
+                                                                        <Binding Path="currency"/>
+                                                                        <Binding Converter="{StaticResource cartSubTotalConverter}"
+                                                                                ConverterParameter="{Binding .}"/>
+                                                                    </MultiBinding>
+                                                                </Label.Text>
+                                                            </Label>
+                                                        </StackLayout>
+
+                                                        <Frame Grid.Column="1"
+                                                               BackgroundColor="{AppThemeBinding Light={StaticResource LightGray}, Dark={StaticResource Background_Mid}}"
+                                                               CornerRadius="15"
+                                                               HasShadow="True"
+                                                                Margin="2">
+
+                                                            <Grid Margin="2">
+                                                                <Grid.RowDefinitions>
+                                                                    <RowDefinition/>
+                                                                </Grid.RowDefinitions>
+                                                                <Grid.ColumnDefinitions>
+                                                                    <ColumnDefinition/>
+                                                                    <ColumnDefinition/>
+                                                                    <ColumnDefinition/>
+                                                                </Grid.ColumnDefinitions>
+
+                                                                <Label
+                                                                    VerticalOptions="Center"
+                                                                    HorizontalOptions="CenterAndExpand"
+                                                                    FontSize="30"
+                                                                    Text="+"
+                                                                    
+                                                                    FontAttributes="Bold"
+                                                                    Padding="2">
+                                                                    <Label.GestureRecognizers>
+                                                                        <TapGestureRecognizer Tapped="IncreaseQty"/>
+                                                                    </Label.GestureRecognizers>
+                                                                </Label>
+
+                                                                <Label
+                                                                    Grid.Column="1"
+                                                                    Padding="2"
+                                                                    VerticalOptions="Center"
+                                                                    HorizontalOptions="CenterAndExpand"
+                                                                    Style="{StaticResource SubTextSemiBold}"
+                                                                    Text="{Binding orderQty}"
+                                                                    
+                                                                    FontAttributes="Bold"/>
+
+                                                                <Label
+                                                                    Grid.Column="2"
+                                                                    VerticalOptions="Center"
+                                                                    HorizontalOptions="CenterAndExpand"
+                                                                    FontSize="30"
+                                                                    Text="-"
+                                                                    
+                                                                    FontAttributes="Bold"
+                                                                    Padding="2">
+                                                                    <Label.GestureRecognizers>
+                                                                        <TapGestureRecognizer Tapped="DecreaseQty"/>
+                                                                    </Label.GestureRecognizers>
+                                                                </Label>
+                                                            </Grid>
+                                                        </Frame>
+                                                    </Grid>
+                                                </StackLayout>
+                                            </Frame>
+                                        </StackLayout>
+                                    </DataTemplate>
+                                </BindableLayout.ItemTemplate>
+                            </StackLayout>
+                        </StackLayout>
+                    </ScrollView>
+
+                    <StackLayout Orientation="Horizontal"
+                            Spacing="14"
+                            Margin="5"
+                            VerticalOptions="End"
+                            BackgroundColor="Transparent">
+                        <Image Source="close_tab.png"
+                                HeightRequest="35"
+                                WidthRequest="35"
+                                Margin="5"
+                                HorizontalOptions="Center"
+                                VerticalOptions="CenterAndExpand">
+                            <Image.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="Btn_Back"/>
+                            </Image.GestureRecognizers>
+                        </Image>
+
+                        <Frame HorizontalOptions="FillAndExpand"
+                                BackgroundColor="{AppThemeBinding Light={StaticResource LightGray}, Dark={StaticResource Background_Mid}}"
+                                HeightRequest="50"
+                                Margin="0,0,5,5">
+                            <Frame.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="GoToCheckOut"/>
+                            </Frame.GestureRecognizers>
+                            <Label Text="Continue"
+                                    FontSize="14"
+                                    
+                                    FontAttributes="Bold"
+                                    VerticalOptions="Center"
+                                    HorizontalOptions="Center"/>
+                        </Frame>
+                    </StackLayout>
+                </StackLayout>
+            </RefreshView>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

@@ -1,0 +1,553 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Youth.Views.SafeSpace.SafeSpaceMainPage"
+             Title="{Binding Title}"
+             xmlns:local="clr-namespace:Youth.ViewModels"
+             xmlns:model="clr-namespace:Youth.Models"
+             xmlns:utils="clr-namespace:Youth.Utils"
+             Shell.NavBarIsVisible="False"
+             Shell.FlyoutItemIsVisible="False"
+             Shell.FlyoutBehavior="Disabled"
+             Shell.PresentationMode="Animated"
+             NavigationPage.HasNavigationBar="False"
+             Shell.TabBarIsVisible="False"
+             xmlns:widgets="clr-namespace:Youth.Views.Widgets"
+             xmlns:behaviors="clr-namespace:CommunityToolkit.Maui.Behaviors;assembly=CommunityToolkit.Maui"
+             xmlns:ios="clr-namespace:Microsoft.Maui.Controls.PlatformConfiguration.iOSSpecific;assembly=Microsoft.Maui.Controls"
+             xmlns:toolkitViews="clr-namespace:CommunityToolkit.Maui.Views;assembly=CommunityToolkit.Maui"
+             ios:Page.UseSafeArea="true"
+             x:DataType="local:SafeSpaceMainViewModel"
+             xmlns:converters="clr-namespace:Youth.Helpers.Converters">
+
+    <ContentPage.Resources>
+        <Style TargetType="Frame">
+            <Setter Property="HasShadow" Value="False"/>
+            <Setter Property="Padding" Value="0"/>
+            <Setter Property="CornerRadius" Value="20"/>
+            <Setter Property="BackgroundColor" Value="transparent"/>
+            <Setter Property="IsClippedToBounds" Value="True"/>
+        </Style>
+        <ResourceDictionary>
+            <converters:IsImageSourceConverter x:Key="isImageSourceConverter"/>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <ContentPage.Content>
+        <StackLayout>
+            <StackLayout Orientation="Horizontal" VerticalOptions="Center" Spacing="10" Grid.Row="0" Margin="10,20,10,0">
+                <Image
+                    HorizontalOptions="Start" HeightRequest="30" Source="back.png" BackgroundColor="transparent" VerticalOptions="CenterAndExpand">
+                    <Image.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="Btn_Back"/>
+                    </Image.GestureRecognizers>
+                </Image>
+
+                <Label Text="{Binding Title}" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Style="{StaticResource TabHeader}"/>
+                <Image Source="settings.png" HorizontalOptions="End" HeightRequest="30"/>
+            </StackLayout>
+
+            <RefreshView Command="{Binding LoadSafePostsCommand}"
+                    IsRefreshing="{Binding IsBusy}">
+                <ScrollView VerticalScrollBarVisibility="Never">
+                    <StackLayout Padding="0,10,0,10"
+                            Spacing="10">
+
+                        <Frame Margin="0,20,0,0"
+                                Padding="10,0,10,0"
+                                CornerRadius="20"
+                                HasShadow="False"
+                                BackgroundColor="Transparent">
+                            <Frame.Triggers>
+                                <DataTrigger Binding="{Binding IsUserAuthenticated}"
+                                        TargetType="Frame"
+                                        Value="False">
+                                    <Setter Property="IsVisible"
+                                            Value="False"/>
+                                </DataTrigger>
+                            </Frame.Triggers>
+                            <Grid>
+                                <Grid.GestureRecognizers>
+                                    <TapGestureRecognizer Tapped="OpenComposePostPage"/>
+                                </Grid.GestureRecognizers>
+
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+
+                                <toolkitViews:AvatarView VerticalOptions="Center" HorizontalOptions="Start" Grid.Column="0" Margin="10,0,0,0" x:Name="ProfileImge"
+                                                         BorderWidth="0" HeightRequest="50" WidthRequest="50" BackgroundColor="Transparent" CornerRadius="10"
+                                                                 ImageSource="{Binding userAccount.profile_picture, Converter={StaticResource isImageSourceConverter}}">
+                                    <toolkitViews:AvatarView.Shadow>
+                                        <Shadow Opacity="0.3"/>
+                                    </toolkitViews:AvatarView.Shadow>
+                                </toolkitViews:AvatarView>
+
+                                <Label Grid.Column="1"
+                                        Margin="20,0,0,0"
+                                        Style="{StaticResource SubTextSemiBold}"
+                                        Text="What's on your mind?."
+                                        VerticalOptions="Center"/>
+                                <Image Grid.Column="2"
+                                        Margin="0,0,10,0"
+                                        HorizontalOptions="End"
+                                        Source="arrow.png"
+                                        VerticalOptions="Center"/>
+                            </Grid>
+                        </Frame>
+
+                        <widgets:LoginToContinueWidget Grid.Row="0"
+                                Padding="0"
+                                Margin="10"
+                                HorizontalOptions="FillAndExpand">
+                            <widgets:LoginToContinueWidget.Triggers>
+                                <DataTrigger Binding="{Binding IsUserAuthenticated}"
+                                        TargetType="widgets:LoginToContinueWidget"
+                                        Value="True">
+                                    <Setter Property="IsVisible"
+                                            Value="False"/>
+                                </DataTrigger>
+                            </widgets:LoginToContinueWidget.Triggers>
+                        </widgets:LoginToContinueWidget>
+
+                        <Grid Margin="10,0,10,0">
+                            <Grid.RowDefinitions>
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+
+                            <Border Padding="10"
+                                    BackgroundColor="{AppThemeBinding Light={StaticResource LightGray}, Dark={StaticResource Background_Mid}}">
+                                <Border.StrokeShape>
+                                    <RoundRectangle CornerRadius="10"/>
+                                </Border.StrokeShape>
+
+                                <Border.GestureRecognizers>
+                                    <TapGestureRecognizer
+                                            NumberOfTapsRequired="1"
+                                            Command="{Binding Source={RelativeSource AncestorType={x:Type local:SafeSpaceMainViewModel}}, Path=OpenAllSafePostsCommand}"
+                                            CommandParameter="{Binding .}"/>
+                                </Border.GestureRecognizers>
+
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+
+                                    <Image Margin="5,0,0,0"
+                                            HorizontalOptions="Center"
+                                            Source="menu.png"
+                                            HeightRequest="20"
+                                            WidthRequest="20"
+                                            VerticalOptions="Center">
+                                        <Image.Behaviors>
+                                            <behaviors:IconTintColorBehavior TintColor="{AppThemeBinding Light={StaticResource DarkGray}, Dark={StaticResource White}}"/>
+                                        </Image.Behaviors>
+                                    </Image>
+                                    <Label Grid.Column="1"
+                                            Margin="5,0,0,0"
+                                            VerticalOptions="Center"
+                                            Text="Stories"/>
+                                </Grid>
+                            </Border>
+
+                            <Border Padding="10"
+                                    Grid.Column="1"
+                                    BackgroundColor="{AppThemeBinding Light={StaticResource LightGray}, Dark={StaticResource Background_Mid}}">
+                                <Border.StrokeShape>
+                                    <RoundRectangle CornerRadius="10"/>
+                                </Border.StrokeShape>
+
+                                <Border.GestureRecognizers>
+                                    <TapGestureRecognizer
+                                            NumberOfTapsRequired="1"
+                                            Command="{Binding Source={RelativeSource AncestorType={x:Type local:SafeSpaceMainViewModel}}, Path=OpenSafePostsPhotosCommand}"
+                                            CommandParameter="{Binding .}"/>
+                                </Border.GestureRecognizers>
+
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+
+                                    <Image
+                                        Margin="5,0,0,0"
+                                        HorizontalOptions="Center"
+                                        Source="gallery.png"
+                                        HeightRequest="20"
+                                            WidthRequest="20"
+                                        VerticalOptions="Center">
+                                        <Image.Behaviors>
+                                            <behaviors:IconTintColorBehavior TintColor="{AppThemeBinding Light={StaticResource DarkGray}, Dark={StaticResource White}}"/>
+                                        </Image.Behaviors>
+                                    </Image>
+                                    <Label
+                                        Grid.Column="1"
+                                        Margin="5,0,0,0"
+                                        VerticalOptions="Center"
+                                        Text="Photos"/>
+                                </Grid>
+                            </Border>
+
+                            <Border Padding="10"
+                                    Grid.Column="2"
+                                    BackgroundColor="{AppThemeBinding Light={StaticResource LightGray}, Dark={StaticResource Background_Mid}}">
+                                <Border.StrokeShape>
+                                    <RoundRectangle CornerRadius="10"/>
+                                </Border.StrokeShape>
+
+                                <Border.GestureRecognizers>
+                                    <TapGestureRecognizer
+                                            NumberOfTapsRequired="1"
+                                            Command="{Binding Source={RelativeSource AncestorType={x:Type local:SafeSpaceMainViewModel}}, Path=OpenSafePostsVideosCommand}"
+                                            CommandParameter="{Binding .}"/>
+                                </Border.GestureRecognizers>
+
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+
+                                    <Image Margin="5,0,0,0"
+                                            HorizontalOptions="Center"
+                                            Source="video.png"
+                                            HeightRequest="20"
+                                            WidthRequest="20"
+                                            VerticalOptions="Center">
+                                        <Image.Behaviors>
+                                            <behaviors:IconTintColorBehavior TintColor="{AppThemeBinding Light={StaticResource DarkGray}, Dark={StaticResource White}}"/>
+                                        </Image.Behaviors>
+                                    </Image>
+                                    <Label Grid.Column="1"
+                                            Margin="5,0,0,0"
+                                            VerticalOptions="Center"
+                                            Text="Videos"/>
+                                </Grid>
+                            </Border>
+                        </Grid>
+
+                        <StackLayout BindableLayout.ItemsSource="{Binding SafePosts}">
+                            <BindableLayout.ItemTemplate>
+                                <DataTemplate x:DataType="model:SafePost">
+                                    <StackLayout Padding="5,0,5,0">
+                                        <Frame CornerRadius="10"
+                                                BackgroundColor="{AppThemeBinding Light={StaticResource LightGray}, Dark={StaticResource Background_Mid}}"
+                                                HasShadow="True"
+                                                Margin="5">
+                                            <StackLayout Orientation="Vertical"
+                                                    Padding="5">
+
+                                                <StackLayout Orientation="Horizontal">
+
+                                                    <toolkitViews:AvatarView VerticalOptions="Center" HorizontalOptions="Start" Grid.Column="0" Margin="10,0,0,0" x:Name="ProfileImge"
+                                                         BorderWidth="0" HeightRequest="50" WidthRequest="50" BackgroundColor="Transparent" CornerRadius="10"
+                                                                 ImageSource="{Binding profile_picture, Converter={StaticResource isImageSourceConverter}}">
+                                                        <toolkitViews:AvatarView.Shadow>
+                                                            <Shadow Opacity="0.3"/>
+                                                        </toolkitViews:AvatarView.Shadow>
+
+                                                        <toolkitViews:AvatarView.Triggers>
+                                                            <DataTrigger
+                                                                Binding="{Binding ghostModeEnabled}"
+                                                                TargetType="toolkitViews:AvatarView"
+                                                                Value="True">
+                                                                <Setter Property="IsVisible"
+                                                                        Value="False"/>
+                                                            </DataTrigger>
+                                                        </toolkitViews:AvatarView.Triggers>
+                                                    </toolkitViews:AvatarView>
+
+                                                    <toolkitViews:AvatarView IsVisible="{Binding ghostModeEnabled}" VerticalOptions="Center" HorizontalOptions="Start" Grid.Column="0" Margin="10,0,0,0"
+                                                         BorderWidth="0" HeightRequest="50" WidthRequest="50" BackgroundColor="Transparent" CornerRadius="10"
+                                                                 ImageSource="https://cya.wagaana.com/images/default_profile.png">
+                                                        <toolkitViews:AvatarView.Shadow>
+                                                            <Shadow Opacity="0.3"/>
+                                                        </toolkitViews:AvatarView.Shadow>
+                                                    </toolkitViews:AvatarView>
+
+                                                    <StackLayout Orientation="Vertical"
+                                                            Margin="10,0,0,0">
+                                                        <Label FontAttributes="Bold">
+                                                            <Label.Text>
+                                                                <MultiBinding StringFormat="{}{0} {1} @{2}">
+                                                                    <Binding Path="name"/>
+                                                                    <Binding Path="dot"/>
+                                                                    <Binding Path="user_name"/>
+                                                                </MultiBinding>
+                                                            </Label.Text>
+
+                                                            <Label.Triggers>
+                                                                <DataTrigger
+                                                                    Binding="{Binding ghostModeEnabled}"
+                                                                    TargetType="Label"
+                                                                    Value="True">
+                                                                    <Setter Property="IsVisible"
+                                                                            Value="False"/>
+                                                                </DataTrigger>
+                                                            </Label.Triggers>
+                                                        </Label>
+                                                        <Label FontAttributes="Bold"
+                                                                Text="Anonymous . @Anonymous"
+                                                                IsVisible="{Binding ghostModeEnabled}"/>
+
+                                                        <Label
+                                                            FontAttributes="Bold"
+                                                            Text="{Binding created_at}"
+                                                            VerticalOptions="Center"
+                                                            Style="{StaticResource SubTextSemiBold}"/>
+                                                    </StackLayout>
+                                                </StackLayout>
+
+                                                <utils:LinksLabel Padding="5"
+                                                        Style="{StaticResource SubTextSemiBold}"
+                                                        LinksText="{Binding message}"/>
+
+                                                <Frame CornerRadius="10"
+                                                        HasShadow="True">
+                                                    <Grid>
+                                                        <Image IsVisible="{Binding isShowingImage}"
+                                                                Source="{Binding fileUrl, Converter={StaticResource isImageSourceConverter}}"
+                                                                HeightRequest="170"
+                                                                Aspect="AspectFill">
+                                                        </Image>
+
+                                                        <Image IsVisible="{Binding isShowingVideo}"
+                                                                Source="{Binding videoId, StringFormat='https://img.youtube.com/vi/{0}/0.jpg'}"
+                                                                HeightRequest="200"
+                                                                Aspect="AspectFill">
+                                                        </Image>
+
+                                                        <Image IsVisible="{Binding isShowingVideo}"
+                                                                Margin="0,0,0,0"
+                                                                Source="youtube.png"
+                                                                HeightRequest="50"
+                                                                WidthRequest="50"
+                                                                HorizontalOptions="CenterAndExpand"
+                                                                VerticalOptions="CenterAndExpand"/>
+                                                    </Grid>
+                                                </Frame>
+
+                                                <Grid>
+                                                    <Grid.RowDefinitions>
+                                                        <RowDefinition/>
+                                                    </Grid.RowDefinitions>
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition/>
+                                                        <ColumnDefinition/>
+                                                    </Grid.ColumnDefinitions>
+
+                                                    <BoxView/>
+                                                    <Frame CornerRadius="10"
+                                                            Padding="2,0,2,0">
+                                                        <Grid>
+                                                            <Grid.ColumnDefinitions>
+                                                                <ColumnDefinition Width="Auto"/>
+                                                                <ColumnDefinition Width="*"/>
+                                                            </Grid.ColumnDefinitions>
+
+                                                            <Label Margin="0,0,0,0"
+                                                                    Style="{StaticResource SubTextSemiBold}"
+                                                                    VerticalOptions="Center"
+                                                                    HorizontalOptions="Start"
+                                                                    Text="{Binding likes}"/>
+                                                            <Label Grid.Column="1"
+                                                                    Margin="5,0,0,0"
+                                                                    Style="{StaticResource SubTextSemiBold}"
+                                                                    VerticalOptions="Center"
+                                                                    Text="Likes"/>
+                                                        </Grid>
+                                                    </Frame>
+
+                                                    <BoxView Grid.Column="2"
+                                                            HorizontalOptions="End"/>
+                                                    <Frame CornerRadius="10"
+                                                            Grid.Column="2"
+                                                            Padding="2,0,2,0"
+                                                            HorizontalOptions="End">
+                                                        <Grid>
+                                                            
+                                                            <Grid.GestureRecognizers>
+                                                                <TapGestureRecognizer
+                                                                NumberOfTapsRequired="1"
+                                                                Command="{Binding Source={RelativeSource AncestorType={x:Type local:SafeSpaceMainViewModel}}, Path=SafePostNavTap}"
+                                                                CommandParameter="{Binding .}"/>
+                                                            </Grid.GestureRecognizers>
+                                                            
+
+                                                            <Grid.ColumnDefinitions>
+                                                                <ColumnDefinition Width="Auto"/>
+                                                                <ColumnDefinition Width="*"/>
+                                                            </Grid.ColumnDefinitions>
+
+                                                            <Label Margin="0,0,0,0"
+                                                                    VerticalOptions="Center"
+                                                                    Style="{StaticResource SubTextSemiBold}"
+                                                                    Text="{Binding comments}"
+                                                                    HorizontalOptions="End"/>
+                                                            <Label Grid.Column="1"
+                                                                    Margin="5,0,0,0"
+                                                                    VerticalOptions="Center"
+                                                                    Style="{StaticResource SubTextSemiBold}"
+                                                                    Text="Comment"
+                                                                    HorizontalOptions="End"/>
+                                                        </Grid>
+                                                    </Frame>
+                                                </Grid>
+
+                                                <Grid>
+                                                    <Grid.RowDefinitions>
+                                                        <RowDefinition Height="35"/>
+                                                    </Grid.RowDefinitions>
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition Width="*"/>
+                                                        <ColumnDefinition Width="Auto"/>
+                                                        <ColumnDefinition Width="*"/>
+                                                    </Grid.ColumnDefinitions>
+
+                                                    <Frame CornerRadius="10"
+                                                            Padding="2">
+                                                        <Frame CornerRadius="10"
+                                                                Padding="0,5,5,5"
+                                                                BackgroundColor="{AppThemeBinding Light={StaticResource LightGray}, Dark={StaticResource Background_Mid}}">
+                                                           
+                                                            <Frame.GestureRecognizers>
+                                                                <TapGestureRecognizer
+                                                                    NumberOfTapsRequired="1"
+                                                                    Command="{Binding Source={RelativeSource AncestorType={x:Type local:SafeSpaceMainViewModel}}, Path=LikePostNavTap}"
+                                                                    CommandParameter="{Binding .}"/>
+                                                            </Frame.GestureRecognizers>
+                                                            
+
+                                                            <Grid>
+                                                                <Grid.ColumnDefinitions>
+                                                                    <ColumnDefinition Width="Auto"/>
+                                                                    <ColumnDefinition Width="*"/>
+                                                                </Grid.ColumnDefinitions>
+
+                                                                <Image
+                                                                    IsVisible="{Binding isUnLiked}"
+                                                                    Margin="0,0,0,0"
+                                                                    HorizontalOptions="Center"
+                                                                    Source="like.png"
+                                                                    HeightRequest="20"
+                                                                        WidthRequest="20"
+                                                                    VerticalOptions="Center"/>
+
+                                                                <Image
+                                                                    IsVisible="{Binding likedIt}"
+                                                                    Margin="0,0,0,0"
+                                                                    HorizontalOptions="Center"
+                                                                    Source="liked.png"
+                                                                    HeightRequest="20"
+                                                                        WidthRequest="20"
+                                                                    VerticalOptions="Center"/>
+
+                                                                <Label
+                                                                    Grid.Column="1"
+                                                                    Margin="5,0,0,0"
+                                                                    Style="{StaticResource SubTextSemiBold}"
+                                                                    VerticalOptions="Center"
+                                                                    Text="Like"/>
+                                                            </Grid>
+                                                        </Frame>
+                                                    </Frame>
+
+                                                    <Frame CornerRadius="10"
+                                                            Grid.Column="1"
+                                                            Padding="2">
+                                                        <Frame CornerRadius="10"
+                                                                Padding="5"
+                                                                BackgroundColor="{AppThemeBinding Light={StaticResource LightGray}, Dark={StaticResource Background_Mid}}">
+                                                           
+                                                            <Frame.GestureRecognizers>
+                                                                <TapGestureRecognizer
+                                                                NumberOfTapsRequired="1"
+                                                                Command="{Binding Source={RelativeSource AncestorType={x:Type local:SafeSpaceMainViewModel}}, Path=SafePostNavTap}"
+                                                                CommandParameter="{Binding .}"/>
+                                                            </Frame.GestureRecognizers>
+                                                           
+
+                                                            <Grid>
+                                                                <Grid.ColumnDefinitions>
+                                                                    <ColumnDefinition Width="Auto"/>
+                                                                    <ColumnDefinition Width="*"/>
+                                                                </Grid.ColumnDefinitions>
+
+                                                                <Image
+                                                                    Margin="0,0,0,0"
+                                                                    HorizontalOptions="Center"
+                                                                    Source="chat.png"
+                                                                    HeightRequest="20"
+                                                                        WidthRequest="20"
+                                                                    VerticalOptions="Center"/>
+                                                                <Label
+                                                                    Grid.Column="1"
+                                                                    Margin="5,0,0,0"
+                                                                    Style="{StaticResource SubTextSemiBold}"
+                                                                    VerticalOptions="Center"
+                                                                    Text="Comment"/>
+                                                            </Grid>
+                                                        </Frame>
+                                                    </Frame>
+
+                                                    <Frame CornerRadius="10"
+                                                            Grid.Column="2"
+                                                            Padding="2">
+                                                        <Frame CornerRadius="10"
+                                                                Padding="5"
+                                                                BackgroundColor="{AppThemeBinding Light={StaticResource LightGray}, Dark={StaticResource Background_Mid}}">
+                                                           
+                                                            <Frame.GestureRecognizers>
+                                                                <TapGestureRecognizer
+                                                                NumberOfTapsRequired="1"
+                                                                Command="{Binding Source={RelativeSource AncestorType={x:Type local:SafeSpaceMainViewModel}}, Path=SharePostNavTap}"
+                                                                CommandParameter="{Binding .}"/>
+                                                            </Frame.GestureRecognizers>
+                                                           
+
+                                                            <Grid>
+                                                                <Grid.ColumnDefinitions>
+                                                                    <ColumnDefinition Width="*"/>
+                                                                    <ColumnDefinition Width="Auto"/>
+                                                                </Grid.ColumnDefinitions>
+
+                                                                <Image
+                                                                    Margin="0,0,0,0"
+                                                                    HorizontalOptions="End"
+                                                                    Source="share.png"
+                                                                    HeightRequest="20"
+                                                                        WidthRequest="20"
+                                                                    VerticalOptions="Center"/>
+                                                                <Label
+                                                                    Grid.Column="1"
+                                                                    Margin="5,0,0,0"
+                                                                    VerticalOptions="Center"
+                                                                    Style="{StaticResource SubTextSemiBold}"
+                                                                    Text="Share"
+                                                                    HorizontalOptions="End"/>
+                                                            </Grid>
+                                                        </Frame>
+                                                    </Frame>
+                                                </Grid>
+                                            </StackLayout>
+                                        </Frame>
+                                    </StackLayout>
+                                </DataTemplate>
+                            </BindableLayout.ItemTemplate>
+                        </StackLayout>
+
+                    </StackLayout>
+                </ScrollView>
+            </RefreshView>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

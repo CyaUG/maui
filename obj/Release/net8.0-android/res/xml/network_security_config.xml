@@ -1,0 +1,1 @@
+<network-security-config><domain-config cleartextTrafficPermitted="true"><domain includeSubdomains="true">katale-biz.s3.us-east-1.amazonaws.com</domain></domain-config></network-security-config>

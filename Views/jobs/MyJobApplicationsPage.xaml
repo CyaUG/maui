@@ -1,0 +1,121 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Youth.Views.jobs.MyJobApplicationsPage"
+             Title="{Binding Title}"
+             xmlns:local="clr-namespace:Youth.ViewModels"
+             xmlns:model="clr-namespace:Youth.Models"
+             xmlns:utils="clr-namespace:Youth.Utils"
+             Shell.NavBarIsVisible="False"
+             Shell.FlyoutItemIsVisible="False"
+             Shell.FlyoutBehavior="Disabled"
+             Shell.PresentationMode="Animated"
+             Shell.TabBarIsVisible="False"
+             xmlns:ios="clr-namespace:Microsoft.Maui.Controls.PlatformConfiguration.iOSSpecific;assembly=Microsoft.Maui.Controls"
+             xmlns:toolkitViews="clr-namespace:CommunityToolkit.Maui.Views;assembly=CommunityToolkit.Maui"
+             ios:Page.UseSafeArea="true"
+             xmlns:renderers="clr-namespace:Youth.CustomRenderers"
+             xmlns:converters="clr-namespace:Youth.Helpers.Converters">
+
+    <ContentPage.Resources>
+        <Style TargetType="Frame">
+            <Setter Property="HasShadow"
+                    Value="False"/>
+            <Setter Property="Padding"
+                    Value="0"/>
+            <Setter Property="CornerRadius"
+                    Value="20"/>
+            <Setter Property="IsClippedToBounds"
+                    Value="True"/>
+        </Style>
+        <ResourceDictionary>
+            <utils:MultiplierConverter x:Key="MultiplierConverter"/>
+            <converters:IsImageSourceConverter x:Key="isImageSourceConverter"/>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <ContentPage.Content>
+        <StackLayout>
+            <StackLayout
+                Orientation="Horizontal"
+                VerticalOptions="Center"
+                Spacing="10"
+                Grid.Row="0"
+                Margin="10,20,10,10">
+
+                <Image
+                    HorizontalOptions="Start"
+                    HeightRequest="30"
+                    Source="back.png"
+                    BackgroundColor="transparent"
+                    VerticalOptions="CenterAndExpand">
+                    <Image.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="Btn_Back"/>
+                    </Image.GestureRecognizers>
+                </Image>
+
+                <Label Text="{Binding Title}"
+                        HorizontalOptions="CenterAndExpand"
+                        VerticalOptions="CenterAndExpand"
+                        Style="{StaticResource TabHeader}"/>
+                <Image Source="check_big_black.png"
+                        HorizontalOptions="End"
+                        HeightRequest="30"
+                        IsVisible="True">
+                    <Image.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="Btn_Back"/>
+                    </Image.GestureRecognizers>
+                </Image>
+            </StackLayout>
+
+            <RefreshView
+                x:DataType="local:MyJobApplicationsViewModel"
+                Command="{Binding LoadMyJobApplicationsCommand}"
+                IsRefreshing="{Binding IsBusy}" Padding="10">
+
+                <ScrollView VerticalScrollBarVisibility="Never">
+                    <CollectionView ItemsSource="{Binding JobApplications}">
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate x:DataType="model:JobApplication">
+                                <StackLayout Padding="10,0,10,0">
+                                    <Frame CornerRadius="10"
+                                            HasShadow="True"
+                                            Margin="5" BackgroundColor="{AppThemeBinding Light={StaticResource LightGray}, Dark={StaticResource Background_Mid}}">
+
+                                        <Frame.GestureRecognizers>
+                                            <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type local:MyJobApplicationsViewModel}}, Path=JobApplicationNavTap}" CommandParameter="{Binding .}" />
+                                        </Frame.GestureRecognizers>
+
+                                        <StackLayout Orientation="Vertical" Padding="5">
+                                            <Grid RowDefinitions="Auto, *" ColumnDefinitions="Auto, *">
+                                                <toolkitViews:AvatarView BorderWidth="0" HeightRequest="60" WidthRequest="60" BackgroundColor="Transparent" CornerRadius="10" ImageSource="{Binding imageUrl, Converter={StaticResource isImageSourceConverter}}"
+                                                                HorizontalOptions="FillAndExpand"
+                                                                VerticalOptions="FillAndExpand"
+                                                                Margin="5">
+                                                    <toolkitViews:AvatarView.Shadow>
+                                                        <Shadow Opacity="0.3"/>
+                                                    </toolkitViews:AvatarView.Shadow>
+                                                </toolkitViews:AvatarView>
+
+                                                <StackLayout Orientation="Vertical"
+                                                        Grid.Column="1"
+                                                        Padding="15,0,0,0">
+                                                    <Label Text="{Binding jobTitle}"
+                                                            FontAttributes="Bold"/>
+                                                    <Label Text="{Binding businessName}"
+                                                            FontSize="10"/>
+                                                    <Label Text="{Binding created_at, StringFormat='Submited: {0}'}"
+                                                            FontSize="8"/>
+                                                </StackLayout>
+                                            </Grid>
+                                        </StackLayout>
+                                    </Frame>
+                                </StackLayout>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+                </ScrollView>
+            </RefreshView>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

@@ -1,0 +1,236 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Youth.Views.ReferralProgram.CreateNewReferralPage"
+             Title="{Binding Title}"
+             xmlns:local="clr-namespace:Youth.ViewModels"
+             xmlns:model="clr-namespace:Youth.Models"
+             xmlns:utils="clr-namespace:Youth.Utils"
+             Shell.NavBarIsVisible="False"
+             Shell.FlyoutItemIsVisible="False"
+             Shell.FlyoutBehavior="Disabled"
+             Shell.PresentationMode="Animated"
+             Shell.TabBarIsVisible="False"
+             xmlns:ios="clr-namespace:Microsoft.Maui.Controls.PlatformConfiguration.iOSSpecific;assembly=Microsoft.Maui.Controls"
+             ios:Page.UseSafeArea="true"
+             xmlns:renderers="clr-namespace:Youth.CustomRenderers"
+             xmlns:converters="clr-namespace:Youth.Helpers.Converters">
+
+    <ContentPage.Resources>
+        <Style TargetType="Frame">
+            <Setter Property="HasShadow" Value="False"/>
+            <Setter Property="Padding" Value="0"/>
+            <Setter Property="CornerRadius" Value="20"/>
+            <Setter Property="IsClippedToBounds" Value="True"/>
+        </Style>
+        <ResourceDictionary>
+            <utils:MultiplierConverter x:Key="MultiplierConverter"/>
+            <converters:IsImageSourceConverter x:Key="isImageSourceConverter"/>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <ContentPage.Content>
+        <VerticalStackLayout>
+            <StackLayout Orientation="Horizontal" VerticalOptions="Center" Spacing="10" Grid.Row="0" Margin="10,20,10,0">
+                <Image HorizontalOptions="Start" HeightRequest="30" Source="back.png" BackgroundColor="transparent" VerticalOptions="CenterAndExpand">
+                    <Image.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="Btn_Back"/>
+                    </Image.GestureRecognizers>
+                </Image>
+
+                <Label Text="{Binding Title}" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Style="{StaticResource TabHeader}"/>
+                <Image Source="settings.png" HorizontalOptions="End" HeightRequest="30"/>
+            </StackLayout>
+
+            <ScrollView VerticalScrollBarVisibility="Never" Margin="10">
+                <Grid>
+                    <VerticalStackLayout>
+                        <Frame HasShadow="True" CornerRadius="10" Margin="5" BackgroundColor="{AppThemeBinding Light={StaticResource LightGray}, Dark={StaticResource Background_Mid}}">
+                            <VerticalStackLayout Padding="10">
+                                <HorizontalStackLayout HorizontalOptions="FillAndExpand">
+                                    <!-- circle -->
+                                    <Image x:Name="ProfileImge"
+                                        HeightRequest="70"
+                                        WidthRequest="70"
+                                        HorizontalOptions="Center"
+                                        Source="{Binding referralAccount.profile_picture, Converter={StaticResource isImageSourceConverter}}"
+                                        VerticalOptions="Center"
+                                        Aspect="AspectFill"/>
+
+                                    <!-- verticle lines -->
+                                    <VerticalStackLayout>
+                                        <Label
+                                            Text="{Binding referralAccount.name}"
+                                            Margin="5,10,10,0"
+                                            Padding="3"
+                                            FontAttributes="Bold"
+                                            HorizontalOptions="FillAndExpand"
+                                            VerticalOptions="End"
+                                            Style="{StaticResource SubHeader}"/>
+
+                                        <Label
+                                            Text="{Binding referralAccount.accountCategoryLabel}"
+                                            Margin="5,0,50,0"
+                                            Padding="3"
+                                            FontAttributes="Bold"
+                                            HorizontalOptions="FillAndExpand"
+                                            VerticalOptions="End"/>
+                                    </VerticalStackLayout>
+                            </HorizontalStackLayout>
+
+                                <!-- bottom 2 lines -->
+                                <VerticalStackLayout>
+                                    <Label
+                                        Text="{Binding referralAccount.address_label}"
+                                        Margin="0,0,10,0"
+                                        Padding="3"
+                                        FontAttributes="Bold"
+                                        HorizontalOptions="FillAndExpand"
+                                        VerticalOptions="End"/>
+
+                                    <Label
+                                        Text="{Binding referralAccount.dateOfBirth}"
+                                        Margin="0,0,10,10"
+                                        Padding="3"
+                                        FontAttributes="Bold"
+                                        HorizontalOptions="FillAndExpand"
+                                        VerticalOptions="End"
+                                        Style="{StaticResource SubHeader}"/>
+                                </VerticalStackLayout>
+                            </VerticalStackLayout>
+                        </Frame>
+
+                        <Frame CornerRadius="5"
+                                 BackgroundColor="{AppThemeBinding Light={StaticResource LightGray}, Dark={StaticResource Background_Mid}}"
+                                HasShadow="True"
+                                Margin="5"
+                                Padding="5">
+                        <StackLayout Orientation="Horizontal">
+                                <Editor
+                                    BackgroundColor="Transparent"
+                                    PlaceholderColor="Gray"
+                                    Placeholder="Reason For Referral."
+                                    VerticalOptions="StartAndExpand"
+                                    HorizontalOptions="FillAndExpand"
+                                    HeightRequest="100"
+                                    Text="{Binding ReferralReason}"/>
+                            </StackLayout>
+                        </Frame>
+
+                        <Frame CornerRadius="5" BackgroundColor="{AppThemeBinding Light={StaticResource LightGray}, Dark={StaticResource Background_Mid}}"
+                                Margin="5">
+                            <Grid HeightRequest="170">
+                                <Image Source="{Binding picturePath}"
+                                        Aspect="AspectFill"
+                                        HorizontalOptions="FillAndExpand"
+                                        VerticalOptions="FillAndExpand"/>
+                                <Grid HeightRequest="170">
+                                    <Frame CornerRadius="5" HasShadow="True" BackgroundColor="{AppThemeBinding Light={StaticResource LightGray}, Dark={StaticResource Background_Mid}}"
+                                            VerticalOptions="Center"
+                                            HorizontalOptions="Center">
+                                        <Frame.GestureRecognizers>
+                                            <TapGestureRecognizer Command="{Binding PickPictureAttachmentCommand}"/>
+                                        </Frame.GestureRecognizers>
+                                        <Grid Padding="15">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="Auto"/>
+                                                <ColumnDefinition Width="Auto"/>
+                                            </Grid.ColumnDefinitions>
+
+                                            <Image Margin="10,0,0,0" HorizontalOptions="Center" Source="camera.png" VerticalOptions="Center" HeightRequest="30" WidthRequest="30">
+                                                <Image.Triggers>
+                                                    <DataTrigger Binding="{Binding picSelected}" TargetType="Image" Value="True">
+                                                        <Setter Property="Source" Value="camera_green.png"/>
+                                                    </DataTrigger>
+                                                </Image.Triggers>
+                                            </Image>
+                                            <Label Grid.Column="1" Margin="10,0,10,0" Text="Attach A Picture (Optional)" VerticalOptions="Center"/>
+                                        </Grid>
+                                    </Frame>
+                                </Grid>
+                            </Grid>
+                        </Frame>
+
+                        <Frame Margin="5" Padding="5,5,5,5" BackgroundColor="Transparent"
+                                BorderColor="{StaticResource BorderColor}" CornerRadius="20" HasShadow="False">
+                            <Grid Padding="5">
+                                <Grid.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding PickHealthCenterCommand}"/>
+                                </Grid.GestureRecognizers>
+
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+
+                                <Image Margin="10,0,0,0" HorizontalOptions="Center"
+                                    Source="{Binding mHealthCenter.imageUrl, Converter={StaticResource isImageSourceConverter}}"
+                                    VerticalOptions="Center" HeightRequest="40" WidthRequest="40"/>
+
+                                <Label Grid.Column="1" Margin="20,0,0,0" Text="{Binding mHealthCenter.label}" VerticalOptions="Center"/>
+                                <Image Grid.Column="2" Margin="0,0,10,0" HorizontalOptions="Center" Source="right_arrow.png" VerticalOptions="Center" HeightRequest="20" WidthRequest="20"/>
+                            </Grid>
+                        </Frame>
+
+                        <Frame Margin="5" Padding="5" BackgroundColor="Transparent" BorderColor="{StaticResource BorderColor}" CornerRadius="20" HasShadow="False">
+                            <Grid Padding="5">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+
+                                <Image
+                                    Margin="10,0,0,0"
+                                    HorizontalOptions="Center"
+                                    Source="calendar_tick.png"
+                                    VerticalOptions="Center"
+                                    HeightRequest="30"
+                                    WidthRequest="30">
+                                    <Image.Triggers>
+                                        <DataTrigger Binding="{Binding isQuestionareFilled}" TargetType="Image" Value="True">
+                                            <Setter Property="Source" Value="calendar_green.png"/>
+                                        </DataTrigger>
+                                    </Image.Triggers>
+                                </Image>
+                                <DatePicker x:Name="dobDatePicker" Grid.Column="1" Margin="5,0,0,0" VerticalOptions="Center" DateSelected="OnDateSelected"/>
+                                <Image Grid.Column="2" Margin="0,0,10,0" HorizontalOptions="End"
+                                    Source="right_arrow.png" VerticalOptions="Center" HeightRequest="20" WidthRequest="20"/>
+                            </Grid>
+                        </Frame>
+
+                        <Grid ColumnSpacing="5"  Margin="5">
+                            <Grid.RowDefinitions>
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+
+                            <BoxView/>
+                            <Frame Padding="2" CornerRadius="10" HorizontalOptions="FillAndExpand" BackgroundColor="{AppThemeBinding Light={StaticResource LightGray}, Dark={StaticResource Background_Mid}}" HeightRequest="50">
+                                <Frame.GestureRecognizers>
+                                    <TapGestureRecognizer Tapped="Btn_Back"/>
+                                </Frame.GestureRecognizers>
+                                <Label Text="Cancel" FontSize="14" FontAttributes="Bold" VerticalOptions="Center" HorizontalOptions="Center"/>
+                            </Frame>
+
+                            <BoxView Grid.Column="1"/>
+                            <Frame Padding="2" CornerRadius="10" Grid.Column="1" HorizontalOptions="FillAndExpand" BackgroundColor="{AppThemeBinding Light={StaticResource LightGray}, Dark={StaticResource Background_Mid}}" HeightRequest="50">
+                                <Frame.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding SubmitReferralCommand}"/>
+                                </Frame.GestureRecognizers>
+                                <Label Text="Refer" FontSize="14" FontAttributes="Bold" VerticalOptions="Center" HorizontalOptions="Center"/>
+                            </Frame>
+                        </Grid>
+                    </VerticalStackLayout>
+
+                    <BoxView BackgroundColor="Transparent"/>
+                    <ActivityIndicator x:Name="ActivityIndicator" HorizontalOptions="CenterAndExpand" IsRunning="False" VerticalOptions="CenterAndExpand"/>
+                </Grid>
+            </ScrollView>
+        </VerticalStackLayout>
+    </ContentPage.Content>
+</ContentPage>

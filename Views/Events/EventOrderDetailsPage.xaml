@@ -1,0 +1,351 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Youth.Views.Events.EventOrderDetailsPage"
+             Title="{Binding Title}"
+             xmlns:local="clr-namespace:Youth.ViewModels"
+             xmlns:model="clr-namespace:Youth.Models"
+             xmlns:utils="clr-namespace:Youth.Utils"
+             Shell.NavBarIsVisible="False"
+             Shell.FlyoutItemIsVisible="False"
+             Shell.FlyoutBehavior="Disabled"
+             Shell.PresentationMode="Animated"
+             Shell.TabBarIsVisible="False"
+             xmlns:ios="clr-namespace:Microsoft.Maui.Controls.PlatformConfiguration.iOSSpecific;assembly=Microsoft.Maui.Controls"
+             ios:Page.UseSafeArea="true"
+             xmlns:renderers="clr-namespace:Youth.CustomRenderers"
+             xmlns:converters="clr-namespace:Youth.Helpers.Converters">
+
+    <ContentPage.Resources>
+        <Style TargetType="Frame">
+            <Setter Property="HasShadow"
+                    Value="False"/>
+            <Setter Property="Padding"
+                    Value="0"/>
+            <Setter Property="CornerRadius"
+                    Value="20"/>
+            <Setter Property="IsClippedToBounds"
+                    Value="True"/>
+        </Style>
+        <ResourceDictionary>
+            <utils:MultiplierConverter x:Key="MultiplierConverter"/>
+            <converters:IsImageSourceConverter x:Key="isImageSourceConverter"/>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <ContentPage.Content>
+
+        <StackLayout>
+            <StackLayout
+                Orientation="Horizontal"
+                VerticalOptions="Center"
+                Spacing="10"
+                Grid.Row="0"
+                Margin="10,20,10,0">
+
+                <Image
+                    HorizontalOptions="Start"
+                    HeightRequest="30"
+                    Source="back.png"
+                    BackgroundColor="transparent"
+                    VerticalOptions="CenterAndExpand">
+                    <Image.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="Btn_Back"/>
+                    </Image.GestureRecognizers>
+                </Image>
+
+                <Label Text="{Binding Title}"
+                        HorizontalOptions="CenterAndExpand"
+                        VerticalOptions="CenterAndExpand"
+                        
+                        Style="{StaticResource TabHeader}"/>
+                <Image Source="settings.png"
+                        HorizontalOptions="End"
+                        HeightRequest="30"/>
+            </StackLayout>
+
+            <RefreshView x:DataType="local:EventOrderDetailsViewModel"
+                    Command="{Binding EventDetailsLoadCommand}"
+                    IsRefreshing="{Binding IsBusy}">
+                <StackLayout Orientation="Vertical">
+                    <ScrollView VerticalScrollBarVisibility="Never">
+
+                        <StackLayout Orientation="Vertical">
+
+                            <Image Source="{Binding EventDetails.imageUrl, Converter={StaticResource isImageSourceConverter}}"
+                                   HorizontalOptions="FillAndExpand"
+                                   VerticalOptions="CenterAndExpand"
+                                   Aspect="AspectFill"
+                                   Margin="0"/>
+
+                            <StackLayout Orientation="Vertical"
+                                    Padding="10">
+                                <Label Text="{Binding EventDetails.eventTitle}"
+                                        FontAttributes="Bold"
+                                        FontSize="34"/>
+
+                                <StackLayout Spacing="15">
+
+                                    <Label Text="{Binding EventDetails.eventDate}"
+                                           FontAttributes="Bold"
+                                           FontSize="17"/>
+
+                                    <Grid>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition/>
+                                        </Grid.RowDefinitions>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="Auto"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                        </Grid.ColumnDefinitions>
+
+                                        <BoxView/>
+                                        <Frame CornerRadius="10" BackgroundColor="{AppThemeBinding Light={StaticResource LightGray}, Dark={StaticResource Background_Mid}}"
+                                                Padding="2"
+                                                HorizontalOptions="Start">
+                                            <Frame CornerRadius="10"
+                                                    Padding="10"
+                                                    BackgroundColor="{AppThemeBinding Light={StaticResource LightGray}, Dark={StaticResource Background_Mid}}"
+                                                    HasShadow="True">
+                                                <Frame.GestureRecognizers>
+                                                    <TapGestureRecognizer Command="{Binding LoadEventOrderTicetsCommand}"/>
+                                                </Frame.GestureRecognizers>
+                                                <Grid>
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition Width="Auto"/>
+                                                        <ColumnDefinition Width="*"/>
+                                                    </Grid.ColumnDefinitions>
+
+                                                    <Image
+                                                        Margin="5,0,0,0"
+                                                        HorizontalOptions="Center"
+                                                        Source="ballot.png"
+                                                        HeightRequest="20"
+                                                            WidthRequest="20"
+                                                        VerticalOptions="Center"/>
+                                                    <Label
+                                                        Grid.Column="1"
+                                                        Margin="5,0,0,0"
+                                                        Style="{StaticResource SubTextSemiBold}"
+                                                        VerticalOptions="Center"
+                                                        MaxLines="1"
+                                                        Text="Tickets"
+                                                        />
+                                                </Grid>
+                                            </Frame>
+                                        </Frame>
+
+                                        <BoxView Grid.Column="1"/>
+                                        <Frame CornerRadius="10" BackgroundColor="{AppThemeBinding Light={StaticResource LightGray}, Dark={StaticResource Background_Mid}}"
+                                                Grid.Column="1"
+                                                Padding="2"
+                                                HorizontalOptions="CenterAndExpand">
+                                            <Frame CornerRadius="10"
+                                                    Padding="10"
+                                                    BackgroundColor="{AppThemeBinding Light={StaticResource LightGray}, Dark={StaticResource Background_Mid}}"
+                                                    HasShadow="True">
+                                                <Grid>
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition Width="Auto"/>
+                                                        <ColumnDefinition Width="*"/>
+                                                    </Grid.ColumnDefinitions>
+
+                                                    <Image
+                                                        Margin="5,0,0,0"
+                                                        HorizontalOptions="Center"
+                                                        Source="chat.png"
+                                                        HeightRequest="20"
+                                                            WidthRequest="20"
+                                                        VerticalOptions="Center"/>
+                                                    <Label
+                                                        Grid.Column="1"
+                                                        Margin="5,0,0,0"
+                                                        Style="{StaticResource SubTextSemiBold}"
+                                                        VerticalOptions="Center"
+                                                        Text="Comments"
+                                                        MaxLines="1"
+                                                        />
+                                                </Grid>
+                                            </Frame>
+                                        </Frame>
+
+                                        <BoxView Grid.Column="2"/>
+                                        <Frame CornerRadius="10" BackgroundColor="{AppThemeBinding Light={StaticResource LightGray}, Dark={StaticResource Background_Mid}}"
+                                                Grid.Column="2"
+                                                Padding="2"
+                                                HorizontalOptions="End">
+                                            <Frame CornerRadius="10"
+                                                    Padding="10"
+                                                    BackgroundColor="{AppThemeBinding Light={StaticResource LightGray}, Dark={StaticResource Background_Mid}}"
+                                                    HasShadow="True">
+                                                <Grid>
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition Width="Auto"/>
+                                                        <ColumnDefinition Width="*"/>
+                                                    </Grid.ColumnDefinitions>
+
+                                                    <Image
+                                                        Margin="5,0,0,0"
+                                                        HorizontalOptions="Center"
+                                                        Source="alert.png"
+                                                        HeightRequest="20"
+                                                            WidthRequest="20"
+                                                        VerticalOptions="Center"/>
+                                                    <Label
+                                                        Grid.Column="1"
+                                                        Margin="5,0,0,0"
+                                                        VerticalOptions="Center"
+                                                        Style="{StaticResource SubTextSemiBold}"
+                                                        Text="Report"
+                                                        MaxLines="1"
+                                                        />
+                                                </Grid>
+                                            </Frame>
+                                        </Frame>
+                                    </Grid>
+
+                                    <Grid>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition/>
+                                        </Grid.RowDefinitions>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition/>
+                                            <ColumnDefinition/>
+                                        </Grid.ColumnDefinitions>
+
+                                        <BoxView/>
+                                        <Frame CornerRadius="10" BackgroundColor="{AppThemeBinding Light={StaticResource LightGray}, Dark={StaticResource Background_Mid}}"
+                                                Padding="2,0,2,0">
+                                            <Grid>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="Auto"/>
+                                                    <ColumnDefinition Width="*"/>
+                                                </Grid.ColumnDefinitions>
+
+                                                <Label
+                                                    Margin="0,0,0,0"
+                                                    Style="{StaticResource SubTextSemiBold}"
+                                                    VerticalOptions="Center"
+                                                    HorizontalOptions="Start"
+                                                    Text="{Binding EventDetails.likes}"
+                                                    />
+                                                <Label
+                                                    Grid.Column="1"
+                                                    Margin="5,0,0,0"
+                                                    Style="{StaticResource SubTextSemiBold}"
+                                                    VerticalOptions="Center"
+                                                    Text="Likes"/>
+                                            </Grid>
+                                        </Frame>
+
+                                        <BoxView Grid.Column="2"
+                                                HorizontalOptions="End"/>
+                                        <Frame CornerRadius="10" BackgroundColor="{AppThemeBinding Light={StaticResource LightGray}, Dark={StaticResource Background_Mid}}"
+                                                Grid.Column="2"
+                                                Padding="2,0,2,0"
+                                                HorizontalOptions="End">
+                                            <Grid>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="Auto"/>
+                                                    <ColumnDefinition Width="*"/>
+                                                </Grid.ColumnDefinitions>
+
+                                                <Label
+                                                    Margin="0,0,0,0"
+                                                    VerticalOptions="Center"
+                                                    Style="{StaticResource SubTextSemiBold}"
+                                                    Text="{Binding EventDetails.totalComments}"
+                                                    
+                                                    HorizontalOptions="End"/>
+                                                <Label
+                                                    Grid.Column="1"
+                                                    Margin="5,0,0,0"
+                                                    VerticalOptions="Center"
+                                                    Style="{StaticResource SubTextSemiBold}"
+                                                    Text="Comment"
+                                                    HorizontalOptions="End"/>
+                                            </Grid>
+                                        </Frame>
+                                    </Grid>
+
+                                    <Label Text="Job Description"
+                                            FontSize="12"
+                                            FontAttributes="Bold"/>
+
+                                    <Label Text="{Binding EventDetails.description}"
+                                            FontSize="14"/>
+
+                                    <Label Text="Address"
+                                            FontSize="12"
+                                            FontAttributes="Bold"/>
+
+                                    <Frame CornerRadius="10" BackgroundColor="{AppThemeBinding Light={StaticResource LightGray}, Dark={StaticResource Background_Mid}}"
+                                            HasShadow="True">
+                                        <Frame.GestureRecognizers>
+                                            <TapGestureRecognizer Command="{Binding EventAddressTap}"
+                                                    CommandParameter="{Binding EventDetails}"/>
+                                        </Frame.GestureRecognizers>
+                                        <Grid>
+                                            <Image Source="{Binding EventDetails.event_address_image, Converter={StaticResource isImageSourceConverter}}"
+                                                HeightRequest="170"
+                                                HorizontalOptions="FillAndExpand"
+                                                Aspect="AspectFill">
+                                            </Image>
+                                        </Grid>
+                                    </Frame>
+
+                                    <StackLayout Orientation="Horizontal"
+                                            Spacing="14">
+                                        <StackLayout.GestureRecognizers>
+                                            <TapGestureRecognizer Command="{Binding EventAddressTap}"
+                                                    CommandParameter="{Binding EventDetails}"/>
+                                        </StackLayout.GestureRecognizers>
+                                        <Image Source="address.png"
+                                                WidthRequest="30"
+                                                HorizontalOptions="Start"/>
+                                        <Label Text="{Binding EventDetails.event_address}"
+                                                FontSize="14"
+                                                VerticalOptions="Center"/>
+                                    </StackLayout>
+
+                                    <Label Text="Listed By"
+                                            FontSize="12"
+                                            FontAttributes="Bold"/>
+
+                                    <StackLayout Orientation="Horizontal">
+                                        <StackLayout Margin="5,0,20,0">
+                                            <Image
+                                                HeightRequest="50"
+                                                Source="{Binding EventDetails.profile_picture, Converter={StaticResource isImageSourceConverter}}"
+                                                WidthRequest="50"
+                                                HorizontalOptions="Center"
+                                                Aspect="AspectFill">
+                                                <Image.GestureRecognizers>
+                                                    <TapGestureRecognizer/>
+                                                </Image.GestureRecognizers>
+                                            </Image>
+                                        </StackLayout>
+
+                                        <StackLayout VerticalOptions="Center">
+                                            <Label
+                                                FontAttributes="Bold"
+                                                FontSize="Small"
+                                                Text="{Binding EventDetails.name}"
+                                                VerticalOptions="Center"/>
+                                            <Label
+                                                FontSize="Small"
+                                                Text="{Binding EventDetails.user_name, StringFormat='@{0}'}"
+                                                VerticalOptions="Center"/>
+                                        </StackLayout>
+                                    </StackLayout>
+
+                                </StackLayout>
+                            </StackLayout>
+                        </StackLayout>
+                    </ScrollView>
+                </StackLayout>
+            </RefreshView>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

@@ -1,0 +1,105 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Youth.Views.Account.PhoneEditorPage"
+             Title="Phone Number"
+             Shell.NavBarIsVisible="False"
+             NavigationPage.HasNavigationBar="False"
+             Shell.FlyoutItemIsVisible="False"
+             Shell.FlyoutBehavior="Disabled"
+             Shell.TabBarIsVisible="False"
+             xmlns:ios="clr-namespace:Microsoft.Maui.Controls.PlatformConfiguration.iOSSpecific;assembly=Microsoft.Maui.Controls"
+             ios:Page.UseSafeArea="true"
+             xmlns:icons="clr-namespace:Youth.Resources.Styles">
+
+    <ContentPage.Resources>
+        <Style TargetType="Frame">
+            <Setter Property="HasShadow" Value="False"/>
+            <Setter Property="Padding" Value="0"/>
+            <Setter Property="CornerRadius" Value="20"/>
+            <Setter Property="IsClippedToBounds" Value="True"/>
+        </Style>
+    </ContentPage.Resources>
+
+    <ContentPage.Content>
+        <StackLayout>
+            <Grid VerticalOptions="Start" HorizontalOptions="FillAndExpand" Margin="25">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+
+                <Border HeightRequest="40" WidthRequest="40" Padding="4" BackgroundColor="{AppThemeBinding Light={StaticResource Background_Dark}, Dark={StaticResource White}}" StrokeThickness="0" VerticalOptions="Start" HorizontalOptions="Start">
+                    <Border.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="TapGestureRecognizer_OnTapped"></TapGestureRecognizer>
+                    </Border.GestureRecognizers>
+                    <Border.StrokeShape>
+                        <RoundRectangle CornerRadius="10"/>
+                    </Border.StrokeShape>
+                    <Border.Shadow>
+                        <Shadow Opacity="0.3"/>
+                    </Border.Shadow>
+                    <Image HeightRequest="30">
+                        <Image.Source>
+                            <FontImageSource FontFamily="{StaticResource FontAwesome}" Glyph="{Static icons:IconFont.ArrowLeft}" Color="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource Background_Dark}}" />
+                        </Image.Source>
+                    </Image>
+                </Border>
+
+                <Label Grid.Column="1" Margin="0" Text="Phone Number" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" FontSize="16" HorizontalTextAlignment="Center"></Label>
+
+                <Border Grid.Column="2" VerticalOptions="StartAndExpand" HeightRequest="40" WidthRequest="40" Padding="4" BackgroundColor="{AppThemeBinding Light={StaticResource Background_Dark}, Dark={StaticResource White}}" StrokeThickness="0">
+                    <Border.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding SubmitPhoneCommand}"/>
+                    </Border.GestureRecognizers>
+                    <Border.StrokeShape>
+                        <RoundRectangle CornerRadius="10"/>
+                    </Border.StrokeShape>
+                    <Border.Shadow>
+                        <Shadow Opacity="0.3"/>
+                    </Border.Shadow>
+                    <Image HeightRequest="30">
+                        <Image.Source>
+                            <FontImageSource FontFamily="{StaticResource FontAwesome}" Glyph="{Static icons:IconFont.Check}" Color="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource Background_Dark}}" />
+                        </Image.Source>
+                    </Image>
+                </Border>
+            </Grid>
+
+            <StackLayout Margin="15,30,15,15">
+
+                <Label Text="Your Phone Number" HorizontalOptions="Start" FontSize="12" FontAttributes="Bold" TextColor="{AppThemeBinding Light={StaticResource Background_Dark}, Dark={StaticResource White}}" Margin="15,0,0,0"/>
+                <Frame BackgroundColor="{AppThemeBinding Light={StaticResource LightGray}, Dark={StaticResource Background_Mid}}" CornerRadius="20" BorderColor="{StaticResource BorderColor}" HasShadow="False" Margin="5" Padding="5">
+                    <Grid Padding="10" MinimumHeightRequest="50">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+
+
+                        <FlexLayout Padding="5,0" AlignItems="Center" HeightRequest="40">
+                            <FlexLayout.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding OpenCountryCodePickerPageCommand}"/>
+                            </FlexLayout.GestureRecognizers>
+                            <Image x:Name="_flagImage" WidthRequest="30" />
+
+                            <Label x:Name="_countryCodeLabel" Margin="2,0" FontFamily="{StaticResource MediumFontFamily}" FontSize="18" />
+
+                            <Image WidthRequest="10">
+                                <Image.Source>
+                                    <FontImageSource FontFamily="{StaticResource FontAwesome}" Glyph="{Static icons:IconFont.AngleDown}" Color="{AppThemeBinding Light={StaticResource Background_Dark}, Dark={StaticResource White}}" />
+                                </Image.Source>
+                            </Image>
+                        </FlexLayout>
+
+                        <BoxView VerticalOptions="CenterAndExpand" Grid.Column="1" Margin="0,0,10,0" WidthRequest="1" Color="#C4C4C4" />
+
+                        <Entry Grid.Column="2" x:Name="_phoneNumberEntry" HorizontalOptions="FillAndExpand" Keyboard="Numeric" MaxLength="12" Placeholder="xxxxxx" TextChanged="PhoneNumberEntry_TextChanged" VerticalOptions="CenterAndExpand" />
+                    </Grid>
+                </Frame>
+            </StackLayout>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

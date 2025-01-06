@@ -1,0 +1,181 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Youth.Views.Events.EventOrderTicetsPage"
+             Title="{Binding Title}"
+             xmlns:local="clr-namespace:Youth.ViewModels"
+             xmlns:model="clr-namespace:Youth.Models"
+             xmlns:utils="clr-namespace:Youth.Utils"
+             xmlns:converters="clr-namespace:Youth.Helpers.Converters"
+             Shell.NavBarIsVisible="False"
+             Shell.FlyoutItemIsVisible="False"
+             Shell.FlyoutBehavior="Disabled"
+             Shell.PresentationMode="Animated"
+             Shell.TabBarIsVisible="False"
+             xmlns:ios="clr-namespace:Microsoft.Maui.Controls.PlatformConfiguration.iOSSpecific;assembly=Microsoft.Maui.Controls"
+             ios:Page.UseSafeArea="true"
+             xmlns:renderers="clr-namespace:Youth.CustomRenderers">
+
+    <ContentPage.Resources>
+        <Style TargetType="Frame">
+            <Setter Property="HasShadow"
+                    Value="False"/>
+            <Setter Property="Padding"
+                    Value="0"/>
+            <Setter Property="CornerRadius"
+                    Value="20"/>
+            <Setter Property="IsClippedToBounds"
+                    Value="True"/>
+        </Style>
+        <ResourceDictionary>
+            <converters:TextToQRcodeImageConverter x:Key="textToQRcodeImageConverter"/>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <ContentPage.Content>
+
+        <StackLayout>
+            <StackLayout
+                Orientation="Horizontal"
+                VerticalOptions="Center"
+                Spacing="10"
+                Grid.Row="0"
+                Margin="10,20,10,0">
+
+                <Image
+                    HorizontalOptions="Start"
+                    HeightRequest="30"
+                    Source="back.png"
+                    BackgroundColor="transparent"
+                    VerticalOptions="CenterAndExpand">
+                    <Image.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="Btn_Back"/>
+                    </Image.GestureRecognizers>
+                </Image>
+
+                <Image Source="settings.png"
+                        HorizontalOptions="EndAndExpand"
+                        HeightRequest="30"/>
+            </StackLayout>
+
+            <RefreshView x:DataType="local:EventOrderTicetsViewModel"
+                    Command="{Binding EventOrderTicetsLoadCommand}"
+                    IsRefreshing="{Binding IsBusy}">
+                <ScrollView VerticalScrollBarVisibility="Never">
+                    <StackLayout
+                        Padding="10,0,0,10"
+                        Spacing="30">
+
+                        <StackLayout
+                            Orientation="Horizontal"
+                            Spacing="20">
+                        </StackLayout>
+
+                        <Label Text="{Binding Title}"
+                                FontAttributes="Bold"
+                                FontSize="45"
+                                />
+
+                        <CollectionView ItemsSource="{Binding EventTicketTokens}">
+                            <CollectionView.ItemTemplate>
+                                <DataTemplate x:DataType="model:EventTicketToken">
+                                    <StackLayout Padding="0,0,10,0">
+                                        <Frame CornerRadius="10"
+                                                BackgroundColor="{AppThemeBinding Light={StaticResource LightGray}, Dark={StaticResource Background_Mid}}"
+                                                HasShadow="True"
+                                                Margin="5">
+
+                                            <Frame.GestureRecognizers>
+                                                <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type local:EventOrderTicetsViewModel}}, Path=EventTicketTokenTapCommand}" CommandParameter="{Binding .}" />
+                                            </Frame.GestureRecognizers>
+                                            <StackLayout Orientation="Vertical"
+                                                    Padding="5">
+                                                <Grid RowDefinitions="Auto, *"
+                                                        ColumnDefinitions="Auto, *">
+
+                                                    <StackLayout Grid.RowSpan="3"
+                                                            Orientation="Horizontal"
+                                                            VerticalOptions="CenterAndExpand"
+                                                            HeightRequest="100"
+                                                            WidthRequest="100">
+                                                        <Frame CornerRadius="10">
+                                                            <Image
+                                                                Source="{Binding tocken, Converter={StaticResource textToQRcodeImageConverter}}"
+                                                                HeightRequest="100"
+                                                                WidthRequest="100">
+                                                            </Image>
+                                                        </Frame>
+                                                    </StackLayout>
+
+                                                    <StackLayout Orientation="Vertical"
+                                                            Grid.Column="1"
+                                                            Padding="15,0,0,0">
+                                                        <Label Text="{Binding tocken}"
+                                                                FontAttributes="Bold"/>
+                                                        <Label Text="{Binding event_address}"
+                                                                FontSize="10"/>
+                                                        <StackLayout Orientation="Horizontal">
+                                                            <StackLayout Orientation="Vertical">
+                                                                <Label IsVisible="{Binding onDiscount}"
+                                                                        TextColor="Red"
+                                                                        FontSize="10"
+                                                                        TextDecorations="Strikethrough">
+                                                                    <Label.Text>
+                                                                        <MultiBinding StringFormat="{}{0} {1}">
+                                                                            <Binding Path="currency"/>
+                                                                            <Binding Path="amount"/>
+                                                                        </MultiBinding>
+                                                                    </Label.Text>
+                                                                </Label>
+
+                                                                <Label IsVisible="{Binding onDiscount}"
+                                                                        FontAttributes="Bold"
+                                                                        FontSize="10">
+                                                                    <Label.Text>
+                                                                        <MultiBinding StringFormat="{}{0} {1}">
+                                                                            <Binding Path="currency"/>
+                                                                            <Binding Path="discountPrice"/>
+                                                                        </MultiBinding>
+                                                                    </Label.Text>
+                                                                </Label>
+
+                                                                <Label IsVisible="{Binding offerDiscount}"
+                                                                        FontSize="10">
+                                                                    <Label.Text>
+                                                                        <MultiBinding StringFormat="{}{0} {1}">
+                                                                            <Binding Path="currency"/>
+                                                                            <Binding Path="amount"/>
+                                                                        </MultiBinding>
+                                                                    </Label.Text>
+                                                                </Label>
+                                                            </StackLayout>
+
+                                                            <Label HorizontalOptions="EndAndExpand"
+                                                                    HorizontalTextAlignment="End"
+                                                                    FontSize="10"
+                                                                    Text="{Binding ticketLabel}"/>
+                                                        </StackLayout>
+                                                        <StackLayout Orientation="Horizontal">
+                                                            <Label Text="{Binding orderDate, StringFormat='Date: {0:MMMM dd, yyyy}'}"
+                                                                    FontAttributes="Bold"
+                                                                    FontSize="10"/>
+                                                            <Label HorizontalOptions="EndAndExpand"
+                                                                    HorizontalTextAlignment="End"
+                                                                    Text="{Binding status}"
+                                                                    FontAttributes="Bold"
+                                                                    FontSize="10"/>
+                                                        </StackLayout>
+                                                    </StackLayout>
+                                                </Grid>
+                                            </StackLayout>
+                                        </Frame>
+                                    </StackLayout>
+                                </DataTemplate>
+                            </CollectionView.ItemTemplate>
+                        </CollectionView>
+                    </StackLayout>
+                </ScrollView>
+            </RefreshView>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

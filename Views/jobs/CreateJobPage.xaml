@@ -1,0 +1,681 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Youth.Views.jobs.CreateJobPage"
+             Title="{Binding Title}"
+             xmlns:local="clr-namespace:Youth.ViewModels"
+             xmlns:model="clr-namespace:Youth.Models"
+             xmlns:utils="clr-namespace:Youth.Utils"
+             Shell.NavBarIsVisible="False"
+             Shell.FlyoutItemIsVisible="False"
+             Shell.FlyoutBehavior="Disabled"
+             Shell.PresentationMode="Animated"
+             Shell.TabBarIsVisible="False"
+             xmlns:ios="clr-namespace:Microsoft.Maui.Controls.PlatformConfiguration.iOSSpecific;assembly=Microsoft.Maui.Controls"
+             ios:Page.UseSafeArea="true"
+             xmlns:renderers="clr-namespace:Youth.CustomRenderers"
+             xmlns:converters="clr-namespace:Youth.Helpers.Converters">
+
+    <ContentPage.Resources>
+        <Style TargetType="Frame">
+            <Setter Property="HasShadow"
+                    Value="False"/>
+            <Setter Property="Padding"
+                    Value="0"/>
+            <Setter Property="CornerRadius"
+                    Value="20"/>
+            <Setter Property="IsClippedToBounds"
+                    Value="True"/>
+        </Style>
+        <ResourceDictionary>
+            <utils:MultiplierConverter x:Key="MultiplierConverter"/>
+            <converters:IsImageSourceConverter x:Key="isImageSourceConverter"/>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <ContentPage.Content>
+        <StackLayout Padding="5">
+            <StackLayout
+                Orientation="Horizontal"
+                VerticalOptions="Center"
+                Spacing="10"
+                Grid.Row="0"
+                Margin="10,20,10,10">
+
+                <Image
+                    HorizontalOptions="Start"
+                    HeightRequest="30"
+                    Source="back.png"
+                    BackgroundColor="transparent"
+                    VerticalOptions="CenterAndExpand">
+                    <Image.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="Btn_Back"/>
+                    </Image.GestureRecognizers>
+                </Image>
+
+                <Label Text="{Binding Title}"
+                        HorizontalOptions="CenterAndExpand"
+                        VerticalOptions="CenterAndExpand"
+                        
+                        Style="{StaticResource TabHeader}"/>
+                <Image Source="check_big_black.png"
+                        HorizontalOptions="End"
+                        HeightRequest="30"
+                        IsVisible="True">
+                    <Image.Triggers>
+                        <DataTrigger Binding="{Binding isRunning}"
+                                TargetType="Image"
+                                Value="True">
+                            <Setter Property="IsVisible"
+                                    Value="False"/>
+                        </DataTrigger>
+                    </Image.Triggers>
+                    <Image.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="Btn_Back"/>
+                    </Image.GestureRecognizers>
+                </Image>
+
+                <ActivityIndicator
+                    x:Name="ActivityIndicator"
+                    IsRunning="{Binding isRunning}"
+                    HeightRequest="30"
+                    WidthRequest="30"
+                    HorizontalOptions="End"
+                    Color="{StaticResource PrimaryDarkColor}"
+                    IsVisible="False">
+                    <ActivityIndicator.Triggers>
+                        <DataTrigger Binding="{Binding isRunning}"
+                                TargetType="ActivityIndicator"
+                                Value="True">
+                            <Setter Property="IsVisible"
+                                    Value="True"/>
+                        </DataTrigger>
+                    </ActivityIndicator.Triggers>
+                </ActivityIndicator>
+            </StackLayout>
+
+            <RefreshView
+                x:DataType="local:CreateJobViewModel"
+                Command="{Binding LoadEssentialsCommand}"
+                IsRefreshing="{Binding IsBusy}">
+
+                <ScrollView VerticalScrollBarVisibility="Never">
+                    <StackLayout Orientation="Vertical">
+                        <Frame Margin="5"
+                                Padding="5,5,5,5"
+                                BackgroundColor="Transparent"
+                                BorderColor="{StaticResource BorderColor}"
+                                CornerRadius="20"
+                                HasShadow="False">
+                            <Grid Padding="5">
+                                <Grid.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding PickJobCategoryCommand}"/>
+                                </Grid.GestureRecognizers>
+
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+
+                                <Image
+                                    Margin="10,0,0,0"
+                                    HorizontalOptions="Center"
+                                    Source="{Binding jobCategory.imageUrl, Converter={StaticResource isImageSourceConverter}}"
+                                    VerticalOptions="Center"
+                                    HeightRequest="40"
+                                    WidthRequest="40"/>
+
+                                <Label
+                                    Grid.Column="1"
+                                    Margin="20,0,0,0"
+                                    Style="{StaticResource SubTextSemiBold}"
+                                    Text="{Binding jobCategory.label}"
+                                    VerticalOptions="Center"/>
+                                <Image
+                                    Grid.Column="2"
+                                    Margin="0,0,0,0"
+                                    HorizontalOptions="Center"
+                                    Source="right_arrow.png"
+                                    VerticalOptions="Center"
+                                    HeightRequest="20"
+                                    WidthRequest="20"/>
+                            </Grid>
+                        </Frame>
+
+                        <Frame CornerRadius="5"
+                                BackgroundColor="{AppThemeBinding Light={StaticResource LightGray}, Dark={StaticResource Background_Mid}}"
+                                HasShadow="True"
+                                Margin="5"
+                                Padding="5">
+                            <StackLayout Orientation="Horizontal">
+                                <Image Source="ballot.png"
+                                        Scale="0.7"
+                                        WidthRequest="40"
+                                        HeightRequest="40"></Image>
+                                <Entry x:Name="JobTitle"
+                                        Placeholder="Job Title"
+                                        HorizontalOptions="FillAndExpand"
+                                        Text="{Binding JobTitleValue}"></Entry>
+                            </StackLayout>
+                        </Frame>
+
+                        <Frame CornerRadius="5"
+                                BackgroundColor="{AppThemeBinding Light={StaticResource LightGray}, Dark={StaticResource Background_Mid}}"
+                                HasShadow="True"
+                                Margin="5"
+                                Padding="5">
+                            <StackLayout Orientation="Horizontal">
+                                <Image Source="store.png"
+                                        Scale="0.7"
+                                        WidthRequest="40"
+                                        HeightRequest="40"></Image>
+                                <Entry x:Name="BusinessName"
+                                        Placeholder="Business Name"
+                                        HorizontalOptions="FillAndExpand"
+                                        Text="{Binding BusinessNameValue}"></Entry>
+                            </StackLayout>
+                        </Frame>
+
+                        <Frame CornerRadius="5"
+                                BackgroundColor="{AppThemeBinding Light={StaticResource LightGray}, Dark={StaticResource Background_Mid}}"
+                                HasShadow="True"
+                                Margin="5"
+                                Padding="5">
+                            <StackLayout Orientation="Horizontal">
+                                <Editor
+                                    x:Name="JobDescription"
+                                    BackgroundColor="Transparent"
+                                    Placeholder="Job Description"
+                                    VerticalOptions="StartAndExpand"
+                                    HorizontalOptions="FillAndExpand"
+                                    HeightRequest="100"
+                                    PlaceholderColor="DarkGray"
+                                    Text="{Binding JobDescriptionValue}"/>
+                            </StackLayout>
+                        </Frame>
+
+                        <StackLayout Grid.Row="2"
+                                Orientation="Vertical"
+                                HorizontalOptions="FillAndExpand">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition/>
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                </Grid.ColumnDefinitions>
+
+                                <BoxView/>
+                                <Frame CornerRadius="5"
+                                            BackgroundColor="{AppThemeBinding Light={StaticResource LightGray}, Dark={StaticResource Background_Mid}}"
+                                            HasShadow="True"
+                                            Margin="5"
+                                            Padding="5">
+                                        <StackLayout Orientation="Horizontal"
+                                                     HorizontalOptions="FillAndExpand"
+                                                     HeightRequest="50">
+                                            <Image Source="dollar.png"
+                                                    Scale="0.7"
+                                                    WidthRequest="40"
+                                                    HeightRequest="40"></Image>
+                                            <Entry x:Name="MinSalary"
+                                                    Placeholder="Min Salary"
+                                                    HorizontalOptions="FillAndExpand"
+                                                    Text="{Binding MinSalaryValue}"></Entry>
+                                        </StackLayout>
+                                    </Frame>
+
+                                <BoxView Grid.Column="1"/>
+                                <Frame CornerRadius="5" Grid.Column="1"
+                                            BackgroundColor="{AppThemeBinding Light={StaticResource LightGray}, Dark={StaticResource Background_Mid}}"
+                                            HasShadow="True"
+                                            Margin="5"
+                                            Padding="5">
+                                        <StackLayout Orientation="Horizontal"
+                                                     HorizontalOptions="FillAndExpand"
+                                                     HeightRequest="50">
+                                            <Image Source="dollar.png"
+                                                    Scale="0.7"
+                                                    WidthRequest="40"
+                                                    HeightRequest="40"></Image>
+                                            <Entry x:Name="MaxSalary"
+                                                    Placeholder="Max Salary"
+                                                    HorizontalOptions="FillAndExpand"
+                                                    Text="{Binding MaxSalaryValue}"></Entry>
+                                        </StackLayout>
+                                    </Frame>
+                            </Grid>
+                        </StackLayout>
+
+                        <Frame Margin="5"
+                                Padding="5"
+                                BackgroundColor="Transparent"
+                                BorderColor="{StaticResource BorderColor}"
+                                CornerRadius="20"
+                                HasShadow="False">
+                            <Grid Padding="5">
+                                <Grid.GestureRecognizers>
+                                    <TapGestureRecognizer Tapped="Handle_Clicked"/>
+                                </Grid.GestureRecognizers>
+
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+
+                                <Image
+                                    Margin="10,0,0,0"
+                                    HorizontalOptions="Center"
+                                    Source="gps_point.png"
+                                    VerticalOptions="Center"
+                                    HeightRequest="30"
+                                    WidthRequest="30">
+                                    <Image.Triggers>
+                                        <DataTrigger
+                                            Binding="{Binding isQuestionareFilled}"
+                                            TargetType="Image"
+                                            Value="True">
+                                            <Setter Property="Source"
+                                                    Value="gps_green.png"/>
+                                        </DataTrigger>
+                                    </Image.Triggers>
+                                </Image>
+                                <Label
+                                    Grid.Column="1"
+                                    Margin="20,0,0,0"
+                                    Style="{StaticResource SubTextSemiBold}"
+                                    Text="{Binding LocationAddress}"
+                                    VerticalOptions="Center"/>
+                                <Image
+                                    Grid.Column="2"
+                                    Margin="0,0,0,0"
+                                    HorizontalOptions="Center"
+                                    Source="right_arrow.png"
+                                    VerticalOptions="Center"
+                                    HeightRequest="20"
+                                    WidthRequest="20"/>
+                            </Grid>
+                        </Frame>
+
+                        <Frame Margin="5"
+                                Padding="5"
+                                BackgroundColor="Transparent"
+                                BorderColor="{StaticResource BorderColor}"
+                                CornerRadius="20"
+                                HasShadow="False">
+                            <Grid Padding="5">
+                                <Grid.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding PickJobTypeCommand}"/>
+                                </Grid.GestureRecognizers>
+
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+
+                                <Label
+                                    Margin="0,0,0,0"
+                                    Style="{StaticResource SubTextSemiBold}"
+                                    Text="{Binding JobTypeLabel}"
+                                    VerticalOptions="Center"/>
+                                <Image
+                                    Grid.Column="1"
+                                    Margin="0,0,0,0"
+                                    HorizontalOptions="Center"
+                                    Source="arrow_drop_down.png"
+                                    VerticalOptions="Center"
+                                    HeightRequest="30"
+                                    WidthRequest="30"/>
+                            </Grid>
+                        </Frame>
+
+                        <Frame Margin="5"
+                                Padding="5"
+                                BackgroundColor="Transparent"
+                                BorderColor="{StaticResource BorderColor}"
+                                CornerRadius="20"
+                                HasShadow="False">
+                            <Grid Padding="5">
+                                <Grid.GestureRecognizers>
+                                    <TapGestureRecognizer Tapped="OnOpenDateEditor"/>
+                                </Grid.GestureRecognizers>
+
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+
+                                <Image
+                                    Margin="10,0,0,0"
+                                    HorizontalOptions="Center"
+                                    Source="calendar_tick.png"
+                                    VerticalOptions="Center"
+                                    HeightRequest="30"
+                                    WidthRequest="30">
+                                    <Image.Triggers>
+                                        <DataTrigger
+                                            Binding="{Binding isQuestionareFilled}"
+                                            TargetType="Image"
+                                            Value="True">
+                                            <Setter Property="Source"
+                                                    Value="calendar_green.png"/>
+                                        </DataTrigger>
+                                    </Image.Triggers>
+                                </Image>
+
+                                <Label
+                                    Grid.Column="1"
+                                    Margin="20,0,0,0"
+                                    Style="{StaticResource SubTextSemiBold}"
+                                    Text="{Binding ApplicationDeadline}"
+                                    VerticalOptions="Center"/>
+
+                                <Image
+                                    Grid.Column="2"
+                                    Margin="0,0,0,0"
+                                    HorizontalOptions="End"
+                                    Source="right_arrow.png"
+                                    VerticalOptions="Center"
+                                    HeightRequest="20"
+                                    WidthRequest="20"/>
+                            </Grid>
+                        </Frame>
+
+                        <Frame CornerRadius="5"
+                                Margin="5"
+                                Padding="5" BackgroundColor="{AppThemeBinding Light={StaticResource LightGray}, Dark={StaticResource Background_Mid}}">
+                            <Grid HeightRequest="170">
+                                <Image Source="{Binding coverPicturePath}"
+                                        Aspect="AspectFill"
+                                        HorizontalOptions="FillAndExpand"
+                                        VerticalOptions="FillAndExpand"/>
+                                <Grid HeightRequest="170">
+                                    <Frame CornerRadius="5"
+                                            VerticalOptions="Center"
+                                            HorizontalOptions="Center" HasShadow="True" BackgroundColor="{AppThemeBinding Light={StaticResource LightGray}, Dark={StaticResource Background_Mid}}">
+                                        <Frame.GestureRecognizers>
+                                            <TapGestureRecognizer Command="{Binding PickCoverPictureCommand}"/>
+                                        </Frame.GestureRecognizers>
+                                        <Grid Padding="15">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="Auto"/>
+                                                <ColumnDefinition Width="Auto"/>
+                                            </Grid.ColumnDefinitions>
+
+                                            <Image
+                                                Margin="10,0,0,0"
+                                                HorizontalOptions="Center"
+                                                Source="camera.png"
+                                                VerticalOptions="Center"
+                                                HeightRequest="30"
+                                                WidthRequest="30">
+                                                <Image.Triggers>
+                                                    <DataTrigger
+                                                        Binding="{Binding coverPicSelected}"
+                                                        TargetType="Image"
+                                                        Value="True">
+                                                        <Setter Property="Source"
+                                                                Value="camera_green.png"/>
+                                                    </DataTrigger>
+                                                </Image.Triggers>
+                                            </Image>
+                                            <Label
+                                                Grid.Column="1"
+                                                Margin="10,0,10,0"
+                                                Style="{StaticResource SubTextSemiBold}"
+                                                Text="Add Profile Picture"
+                                                VerticalOptions="Center"/>
+                                        </Grid>
+                                    </Frame>
+                                </Grid>
+                            </Grid>
+                        </Frame>
+
+                        <Label
+                            Margin="10,10,10,0"
+                            Text="Application Questions"
+                            
+                            Style="{StaticResource TabHeader}"/>
+
+                        <Label
+                            Margin="10,0,10,10"
+                            Style="{StaticResource SubText}"
+                            Text="Make hiring easier by asking questions to find more qualified applicants."/>
+
+                        <CollectionView ItemsSource="{Binding JobSugestionQuestions}">
+                            <CollectionView.ItemTemplate>
+                                <DataTemplate x:DataType="model:JobSugestionQuestion">
+                                    <StackLayout Padding="5,0,5,0">
+                                        <Frame CornerRadius="10"
+                                                BackgroundColor="{AppThemeBinding Light={StaticResource LightGray}, Dark={StaticResource Background_Mid}}"
+                                                HasShadow="True"
+                                                Margin="5">
+
+                                            <Frame.GestureRecognizers>
+                                                <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type local:CreateJobViewModel}}, Path=DeleteJobSugestionQuestionNavTap}" CommandParameter="{Binding .}" />
+                                            </Frame.GestureRecognizers>
+
+                                            <StackLayout Orientation="Vertical"
+                                                    Padding="5">
+
+                                                <Grid>
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition Width="40"/>
+                                                        <ColumnDefinition Width="*"/>
+                                                        <ColumnDefinition Width="40"/>
+                                                    </Grid.ColumnDefinitions>
+                                                    <Image
+                                                        VerticalOptions="CenterAndExpand"
+                                                        Grid.Column="0"
+                                                        Margin="5"
+                                                        Source="plus_circle.png"
+                                                        HeightRequest="50"
+                                                        WidthRequest="50"/>
+                                                    <StackLayout VerticalOptions="CenterAndExpand"
+                                                            Grid.Column="1"
+                                                            Margin="5,0,0,0">
+                                                        <Label Text="{Binding question}"
+                                                                VerticalOptions="CenterAndExpand"
+                                                                Padding="0,0,10,0"
+                                                                FontSize="16"
+                                                                FontAttributes="Bold"/>
+                                                    </StackLayout>
+                                                    <Image
+                                                        Source="right_arrow.png"
+                                                        Grid.Column="2"
+                                                        VerticalOptions="CenterAndExpand"
+                                                        Margin="5,0,5,0"
+                                                        HorizontalOptions="End"
+                                                        HeightRequest="30"/>
+                                                </Grid>
+                                            </StackLayout>
+                                        </Frame>
+                                    </StackLayout>
+                                </DataTemplate>
+                            </CollectionView.ItemTemplate>
+                        </CollectionView>
+
+
+                        <Frame Margin="5"
+                                Padding="5"
+                                BackgroundColor="Transparent"
+                                BorderColor="{StaticResource BorderColor}"
+                                CornerRadius="20"
+                                HasShadow="False">
+                            <Grid Padding="5">
+                                <Grid.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding PickQuestionSuggestionsCommand}"/>
+                                </Grid.GestureRecognizers>
+
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+                                <Label
+                                    Margin="10,0,0,0"
+                                    Style="{StaticResource SubTextSemiBold}"
+                                    Text="See Suggestions"
+                                    VerticalOptions="Center"/>
+                                <Image
+                                    Grid.Column="1"
+                                    Margin="0,0,0,0"
+                                    HorizontalOptions="Center"
+                                    Source="arrow_drop_down.png"
+                                    VerticalOptions="Center"
+                                    HeightRequest="30"
+                                    WidthRequest="30"/>
+                            </Grid>
+                        </Frame>
+
+                        <Grid Padding="15"
+                                VerticalOptions="Center"
+                                HorizontalOptions="Center">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Image
+                                Margin="10,0,0,0"
+                                HorizontalOptions="Center"
+                                Source="pencil.png"
+                                VerticalOptions="Center"
+                                HeightRequest="30"
+                                WidthRequest="30">
+                                <Image.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding AddCustomQuestionCommand}"/>
+                                </Image.GestureRecognizers>
+                            </Image>
+
+                            <Label
+                                Grid.Column="1"
+                                Margin="10,0,10,0"
+                                Style="{StaticResource SubTextSemiBold}"
+                                Text="Add Custom Question"
+                                VerticalOptions="Center"/>
+                        </Grid>
+
+                        <CollectionView ItemsSource="{Binding selectedCustomQuestions}">
+                            <CollectionView.ItemTemplate>
+                                <DataTemplate x:DataType="model:JobSugestionQuestion">
+                                    <StackLayout Padding="5,0,5,0">
+                                        <Frame CornerRadius="10"
+                                                BackgroundColor="{AppThemeBinding Light={StaticResource LightGray}, Dark={StaticResource Background_Mid}}"
+                                                HasShadow="True"
+                                                Margin="5">
+
+                                            <Frame.GestureRecognizers>
+                                                <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type local:CreateJobViewModel}}, Path=DeleteJobSugestionQuestionNavTap}" CommandParameter="{Binding .}" />
+                                            </Frame.GestureRecognizers>
+
+                                            <StackLayout Orientation="Vertical"
+                                                    Padding="5">
+
+                                                <Grid>
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition Width="40"/>
+                                                        <ColumnDefinition Width="*"/>
+                                                        <ColumnDefinition Width="40"/>
+                                                    </Grid.ColumnDefinitions>
+                                                    <Image
+                                                        VerticalOptions="CenterAndExpand"
+                                                        Grid.Column="0"
+                                                        Margin="5"
+                                                        Source="minus_circle.png"
+                                                        HeightRequest="50"
+                                                        WidthRequest="50"/>
+                                                    <StackLayout VerticalOptions="CenterAndExpand"
+                                                            Grid.Column="1"
+                                                            Margin="5,0,0,0">
+                                                        <Label Text="{Binding question}"
+                                                                VerticalOptions="CenterAndExpand"
+                                                                Padding="0,0,10,0"
+                                                                FontSize="16"
+                                                                FontAttributes="Bold"/>
+                                                    </StackLayout>
+                                                    <Image
+                                                        Source="right_arrow.png"
+                                                        Grid.Column="2"
+                                                        VerticalOptions="CenterAndExpand"
+                                                        Margin="5,0,5,0"
+                                                        HorizontalOptions="End"
+                                                        HeightRequest="30"/>
+                                                </Grid>
+                                            </StackLayout>
+                                        </Frame>
+                                    </StackLayout>
+                                </DataTemplate>
+                            </CollectionView.ItemTemplate>
+                        </CollectionView>
+
+                        <BoxView Color="{StaticResource Gray-800}"
+                                HeightRequest="1"
+                                HorizontalOptions="FillAndExpand"
+                                Margin="10"/>
+
+                        <Label
+                            Margin="10,10,10,0"
+                            Text="Application Settings"
+                            
+                            Style="{StaticResource TabHeader}"/>
+
+                        <Grid Margin="10,0,0,10" VerticalOptions="Center" HorizontalOptions="FillAndExpand">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="100"/>
+                            </Grid.ColumnDefinitions>
+
+                            <VerticalStackLayout>
+                                <Label
+                                    Style="{StaticResource SubTextSemiBold}"
+                                    Text="Require past employment or resume"
+                                    TextColor="{StaticResource GrayShadowBackgroundColor}"/>
+
+                                <Label
+                                    Style="{StaticResource TagLabel}"
+                                    TextColor="{StaticResource Gray-800}"
+                                    Text="People can only apply if they include their work history or attach a resume."
+                                    FontSize="Micro"/>
+                            </VerticalStackLayout>
+
+                            <Switch VerticalOptions="CenterAndExpand"
+                                    IsToggled="{Binding RequireResume}"
+                                    Grid.Column="1"/>
+                        </Grid>
+
+                        <BoxView Color="{StaticResource Gray-800}"
+                                HeightRequest="1"
+                                HorizontalOptions="FillAndExpand"
+                                Margin="10"/>
+
+                        <Label
+                            Margin="10"
+                            Style="{StaticResource SubTextSemiBold}"
+                            Text="By posting you confirm that this complies with CYA Application's Jobs policies (including anti-discrimination policy) and all applicable laws."
+                            HorizontalTextAlignment="Center"
+                            FontSize="Micro"/>
+
+                        <Frame HorizontalOptions="FillAndExpand"
+                                 BackgroundColor="{AppThemeBinding Light={StaticResource LightGray}, Dark={StaticResource Background_Mid}}"
+                                HeightRequest="50"
+                                Margin="10,10,10,100">
+                            <Frame.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding PostNewJobCommand}"/>
+                            </Frame.GestureRecognizers>
+                            <Label Text="Post Now"
+                                    FontSize="14"
+                                    TextColor="White"
+                                    FontAttributes="Bold"
+                                    VerticalOptions="Center"
+                                    HorizontalOptions="Center"/>
+                        </Frame>
+                    </StackLayout>
+                </ScrollView>
+            </RefreshView>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

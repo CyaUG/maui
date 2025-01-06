@@ -1,0 +1,123 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Youth.Views.Shopping.ProductSizeProviderPage"
+             Title="{Binding Title}"
+             xmlns:local="clr-namespace:Youth.ViewModels"
+             xmlns:model="clr-namespace:Youth.Models"
+             xmlns:renderers="clr-namespace:Youth.CustomRenderers"
+             Shell.NavBarIsVisible="False"
+             Shell.FlyoutItemIsVisible="False"
+             Shell.FlyoutBehavior="Disabled"
+             NavigationPage.HasNavigationBar="False"
+             Shell.PresentationMode="Animated"
+             Shell.TabBarIsVisible="False"
+             xmlns:ios="clr-namespace:Microsoft.Maui.Controls.PlatformConfiguration.iOSSpecific;assembly=Microsoft.Maui.Controls"
+             ios:Page.UseSafeArea="true">
+
+    <ContentPage.Resources>
+        <Style TargetType="Frame">
+            <Setter Property="HasShadow"
+                    Value="False"/>
+            <Setter Property="Padding"
+                    Value="0"/>
+            <Setter Property="CornerRadius"
+                    Value="20"/>
+            <Setter Property="IsClippedToBounds"
+                    Value="True"/>
+        </Style>
+    </ContentPage.Resources>
+
+    <ContentPage.Content>
+        <StackLayout>
+            <StackLayout
+                Orientation="Horizontal"
+                VerticalOptions="Center"
+                Spacing="10"
+                Grid.Row="0"
+                Margin="10,20,10,0">
+
+                <Image
+                    HorizontalOptions="StartAndExpand"
+                    HeightRequest="30"
+                    Source="back.png"
+                    BackgroundColor="transparent"
+                    VerticalOptions="CenterAndExpand">
+                    <Image.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="Btn_Back"/>
+                    </Image.GestureRecognizers>
+                </Image>
+
+                <Image Source="Search"
+                        HorizontalOptions="EndAndExpand"
+                        HeightRequest="30">
+                    <Image.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OpenSearchPage"/>
+                    </Image.GestureRecognizers>
+                </Image>
+                <Image Source="shopping_cart"
+                        HorizontalOptions="End"
+                        HeightRequest="30">
+                    <Image.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OpenShoppingCart"/>
+                    </Image.GestureRecognizers>
+                </Image>
+            </StackLayout>
+
+
+
+            <ScrollView VerticalScrollBarVisibility="Never">
+                <StackLayout Padding="10,10,10,10"
+                        Spacing="30">
+                    <Label Text="{Binding Title}"
+                            FontAttributes="Bold"
+                            FontSize="45"/>
+
+
+                    <CollectionView ItemsSource="{Binding ShoppingProductSizeOptions}"
+                            SelectionMode="Single">
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate x:DataType="model:ShoppingProductSizeOption">
+                                <StackLayout>
+
+                                    <Frame CornerRadius="10"
+                                           BackgroundColor="{AppThemeBinding Light={StaticResource LightGray}, Dark={StaticResource Background_Mid}}"
+                                           HasShadow="True"
+                                           Margin="5">
+
+                                        <Frame.GestureRecognizers>
+                                            <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type local:ProductSizeProviderViewModel}}, Path=ProductSizeTapCommand}" CommandParameter="{Binding .}" />
+                                        </Frame.GestureRecognizers>
+
+
+                                        <Grid Padding="5">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="*"/>
+                                                <ColumnDefinition Width="Auto"/>
+                                            </Grid.ColumnDefinitions>
+                                            <StackLayout HeightRequest="40">
+                                                <Label
+                                                    Margin="20,0,0,0"
+                                                    Style="{StaticResource SubTextSemiBold}"
+                                                    Text="{Binding label}"
+                                                    VerticalOptions="CenterAndExpand"/>
+                                            </StackLayout>
+                                            <Image
+                                                Grid.Column="1"
+                                                Margin="0,0,10,0"
+                                                HorizontalOptions="End"
+                                                Source="right_arrow.png"
+                                                VerticalOptions="Center"
+                                                HeightRequest="20"
+                                                WidthRequest="20"/>
+                                        </Grid>
+                                    </Frame>
+                                </StackLayout>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+                </StackLayout>
+            </ScrollView>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

@@ -1,0 +1,148 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             x:Class="Youth.Views.Auth.WelcomePage"
+             Shell.NavBarIsVisible="False"
+             Shell.FlyoutItemIsVisible="False"
+             Shell.FlyoutBehavior="Disabled"
+             NavigationPage.HasNavigationBar="False"
+             Shell.PresentationMode="Animated"
+             Shell.TabBarIsVisible="False"
+             xmlns:ios="clr-namespace:Microsoft.Maui.Controls.PlatformConfiguration.iOSSpecific;assembly=Microsoft.Maui.Controls"
+             ios:Page.UseSafeArea="true">
+
+    <ContentPage.Content>
+
+        <Grid VerticalOptions="FillAndExpand"
+                HorizontalOptions="FillAndExpand">
+            <ScrollView VerticalScrollBarVisibility="Never"
+                    IsVisible="False"
+                    x:Name="MyScrollView">
+                <StackLayout HorizontalOptions="CenterAndExpand"
+                        VerticalOptions="CenterAndExpand">
+
+                    <Image Source="corporates.png"
+                            Aspect="Fill"
+                            HorizontalOptions="Fill"
+                            HeightRequest="250"/>
+
+                    <Label Text="Creative Youth Agency"
+                            FontAttributes="Bold"
+                            FontSize="50"
+                            Padding="10,20,10,20"/>
+
+                    <Frame
+                        Padding="4"
+                        CornerRadius="20"
+                        BackgroundColor="{AppThemeBinding Light={StaticResource LightGray}, Dark={StaticResource Background_Mid}}"
+                        Margin="10">
+                        <StackLayout Orientation="Horizontal"
+                                Padding="15">
+                            <Image Source="login_wt.png"
+                                    HeightRequest="24"
+                                    WidthRequest="24"/>
+                            <Label Text="Sign in with Email"
+                                    FontSize="20"
+                                    FontAttributes="Bold"
+                                    Margin="5,0,0,0"/>
+                        </StackLayout>
+                        <Frame.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="Btn_SignIn"/>
+                        </Frame.GestureRecognizers>
+                    </Frame>
+
+                    <Grid HorizontalOptions="FillAndExpand"
+                            Margin="10">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Frame
+                            Padding="4"
+                            CornerRadius="20"
+                            BackgroundColor="White"
+                            Margin="0,0,5,0">
+                            <StackLayout Orientation="Horizontal"
+                                    Padding="15">
+                                <Image Source="account_plus.png"
+                                        HeightRequest="24"
+                                        WidthRequest="24"/>
+                                <Label Text="Register"
+                                        FontSize="20"
+                                        TextColor="{StaticResource PrimaryDarkColor}"
+                                        FontAttributes="Bold"
+                                        Margin="5,0,0,0"/>
+                            </StackLayout>
+                            <Frame.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="Btn_Register"/>
+                            </Frame.GestureRecognizers>
+                        </Frame>
+
+                        <Frame
+                            Padding="4"
+                            CornerRadius="20"
+                            Grid.Column="1"
+                            BackgroundColor="{AppThemeBinding Light={StaticResource LightGray}, Dark={StaticResource Background_Mid}}"
+                            Margin="5,0,0,0">
+                            <StackLayout Orientation="Horizontal"
+                                    Padding="15">
+                                <Image Source="share_wt.png"
+                                        HeightRequest="24"
+                                        WidthRequest="24"/>
+                                <Label Text="Share"
+                                        FontSize="20"
+                                        FontAttributes="Bold"
+                                        Margin="5,0,0,0"/>
+                            </StackLayout>
+                            <Frame.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="Btn_Share"/>
+                            </Frame.GestureRecognizers>
+                        </Frame>
+                    </Grid>
+
+                    <Label
+                        Margin="10,10,10,5"
+                        Style="{StaticResource SubTextSemiBold}"
+                        Text="By using our application, you agree to our terms of service and privacy policy, please review them before creating an account."
+                        HorizontalTextAlignment="Center"/>
+
+                    <Label
+                        Padding="5,10,10,10"
+                        Style="{StaticResource SubTextSemiBold}"
+                        Text="Terms Of Service"
+                        HorizontalTextAlignment="Center"
+                        TextColor="Orange">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="BtnPrivacyPolicy"/>
+                        </Label.GestureRecognizers>
+                    </Label>
+                </StackLayout>
+            </ScrollView>
+
+            <ActivityIndicator
+                x:Name="ActivityIndicator"
+                VerticalOptions="CenterAndExpand"
+                HorizontalOptions="CenterAndExpand"
+                IsRunning="{Binding isRunning}"
+                HeightRequest="30"
+                WidthRequest="30"
+                IsEnabled="True"
+                Color="{StaticResource PrimaryDarkColor}"/>
+
+
+            <Border HeightRequest="40" WidthRequest="40" Padding="8" BackgroundColor="White" Opacity="0.8" StrokeThickness="0" VerticalOptions="Start" HorizontalOptions="Start" Margin="25">
+                <Border.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="Btn_Back"/>
+                </Border.GestureRecognizers>
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="10"/>
+                </Border.StrokeShape>
+                <Border.Shadow>
+                    <Shadow Opacity="0.3"/>
+                </Border.Shadow>
+                <Image HeightRequest="20" Source="back.png" />
+            </Border>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

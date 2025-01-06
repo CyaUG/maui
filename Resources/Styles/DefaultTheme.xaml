@@ -1,0 +1,650 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ResourceDictionary xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+                    xmlns:app="clr-namespace:Youth.Resources.Styles"
+                    x:Class="Youth.Resources.Styles.DefaultTheme"
+                    xmlns:android="clr-namespace:Microsoft.Maui.Controls.PlatformConfiguration.AndroidSpecific;assembly=Microsoft.Maui.Controls"
+                    xmlns:ios="clr-namespace:Microsoft.Maui.Controls.PlatformConfiguration.iOSSpecific;assembly=Microsoft.Maui.Controls">
+
+    <Color x:Key="Primary">#FFCC00</Color>
+    <Color x:Key="Secondary">#DFD8F7</Color>
+    <Color x:Key="Tertiary">#2B0B98</Color>
+    <Color x:Key="Neutral">#969696</Color>
+    <Color x:Key="NeutralLighter">#E5E5E1</Color>
+    <Color x:Key="NeutralDarker">#505050</Color>
+    <Color x:Key="White">#FFFFFF</Color>
+    <Color x:Key="Black">#000000</Color>
+    <Color x:Key="Accent">#FFCC00</Color>
+    <Color x:Key="Error">#C00</Color>
+    <Color x:Key="Warning">#FFCC00</Color>
+    <Color x:Key="Text_Light">#000000</Color>
+    <Color x:Key="Text_Dark">#FFFFFF</Color>
+    <Color x:Key="TextOnSolid_Light">#FFFFFF</Color>
+    <Color x:Key="TextOnSolid_Dark">#000000</Color>
+    <Color x:Key="TextSecondary_Light">#1d1d1d</Color>
+    <Color x:Key="TextSecondary_Dark">#f1f1f1</Color>
+    <Color x:Key="Background_Dark">#2E1913</Color>
+    <Color x:Key="Background_Mid">#8E4A36</Color>
+    <Color x:Key="Accent_Yellow100">#F7B548</Color>
+    <Color x:Key="Accent_Yellow200">#FFD590</Color>
+    <Color x:Key="Accent_Blue100">#3E8EED</Color>
+    <Color x:Key="Accent_Blue200">#72ACF1</Color>
+    <Color x:Key="TabOff">#2E1913</Color>
+    <Color x:Key="BorderColor">#EBEBEB</Color>
+    <Color x:Key="TextLinkColor">#407EC7</Color>
+    <Color x:Key="BackgroundDarkColor">#000000cf</Color>
+
+    <!-- light theme alternatives -->
+    <Color x:Key="DarkGray">#212125</Color>
+    <Color x:Key="MidGray">#CFCFD3</Color>
+    <Color x:Key="LightGray">#EFEFEF</Color>
+
+    <x:String x:Key="FontAwesome">FontAwesome</x:String>
+    <x:String x:Key="transactionPolicy">By continuing, you confirm that you comply with Nsiimbi's Application policies (including the anti-money laundering policy) and all applicable laws.</x:String>
+    <x:String x:Key="shippingPolicy">Shipments may be subject to customs duty and tax payable by the reciever. By continuing, you confirm that you comply with Nsiimbi's Application policies and all applicable laws.</x:String>
+    <x:String x:Key="MediumFontFamily">Poppins-Medium</x:String>
+    <x:String x:Key="BoldFontFamily">Poppins-Bold</x:String>
+
+    <x:String x:Key="degrees_symb">˚</x:String>
+    <x:String x:Key="dots">◦◦◦</x:String>
+    <x:String x:Key="image_message">🖼 Image</x:String>
+    <x:String x:Key="video_message">🎬 Video</x:String>
+    <x:String x:Key="contact_message">👤 Contact</x:String>
+    <x:String x:Key="location_message">🗺 Location</x:String>
+    <x:String x:Key="file_message">💾 Document</x:String>
+    <x:String x:Key="file_audio">🔊 Voice Note</x:String>
+    <x:String x:Key="product_message">🛒Product</x:String>
+
+    <FontImageSource
+                x:Key="SearchIcon"
+                FontFamily="FontAwesome"
+                Glyph="{x:Static app:IconFont.Search}"
+                Color="{StaticResource Background_Mid}"
+                Size="16"/>
+
+    <Style
+        x:Key="TextSecondary"
+        Class="TextSecondary"
+        TargetType="Label">
+        <Setter Property="TextColor" Value="{StaticResource Secondary}" />
+    </Style>
+
+    <!-- SHELL -->
+    <Style x:Key="BaseStyle"
+           TargetType="Element">
+        <Setter Property="Shell.FlyoutBackgroundColor"
+                        Value="{AppThemeBinding 
+                                Light={StaticResource LightGray}, 
+                                Dark={StaticResource Background_Mid}}"/>
+        <Setter Property="Shell.BackgroundColor"
+                    Value="{AppThemeBinding 
+                        Light={StaticResource LightGray}, 
+                        Dark={StaticResource Background_Mid}}" />
+        <Setter Property="Shell.ForegroundColor"
+                Value="{AppThemeBinding 
+                        Light={StaticResource Background_Dark}, 
+                        Dark={StaticResource White}}" />
+        <Setter Property="Shell.TitleColor"
+                Value="{AppThemeBinding 
+                        Light={StaticResource Background_Dark}, 
+                        Dark={StaticResource White}}" />
+        <!--<Setter Property="Shell.DisabledColor"
+                Value="#B4000000" />
+            <Setter Property="Shell.UnselectedColor"
+                Value="#CC0000" />-->
+        <Setter Property="Shell.NavBarHasShadow"
+                Value="False"/>
+
+    </Style>
+
+    <Style x:Key="FrameButton" TargetType="Frame">
+        <Setter Property="CornerRadius" Value="5" />
+        <Setter Property="Padding" Value="{OnPlatform 10, Android='18,19,18,17'}" />
+        <Setter Property="Background">
+            <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                <GradientStop Color="{StaticResource Primary}" />
+                <GradientStop Offset="1" Color="{StaticResource Neutral}" />
+            </LinearGradientBrush>
+        </Setter>
+        <!--
+        <Setter Property="ios:VisualElement.IsShadowEnabled" Value="True" />
+        <Setter Property="ios:VisualElement.ShadowColor" Value="{AppThemeBinding Light={StaticResource LightGray}, Dark={StaticResource Background_Mid}}" />
+        <Setter Property="ios:VisualElement.ShadowOffset" Value="0,10" />
+        <Setter Property="ios:VisualElement.ShadowRadius" Value="5" />
+        -->
+    </Style>
+
+    <Style BasedOn="{StaticResource BaseStyle}"
+           ApplyToDerivedTypes="True"
+           TargetType="ShellItem" />
+
+    <Style TargetType="TabBar">
+        <Setter Property="Shell.TabBarBackgroundColor"
+            Value="{AppThemeBinding 
+                                Light={StaticResource LightGray}, 
+                                Dark={StaticResource Background_Mid}}" />
+        <Setter Property="Shell.TabBarTitleColor"
+            Value="{AppThemeBinding 
+                        Light={StaticResource Background_Dark}, 
+                        Dark={StaticResource White}}" />
+        <Setter Property="Shell.TabBarUnselectedColor"
+            Value="{AppThemeBinding 
+                                Light={StaticResource Background_Mid}, 
+                                Dark={StaticResource White}}" />
+        <Setter Property="Shell.TabBarForegroundColor"
+            Value="{StaticResource Accent}" />
+    </Style>
+
+    <Style TargetType="Page" ApplyToDerivedTypes="True">
+        <Setter Property="Padding" Value="0"/>
+        <Setter Property="BackgroundColor" Value="{AppThemeBinding 
+            Light={StaticResource MidGray},
+            Dark={StaticResource Background_Dark}}"/>
+    </Style>
+
+    <Style TargetType="NavigationPage" ApplyToDerivedTypes="True">
+        <Setter Property="BackgroundColor" Value="{AppThemeBinding 
+            Light={StaticResource LightGray},
+            Dark={StaticResource Background_Dark}}"/>
+        <Setter Property="BarBackgroundColor" Value="{AppThemeBinding 
+            Light={StaticResource LightGray},
+            Dark={StaticResource Background_Dark}}"/>
+        <Setter Property="BarTextColor" Value="{AppThemeBinding 
+                                                Light={StaticResource Background_Dark}, 
+                                                Dark={StaticResource White}}"/>
+    </Style>
+
+    <Style TargetType="Label">
+        <Setter Property="FontFamily" Value="OpenSansRegular"/>
+        <Setter Property="FontSize"
+                Value="17"/>
+        <Setter Property="TextColor"
+                Value="{AppThemeBinding Light={StaticResource Background_Dark}, Dark={StaticResource White}}"/>
+    </Style>
+
+
+    <Style TargetType="Editor">
+        <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource Background_Dark}, Dark={StaticResource White}}" />
+        <Setter Property="BackgroundColor" Value="Transparent" />
+        <Setter Property="FontFamily" Value="OpenSansRegular"/>
+        <Setter Property="FontSize" Value="14" />
+        <Setter Property="PlaceholderColor" Value="{AppThemeBinding Light={StaticResource Background_Mid}, Dark={StaticResource Secondary}}" />
+        <Setter Property="MinimumHeightRequest" Value="44"/>
+        <Setter Property="MinimumWidthRequest" Value="44"/>
+        <Setter Property="VisualStateManager.VisualStateGroups">
+            <VisualStateGroupList>
+                <VisualStateGroup x:Name="CommonStates">
+                    <VisualState x:Name="Normal" />
+                    <VisualState x:Name="Disabled">
+                        <VisualState.Setters>
+                            <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource Background_Mid}, Dark={StaticResource NeutralDarker}}" />
+                        </VisualState.Setters>
+                    </VisualState>
+                </VisualStateGroup>
+            </VisualStateGroupList>
+        </Setter>
+    </Style>
+    
+    <Style TargetType="Label"
+            Class="LargeTitle">
+        <Setter Property="FontSize"
+                Value="24"/>
+        <Setter Property="FontFamily" Value="OpenSansRegular"/>
+    </Style>
+    <Style TargetType="Label"
+            Class="SectionTitle">
+        <Setter Property="FontSize"
+                Value="27"/>
+        <Setter Property="TextColor" Value="{StaticResource Accent_Blue100}"/>
+        <Setter Property="FontFamily" Value="OpenSansRegular"/>
+    </Style>
+    <Style TargetType="Label"
+            Class="Title1">
+        <Setter Property="FontSize"
+                Value="26"/>
+        <Setter Property="FontFamily" Value="OpenSansSemiBold"/>
+    </Style>
+    <Style TargetType="Label"
+            Class="Headline">
+        <Setter Property="FontSize"
+                Value="17"/>
+        <Setter Property="FontFamily" Value="OpenSansSemiBold"/>
+    </Style>
+    <Style TargetType="Label"
+            Class="Subhead">
+        <Setter Property="FontSize"
+                Value="14"/>
+    </Style>
+    <Style TargetType="Label"
+            Class="SubContent">
+        <Setter Property="FontSize"
+                Value="14"/>
+        <Setter Property="TextColor"
+                Value="{AppThemeBinding Light={StaticResource Background_Dark}, Dark={StaticResource TabOff}}"/>
+    </Style>
+    <Style TargetType="Label"
+            Class="Footnote">
+        <Setter Property="FontSize"
+                Value="13"/>
+    </Style>
+    <Style TargetType="Label"
+            Class="Small">
+        <Setter Property="FontSize"
+                Value="10"/>
+    </Style>
+
+    <!-- Text Color Styles -->
+    <Style TargetType="Label"
+            Class="Secondary">
+        <Setter Property="TextColor"
+                Value="{StaticResource Secondary}"/>
+    </Style>
+    <Style TargetType="Label"
+            Class="Primary">
+        <Setter Property="TextColor"
+                Value="{StaticResource Primary}"/>
+    </Style>
+    <Style TargetType="Label"
+            Class="Error">
+        <Setter Property="TextColor"
+                Value="{StaticResource Error}"/>
+    </Style>
+    <Style TargetType="Label"
+            Class="Warning">
+        <Setter Property="TextColor"
+                Value="{StaticResource Warning}"/>
+    </Style>
+    <Style TargetType="Label"
+            Class="Disabled">
+        <Setter Property="TextColor"
+                Value="{StaticResource Neutral}"/>
+    </Style>
+
+    <FontImageSource
+        x:Key="CircleIcon"
+        FontFamily="FontAwesome"
+        Glyph="{x:Static app:IconFont.DotCircle}"
+        Color="{StaticResource TextOnSolid_Light}"
+        Size="16"/>
+
+    <FontImageSource
+        x:Key="CircleIconDisabled"
+        FontFamily="FontAwesome"
+        Glyph="{x:Static app:IconFont.DotCircle}"
+        Color="{StaticResource TextOnSolid_Light}"
+        Size="16"/>
+
+    <FontImageSource
+        x:Key="CircleIconAlt"
+        FontFamily="FontAwesome"
+        Glyph="{x:Static app:IconFont.DotCircle}"
+        Color="{StaticResource Primary}"
+        Size="16"/>
+    <FontImageSource
+        x:Key="CircleIconAltDisabled"
+        FontFamily="FontAwesome"
+        Glyph="{x:Static app:IconFont.DotCircle}"
+        Color="{StaticResource Neutral}"
+        Size="16"/>
+
+    <Style TargetType="Button">
+        <Setter Property="TextColor" Value="White"></Setter>
+        <Setter Property="FontFamily" Value="OpenSansRegular"/>
+        <Setter Property="CornerRadius" Value="8"/>
+        <Setter Property="Padding" Value="14,10"/>
+        <Setter Property="VisualStateManager.VisualStateGroups">
+            <VisualStateGroupList>
+                <VisualStateGroup x:Name="CommonStates">
+                    <VisualState x:Name="Normal">
+                        <VisualState.Setters>
+                            <Setter Property="BackgroundColor" Value="{StaticResource Primary}" />
+                        </VisualState.Setters>
+                    </VisualState>
+                    <VisualState x:Name="Disabled">
+                        <VisualState.Setters>
+                            <Setter Property="BackgroundColor" Value="{StaticResource Neutral}" />
+                            <Setter Property="TextColor" Value="White"/>
+                        </VisualState.Setters>
+                    </VisualState>
+                </VisualStateGroup>
+            </VisualStateGroupList>
+        </Setter>
+    </Style>
+
+    <Style TargetType="Frame" x:Key="ButtonStyle">
+        <Setter Property="CornerRadius" Value="8"/>
+        <Setter Property="Padding" Value="14,10"/>
+        <Setter Property="VisualStateManager.VisualStateGroups">
+            <VisualStateGroupList>
+                <VisualStateGroup x:Name="CommonStates">
+                    <VisualState x:Name="Normal">
+                        <VisualState.Setters>
+                            <Setter Property="BackgroundColor" Value="{StaticResource Primary}" />
+                        </VisualState.Setters>
+                    </VisualState>
+                    <VisualState x:Name="Disabled">
+                        <VisualState.Setters>
+                            <Setter Property="BackgroundColor" Value="{StaticResource Neutral}" />
+                        </VisualState.Setters>
+                    </VisualState>
+                </VisualStateGroup>
+            </VisualStateGroupList>
+        </Setter>
+    </Style>
+
+    <!--
+    <Style TargetType="Button">
+        <Setter Property="FontFamily" Value="OpenSansRegular"/>
+        <Setter Property="FontSize" Value="16" />
+        <Setter Property="TextColor" Value="White" />
+        <Setter Property="TextTransform" Value="None" />
+        <Setter Property="CornerRadius" Value="5" />
+        <Setter Property="Padding" Value="{OnPlatform 18, Android='18,19,18,17'}" />
+        <Setter Property="Background">
+            <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                <GradientStop Color="{StaticResource Background_Dark}" />
+                <GradientStop Offset="1" Color="{StaticResource Primary}" />
+            </LinearGradientBrush>
+        </Setter>
+    </Style>
+-->
+
+    <Style TargetType="Button" x:Key="PrimaryButtonOutline">
+        <Setter Property="CornerRadius" Value="8"/>
+        <Setter Property="BackgroundColor" Value="Transparent"/>
+        <Setter Property="TextColor" Value="{StaticResource Primary}"/>
+        <Setter Property="BorderWidth" Value="1"/>
+        <Setter Property="BorderColor" Value="{StaticResource Primary}"/>
+        <Setter Property="VisualStateManager.VisualStateGroups">
+            <VisualStateGroupList>
+                <VisualStateGroup x:Name="CommonStates">
+                    <VisualState x:Name="Disabled">
+                        <VisualState.Setters>
+                            <Setter Property="BorderColor" Value="{StaticResource Neutral}" />
+                            <Setter Property="TextColor" Value="{StaticResource Neutral}" />
+                            <Setter Property="BackgroundColor" Value="Transparent"/>
+                        </VisualState.Setters>
+                    </VisualState>
+                </VisualStateGroup>
+            </VisualStateGroupList>
+        </Setter>
+    </Style>
+
+    <Style TargetType="Button" x:Key="PrimaryButtonOutlineIcon" BasedOn="{StaticResource PrimaryButtonOutline}">
+        <Setter Property="VisualStateManager.VisualStateGroups">
+            <VisualStateGroupList>
+                <VisualStateGroup x:Name="CommonStates">
+                    <VisualState x:Name="Disabled">
+                        <VisualState.Setters>
+                            <Setter Property="ImageSource" Value="{StaticResource CircleIconAltDisabled}" />
+                        </VisualState.Setters>
+                    </VisualState>
+                </VisualStateGroup>
+            </VisualStateGroupList>
+        </Setter>
+    </Style>
+
+    <Style TargetType="Button" x:Key="SecondaryButtonOutline" BasedOn="{StaticResource PrimaryButtonOutline}">
+        <Setter Property="Padding" Value="4"/>
+    </Style>
+    <Style TargetType="Button" x:Key="TertiaryButtonOutline" BasedOn="{StaticResource PrimaryButtonOutline}">
+    </Style>
+    <Style TargetType="Button" x:Key="BorderlessButton">
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="TextColor" Value="{StaticResource Primary}"/>
+        <Setter Property="VisualStateManager.VisualStateGroups">
+            <VisualStateGroupList>
+                <VisualStateGroup x:Name="CommonStates">
+                    <VisualState x:Name="Disabled">
+                        <VisualState.Setters>
+                            <Setter Property="TextColor" Value="{StaticResource Neutral}" />
+                        </VisualState.Setters>
+                    </VisualState>
+                </VisualStateGroup>
+            </VisualStateGroupList>
+        </Setter>
+    </Style>
+
+    <Style x:Key="TitleBold" TargetType="Label">
+        <Setter Property="FontFamily" Value="{StaticResource BoldFontFamily}" />
+        <Setter Property="FontSize" Value="30" />
+    </Style>
+
+    <Style TargetType="ImageButton">
+        <Setter Property="BackgroundColor"
+                Value="Transparent"/>
+        <Setter Property="BorderColor"
+                Value="Transparent"/>
+        <Setter Property="android:ImageButton.ShadowColor"
+                Value="Transparent"/>
+    </Style>
+
+    <Style TargetType="StackLayout" Class="CheckBoxContainer">
+        <Setter Property="Spacing" Value="0"/>
+        <Setter Property="Orientation" Value="Horizontal"/>
+    </Style>
+
+    <Style TargetType="StackLayout" Class="SwitchContainer">
+        <Setter Property="Spacing" Value="0"/>
+        <Setter Property="Orientation" Value="Horizontal"/>
+    </Style>
+
+    <Style TargetType="ScrollView">
+        <Setter Property="VerticalScrollBarVisibility"
+                Value="Never"/>
+        <Setter Property="HorizontalScrollBarVisibility"
+                Value="Never"/>
+    </Style>
+
+    <!-- Misc -->
+    <Style TargetType="BoxView">
+        <Setter Property="BackgroundColor" Value="Transparent"/>
+    </Style>
+    <Style Class="HRule"
+           TargetType="BoxView">
+        <Setter Property="HeightRequest" Value="1"/>
+        <Setter Property="HorizontalOptions" Value="FillAndExpand"/>
+        <Setter Property="BackgroundColor" Value="{StaticResource Background_Mid}"/>
+    </Style>
+
+    <!-- <x:String x:Key="LineBreak">&#x0a;</x:String> -->
+
+    <!-- data templates -->
+    <DataTemplate x:Key="WeatherWidgetTemplate">
+        <Frame
+            HorizontalOptions="Start"
+            HeightRequest="164"
+            WidthRequest="164"
+            Padding="0"
+            CornerRadius="20"
+            HasShadow="False"
+            BackgroundColor="{StaticResource Background_Mid}">
+            <Grid HeightRequest="144"
+                  WidthRequest="144"
+                  Padding="20">
+                <Image Source="{Binding .}"
+                                   VerticalOptions="Start"
+                                     HorizontalOptions="End"/>
+
+                <StackLayout HorizontalOptions="Start"
+                                     Spacing="0"
+                                     VerticalOptions="End">
+                    <Label Text="2%" class="LargeTitle"/>
+                    <Label Text="From" class="Subhead"/>
+                    <Label Text="Pond Elementary" class="SubContent"/>
+                </StackLayout>
+            </Grid>
+        </Frame>
+    </DataTemplate>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Background Image -->
+    <x:String x:Key="iPhone">iphone</x:String>
+    <x:String x:Key="bg_trophy">bg_trophy.jpg</x:String>
+
+    <Color x:Key="AppBackground">#ffffff</Color>
+    <Color x:Key="AccentColor">#FFBF00</Color>
+
+    <Color x:Key="TitleTextColor">#CC9900</Color>
+    <Color x:Key="PaleBackColorPrimary">#F2EFE6</Color>
+    <Color x:Key="PaleBackColorSecondary">#F2EDDA</Color>
+    <Color x:Key="DeepTextColor">#555555</Color>
+    <Color x:Key="NormalTextColor">#666666</Color>
+    <Color x:Key="PaleTextColor">#999999</Color>
+    <Color x:Key="EmphasisTextColor">#FF0000</Color>
+    <x:Double x:Key="BaseFontSize">12</x:Double>
+    <x:Double x:Key="BaseFontSize+">14</x:Double>
+    <x:Double x:Key="BaseFontSize++">17</x:Double>
+    <x:Double x:Key="BaseFontSize-">11</x:Double>
+    <x:Double x:Key="app_bar_height_small">140</x:Double>
+    <x:Double x:Key="Heading5">18</x:Double>
+
+    <!--  Colors  -->
+    <Color x:Key="HeaderColor">#213654</Color>
+    <Color x:Key="ArrowColor">#768ea0</Color>
+
+    <Color x:Key="TagColor">#ffa318</Color>
+    <Color x:Key="TabSubTextColor">#96a7dd</Color>
+    <Color x:Key="SubTextColor">#95a8b6</Color>
+    <Color x:Key="TempLabelColor">#ffffff</Color>
+
+    <!--BackgroundGradients-->
+    <Color x:Key="BackgroundGradientStartColor">#FFF1EA</Color>
+    <Color x:Key="BackgroundGradientMidColor">#D6D7E3</Color>
+    <Color x:Key="BackgroundGradientEndColor">#F0F6FF</Color>
+
+    <!--Guage Gradients-->
+    <Color x:Key="GaugeGradientStartColor">#99C2FF</Color>
+    <Color x:Key="GaugeGradientEndColor">#FB7D80</Color>
+
+    <Color x:Key="PrimaryColor">#8E4A36</Color>
+    <Color x:Key="PrimaryDarkColor">#2E1913</Color>
+    <Color x:Key="PrimaryDarkenColor">#0B78FF</Color>
+    <Color x:Key="PrimaryLighterColor">#71B0FF</Color>
+    <Color x:Key="PrimaryGradient">#3E65FF</Color>
+    <Color x:Key="PrimaryLight">#A4CDFF</Color>
+    <Color x:Key="SecondaryGradient">#9683FC</Color>
+    <Color x:Key="Green">#7ED321</Color>
+    <Color x:Key="Red">#FF4A4A</Color>
+    <Color x:Key="Orange">#FF844A</Color>
+    <Color x:Key="Blue">#4ACAFF</Color>
+    <Color x:Key="HyperLink">#3EAFFF</Color>
+
+    <Color x:Key="Gray-100">#333942</Color>
+    <Color x:Key="Gray-200">#454D59</Color>
+    <Color x:Key="Gray-300">#57616F</Color>
+    <Color x:Key="Gray-400">#656F81</Color>
+    <Color x:Key="Gray-500">#737E91</Color>
+    <Color x:Key="Gray-600">#848E9F</Color>
+    <Color x:Key="Gray-700">#9BA3B1</Color>
+    <Color x:Key="Gray-800">#BDC3CB</Color>
+    <Color x:Key="Gray-900">#EBEDEF</Color>
+    <Color x:Key="Gray-Bg">#2F343C</Color>
+    <Color x:Key="Gray-Black">#000000</Color>
+    <Color x:Key="Gray-White">#ffffff</Color>
+    <Color x:Key="GrayShadowColor">#333942</Color>
+    <Color x:Key="GrayShadowBackgroundColor">#2F343C</Color>
+
+    <!--  Fonts  -->
+    <OnPlatform x:Key="TextBold" x:TypeArguments="x:String">
+        <On Platform="iOS" Value="Poppins" />
+        <On Platform="Android" Value="Poppins-Bold.ttf#Poppins" />
+    </OnPlatform>
+
+    <OnPlatform x:TypeArguments="x:String" x:Key="IconImageSource">
+        <On Platform="Android" Value="logo.png" />
+        <On Platform="iOS" Value="logo.png" />
+    </OnPlatform>
+
+    <OnPlatform x:Key="TextLight" x:TypeArguments="x:String">
+        <On Platform="iOS" Value="Poppins Light" />
+        <On Platform="Android" Value="Poppins-Light.ttf#Poppins Light" />
+    </OnPlatform>
+
+    <OnPlatform x:Key="TextSemiBold" x:TypeArguments="x:String">
+        <On Platform="iOS" Value="Poppins SemiBold" />
+        <On Platform="Android" Value="Poppins-SemiBold.ttf#Poppins SemiBold" />
+    </OnPlatform>
+
+    <!--  Styles  -->
+    <Style x:Key="Header" TargetType="Label">
+        <Setter Property="FontFamily" Value="{StaticResource TextBold}" />
+        <Setter Property="FontSize" Value="30" />
+    </Style>
+
+    <Style x:Key="SubText" TargetType="Label">
+        <Setter Property="FontFamily" Value="{StaticResource TextLight}" />
+        <Setter Property="FontSize" Value="14" />
+    </Style>
+
+    <Style x:Key="SubTextSemiBold" TargetType="Label">
+        <Setter Property="FontFamily" Value="{StaticResource TextSemiBold}" />
+        <Setter Property="FontSize" Value="14" />
+    </Style>
+
+    <Style x:Key="SubHeader" TargetType="Label">
+        <Setter Property="FontFamily" Value="{StaticResource TextBold}" />
+        <Setter Property="FontSize" Value="22" />
+        <Setter Property="Margin" Value="0,20,0,0" />
+    </Style>
+
+    <Style x:Key="TempLabel" TargetType="Label">
+        <Setter Property="FontFamily" Value="{StaticResource TextBold}" />
+        <Setter Property="FontSize" Value="38" />
+    </Style>
+
+    <Style x:Key="TagLabel" TargetType="Label">
+        <Setter Property="FontFamily" Value="{StaticResource TextBold}" />
+        <Setter Property="FontSize" Value="12" />
+    </Style>
+
+    <Style x:Key="TabHeader" TargetType="Label">
+        <Setter Property="FontFamily" Value="{StaticResource TextSemiBold}" />
+        <Setter Property="FontSize" Value="18" />
+    </Style>
+
+    <Style x:Key="TabSubText" TargetType="Label">
+        <Setter Property="FontFamily" Value="{StaticResource TextLight}" />
+        <Setter Property="FontSize" Value="14" />
+    </Style>
+
+    <!--  Implicit Styles  -->
+    <Style TargetType="Grid">
+        <Setter Property="RowSpacing" Value="0" />
+        <Setter Property="ColumnSpacing" Value="0" />
+    </Style>
+
+    <Style x:Key="BCard" TargetType="Frame">
+        <Setter Property="Padding" Value="16"/>
+        <Setter Property="CornerRadius" Value="8"/>
+        <Setter Property="HasShadow" Value="{OnPlatform iOS=false, Android=true}"/>
+    </Style>
+</ResourceDictionary>

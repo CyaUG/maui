@@ -1,0 +1,215 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:local="clr-namespace:Youth"
+             xmlns:actions="clr-namespace:Youth.Actions"
+             xmlns:cr="clr-namespace:Youth.CustomRenderers"
+             x:Class="Youth.Views.Auth.LoginPage"
+             Shell.NavBarIsVisible="False"
+             Shell.FlyoutItemIsVisible="False"
+             Shell.FlyoutBehavior="Disabled"
+             Shell.PresentationMode="Animated"
+             Shell.TabBarIsVisible="False"
+             xmlns:ios="clr-namespace:Microsoft.Maui.Controls.PlatformConfiguration.iOSSpecific;assembly=Microsoft.Maui.Controls"
+             ios:Page.UseSafeArea="true">
+
+    <ContentPage.Resources>
+        <Style TargetType="Frame">
+            <Setter Property="HasShadow"
+                    Value="False"/>
+            <Setter Property="Padding"
+                    Value="0"/>
+            <Setter Property="CornerRadius"
+                    Value="20"/>
+            <Setter Property="IsClippedToBounds"
+                    Value="True"/>
+        </Style>
+    </ContentPage.Resources>
+
+    <ContentPage.Content>
+        <ScrollView VerticalScrollBarVisibility="Never">
+
+            <Grid>
+                <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand" Padding="0,50,0,10">
+                    <Grid x:Name="LoginGrid"
+                                HorizontalOptions="FillAndExpand"
+                                VerticalOptions="FillAndExpand">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+
+                        <StackLayout Grid.Row="0"
+                                    Padding="20,20,20,20">
+                            <Image Aspect="AspectFit"
+                                        HeightRequest="80"
+                                        Source="logo.png"/>
+                        </StackLayout>
+
+                        <StackLayout Grid.Row="1">
+                            <Grid Padding="20,20,20,20"
+                                        HorizontalOptions="FillAndExpand"
+                                        RowSpacing="20"
+                                        VerticalOptions="FillAndExpand">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
+
+                                <Label
+                                        Grid.Row="0"
+                                        FontAttributes="Bold"
+                                        FontSize="24"
+                                        HorizontalOptions="CenterAndExpand"
+                                        Text="Sign in to your Account"/>
+
+                                <Frame
+                                        x:Name="EmailFrame"
+                                        Grid.Row="1"
+                                        Padding="5"
+                                        BackgroundColor="Transparent"
+                                        BorderColor="#bdbdbd"
+                                        CornerRadius="20"
+                                        HorizontalOptions="FillAndExpand">
+                                    <StackLayout
+                                            Grid.Row="1"
+                                            Padding="20,5,20,5"
+                                            Orientation="Horizontal">
+                                        <cr:CustomEntry
+                                                x:Name="EmailEntry"
+                                                Focused="Focused_Email"
+                                                FontSize="Medium"
+                                                HorizontalOptions="FillAndExpand"
+                                                Keyboard="Email"
+                                                Placeholder="Email"
+                                                VerticalOptions="FillAndExpand"/>
+                                    </StackLayout>
+                                </Frame>
+
+                                <Frame
+                                        x:Name="passwordFrame"
+                                        Grid.Row="2"
+                                        Padding="5"
+                                        BackgroundColor="Transparent"
+                                        BorderColor="#bdbdbd"
+                                        CornerRadius="20"
+                                        HorizontalOptions="FillAndExpand">
+                                    <Grid Padding="20,5,20,5">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="50"/>
+                                        </Grid.ColumnDefinitions>
+
+                                        <cr:CustomEntry
+                                                x:Name="PasswordEntry"
+                                                Focused="Focused_Password"
+                                                FontSize="Medium"
+                                                HorizontalOptions="FillAndExpand"
+                                                IsPassword="{Binding Source={x:Reference ShowPasswordActualTrigger}, Path=HidePassword}"
+                                                Placeholder="Password"
+                                                VerticalOptions="FillAndExpand"/>
+
+                                        <ImageButton
+                                                Margin="0,0,10,0"
+                                                BackgroundColor="Transparent"
+                                                HeightRequest="20"
+                                                WidthRequest="50"
+                                                HorizontalOptions="End"
+                                                Grid.Column="1"
+                                                Source="hide"
+                                                VerticalOptions="Center">
+                                            <ImageButton.Triggers>
+                                                <EventTrigger Event="Clicked">
+                                                    <actions:ShowPasswordTriggerAction
+                                                            x:Name="ShowPasswordActualTrigger"
+                                                            HideIcon="hide.png"
+                                                            ShowIcon="show.png"/>
+                                                </EventTrigger>
+                                            </ImageButton.Triggers>
+                                        </ImageButton>
+                                    </Grid>
+                                </Frame>
+
+                                <Grid Grid.Row="3">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <CheckBox x:Name="agreementCheckBox"/>
+                                    <Label Grid.Column="1"
+                                                Text="I read &amp; I agree to all terms of service."
+                                                TextColor="#A9A9A9"
+                                                FontSize="14"
+                                                VerticalTextAlignment="Center"/>
+                                </Grid>
+
+                                <Label Grid.Row="4"
+                                           Padding="0"
+                                           BackgroundColor="Transparent"
+                                           HorizontalOptions="EndAndExpand"
+                                           Text="Forgot Password?">
+                                    <Label.GestureRecognizers>
+                                        <TapGestureRecognizer Tapped="Btn_ResetPass"/>
+                                    </Label.GestureRecognizers>
+                                </Label>
+
+                                <Button Grid.Row="5"
+                                            BackgroundColor="#e91e63"
+                                            Clicked="Btn_SignIn"
+                                            CornerRadius="20"
+                                            Text="Sign in"/>
+
+                                <Label Grid.Row="7"
+                                           Margin="10,10,10,5"
+                                           Style="{StaticResource SubTextSemiBold}"
+                                           Text="By using our application, you agree to our terms of service and privacy policy, please review them before creating an account."
+                                           HorizontalTextAlignment="Center"/>
+
+                                <Label Grid.Row="8"
+                                           Padding="5,10,10,10"
+                                           Style="{StaticResource SubTextSemiBold}"
+                                           Text="Terms Of Service"
+                                           HorizontalTextAlignment="Center"
+                                           TextColor="Orange">
+                                    <Label.GestureRecognizers>
+                                        <TapGestureRecognizer Tapped="BtnPrivacyPolicy"/>
+                                    </Label.GestureRecognizers>
+                                </Label>
+                            </Grid>
+                        </StackLayout>
+                    </Grid>
+
+                </StackLayout>
+
+                <ActivityIndicator
+                        x:Name="ActivityIndicator"
+                        AbsoluteLayout.LayoutBounds="0.5, 0.5, -1, -1"
+                        AbsoluteLayout.LayoutFlags="PositionProportional"
+                        HorizontalOptions="CenterAndExpand"
+                        IsRunning="False"
+                        VerticalOptions="CenterAndExpand"/>
+
+                <Border HeightRequest="40" WidthRequest="40" Padding="8" BackgroundColor="White" Opacity="0.8" StrokeThickness="0" VerticalOptions="Start" HorizontalOptions="Start" Margin="25">
+                    <Border.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="Btn_Back"/>
+                    </Border.GestureRecognizers>
+                    <Border.StrokeShape>
+                        <RoundRectangle CornerRadius="10"/>
+                    </Border.StrokeShape>
+                    <Border.Shadow>
+                        <Shadow Opacity="0.3"/>
+                    </Border.Shadow>
+                    <Image HeightRequest="20" Source="back.png" />
+                </Border>
+            </Grid>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>

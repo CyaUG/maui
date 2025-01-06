@@ -1,0 +1,223 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Youth.Views.ReferralProgram.LinkReferralProfilePage"
+             Title="{Binding Title}"
+             xmlns:local="clr-namespace:Youth.ViewModels"
+             xmlns:model="clr-namespace:Youth.Models"
+             Shell.NavBarIsVisible="False"
+             Shell.FlyoutItemIsVisible="False"
+             Shell.FlyoutBehavior="Disabled"
+             Shell.PresentationMode="Animated"
+             Shell.TabBarIsVisible="False"
+             xmlns:ios="clr-namespace:Microsoft.Maui.Controls.PlatformConfiguration.iOSSpecific;assembly=Microsoft.Maui.Controls"
+             ios:Page.UseSafeArea="true"
+             xmlns:zxing="clr-namespace:ZXing.Net.Maui.Controls;assembly=ZXing.Net.MAUI.Controls"
+             xmlns:renderers="clr-namespace:Youth.CustomRenderers"
+             xmlns:converters="clr-namespace:Youth.Helpers.Converters">
+
+    <ContentPage.Resources>
+        <Style TargetType="Frame">
+            <Setter Property="HasShadow" Value="False"/>
+            <Setter Property="Padding" Value="0"/>
+            <Setter Property="CornerRadius" Value="20"/>
+            <Setter Property="IsClippedToBounds" Value="True"/>
+        </Style>
+        <ResourceDictionary>
+            <converters:IsImageSourceConverter x:Key="isImageSourceConverter"/>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <ContentPage.Content>
+        <Grid>
+            <Grid VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
+                <zxing:CameraBarcodeReaderView x:Name="scannerView" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" BarcodesDetected="Handle_OnScanResult"/>
+
+                <Image WidthRequest="150" HeightRequest="150" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" Source="camera_border_capture_transparent.png"/>
+
+                <VerticalStackLayout VerticalOptions="End" Margin="10,15" HorizontalOptions="FillAndExpand">
+                    <Label Text="Card Info" Margin="10,10,10,0" HorizontalOptions="Center" VerticalOptions="Center"/>
+
+                    <ScrollView VerticalScrollBarVisibility="Never">
+                        <Grid HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+                            <!-- blank ui -->
+                            <Frame BackgroundColor="{AppThemeBinding Light={StaticResource LightGray}, Dark={StaticResource Background_Mid}}"
+                                            HasShadow="True" CornerRadius="10" Margin="10,25,10,25" IsVisible="True">
+                                <Frame.Triggers>
+                                    <DataTrigger Binding="{Binding showAccountDetails}" TargetType="Frame" Value="True">
+                                        <Setter Property="IsVisible" Value="False"/>
+                                    </DataTrigger>
+                                </Frame.Triggers>
+                                
+                                <VerticalStackLayout Padding="20"
+                                                HorizontalOptions="FillAndExpand">
+                                    <Grid HorizontalOptions="FillAndExpand">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="60"/>
+                                            <ColumnDefinition Width="*"/>
+                                        </Grid.ColumnDefinitions>
+
+                                        <!-- circle -->
+                                        <Border BackgroundColor="{AppThemeBinding Light={StaticResource BackgroundDarkColor}, Dark={StaticResource Background_Dark}}"
+                                                        Margin="5"
+                                                        HeightRequest="50"
+                                                        WidthRequest="50">
+                                            <Border.StrokeShape>
+                                                <RoundRectangle CornerRadius="10"/>
+                                            </Border.StrokeShape>
+                                        </Border>
+
+                                        <!-- verticle lines -->
+                                        <StackLayout Grid.Column="1"
+                                                        Orientation="Vertical"
+                                                        HorizontalOptions="FillAndExpand">
+                                            <Border
+                                                        Margin="10,10,10,0"
+                                                        Padding="3"
+                                                        HorizontalOptions="FillAndExpand"
+                                                        VerticalOptions="End"
+                                                        HeightRequest="15"
+                                                        BackgroundColor="{AppThemeBinding Light={StaticResource BackgroundDarkColor}, Dark={StaticResource Background_Dark}}">
+                                                <Border.StrokeShape>
+                                                    <RoundRectangle CornerRadius="5"/>
+                                                </Border.StrokeShape>
+
+                                            </Border>
+
+                                            <Border
+                                                        Margin="10,0,50,0"
+                                                        Padding="3"
+                                                        HorizontalOptions="FillAndExpand"
+                                                        VerticalOptions="End"
+                                                        HeightRequest="20"
+                                                        BackgroundColor="{AppThemeBinding Light={StaticResource BackgroundDarkColor}, Dark={StaticResource Background_Dark}}">
+                                                <Border.StrokeShape>
+                                                    <RoundRectangle CornerRadius="5"/>
+                                                </Border.StrokeShape>
+
+                                            </Border>
+                                        </StackLayout>
+                                    </Grid>
+
+                                    <!-- bottom 2 lines -->
+                                    <VerticalStackLayout HorizontalOptions="FillAndExpand">
+                                        <Border
+                                                    Margin="10,0,10,10"
+                                                    Padding="3"
+                                                    HorizontalOptions="FillAndExpand"
+                                                    VerticalOptions="End"
+                                                    HeightRequest="15"
+                                                    BackgroundColor="{AppThemeBinding Light={StaticResource BackgroundDarkColor}, Dark={StaticResource Background_Dark}}">
+                                            <Border.StrokeShape>
+                                                <RoundRectangle CornerRadius="5"/>
+                                            </Border.StrokeShape>
+
+                                        </Border>
+
+                                        <Border
+                                                    Margin="10,0,10,10"
+                                                    Padding="3"
+                                                    HorizontalOptions="FillAndExpand"
+                                                    VerticalOptions="End"
+                                                    HeightRequest="25"
+                                                    BackgroundColor="{AppThemeBinding Light={StaticResource BackgroundDarkColor}, Dark={StaticResource Background_Dark}}">
+                                            <Border.StrokeShape>
+                                                <RoundRectangle CornerRadius="5"/>
+                                            </Border.StrokeShape>
+
+                                        </Border>
+                                    </VerticalStackLayout>
+                                </VerticalStackLayout>
+                            </Frame>
+
+                            <!-- card info -->
+                            <VerticalStackLayout>
+                                <VerticalStackLayout.Triggers>
+                                    <DataTrigger Binding="{Binding showAccountDetails}" TargetType="VerticalStackLayout" Value="False">
+                                        <Setter Property="IsVisible" Value="False"/>
+                                    </DataTrigger>
+                                </VerticalStackLayout.Triggers>
+
+                                <Frame HasShadow="True" BackgroundColor="{AppThemeBinding Light={StaticResource LightGray}, Dark={StaticResource Background_Mid}}" CornerRadius="10" Margin="10,5">
+                                    <Frame.Triggers>
+                                        <DataTrigger Binding="{Binding showAccountDetails}" TargetType="Frame" Value="False">
+                                            <Setter Property="IsVisible" Value="False"/>
+                                        </DataTrigger>
+                                    </Frame.Triggers>
+                                    <StackLayout Orientation="Vertical" Padding="10">
+                                        <StackLayout Orientation="Horizontal">
+
+                                            <!-- circle -->
+                                            <Image x:Name="ProfileImge" HeightRequest="70" WidthRequest="70" HorizontalOptions="Center"
+                                                        Source="{Binding referralAccount.profile_picture, Converter={StaticResource isImageSourceConverter}}" VerticalOptions="Center" Aspect="AspectFill"/>
+
+                                            <!-- verticle lines -->
+                                            <StackLayout Orientation="Vertical" HorizontalOptions="FillAndExpand">
+                                                <Label Text="{Binding referralAccount.name}" Margin="5,10,10,0" FontSize="18" Padding="3"
+                                                            FontAttributes="Bold" HorizontalOptions="FillAndExpand" VerticalOptions="End"/>
+
+                                                <Label Text="{Binding referralAccount.accountCategoryLabel}" Margin="5,0,50,0" Padding="3"
+                                                                FontAttributes="Bold" HorizontalOptions="FillAndExpand" VerticalOptions="End"/>
+                                            </StackLayout>
+                                        </StackLayout>
+
+                                        <!-- bottom 2 lines -->
+                                        <StackLayout Orientation="Vertical">
+                                            <Label Text="{Binding referralAccount.address_label}" Margin="0,0,10,0" Padding="3"
+                                                        FontAttributes="Bold" LineBreakMode="TailTruncation" MaxLines="1" HorizontalOptions="FillAndExpand" VerticalOptions="End"/>
+
+                                            <Label Text="{Binding referralAccount.dateOfBirth}" Margin="0,0,10,10" Padding="3"
+                                                        FontAttributes="Bold" HorizontalOptions="FillAndExpand" VerticalOptions="End"/>
+                                        </StackLayout>
+                                    </StackLayout>
+                                </Frame>
+
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+                                    
+                                    <Frame Grid.Column="0" HorizontalOptions="FillAndExpand" BackgroundColor="{AppThemeBinding Light={StaticResource LightGray}, Dark={StaticResource Background_Mid}}" HeightRequest="50" Margin="10">
+                                        <Frame.GestureRecognizers>
+                                            <TapGestureRecognizer Tapped="Btn_Back"/>
+                                        </Frame.GestureRecognizers>
+                                        <Label Text="Close" FontSize="14" FontAttributes="Bold" VerticalOptions="Center" HorizontalOptions="Center"/>
+                                    </Frame>
+
+                                    <Frame Grid.Column="1" HorizontalOptions="FillAndExpand" BackgroundColor="{AppThemeBinding Light={StaticResource LightGray}, Dark={StaticResource Background_Mid}}" HeightRequest="50" Margin="10">
+                                        <Frame.GestureRecognizers>
+                                            <TapGestureRecognizer Command="{Binding SubmitReferralAccountRequestCommand}"/>
+                                        </Frame.GestureRecognizers>
+                                        <Label Text="Register" FontSize="14" FontAttributes="Bold" VerticalOptions="Center" HorizontalOptions="Center"/>
+                                    </Frame>
+                                </Grid>
+                            </VerticalStackLayout>
+
+                            <BoxView BackgroundColor="Transparent"/>
+
+                            <ActivityIndicator
+                                    x:Name="ActivityIndicator"
+                                    HorizontalOptions="CenterAndExpand"
+                                    IsRunning="False"
+                                    VerticalOptions="CenterAndExpand"/>
+                        </Grid>
+                    </ScrollView>
+                </VerticalStackLayout>
+            </Grid>
+
+            <Border HeightRequest="40" WidthRequest="40" Padding="8" BackgroundColor="White" Opacity="0.8" StrokeThickness="0" VerticalOptions="Start" HorizontalOptions="Start" Margin="25">
+                <Border.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="Btn_Back"/>
+                </Border.GestureRecognizers>
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="10"/>
+                </Border.StrokeShape>
+                <Border.Shadow>
+                    <Shadow Opacity="0.3"/>
+                </Border.Shadow>
+                <Image HeightRequest="20" Source="back.png" />
+            </Border>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

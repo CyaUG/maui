@@ -1,0 +1,365 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Youth.Views.Main.MessagesPage"
+             Title="{Binding Title}"
+             xmlns:local="clr-namespace:Youth.Helpers.Converters"
+             xmlns:model="clr-namespace:Youth.Models"
+             xmlns:vm="clr-namespace:Youth.ViewModels"
+             Shell.NavBarIsVisible="False"
+             Shell.FlyoutItemIsVisible="False"
+             Shell.FlyoutBehavior="Disabled"
+             Shell.PresentationMode="Animated"
+             Shell.TabBarIsVisible="False"
+             xmlns:icons="clr-namespace:Youth.Resources.Styles"
+             xmlns:ios="clr-namespace:Microsoft.Maui.Controls.PlatformConfiguration.iOSSpecific;assembly=Microsoft.Maui.Controls"
+             xmlns:toolkitViews="clr-namespace:CommunityToolkit.Maui.Views;assembly=CommunityToolkit.Maui"
+             ios:Page.UseSafeArea="true"
+             xmlns:converters="clr-namespace:Youth.Helpers.Converters">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <local:IsViewerConverter x:Key="isViewerConverter"/>
+            <local:IsMessageText x:Key="isMessageText"/>
+            <local:IsMessageImage x:Key="isMessageImage"/>
+            <local:IsMessageContact x:Key="isMessageContact"/>
+            <local:IsMessageVideo x:Key="isMessageVideo"/>
+            <local:IsMessageLocation x:Key="isMessageLocation"/>
+            <local:IsMessageFile x:Key="isMessageFile"/>
+            <local:IsMessageAudio x:Key="isMessageAudio"/>
+            <local:HtmlEscapeConverter x:Key="htmlEscapeConverter"/>
+            <local:TimeElapsedConverter x:Key="timeElapsedConverter"/>
+            <local:IsGroupChatImageConverter x:Key="isGroupChatImageConverter"/>
+            <local:IsGroupChatNameConverter x:Key="isGroupChatNameConverter"/>
+            <converters:IsImageSourceConverter x:Key="isImageSourceConverter"/>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <ContentPage.Content>
+        <StackLayout Padding="10" HorizontalOptions="FillAndExpand">
+
+            <StackLayout VerticalOptions="Start"
+                    Padding="5,0,5,0">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+
+                    <StackLayout
+                        Grid.Row="0"
+                        Grid.Column="0"
+                        Padding="0"
+                        HeightRequest="35"
+                        HorizontalOptions="Center"
+                        IsClippedToBounds="True"
+                        WidthRequest="35">
+
+                        <toolkitViews:AvatarView BorderWidth="0" HorizontalOptions="Center" HeightRequest="35" WidthRequest="35" BackgroundColor="Transparent" CornerRadius="10"
+                                                                 ImageSource="{Binding mChat, Converter={StaticResource isGroupChatImageConverter}}">
+                            <toolkitViews:AvatarView.Shadow>
+                                <Shadow Opacity="0.3"/>
+                            </toolkitViews:AvatarView.Shadow>
+                        </toolkitViews:AvatarView>
+                    </StackLayout>
+
+                    <Label
+                        Grid.Row="0"
+                        Grid.Column="1"
+                        Margin="5,0,0,0"
+                        FontAttributes="Bold"
+                        FontSize="Medium"
+                        Text="{Binding mChat, Converter={StaticResource isGroupChatNameConverter}}"
+                        
+                        VerticalOptions="Center"/>
+
+                    <ImageButton
+                        Grid.Row="0"
+                        Grid.Column="2"
+                        BackgroundColor="Transparent"
+                        Clicked="GoBack"
+                        HeightRequest="20"
+                        HorizontalOptions="End"
+                        Source="back.png"
+                        VerticalOptions="Center"
+                        WidthRequest="20"/>
+                </Grid>
+            </StackLayout>
+
+            <!--  Messages  -->
+            <StackLayout x:Name="messageListGrid" IsVisible="True" VerticalOptions="CenterAndExpand">
+                <!--  Start Converstation  -->
+                <CollectionView x:Name="conversationListView" Margin="0,10,0,12" ItemsSource="{Binding Messages}" VerticalScrollBarVisibility="Never" SelectionMode="None" VerticalOptions="FillAndExpand">
+                    <CollectionView.ItemsLayout>
+                        <LinearItemsLayout Orientation="Vertical" ItemSpacing="8"/>
+                    </CollectionView.ItemsLayout>
+
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate x:DataType="model:Conversation">
+                            <StackLayout Margin="5,5,30,5" HorizontalOptions="Start" VerticalOptions="StartAndExpand">
+
+                                <StackLayout.Triggers>
+                                    <DataTrigger Binding="{Binding ., Converter={StaticResource isViewerConverter}}" TargetType="StackLayout" Value="True">
+                                        <Setter Property="HorizontalOptions" Value="End"/>
+                                        <Setter Property="Margin" Value="30,5,5,5"/>
+                                    </DataTrigger>
+                                </StackLayout.Triggers>
+                                
+                                <!--<Grid.Triggers>
+                                            <DataTrigger
+                                                Binding="{Binding ., Converter={StaticResource isViewerConverter}}"
+                                                TargetType="Grid"
+                                                Value="True">
+                                                <Setter Property="ColumnDefinitions" Value=" 40, *" />
+                                            </DataTrigger>
+                                        </Grid.Triggers>-->
+
+                                <Frame Grid.Column="0" Margin="0" Padding="10" BackgroundColor="#e91e63" CornerRadius="20" HasShadow="True" HorizontalOptions="Start" MinimumWidthRequest="20">
+                                    <Frame.Triggers>
+                                        <DataTrigger Binding="{Binding ., Converter={StaticResource isViewerConverter}}" TargetType="Frame" Value="True">
+                                            <Setter Property="Grid.Column" Value="1"/>
+                                            <Setter Property="BackgroundColor" Value="#9c27b0"/>
+                                            <Setter Property="HorizontalOptions" Value="End"/>
+                                        </DataTrigger>
+                                    </Frame.Triggers>
+                                    <StackLayout Margin="10">
+                                        <Label FontSize="Small" Text="{StaticResource dots}" VerticalOptions="Center" IsVisible="{Binding ., Converter={StaticResource isMessageText}}">
+                                            <Label.Triggers>
+                                                <DataTrigger Binding="{Binding ., Converter={StaticResource isMessageText}}" TargetType="Label" Value="True">
+                                                    <Setter Property="Text" Value="{Binding message, Converter={StaticResource htmlEscapeConverter}}"/>
+                                                </DataTrigger>
+                                            </Label.Triggers>
+                                        </Label>
+
+                                        <Frame CornerRadius="30" VerticalOptions="Center" IsVisible="{Binding ., Converter={StaticResource isMessageImage}}">
+                                            <Image Source="{Binding message, Converter={StaticResource isImageSourceConverter}}"
+                                                        HeightRequest="200" WidthRequest="200" Aspect="AspectFill"/>
+                                        </Frame>
+
+                                        <StackLayout VerticalOptions="Center" IsVisible="{Binding ., Converter={StaticResource isMessageContact}}">
+                                            <StackLayout Orientation="Horizontal">
+
+                                                <Label FontSize="25" Text="👤" VerticalOptions="Center" HorizontalOptions="Start"/>
+
+                                                <Label VerticalOptions="Center" FontSize="Medium" HorizontalOptions="StartAndExpand">
+                                                    <Label.Text>
+                                                        <MultiBinding StringFormat="{}{0} {1}">
+                                                            <Binding Path="firstName"/>
+                                                            <Binding Path="lastName"/>
+                                                        </MultiBinding>
+                                                    </Label.Text>
+                                                </Label>
+
+                                            </StackLayout>
+                                        </StackLayout>
+
+                                        <Label FontSize="Small" Text="{StaticResource video_message}" VerticalOptions="Center" IsVisible="{Binding ., Converter={StaticResource isMessageVideo}}"/>
+
+                                        <Frame CornerRadius="30" VerticalOptions="Center" IsVisible="{Binding ., Converter={StaticResource isMessageLocation}}">
+                                            <Image Source="{Binding mImage, Converter={StaticResource isImageSourceConverter}}"
+                                                   HeightRequest="200" WidthRequest="200" Aspect="AspectFill"/>
+                                        </Frame>
+
+                                        <Label FontSize="Small" Text="{Binding mAddress}" VerticalOptions="Center" IsVisible="{Binding ., Converter={StaticResource isMessageLocation}}"/>
+
+                                        <StackLayout VerticalOptions="Center" IsVisible="{Binding ., Converter={StaticResource isMessageFile}}">
+                                            <StackLayout Orientation="Horizontal">
+                                                <Label FontSize="18" Text="💾" VerticalOptions="Center" HorizontalOptions="Start"/>
+                                                <Label Text="Document" VerticalOptions="Center" FontSize="Medium" HorizontalOptions="CenterAndExpand"/>
+                                                <Label FontSize="18" Text="📥" VerticalOptions="Center" HorizontalOptions="End"/>
+                                            </StackLayout>
+                                        </StackLayout>
+
+                                        <StackLayout VerticalOptions="Center" IsVisible="{Binding ., Converter={StaticResource isMessageAudio}}" Orientation="Horizontal">
+                                            <!--
+                                                    <extensions:MediaElement
+                                                        x:Name="audioPlayer"
+                                                        IsVisible="false"
+                                                        Source="{Binding Source={RelativeSource AncestorType={x:Type vm:MessageViewModel}}, Path=AudioUri}"
+                                                        AutoPlay="{Binding Source={RelativeSource AncestorType={x:Type vm:MessageViewModel}}, Path=IsPlaying}"/>
+                                                    <Slider 
+                                                        x:Name="audioSeeker"
+                                                        Maximum="{Binding Source={x:Reference audioPlayer}, Path=Duration.Value.TotalSeconds}"
+                                                        Value="{Binding Source={x:Reference audioPlayer}, Path=Position.TotalSeconds}"
+                                                        WidthRequest="150"/>
+                                                    
+                                                    <Image
+                                                        Source="play_white.png"
+                                                        IsVisible="{Binding Source={RelativeSource AncestorType={x:Type vm:MessageViewModel}}, Path=IsNotPlaying}"
+                                                        IsEnabled="{Binding Source={RelativeSource AncestorType={x:Type vm:MessageViewModel}}, Path=IsNotPlaying}"
+                                                        HeightRequest="25"
+                                                        WidthRequest="25">
+                                                        <Image.GestureRecognizers>
+                                                            <TapGestureRecognizer
+                                                                NumberOfTapsRequired="1"
+                                                                Command="{Binding Source={RelativeSource AncestorType={x:Type vm:MessageViewModel}}, Path=PlayCommand}"
+                                                                CommandParameter="{Binding .}"/>
+                                                        </Image.GestureRecognizers>
+                                                        <Image.Triggers>
+                                                            <DataTrigger
+                                                                Binding="{Binding Source={RelativeSource AncestorType={x:Type vm:MessageViewModel}}, Path=IsPlaying}"
+                                                                TargetType="Image"
+                                                                Value="True">
+                                                                <Setter Property="IsVisible" Value="False" />
+                                                            </DataTrigger>
+                                                        </Image.Triggers>
+                                                    </Image>
+                                                    
+                                                    <Image
+                                                        Source="pause_white.png"
+                                                        IsVisible="{Binding Source={RelativeSource AncestorType={x:Type vm:MessageViewModel}}, Path=IsPlaying}"
+                                                        IsEnabled="{Binding Source={RelativeSource AncestorType={x:Type vm:MessageViewModel}}, Path=IsPlaying}"
+                                                        HeightRequest="25"
+                                                        WidthRequest="25">
+                                                        <Image.GestureRecognizers>
+                                                            <TapGestureRecognizer
+                                                                NumberOfTapsRequired="1"
+                                                                Command="{Binding Source={RelativeSource AncestorType={x:Type vm:MessageViewModel}}, Path=PauseCommand}"
+                                                                CommandParameter="{Binding .}"/>
+                                                        </Image.GestureRecognizers>
+                                                        <Image.Triggers>
+                                                            <DataTrigger
+                                                                Binding="{Binding Source={RelativeSource AncestorType={x:Type vm:MessageViewModel}}, Path=IsNotPlaying}"
+                                                                TargetType="Image"
+                                                                Value="True">
+                                                                <Setter Property="IsVisible" Value="False" />
+                                                            </DataTrigger>
+                                                        </Image.Triggers>
+                                                    </Image>
+                                                    -->
+                                        </StackLayout>
+                                    </StackLayout>
+                                </Frame>
+
+                                <StackLayout HorizontalOptions="Start" VerticalOptions="CenterAndExpand" WidthRequest="130" Padding="10,0,10,0">
+                                    <StackLayout.Triggers>
+                                        <DataTrigger Binding="{Binding ., Converter={StaticResource isViewerConverter}}" TargetType="StackLayout" Value="True">
+                                            <Setter Property="HorizontalOptions" Value="End"/>
+                                        </DataTrigger>
+                                    </StackLayout.Triggers>
+                                    <Label BackgroundColor="Transparent" Text="{Binding sentTime, Converter={StaticResource timeElapsedConverter}}" VerticalOptions="Center" HorizontalOptions="StartAndExpand" FontSize="6">
+                                        <Label.Triggers>
+                                            <DataTrigger Binding="{Binding ., Converter={StaticResource isViewerConverter}}" TargetType="Label" Value="True">
+                                                <Setter Property="HorizontalOptions" Value="EndAndExpand"/>
+                                            </DataTrigger>
+                                        </Label.Triggers>
+                                    </Label>
+                                </StackLayout>
+                            </StackLayout>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+
+                    <!--
+                    <Span Text="{Binding Title, StringFormat='with {0}'}" />
+                    -->
+                    <CollectionView.EmptyView>
+                        <ContentView>
+                            <Frame VerticalOptions="StartAndExpand" HeightRequest="200" BorderColor="Transparent" BackgroundColor="Transparent" HasShadow="False" CornerRadius="10" Padding="10" Margin="5">
+                                <VerticalStackLayout HorizontalOptions="CenterAndExpand" VerticalOptions="StartAndExpand">
+                                    <ActivityIndicator IsRunning="{Binding IsBusy}" HeightRequest="30" WidthRequest="30" HorizontalOptions="CenterAndExpand" IsVisible="{Binding IsBusy}" Color="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}"/>
+                                    <Label Margin="10,25,10,10" FontAttributes="Italic" FontSize="12" HorizontalOptions="Fill" HorizontalTextAlignment="Center">
+                                        <Label.FormattedText>
+                                            <FormattedString>
+                                                <Span Text="You can now start a conversation" />
+                                                <Span Text=" " />
+                                                <Span Text="{Binding Title, StringFormat='with {0}'}" />
+                                            </FormattedString>
+                                        </Label.FormattedText>
+                                    </Label>
+                                </VerticalStackLayout>
+                            </Frame>
+                        </ContentView>
+                    </CollectionView.EmptyView>
+                </CollectionView>
+            </StackLayout>
+
+            <!--  Message Entry  -->
+            <Frame x:Name="AttachmentView" VerticalOptions="End" Padding="10" BackgroundColor="{AppThemeBinding Light={StaticResource LightGray}, Dark={StaticResource Background_Mid}}" BorderColor="Transparent" CornerRadius="20" Margin="10" IsVisible="False">
+                <Grid ColumnSpacing="0" RowSpacing="0" HorizontalOptions="FillAndExpand">
+
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <ImageButton
+                        Grid.Row="0"
+                        Grid.Column="0"
+                        Margin="5"
+                        BackgroundColor="Transparent"
+                        Clicked="OnOpenFile"
+                        HeightRequest="35"
+                        HorizontalOptions="CenterAndExpand"
+                        Source="file.png"
+                        VerticalOptions="End"/>
+
+                    <ImageButton
+                        Grid.Row="0"
+                        Grid.Column="1"
+                        Margin="5"
+                        BackgroundColor="Transparent"
+                        Clicked="OnSelectImage"
+                        HeightRequest="35"
+                        HorizontalOptions="CenterAndExpand"
+                        Source="gallery.png"
+                        VerticalOptions="End"/>
+
+                    <ImageButton
+                        Grid.Row="0"
+                        Grid.Column="2"
+                        Margin="5"
+                        BackgroundColor="Transparent"
+                        Clicked="OnOpenAddress"
+                        HeightRequest="35"
+                        HorizontalOptions="CenterAndExpand"
+                        Source="gps_point.png"
+                        VerticalOptions="End"/>
+
+                    <ImageButton
+                        Grid.Row="0"
+                        Grid.Column="3"
+                        Margin="5"
+                        BackgroundColor="Transparent"
+                        Clicked="OnOpenContact"
+                        HeightRequest="35"
+                        HorizontalOptions="CenterAndExpand"
+                        Source="contact.png"
+                        VerticalOptions="End"/>
+                </Grid>
+            </Frame>
+
+            <StackLayout BackgroundColor="Transparent" Orientation="Horizontal" VerticalOptions="End">
+                <Grid ColumnSpacing="0" RowSpacing="0" HorizontalOptions="FillAndExpand">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="35" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="35" />
+                    </Grid.ColumnDefinitions>
+
+                    <ImageButton Grid.Column="0" Margin="0,5,5,17" BackgroundColor="Transparent" Clicked="ShowAttachmentOptions" HeightRequest="35" WidthRequest="35" HorizontalOptions="Start" VerticalOptions="End">
+                        <ImageButton.Source>
+                            <FontImageSource FontFamily="{StaticResource FontAwesome}" Size="30" Glyph="{Static icons:IconFont.Paperclip}" Color="{AppThemeBinding Light={StaticResource Background_Dark}, Dark={StaticResource White}}" />
+                        </ImageButton.Source>
+                    </ImageButton>
+                    <Frame Grid.Column="1" Margin="0,0,0,10" Padding="20,10,20,10" BackgroundColor="{AppThemeBinding Light={StaticResource LightGray}, Dark={StaticResource Background_Mid}}" BorderColor="Transparent" CornerRadius="20" MinimumHeightRequest="50" VerticalOptions="End" HorizontalOptions="Fill">
+                        <Editor x:Name="MessageEntry" AutoSize="TextChanges" PlaceholderColor="{StaticResource Background_Mid}" Focused="ToggleSendButton" FontSize="Small" Keyboard="Chat" MaxLength="240" MinimumHeightRequest="40" Placeholder="Write your message here..." TextChanged="ToggleSendButton" Text="{Binding TextMessage}"/>
+                    </Frame>
+                    <ImageButton x:Name="SendButton" Grid.Column="2" Margin="5,0,5,17"  BackgroundColor="Transparent"  Command="{Binding SendTextMessageCommand}" HeightRequest="35" WidthRequest="35" HorizontalOptions="End" Rotation="45" Source="send_disabled.png" VerticalOptions="End" />
+                </Grid>
+            </StackLayout>
+        </StackLayout>
+
+    </ContentPage.Content>
+</ContentPage>

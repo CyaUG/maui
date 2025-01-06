@@ -1,0 +1,358 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Youth.Views.Events.EventPosPage"
+             Title="{Binding Title}"
+             xmlns:local="clr-namespace:Youth.ViewModels"
+             xmlns:model="clr-namespace:Youth.Models"
+             xmlns:utils="clr-namespace:Youth.Utils"
+             xmlns:converters="clr-namespace:Youth.Helpers.Converters"
+             Shell.NavBarIsVisible="False"
+             Shell.FlyoutItemIsVisible="False"
+             Shell.FlyoutBehavior="Disabled"
+             Shell.PresentationMode="Animated"
+             Shell.TabBarIsVisible="False"
+             xmlns:ios="clr-namespace:Microsoft.Maui.Controls.PlatformConfiguration.iOSSpecific;assembly=Microsoft.Maui.Controls"
+             ios:Page.UseSafeArea="true"
+             xmlns:zxing="clr-namespace:ZXing.Net.Maui.Controls;assembly=ZXing.Net.MAUI.Controls"
+             xmlns:renderers="clr-namespace:Youth.CustomRenderers">
+
+    <ContentPage.Resources>
+        <Style TargetType="Frame">
+            <Setter Property="HasShadow"
+                    Value="False"/>
+            <Setter Property="Padding"
+                    Value="0"/>
+            <Setter Property="CornerRadius"
+                    Value="20"/>
+            <Setter Property="IsClippedToBounds"
+                    Value="True"/>
+        </Style>
+        <ResourceDictionary>
+            <utils:MultiplierConverter x:Key="MultiplierConverter"/>
+            <converters:IsTicketUsedConverter x:Key="isTicketUsedConverter"/>
+            <converters:IsImageSourceConverter x:Key="isImageSourceConverter"/>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <ContentPage.Content>
+        <Grid x:Name="gridParent">
+            <VerticalStackLayout Spacing="10">
+                <StackLayout
+                    Orientation="Horizontal"
+                    VerticalOptions="Center"
+                    Spacing="10"
+                    Grid.Row="0"
+                    Margin="10,20,10,10">
+
+                    <Image
+                        HorizontalOptions="Start"
+                        HeightRequest="30"
+                        Source="back.png"
+                        BackgroundColor="transparent"
+                        VerticalOptions="CenterAndExpand">
+                        <Image.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="Btn_Back"/>
+                        </Image.GestureRecognizers>
+                    </Image>
+                    <Label Text="{Binding Title}"
+                            HorizontalOptions="CenterAndExpand"
+                            VerticalOptions="CenterAndExpand"
+                            
+                            Style="{StaticResource TabHeader}"/>
+
+                    <ActivityIndicator
+                        x:Name="ActivityIndicator"
+                        IsRunning="{Binding isRunning}"
+                        HeightRequest="30"
+                        WidthRequest="30"
+                        HorizontalOptions="End"/>
+                </StackLayout>
+
+                <Grid VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" HeightRequest="200">
+                    <zxing:CameraBarcodeReaderView x:Name="scannerView"
+                                VerticalOptions="FillAndExpand"
+                                HorizontalOptions="FillAndExpand"
+                                BarcodesDetected="Handle_OnScanResult"/>
+
+                    <Image WidthRequest="150"
+                                HeightRequest="150"
+                                VerticalOptions="CenterAndExpand"
+                                HorizontalOptions="CenterAndExpand"
+                                Source="camera_border_capture_transparent.png"/>
+                </Grid>
+
+                <Label Grid.Row="1" Text="Recent Activity"
+                            Margin="10"
+                            HorizontalOptions="Center"
+                            VerticalOptions="Center"
+                            Style="{StaticResource SubHeader}"/>
+
+                <ScrollView Grid.Row="2" VerticalScrollBarVisibility="Never">
+                    <CollectionView ItemsSource="{Binding eventTicketTokens}">
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate x:DataType="model:EventTicketToken">
+                                <StackLayout Padding="0,0,0,0">
+                                    <Frame CornerRadius="10"
+                                                BackgroundColor="{AppThemeBinding Light={StaticResource LightGray}, Dark={StaticResource Background_Mid}}"
+                                                HasShadow="True"
+                                                Margin="5">
+
+                                        <Frame.GestureRecognizers>
+                                            <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type local:EventPosViewModel}}, Path=EventNavTap}" CommandParameter="{Binding .}" />
+                                        </Frame.GestureRecognizers>
+
+                                        <StackLayout Orientation="Vertical"
+                                                    Padding="5">
+                                            <Grid RowDefinitions="Auto, *"
+                                                        ColumnDefinitions="Auto, *">
+
+                                                <StackLayout Grid.RowSpan="3"
+                                                            VerticalOptions="FillAndExpand"
+                                                            WidthRequest="60">
+                                                    <Frame CornerRadius="10">
+                                                        <Image Source="{Binding profile_picture, Converter={StaticResource isImageSourceConverter}}"
+                                                                VerticalOptions="FillAndExpand"
+                                                                WidthRequest="70"
+                                                                Aspect="AspectFill">
+                                                        </Image>
+                                                    </Frame>
+                                                </StackLayout>
+
+                                                <StackLayout Orientation="Vertical"
+                                                            Grid.Column="1"
+                                                            Padding="15,0,0,0">
+                                                    <Label Text="{Binding tocken}"
+                                                                FontAttributes="Bold"/>
+
+                                                    <Grid HeightRequest="30">
+                                                        <Grid.RowDefinitions>
+                                                            <RowDefinition/>
+                                                        </Grid.RowDefinitions>
+                                                        <Grid.ColumnDefinitions>
+                                                            <ColumnDefinition  Width="Auto"/>
+                                                            <ColumnDefinition  Width="Auto"/>
+                                                        </Grid.ColumnDefinitions>
+
+                                                        <Label Text="{Binding name}"
+                                                                    FontSize="10"
+                                                                    VerticalOptions="Center"/>
+
+                                                        <Label
+                                                                Grid.Column="2"
+                                                                Margin="5,0,0,0"
+                                                                VerticalOptions="Center"
+                                                                HorizontalOptions="End"
+                                                                Text="{Binding orderDate, StringFormat='Date: {0:MMMM dd, yyyy}'}"
+                                                                FontAttributes="Bold"
+                                                                FontSize="10"/>
+                                                    </Grid>
+
+                                                    <Grid HeightRequest="30">
+                                                        <Grid.RowDefinitions>
+                                                            <RowDefinition/>
+                                                        </Grid.RowDefinitions>
+                                                        <Grid.ColumnDefinitions>
+                                                            <ColumnDefinition  Width="Auto"/>
+                                                            <ColumnDefinition  Width="Auto"/>
+                                                        </Grid.ColumnDefinitions>
+
+                                                        <Label
+                                                                FontAttributes="Bold"
+                                                                HorizontalOptions="Start"
+                                                                HorizontalTextAlignment="Start"
+                                                                FontSize="16">
+                                                            <Label.Text>
+                                                                <MultiBinding StringFormat="{}{0} {1}">
+                                                                    <Binding Path="currency"/>
+                                                                    <Binding Path="ammountPaid"/>
+                                                                </MultiBinding>
+                                                            </Label.Text>
+                                                        </Label>
+
+                                                        <Label
+                                                                Grid.Column="2"
+                                                                Margin="5,0,0,0"
+                                                                VerticalOptions="Center"
+                                                                Style="{StaticResource SubTextSemiBold}"
+                                                                Text="{Binding ticketLabel}"
+                                                                HorizontalOptions="End"/>
+                                                    </Grid>
+                                                </StackLayout>
+                                            </Grid>
+                                        </StackLayout>
+                                    </Frame>
+                                </StackLayout>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+                </ScrollView>
+            </VerticalStackLayout>
+
+            <Frame
+                BackgroundColor="{AppThemeBinding Light={StaticResource LightGray}, Dark={StaticResource Background_Mid}}"
+                VerticalOptions="EndAndExpand"
+                x:Name="MyDraggableView"
+                HorizontalOptions="FillAndExpand"
+                HeightRequest="0">
+
+                <!--<StackLayout HeightRequest="{Binding Source={x:Reference gridParent}, Path=Height, Converter={StaticResource MultiplierConverter}, ConverterParameter=0.5}">-->
+                <StackLayout Orientation="Vertical">
+                    <Grid Grid.Row="0"
+                            Margin="15">
+                        <Image Source="close_tab.png"
+                                HeightRequest="30"
+                                WidthRequest="30"/>
+                        <Grid.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped"/>
+                        </Grid.GestureRecognizers>
+                    </Grid>
+
+                    <!--Menu here-->
+                    <StackLayout Margin="10"
+                            Orientation="Vertical">
+
+                        <StackLayout VerticalOptions="Center"
+                                WidthRequest="60"
+                                Margin="5">
+                            <Frame CornerRadius="10">
+                                <Image Source="{Binding mEventTicketToken.profile_picture, Converter={StaticResource isImageSourceConverter}}"
+                                    VerticalOptions="FillAndExpand"
+                                    WidthRequest="70"
+                                    Aspect="AspectFill"/>
+                            </Frame>
+                        </StackLayout>
+
+                        <Label
+                            Text="{Binding mEventTicketToken.name}"
+                            HorizontalOptions="CenterAndExpand"
+                            
+                            FontSize="22"/>
+
+                        <Label
+                            Text="{Binding mEventTicketToken.user_name, StringFormat='@{0}'}"
+                            HorizontalOptions="CenterAndExpand"
+                            
+                            FontSize="16"/>
+
+                        <BoxView Color="Gray"
+                                HeightRequest="1"
+                                HorizontalOptions="FillAndExpand"
+                                Margin="10"/>
+
+                        <Label
+                            Text="{Binding mEventTicketToken.tocken}"
+                            HorizontalOptions="CenterAndExpand"
+                            
+                            FontSize="16"/>
+
+                        <StackLayout Orientation="Vertical"
+                                Grid.Column="1"
+                                Padding="15,0,0,0">
+                            <Label
+                                Margin="5,0,0,0"
+                                VerticalOptions="Center"
+                                HorizontalOptions="CenterAndExpand"
+                                Text="{Binding mEventTicketToken.orderDate, StringFormat='{}{0:MMMM dd, yyyy}'}"
+                                FontAttributes="Bold"
+                                FontSize="10"/>
+
+                            <Grid HeightRequest="30">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition/>
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition  Width="Auto"/>
+                                    <ColumnDefinition  Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+
+                                <Label
+                                    FontAttributes="Bold"
+                                    HorizontalOptions="Start"
+                                    HorizontalTextAlignment="Start"
+                                    FontSize="16">
+                                    <Label.Text>
+                                        <MultiBinding StringFormat="{}{0} {1}">
+                                            <Binding Path="systemSettings.currency"/>
+                                            <Binding Path="mEventTicketToken.ammountPaid"/>
+                                        </MultiBinding>
+                                    </Label.Text>
+                                </Label>
+
+                                <Label
+                                    Grid.Column="2"
+                                    Margin="5,0,0,0"
+                                    VerticalOptions="Center"
+                                    Style="{StaticResource SubTextSemiBold}"
+                                    Text="{Binding mEventTicketToken.ticketLabel}"
+                                    HorizontalOptions="End"/>
+                            </Grid>
+
+                            <StackLayout IsVisible="False">
+                                <StackLayout.Triggers>
+                                    <DataTrigger
+                                        Binding="{Binding mEventTicketToken, Converter={StaticResource isTicketUsedConverter}}"
+                                        TargetType="StackLayout"
+                                        Value="False">
+                                        <Setter Property="IsVisible"
+                                                Value="True"/>
+                                    </DataTrigger>
+                                </StackLayout.Triggers>
+
+                                <Frame CornerRadius="10" BackgroundColor="{AppThemeBinding Light={StaticResource LightGray}, Dark={StaticResource Background_Mid}}"
+                                        Margin="2"
+                                        Padding="2"
+                                        WidthRequest="150">
+                                    <Frame BackgroundColor="{AppThemeBinding Light={StaticResource LightGray}, Dark={StaticResource Background_Mid}}"
+                                        HorizontalOptions="FillAndExpand"
+                                        HeightRequest="50">
+                                        <Frame.GestureRecognizers>
+                                            <TapGestureRecognizer Command="{Binding UseEventTicketCommand}"
+                                                    CommandParameter="{Binding mEventTicketToken}"/>
+                                        </Frame.GestureRecognizers>
+                                        <Label Text="Use Ticket"
+                                                FontSize="14"
+                                                FontAttributes="Bold"
+                                                VerticalOptions="Center"
+                                                HorizontalOptions="Center"/>
+                                    </Frame>
+                                </Frame>
+                            </StackLayout>
+
+                            <StackLayout IsVisible="False">
+                                <StackLayout.Triggers>
+                                    <DataTrigger
+                                        Binding="{Binding mEventTicketToken, Converter={StaticResource isTicketUsedConverter}}"
+                                        TargetType="StackLayout"
+                                        Value="True">
+                                        <Setter Property="IsVisible"
+                                                Value="True"/>
+                                    </DataTrigger>
+                                </StackLayout.Triggers>
+
+                                <Frame CornerRadius="10" BackgroundColor="{AppThemeBinding Light={StaticResource LightGray}, Dark={StaticResource Background_Mid}}"
+                                        Margin="2"
+                                        Padding="2"
+                                        WidthRequest="150">
+                                    <Frame
+                                        HorizontalOptions="FillAndExpand"
+                                        BackgroundColor="{AppThemeBinding Light={StaticResource LightGray}, Dark={StaticResource Background_Mid}}"
+                                        HeightRequest="50">
+                                        <Frame.GestureRecognizers>
+                                            <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped"/>
+                                        </Frame.GestureRecognizers>
+                                        <Label Text="Close"
+                                                FontSize="14"
+                                                FontAttributes="Bold"
+                                                VerticalOptions="Center"
+                                                HorizontalOptions="Center"/>
+                                    </Frame>
+                                </Frame>
+                            </StackLayout>
+                        </StackLayout>
+                    </StackLayout>
+                </StackLayout>
+            </Frame>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

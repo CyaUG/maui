@@ -1,0 +1,445 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Youth.Views.Main.HomePage"
+             xmlns:local="clr-namespace:Youth.ViewModels"
+             Title="{Binding Title}"
+             xmlns:model="clr-namespace:Youth.Models"
+             xmlns:renderers="clr-namespace:Youth.CustomRenderers"
+             Shell.NavBarIsVisible="False"
+             NavigationPage.HasNavigationBar="False"
+             Shell.PresentationMode="Animated"
+             xmlns:behaviors="clr-namespace:CommunityToolkit.Maui.Behaviors;assembly=CommunityToolkit.Maui"
+             xmlns:ios="clr-namespace:Microsoft.Maui.Controls.PlatformConfiguration.iOSSpecific;assembly=Microsoft.Maui.Controls"
+             xmlns:toolkitViews="clr-namespace:CommunityToolkit.Maui.Views;assembly=CommunityToolkit.Maui"
+             ios:Page.UseSafeArea="true"
+             xmlns:converters="clr-namespace:Youth.Helpers.Converters">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converters:IsImageSourceConverter x:Key="isImageSourceConverter"/>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <ContentPage.Content>
+        <StackLayout Padding="10,30,10,10">
+            <RefreshView x:DataType="local:HomeViewModel"
+                    Command="{Binding LoadMyAccountCommand}"
+                    IsRefreshing="{Binding IsBusy}">
+                <ScrollView VerticalScrollBarVisibility="Never">
+
+                    <StackLayout>
+                        <Grid Margin="0,20,0,0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="AUTO"/>
+                            </Grid.ColumnDefinitions>
+
+                            <StackLayout>
+                                <Label FontSize="Subtitle"
+                                        TextColor="{AppThemeBinding Light={StaticResource DarkGray}, Dark={StaticResource White}}">
+                                    <Label.FormattedText>
+                                        <FormattedString>
+                                            <Span Text="Hello, "/>
+                                            <Span FontFamily="{StaticResource MediumFontFamily}"
+                                                    FontAttributes="Bold"
+                                                    Text="{Binding userAccount.name}"/>
+                                        </FormattedString>
+                                    </Label.FormattedText>
+                                </Label>
+                            </StackLayout>
+
+                            <Grid HorizontalOptions="Center" Grid.Column="1" VerticalOptions="Center">
+                                <Grid.GestureRecognizers>
+                                    <TapGestureRecognizer Tapped="ProfileImage_Tapped"/>
+                                </Grid.GestureRecognizers>
+                                
+                                <toolkitViews:AvatarView x:Name="ProfileImge" BorderWidth="0" HeightRequest="50" WidthRequest="50" BackgroundColor="Transparent" CornerRadius="10"
+                                                ImageSource="{Binding userAccount.profile_picture, Converter={StaticResource isImageSourceConverter}}">
+                                    <toolkitViews:AvatarView.Shadow>
+                                        <Shadow Opacity="0.3"/>
+                                    </toolkitViews:AvatarView.Shadow>
+                                    
+                                </toolkitViews:AvatarView>
+                            </Grid>
+                        </Grid>
+
+                        <Frame
+                            Margin="0,20,0,0"
+                            Padding="10"
+                            BackgroundColor="Transparent"
+                            BorderColor="{StaticResource BorderColor}"
+                            CornerRadius="20"
+                            HasShadow="False">
+                            <Grid>
+                                <Grid.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding EventsGridTappedCommand}"
+                                            CommandParameter="{Binding .}"/>
+                                </Grid.GestureRecognizers>
+
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+
+                                <Image
+                                    Margin="10,0,0,0"
+                                    HorizontalOptions="Center"
+                                    Source="calendar_tick.png"
+                                    VerticalOptions="Center"
+                                    HeightRequest="40"
+                                    WidthRequest="40">
+                                    <Image.Behaviors>
+                                        <behaviors:IconTintColorBehavior TintColor="{AppThemeBinding Light={StaticResource DarkGray}, Dark={StaticResource White}}"/>
+                                    </Image.Behaviors>
+                                </Image>
+                                <Label
+                                    Grid.Column="1"
+                                    Margin="20,0,0,0"
+                                    Text="Upcoming Events."
+                                        VerticalOptions="CenterAndExpand"/>
+                                <Image
+                                    Grid.Column="2"
+                                    Margin="0,0,10,0"
+                                    HorizontalOptions="Center"
+                                    Source="Arrow"
+                                    VerticalOptions="CenterAndExpand"/>
+                            </Grid>
+                        </Frame>
+
+                        <Label Margin="0,10,0,0"
+                                FontAttributes="Bold"
+                                Text="Quizzes"/>
+
+                        <Border BackgroundColor="{AppThemeBinding Light={StaticResource LightGray}, Dark={StaticResource Background_Mid}}"
+                                Margin="0">
+                            <Border.StrokeShape>
+                                <RoundRectangle CornerRadius="10"/>
+                            </Border.StrokeShape>
+
+                            <Grid HeightRequest="200">
+                                <Image Aspect="AspectFill"
+                                        Source="bg_trophy.jpg"
+                                        HorizontalOptions="Fill"
+                                        VerticalOptions="Fill"/>
+                                <Grid HeightRequest="200"
+                                        Padding="10">
+
+                                    <Grid.GestureRecognizers>
+                                        <TapGestureRecognizer Command="{Binding QuizzesGridTappedCommand}"
+                                                CommandParameter="{Binding .}"/>
+                                    </Grid.GestureRecognizers>
+
+                                    <StackLayout Margin="20,5,0,0"
+                                            InputTransparent="True">
+                                        <Label Style="{StaticResource TempLabel}"
+                                                Text="{Binding quizProfile.totalPoints}"/>
+                                        <Label Margin="0,-5,0,0"
+                                                Style="{StaticResource SubTextSemiBold}"
+                                                Text="POINTS"
+                                                TextColor="White"/>
+                                    </StackLayout>
+                                    <Label
+                                        Margin="0,10,20,0"
+                                        HorizontalOptions="End"
+                                        Style="{StaticResource SubTextSemiBold}"
+                                        Text="◦◦◦"
+                                        TextColor="White"/>
+
+                                    <Label
+                                        Margin="20"
+                                        Style="{StaticResource SubTextSemiBold}"
+                                        Text="Tap To Play"
+                                        TextColor="White"
+                                        HorizontalOptions="End"
+                                        VerticalOptions="End"/>
+                                </Grid>
+                            </Grid>
+                        </Border>
+
+                        <Label Margin="0,10,0,0"
+                                FontAttributes="Bold"
+                                Text="Categories"/>
+
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+
+                            <Border Margin="1"
+                                    Padding="10"
+                                    BackgroundColor="{AppThemeBinding Light={StaticResource LightGray}, Dark={StaticResource Background_Mid}}">
+                                <Border.StrokeShape>
+                                    <RoundRectangle CornerRadius="10"/>
+                                </Border.StrokeShape>
+
+                                <Grid HeightRequest="150"
+                                        HorizontalOptions="FillAndExpand">
+                                    <Grid.GestureRecognizers>
+                                        <TapGestureRecognizer Command="{Binding ShoppingGridTappedCommand}"
+                                                CommandParameter="{Binding .}"/>
+                                    </Grid.GestureRecognizers>
+
+                                    <StackLayout Margin="10,5,0,0"
+                                            InputTransparent="True">
+                                        <Image
+                                            VerticalOptions="Center"
+                                            HorizontalOptions="Start"
+                                            Margin="0,10,0,10"
+                                            Source="shopping_cart.png"
+                                            HeightRequest="40"
+                                            WidthRequest="40">
+                                            <Image.Behaviors>
+                                                <behaviors:IconTintColorBehavior TintColor="{AppThemeBinding Light={StaticResource DarkGray}, Dark={StaticResource White}}"/>
+                                            </Image.Behaviors>
+                                        </Image>
+                                        <Label
+                                            Margin="0,-5,0,0"
+                                            Style="{StaticResource SubTextSemiBold}"
+                                            Text="{Binding dashboardSummary.shoppingCartCount, StringFormat='{0} Cart'}"
+                                            TextColor="DimGray"/>
+                                        <Label
+                                            Margin="0,-5,0,0"
+                                            Style="{StaticResource TabHeader}"
+                                            Text="Shopping"/>
+                                    </StackLayout>
+                                    <Frame
+                                        Margin="5"
+                                        Padding="3,3"
+                                        BackgroundColor="{StaticResource TagColor}"
+                                        CornerRadius="5"
+                                        HasShadow="False"
+                                        HorizontalOptions="End"
+                                        VerticalOptions="End">
+                                        <Label Style="{StaticResource TagLabel}"
+                                                Text="{Binding dashboardSummary.productsCount, StringFormat='{0} ADS'}"/>
+                                    </Frame>
+                                </Grid>
+                            </Border>
+
+                            <Border Grid.Column="1"
+                                    Padding="10"
+                                    Margin="1"
+                                    BackgroundColor="{AppThemeBinding Light={StaticResource LightGray}, Dark={StaticResource Background_Mid}}">
+                                <Border.StrokeShape>
+                                    <RoundRectangle CornerRadius="10"/>
+                                </Border.StrokeShape>
+                                <Grid
+                                    HeightRequest="150"
+                                    HorizontalOptions="FillAndExpand">
+                                    <Grid.GestureRecognizers>
+                                        <TapGestureRecognizer Command="{Binding SafeSpaceGridTappedCommand}"
+                                                CommandParameter="{Binding .}"/>
+                                    </Grid.GestureRecognizers>
+                                    <StackLayout Margin="10,5,0,0"
+                                            InputTransparent="True">
+                                        <Image
+                                            Margin="0,10,0,10"
+                                            HorizontalOptions="Start"
+                                            Source="chat.png"
+                                            VerticalOptions="Center"
+                                            HeightRequest="40"
+                                            WidthRequest="40">
+                                            <Image.Behaviors>
+                                                <behaviors:IconTintColorBehavior TintColor="{AppThemeBinding Light={StaticResource DarkGray}, Dark={StaticResource White}}"/>
+                                            </Image.Behaviors>
+                                        </Image>
+                                        <Label
+                                            Margin="0,-5,0,0"
+                                            Style="{StaticResource SubTextSemiBold}"
+                                            Text="{Binding dashboardSummary.newPosts, StringFormat='{0} New'}"
+                                            TextColor="DimGray"/>
+                                        <Label
+                                            Margin="0,-5,0,0"
+                                            Style="{StaticResource TabHeader}"
+                                            Text="Safe Space"/>
+                                    </StackLayout>
+                                    <Frame
+                                        Margin="5"
+                                        Padding="3,3"
+                                        BackgroundColor="{StaticResource TagColor}"
+                                        CornerRadius="5"
+                                        HasShadow="False"
+                                        HorizontalOptions="End"
+                                        VerticalOptions="End">
+                                        <Label Style="{StaticResource TagLabel}"
+                                                Text="{Binding dashboardSummary.safe_posts, StringFormat='{0} POSTS'}"/>
+                                    </Frame>
+
+                                    <toolkitViews:AvatarView BorderWidth="0" HeightRequest="40" WidthRequest="40" BackgroundColor="Transparent" CornerRadius="10"
+                                                ImageSource="{Binding dashboardSummary.postProfilePicture1, Converter={StaticResource isImageSourceConverter}}"
+                                        HorizontalOptions="End" VerticalOptions="Start" Margin="5,15,15,5">
+                                        <toolkitViews:AvatarView.Shadow>
+                                            <Shadow Opacity="0.3"/>
+                                        </toolkitViews:AvatarView.Shadow>
+                                    </toolkitViews:AvatarView>
+
+                                    <toolkitViews:AvatarView BorderWidth="0" HeightRequest="40" WidthRequest="40" BackgroundColor="Transparent" CornerRadius="10"
+                                                ImageSource="{Binding dashboardSummary.postProfilePicture2, Converter={StaticResource isImageSourceConverter}}"
+                                        HorizontalOptions="End" VerticalOptions="Start" Margin="5,5,5,5">
+                                        <toolkitViews:AvatarView.Shadow>
+                                            <Shadow Opacity="0.3"/>
+                                        </toolkitViews:AvatarView.Shadow>
+                                    </toolkitViews:AvatarView>
+                                </Grid>
+                            </Border>
+
+                            <Border Grid.Row="1"
+                                    Margin="1"
+                                    Padding="10"
+                                    BackgroundColor="{AppThemeBinding Light={StaticResource LightGray}, Dark={StaticResource Background_Mid}}">
+                                <Border.StrokeShape>
+                                    <RoundRectangle CornerRadius="10"/>
+                                </Border.StrokeShape>
+                                <Grid
+                                    HeightRequest="150"
+                                    HorizontalOptions="FillAndExpand">
+                                    <Grid.GestureRecognizers>
+                                        <TapGestureRecognizer Command="{Binding JobsGridTappedCommand}"
+                                                CommandParameter="{Binding .}"/>
+                                    </Grid.GestureRecognizers>
+                                    <StackLayout Margin="10,5,0,0"
+                                            InputTransparent="True">
+                                        <Image
+                                            Margin="0,10,0,10"
+                                            HorizontalOptions="Start"
+                                            Source="portfolio.png"
+                                            VerticalOptions="Center"
+                                            HeightRequest="40"
+                                            WidthRequest="40">
+                                            <Image.Behaviors>
+                                                <behaviors:IconTintColorBehavior TintColor="{AppThemeBinding Light={StaticResource DarkGray}, Dark={StaticResource White}}"/>
+                                            </Image.Behaviors>
+                                        </Image>
+                                        <Label
+                                            Margin="0,-5,0,0"
+                                            Style="{StaticResource SubTextSemiBold}"
+                                            Text="{Binding dashboardSummary.newJobs, StringFormat='{0} New'}"
+                                            TextColor="DimGray"/>
+                                        <Label
+                                            Margin="0,-5,0,0"
+                                            Style="{StaticResource TabHeader}"
+                                            Text="Jobs"/>
+                                    </StackLayout>
+
+                                    <Frame
+                                        Margin="5"
+                                        Padding="3,3"
+                                        BackgroundColor="{StaticResource TagColor}"
+                                        CornerRadius="5"
+                                        HasShadow="False"
+                                        HorizontalOptions="End"
+                                        VerticalOptions="End">
+                                        <Label Style="{StaticResource TagLabel}"
+                                                Text="{Binding dashboardSummary.jobsCount, StringFormat='{0} JOBS'}"/>
+                                    </Frame>
+
+                                    <toolkitViews:AvatarView BorderWidth="0" HeightRequest="40" WidthRequest="40" BackgroundColor="Transparent" CornerRadius="10"
+                                                ImageSource="{Binding dashboardSummary.jobsProfilePicture1, Converter={StaticResource isImageSourceConverter}}"
+                                        HorizontalOptions="End" VerticalOptions="Start" Margin="5,15,15,5">
+                                        <toolkitViews:AvatarView.Shadow>
+                                            <Shadow Opacity="0.3"/>
+                                        </toolkitViews:AvatarView.Shadow>
+                                    </toolkitViews:AvatarView>
+
+                                    <toolkitViews:AvatarView BorderWidth="0" HeightRequest="40" WidthRequest="40" BackgroundColor="Transparent" CornerRadius="10"
+                                                ImageSource="{Binding dashboardSummary.jobsProfilePicture2, Converter={StaticResource isImageSourceConverter}}"
+                                        HorizontalOptions="End" VerticalOptions="Start" Margin="5,5,5,5">
+                                        <toolkitViews:AvatarView.Shadow>
+                                            <Shadow Opacity="0.3"/>
+                                        </toolkitViews:AvatarView.Shadow>
+                                    </toolkitViews:AvatarView>
+                                </Grid>
+                            </Border>
+
+                            <Border Padding="10"
+                                    Grid.Column="1"
+                                    Margin="1"
+                                    Grid.Row="1"
+                                    BackgroundColor="{AppThemeBinding Light={StaticResource LightGray}, Dark={StaticResource Background_Mid}}">
+                                <Border.StrokeShape>
+                                    <RoundRectangle CornerRadius="10"/>
+                                </Border.StrokeShape>
+                                <Grid HeightRequest="150"
+                                        HorizontalOptions="FillAndExpand">
+                                    <Grid.GestureRecognizers>
+                                        <TapGestureRecognizer Command="{Binding PlasticsGridTappedCommand}"
+                                                CommandParameter="{Binding .}"/>
+                                    </Grid.GestureRecognizers>
+                                    <StackLayout Margin="10,5,0,0"
+                                            InputTransparent="True">
+                                        <Image
+                                            Margin="0,10,0,10"
+                                            HorizontalOptions="Start"
+                                            Source="recycle.png"
+                                            VerticalOptions="Center"
+                                            HeightRequest="40"
+                                            WidthRequest="40">
+                                            <Image.Behaviors>
+                                                <behaviors:IconTintColorBehavior TintColor="{AppThemeBinding Light={StaticResource DarkGray}, Dark={StaticResource White}}"/>
+                                            </Image.Behaviors>
+                                        </Image>
+                                        <Label
+                                            Margin="0,-5,0,0"
+                                            Style="{StaticResource SubTextSemiBold}"
+                                            Text="{Binding dashboardSummary.service_points, StringFormat='{0} Service Points'}"
+                                            TextColor="DimGray"/>
+                                        <Label
+                                            Margin="0,-5,0,0"
+                                            Style="{StaticResource TabHeader}"
+                                            Text="Plastics"/>
+
+                                        <Label TextColor="Red"
+                                                Margin="0,-5,0,0"
+                                                Style="{StaticResource TagLabel}">
+                                            <Label.Text>
+                                                <MultiBinding StringFormat="{}{0} {1}">
+                                                    <Binding Path="systemSettings.currency"/>
+                                                    <Binding Path="dashboardSummary.plasticBuy"/>
+                                                </MultiBinding>
+                                            </Label.Text>
+                                        </Label>
+                                    </StackLayout>
+                                    <Frame
+                                        Margin="5"
+                                        Padding="3,3"
+                                        BackgroundColor="{StaticResource TagColor}"
+                                        CornerRadius="5"
+                                        HasShadow="False"
+                                        HorizontalOptions="End"
+                                        VerticalOptions="End">
+                                        <Label Style="{StaticResource TagLabel}">
+                                            <Label.Text>
+                                                <MultiBinding StringFormat="{}{0} {1}">
+                                                    <Binding Path="systemSettings.currency"/>
+                                                    <Binding Path="dashboardSummary.plasticSell"/>
+                                                </MultiBinding>
+                                            </Label.Text>
+                                        </Label>
+                                    </Frame>
+                                </Grid>
+                            </Border>
+                        </Grid>
+
+                        <Grid Margin="20">
+                            <Grid.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="BtnVisitWagaana"/>
+                            </Grid.GestureRecognizers>
+                            <Image Source="{AppThemeBinding Light='wagaana.png', Dark='wagaana_wt.png'}"
+                                    HorizontalOptions="CenterAndExpand"
+                                    WidthRequest="100"
+                                    HeightRequest="30"/>
+                        </Grid>
+                    </StackLayout>
+                    <!--</Grid>-->
+                </ScrollView>
+            </RefreshView>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
