@@ -132,9 +132,6 @@ jobs:
           IOS_CERTIFICATE_PASSWORD: ${{ secrets.IOS_CERTIFICATE_PASSWORD }}
           IOS_PROVISIONING_PROFILE: ${{ secrets.IOS_PROVISIONING_PROFILE }}
         run: |
-          # Log environment validation
-          echo "Starting validation of secrets and provisioning files."
-
           # Validate IOS_CERTIFICATE
           if [ -z "$IOS_CERTIFICATE" ]; then
             echo "Error: IOS_CERTIFICATE is not set"
@@ -151,8 +148,8 @@ jobs:
             echo "IOS_CERTIFICATE_PASSWORD is set."
           fi
 
-          # Decode IOS_CERTIFICATE and check
-          echo "Decoding IOS_CERTIFICATE..."
+          # Decode and Import the Certificate
+          echo "Decoding and Importing IOS_CERTIFICATE..."
           echo "$IOS_CERTIFICATE" | base64 --decode > /tmp/certificate.p12
           if [ ! -s /tmp/certificate.p12 ]; then
             echo "Error: Decoded certificate is empty or invalid."
@@ -162,13 +159,11 @@ jobs:
             ls -lh /tmp/certificate.p12
           fi
 
-          # Import IOS_CERTIFICATE
           echo "Importing certificate to keychain..."
           security import /tmp/certificate.p12 -A -P "$IOS_CERTIFICATE_PASSWORD" 2>&1 || {
             echo "Error: Failed to import certificate. Check the password."
             exit 1
           }
-
           echo "Certificate imported successfully."
 
           # List identities for validation
@@ -183,7 +178,7 @@ jobs:
             echo "IOS_PROVISIONING_PROFILE is set."
           fi
 
-          # Decode IOS_PROVISIONING_PROFILE and check
+          # Decode IOS_PROVISIONING_PROFILE
           echo "Decoding IOS_PROVISIONING_PROFILE..."
           echo "$IOS_PROVISIONING_PROFILE" | base64 --decode > /tmp/profile.mobileprovision
           if [ ! -s /tmp/profile.mobileprovision ]; then
@@ -194,7 +189,7 @@ jobs:
             ls -lh /tmp/profile.mobileprovision
           fi
 
-          # Install IOS_PROVISIONING_PROFILE
+          # Install Provisioning Profile
           echo "Installing provisioning profile..."
           mkdir -p ~/Library/MobileDevice/Provisioning\ Profiles
           cp /tmp/profile.mobileprovision ~/Library/MobileDevice/Provisioning\ Profiles/
