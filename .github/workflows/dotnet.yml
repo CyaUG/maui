@@ -141,7 +141,7 @@ jobs:
 
           # Import the certificate
           echo "Importing certificate.p12..."
-          security import certificate.p12 -A -P "$IOS_CERTIFICATE_PASSWORD" 2>&1 || {
+          security import certificate.p12 -A -P Nsiimbi@2025 2>&1 || {
             echo "Error: Failed to import certificate. Check the password."
             exit 1
           }
