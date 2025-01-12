@@ -24,7 +24,10 @@
 		<ApplicationTitle>CYA</ApplicationTitle>
 
 		<!-- App Identifier -->
-		<ApplicationId>org.creativeyouthagency.app</ApplicationId>
+		<ApplicationId Condition="'$(TargetFramework)' == 'net8.0-windows10.0.19041.0'">org.creativeyouthagency.app</ApplicationId>
+		<ApplicationId Condition="'$(TargetFramework)' == 'net8.0-maccatalyst'">org.creativeyouthagency.app</ApplicationId>
+		<ApplicationId Condition="'$(TargetFramework)' == 'net8.0-android'">org.creativeyouthagency.app</ApplicationId>
+		<ApplicationId Condition="'$(TargetFramework)' == 'net8.0-ios'">com.wagaana.cya</ApplicationId>
 
 		<!-- Versions -->
 		<ApplicationDisplayVersion>1.0</ApplicationDisplayVersion>
