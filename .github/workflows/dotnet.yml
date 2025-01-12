@@ -103,7 +103,7 @@ jobs:
 
   # MAUI iOS Build
   build-ios:
-    runs-on: macos-latest
+    runs-on: macos-15
     name: iOS Build
     steps:
       - name: Checkout
@@ -132,46 +132,83 @@ jobs:
           IOS_CERTIFICATE_PASSWORD: ${{ secrets.IOS_CERTIFICATE_PASSWORD }}
           IOS_PROVISIONING_PROFILE: ${{ secrets.IOS_PROVISIONING_PROFILE }}
         run: |
-          echo "$IOS_CERTIFICATE_PASSWORD"
-          # Validate certificate and password
+          # Log environment validation
+          echo "Starting validation of secrets and provisioning files."
+
+          # Validate IOS_CERTIFICATE
           if [ -z "$IOS_CERTIFICATE" ]; then
             echo "Error: IOS_CERTIFICATE is not set"
             exit 1
+          else
+            echo "IOS_CERTIFICATE is set."
           fi
+
+          # Validate IOS_CERTIFICATE_PASSWORD
           if [ -z "$IOS_CERTIFICATE_PASSWORD" ]; then
             echo "Error: IOS_CERTIFICATE_PASSWORD is not set"
             exit 1
+          else
+            echo "IOS_CERTIFICATE_PASSWORD is set."
           fi
-          # Decode and import certificate
+
+          # Decode IOS_CERTIFICATE and check
+          echo "Decoding IOS_CERTIFICATE..."
           echo "$IOS_CERTIFICATE" | base64 --decode > /tmp/certificate.p12
           if [ ! -s /tmp/certificate.p12 ]; then
-            echo "Error: Decoded certificate is empty"
+            echo "Error: Decoded certificate is empty or invalid."
             exit 1
+          else
+            echo "Certificate decoded successfully. Size:"
+            ls -lh /tmp/certificate.p12
           fi
-          security import /tmp/certificate.p12 -A -P "$IOS_CERTIFICATE_PASSWORD"
+
+          # Import IOS_CERTIFICATE
+          echo "Importing certificate to keychain..."
+          security import /tmp/certificate.p12 -A -P "$IOS_CERTIFICATE_PASSWORD" 2>&1 || {
+            echo "Error: Failed to import certificate. Check the password."
+            exit 1
+          }
+          echo "Certificate imported successfully."
+
+          # List identities for validation
+          echo "Listing available identities for code signing:"
           security find-identity -p codesigning -v
 
-          # Validate provisioning profile
+          # Validate IOS_PROVISIONING_PROFILE
           if [ -z "$IOS_PROVISIONING_PROFILE" ]; then
             echo "Error: IOS_PROVISIONING_PROFILE is not set"
             exit 1
+          else
+            echo "IOS_PROVISIONING_PROFILE is set."
           fi
-          # Decode and install provisioning profile
+
+          # Decode IOS_PROVISIONING_PROFILE and check
+          echo "Decoding IOS_PROVISIONING_PROFILE..."
           echo "$IOS_PROVISIONING_PROFILE" | base64 --decode > /tmp/profile.mobileprovision
           if [ ! -s /tmp/profile.mobileprovision ]; then
-            echo "Error: Decoded provisioning profile is empty"
+            echo "Error: Decoded provisioning profile is empty or invalid."
             exit 1
+          else
+            echo "Provisioning profile decoded successfully. Size:"
+            ls -lh /tmp/profile.mobileprovision
           fi
+
+          # Install IOS_PROVISIONING_PROFILE
+          echo "Installing provisioning profile..."
           mkdir -p ~/Library/MobileDevice/Provisioning\ Profiles
           cp /tmp/profile.mobileprovision ~/Library/MobileDevice/Provisioning\ Profiles/
+          echo "Provisioning profile installed successfully."
 
       - name: Build MAUI iOS
         run: |
-          dotnet build Youth.csproj -c Release -f net8.0-ios --no-restore /p:buildForSimulator=True /p:packageApp=True /p:ArchiveOnBuild=False
+          echo "Starting the iOS build..."
+          dotnet build Youth.csproj -c Release -f net8.0-ios --no-restore \
+            /p:buildForSimulator=True /p:packageApp=True /p:ArchiveOnBuild=False
+          echo "iOS build completed."
 
       - name: List Build Artifacts
         run: |
-          echo "Listing files in bin/Release/net8.0-ios"
+          echo "Listing files in bin/Release/net8.0-ios:"
           ls -al bin/Release/net8.0-ios
 
       - name: Upload iOS Artifact
