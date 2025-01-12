@@ -163,11 +163,18 @@ jobs:
           fi
 
           # Import IOS_CERTIFICATE
-          echo "Importing certificate to keychain..."
-          security import /tmp/certificate.p12 -A -P $IOS_CERTIFICATE_PASSWORD 2>&1 || {
-            echo "Error: Failed to import certificate. Check the password."
+          # echo "Importing certificate to keychain..."
+          # security import /tmp/certificate.p12 -A -P "$IOS_CERTIFICATE_PASSWORD" 2>&1 || {
+          #   echo "Error: Failed to import certificate. Check the password."
+          #   exit 1
+          # }
+          echo "Attempting to import certificate: /tmp/certificate.p12"
+          security import /tmp/certificate.p12 -A -P "$IOS_CERTIFICATE_PASSWORD"
+          if [ $? -ne 0 ]; then
+            echo "Error: Failed to import the certificate. Check the certificate file and password."
             exit 1
-          }
+          fi
+
           echo "Certificate imported successfully."
 
           # List identities for validation
