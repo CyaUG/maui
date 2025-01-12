@@ -1,0 +1,209 @@
+# This workflow will build a .NET project
+# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-net
+
+name: CI Build
+
+on:
+  push:
+    branches: [ main ]
+    paths-ignore:
+      - '**/*.md'
+      - '**/*.gitignore'
+      - '**/*.gitattributes'
+  pull_request:
+    branches: [ main ]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+env:
+  DOTNET_NOLOGO: true                     # Disable the .NET logo
+  DOTNET_SKIP_FIRST_TIME_EXPERIENCE: true # Disable the .NET first time experience
+  DOTNET_CLI_TELEMETRY_OPTOUT: true       # Disable sending .NET CLI telemetry
+
+jobs:
+  # MAUI Android Build
+  build-android:
+    runs-on: windows-latest
+    name: Android Build
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup .NET 8
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 8.0.x
+
+      - name: Install MAUI Workload
+        run: dotnet workload install maui --ignore-failed-sources
+
+      - name: Ensure Directory Exists
+        run: |
+          if (-Not (Test-Path -Path "bin\Release\net8.0-android")) {
+            New-Item -Path "bin\Release\net8.0-android" -ItemType Directory
+          }
+
+      - name: Restore Dependencies
+        run: dotnet restore Katale.csproj
+
+      - name: Build MAUI Android
+        run: dotnet publish Katale.csproj -c Release -f net8.0-android --no-restore
+
+      - name: List Build Artifacts
+        run: |
+          echo "Listing files in bin\Release\net8.0-android"
+          dir bin\Release\net8.0-android
+
+      - name: Upload Android Artifact
+        uses: actions/upload-artifact@v4.3.4
+        with:
+          name: market-android-ci-build
+          path: bin\Release\net8.0-android\*
+
+  # MAUI Windows Build
+  build-windows:
+    runs-on: windows-latest
+    name: Windows Build
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+  
+      - name: Setup .NET 8
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 8.0.x
+  
+      - name: Install MAUI Workload
+        run: dotnet workload install maui
+  
+      - name: Ensure Directory Exists
+        run: |
+          if (-Not (Test-Path -Path "bin\x64\Release\net8.0-windows10.0.19041.0\win-x64")) {
+            New-Item -Path "bin\x64\Release\net8.0-windows10.0.19041.0\win-x64" -ItemType Directory
+          }
+  
+      - name: Restore Dependencies
+        run: dotnet restore Katale.csproj -r win-x64
+  
+      - name: Build MAUI Windows
+        run: dotnet publish Katale.csproj -c Release -f net8.0-windows10.0.19041.0 -r win-x64 --no-restore /p:PublishReadyToRun=false
+  
+      - name: List Build Artifacts
+        run: |
+          echo "Listing files in bin\x64\Release\net8.0-windows10.0.19041.0\win-x64"
+          dir bin\x64\Release\net8.0-windows10.0.19041.0\win-x64
+  
+      - name: Upload Windows Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: market-windows-ci-build
+          path: bin\x64\Release\net8.0-windows10.0.19041.0\win-x64\**\*.msix
+
+  # MAUI iOS Build
+  build-ios:
+    runs-on: macos-latest
+    name: iOS Build
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup .NET 8
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 8.0.x
+
+      - name: Install MAUI Workload
+        run: dotnet workload install maui --ignore-failed-sources
+
+      - name: Ensure Directory Exists
+        run: |
+          if [ ! -d "bin/Release/net8.0-ios" ]; then
+            mkdir -p "bin/Release/net8.0-ios"
+          fi
+
+      - name: Restore Dependencies
+        run: dotnet restore Katale.csproj
+
+      - name: Validate and Import Certificate and Provisioning Profile
+        env:
+          IOS_CERTIFICATE: ${{ secrets.IOS_CERTIFICATE }}
+          IOS_CERTIFICATE_PASSWORD: ${{ secrets.IOS_CERTIFICATE_PASSWORD }}
+          IOS_PROVISIONING_PROFILE: ${{ secrets.IOS_PROVISIONING_PROFILE }}
+        run: |
+          # Validate certificate and password
+          if [ -z "$IOS_CERTIFICATE" ]; then
+            echo "Error: IOS_CERTIFICATE is not set"
+            exit 1
+          fi
+          if [ -z "$IOS_CERTIFICATE_PASSWORD" ]; then
+            echo "Error: IOS_CERTIFICATE_PASSWORD is not set"
+            exit 1
+          fi
+          # Decode and import certificate
+          echo "$IOS_CERTIFICATE" | base64 --decode > /tmp/certificate.p12
+          if [ ! -s /tmp/certificate.p12 ]; then
+            echo "Error: Decoded certificate is empty"
+            exit 1
+          fi
+          security import /tmp/certificate.p12 -A -P "$IOS_CERTIFICATE_PASSWORD"
+          security find-identity -p codesigning -v
+          
+          # Validate provisioning profile
+          if [ -z "$IOS_PROVISIONING_PROFILE" ]; then
+            echo "Error: IOS_PROVISIONING_PROFILE is not set"
+            exit 1
+          fi
+          # Decode and install provisioning profile
+          echo "$IOS_PROVISIONING_PROFILE" | base64 --decode > /tmp/profile.mobileprovision
+          if [ ! -s /tmp/profile.mobileprovision ]; then
+            echo "Error: Decoded provisioning profile is empty"
+            exit 1
+          fi
+          mkdir -p ~/Library/MobileDevice/Provisioning\ Profiles
+          cp /tmp/profile.mobileprovision ~/Library/MobileDevice/Provisioning\ Profiles/
+
+      - name: Build MAUI iOS
+        run: |
+          dotnet build Katale.csproj -c Release -f net8.0-ios --no-restore /p:buildForSimulator=True /p:packageApp=True /p:ArchiveOnBuild=False
+
+      - name: List Build Artifacts
+        run: |
+          echo "Listing files in bin/Release/net8.0-ios"
+          ls -al bin/Release/net8.0-ios
+
+      - name: Upload iOS Artifact
+        uses: actions/upload-artifact@v4.3.4
+        with:
+          name: market-ios-ci-build
+          path: bin/Release/net8.0-ios/iossimulator-x64/**/*.app
+
+# MAUI MacCatalyst Build
+#  build-mac:
+#    runs-on: macos-latest
+#    name: MacCatalyst Build
+#    steps:
+#    
+#      - name: Checkout
+#        uses: actions/checkout@v4
+#
+#      - name: Setup .NET 8
+#        uses: actions/setup-dotnet@v4
+#        with:
+#          dotnet-version: 8.0.x
+#
+#      - name: Install MAUI Workload
+#        run: dotnet workload install maui --ignore-failed-sources
+#
+#      - name: Restore Dependencies
+#        run: dotnet restore Katale.csproj
+#
+#      - name: Build MAUI MacCatalyst
+#        run: dotnet publish Katale.csproj -c Release -f net8.0-maccatalyst --no-restore -p:BuildIpa=True
+#
+#      - name: Upload MacCatalyst Artifact
+#        uses: actions/upload-artifact@v4.3.4
+#        with:
+#          name: market-macos-ci-build
+#          path: bin/Release/net8.0-maccatalyst/maccatalyst-x64/publish/*.pkg
