@@ -139,12 +139,20 @@ jobs:
             exit 1
           fi
 
+          # Check if the certificate file exists
+          if [ ! -f "certificate.p12" ]; then
+            echo "Error: certificate.p12 not found."
+            exit 1
+          fi
+
           # Import the certificate
           echo "Importing certificate.p12..."
-          security import certificate.p12 -A -P Nsiimbi@2025 2>&1 || {
-            echo "Error: Failed to import certificate. Check the password."
+          security import certificate.p12 -A -P "$IOS_CERTIFICATE_PASSWORD" 2>&1 || {
+            echo "Error: Failed to import certificate. Check the password or file format."
             exit 1
           }
+          echo "Certificate imported successfully."
+
           echo "Certificate imported successfully."
 
           # Install Provisioning Profile
