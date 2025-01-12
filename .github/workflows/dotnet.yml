@@ -126,73 +126,31 @@ jobs:
       - name: Restore Dependencies
         run: dotnet restore Youth.csproj
 
-      - name: Validate and Import Certificate and Provisioning Profile
-        env:
-          IOS_CERTIFICATE: ${{ secrets.IOS_CERTIFICATE }}
-          IOS_CERTIFICATE_PASSWORD: ${{ secrets.IOS_CERTIFICATE_PASSWORD }}
-          IOS_PROVISIONING_PROFILE: ${{ secrets.IOS_PROVISIONING_PROFILE }}
+      - name: Copy and Import Certificate and Provisioning Profile
         run: |
-          # Validate IOS_CERTIFICATE
-          if [ -z "$IOS_CERTIFICATE" ]; then
-            echo "Error: IOS_CERTIFICATE is not set"
+          # Validate if required files exist
+          if [ ! -f "certificate.p12" ]; then
+            echo "Error: certificate.p12 file not found in the repository"
             exit 1
-          else
-            echo "IOS_CERTIFICATE is set."
           fi
 
-          # Validate IOS_CERTIFICATE_PASSWORD
-          if [ -z "$IOS_CERTIFICATE_PASSWORD" ]; then
-            echo "Error: IOS_CERTIFICATE_PASSWORD is not set"
+          if [ ! -f "cya.mobileprovision" ]; then
+            echo "Error: cya.mobileprovision file not found in the repository"
             exit 1
-          else
-            echo "IOS_CERTIFICATE_PASSWORD is set."
           fi
 
-          # Decode and Import the Certificate
-          echo "Decoding and Importing IOS_CERTIFICATE..."
-          echo "$IOS_CERTIFICATE" | base64 --decode > /tmp/certificate.p12
-          if [ ! -s /tmp/certificate.p12 ]; then
-            echo "Error: Decoded certificate is empty or invalid."
-            exit 1
-          else
-            echo "Certificate decoded successfully. Size:"
-            ls -lh /tmp/certificate.p12
-          fi
-
-          echo "Importing certificate to keychain..."
-          security import /tmp/certificate.p12 -A -P "$IOS_CERTIFICATE_PASSWORD" 2>&1 || {
+          # Import the certificate
+          echo "Importing certificate.p12..."
+          security import certificate.p12 -A -P "$IOS_CERTIFICATE_PASSWORD" 2>&1 || {
             echo "Error: Failed to import certificate. Check the password."
             exit 1
           }
           echo "Certificate imported successfully."
 
-          # List identities for validation
-          echo "Listing available identities for code signing:"
-          security find-identity -p codesigning -v
-
-          # Validate IOS_PROVISIONING_PROFILE
-          if [ -z "$IOS_PROVISIONING_PROFILE" ]; then
-            echo "Error: IOS_PROVISIONING_PROFILE is not set"
-            exit 1
-          else
-            echo "IOS_PROVISIONING_PROFILE is set."
-          fi
-
-          # Decode IOS_PROVISIONING_PROFILE
-          echo "Decoding IOS_PROVISIONING_PROFILE..."
-          echo "$IOS_PROVISIONING_PROFILE" | base64 --decode > /tmp/profile.mobileprovision
-          if [ ! -s /tmp/profile.mobileprovision ]; then
-            echo "Error: Decoded provisioning profile is empty or invalid."
-            exit 1
-          else
-            echo "Provisioning profile decoded successfully. Size:"
-            ls -lh /tmp/profile.mobileprovision
-          fi
-
           # Install Provisioning Profile
           echo "Installing provisioning profile..."
           mkdir -p ~/Library/MobileDevice/Provisioning\ Profiles
-          cp /tmp/profile.mobileprovision ~/Library/MobileDevice/Provisioning\ Profiles/
+          cp cya.mobileprovision ~/Library/MobileDevice/Provisioning\ Profiles/
           echo "Provisioning profile installed successfully."
 
       - name: Build MAUI iOS
