@@ -160,7 +160,8 @@ jobs:
           fi
 
           echo "Importing certificate to keychain..."
-          security import /tmp/certificate.p12 -A -P "$IOS_CERTIFICATE_PASSWORD" 2>&1 | tee import_log.txt || {
+          security unlock-keychain
+          security import /tmp/certificate.p12 -A -P "$IOS_CERTIFICATE_PASSWORD" || {
             echo "Error: Failed to import certificate. Check the password."
             exit 1
           }
