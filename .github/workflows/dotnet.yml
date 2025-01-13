@@ -152,10 +152,10 @@ jobs:
             exit 1
           fi
 
-          echo "Importing certificate to keychain..."
-          security unlock-keychain
-          security import certificate.p12 -A -P "$IOS_CERTIFICATE_PASSWORD" || {
-            echo "Error: Failed to import certificate. Check the password."
+          echo "Importing certificate to System.keychain..."
+          security unlock-keychain /Library/Keychains/System.keychain
+          security import /tmp/certificate.p12 -k /Library/Keychains/System.keychain -P "$IOS_CERTIFICATE_PASSWORD" -A || {
+            echo "Error: Failed to import certificate to System.keychain. Check the password or permissions."
             exit 1
           }
           echo "Certificate imported successfully."
