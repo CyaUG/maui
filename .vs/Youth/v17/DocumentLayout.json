@@ -38,8 +38,16 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 5,
+          "SelectedChildIndex": 7,
           "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:128:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{01321f1c-6c9e-3b5b-9c0f-66d2a373c254}"
+            },
             {
               "$type": "Document",
               "DocumentIndex": 2,
@@ -108,7 +116,7 @@
               "RelativeDocumentMoniker": "Views\\Events\\EventPosPage.xaml.cs",
               "ToolTip": "C:\\Users\\dell\\workspace\\MAUI\\Youth\\Views\\Events\\EventPosPage.xaml.cs",
               "RelativeToolTip": "Views\\Events\\EventPosPage.xaml.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAiwAsAAAABAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAiwAkAAAA5AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-11-07T11:53:40.854Z",
               "EditorCaption": ""
@@ -124,18 +132,6 @@
               "ViewState": "AgIAACEAAAAAAAAAAAAAACsAAAAgAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
               "WhenOpened": "2024-11-07T11:51:33.456Z"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{cce594b6-0c39-4442-ba28-10c64ac7e89f}"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:128:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{01321f1c-6c9e-3b5b-9c0f-66d2a373c254}"
             },
             {
               "$type": "Bookmark",

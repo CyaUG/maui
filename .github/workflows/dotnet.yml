@@ -24,82 +24,82 @@ env:
 
 jobs:
   # MAUI Android Build
-  # build-android:
-  #   runs-on: windows-latest
-  #   name: Android Build
-  #   steps:
-  #     - name: Checkout
-  #       uses: actions/checkout@v4
+  build-android:
+    runs-on: windows-latest
+    name: Android Build
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
 
-  #     - name: Setup .NET 8
-  #       uses: actions/setup-dotnet@v4
-  #       with:
-  #         dotnet-version: 8.0.x
+      - name: Setup .NET 8
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 8.0.x
 
-  #     - name: Install MAUI Workload
-  #       run: dotnet workload install maui --ignore-failed-sources
+      - name: Install MAUI Workload
+        run: dotnet workload install maui --ignore-failed-sources
 
-  #     - name: Ensure Directory Exists
-  #       run: |
-  #         if (-Not (Test-Path -Path "bin\Release\net8.0-android")) {
-  #           New-Item -Path "bin\Release\net8.0-android" -ItemType Directory
-  #         }
+      - name: Ensure Directory Exists
+        run: |
+          if (-Not (Test-Path -Path "bin\Release\net8.0-android")) {
+            New-Item -Path "bin\Release\net8.0-android" -ItemType Directory
+          }
 
-  #     - name: Restore Dependencies
-  #       run: dotnet restore Youth.csproj
+      - name: Restore Dependencies
+        run: dotnet restore Youth.csproj
 
-  #     - name: Build MAUI Android
-  #       run: dotnet publish Youth.csproj -c Release -f net8.0-android --no-restore
+      - name: Build MAUI Android
+        run: dotnet publish Youth.csproj -c Release -f net8.0-android --no-restore
 
-  #     - name: List Build Artifacts
-  #       run: |
-  #         echo "Listing files in bin\Release\net8.0-android"
-  #         dir bin\Release\net8.0-android
+      - name: List Build Artifacts
+        run: |
+          echo "Listing files in bin\Release\net8.0-android"
+          dir bin\Release\net8.0-android
 
-  #     - name: Upload Android Artifact
-  #       uses: actions/upload-artifact@v4.3.4
-  #       with:
-  #         name: market-android-ci-build
-  #         path: bin\Release\net8.0-android\*
+      - name: Upload Android Artifact
+        uses: actions/upload-artifact@v4.3.4
+        with:
+          name: market-android-ci-build
+          path: bin\Release\net8.0-android\*
 
   # # MAUI Windows Build
-  # build-windows:
-  #   runs-on: windows-latest
-  #   name: Windows Build
-  #   steps:
-  #     - name: Checkout
-  #       uses: actions/checkout@v4
+  build-windows:
+    runs-on: windows-latest
+    name: Windows Build
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
 
-  #     - name: Setup .NET 8
-  #       uses: actions/setup-dotnet@v4
-  #       with:
-  #         dotnet-version: 8.0.x
+      - name: Setup .NET 8
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 8.0.x
 
-  #     - name: Install MAUI Workload
-  #       run: dotnet workload install maui
+      - name: Install MAUI Workload
+        run: dotnet workload install maui
 
-  #     - name: Ensure Directory Exists
-  #       run: |
-  #         if (-Not (Test-Path -Path "bin\x64\Release\net8.0-windows10.0.19041.0\win-x64")) {
-  #           New-Item -Path "bin\x64\Release\net8.0-windows10.0.19041.0\win-x64" -ItemType Directory
-  #         }
+      - name: Ensure Directory Exists
+        run: |
+          if (-Not (Test-Path -Path "bin\x64\Release\net8.0-windows10.0.19041.0\win-x64")) {
+            New-Item -Path "bin\x64\Release\net8.0-windows10.0.19041.0\win-x64" -ItemType Directory
+          }
 
-  #     - name: Restore Dependencies
-  #       run: dotnet restore Youth.csproj -r win-x64
+      - name: Restore Dependencies
+        run: dotnet restore Youth.csproj -r win-x64
 
-  #     - name: Build MAUI Windows
-  #       run: dotnet publish Youth.csproj -c Release -f net8.0-windows10.0.19041.0 -r win-x64 --no-restore /p:PublishReadyToRun=false
+      - name: Build MAUI Windows
+        run: dotnet publish Youth.csproj -c Release -f net8.0-windows10.0.19041.0 -r win-x64 --no-restore /p:PublishReadyToRun=false
 
-  #     - name: List Build Artifacts
-  #       run: |
-  #         echo "Listing files in bin\x64\Release\net8.0-windows10.0.19041.0\win-x64"
-  #         dir bin\x64\Release\net8.0-windows10.0.19041.0\win-x64
+      - name: List Build Artifacts
+        run: |
+          echo "Listing files in bin\x64\Release\net8.0-windows10.0.19041.0\win-x64"
+          dir bin\x64\Release\net8.0-windows10.0.19041.0\win-x64
 
-  #     - name: Upload Windows Artifact
-  #       uses: actions/upload-artifact@v4
-  #       with:
-  #         name: market-windows-ci-build
-  #         path: bin\x64\Release\net8.0-windows10.0.19041.0\win-x64\**\*.msix
+      - name: Upload Windows Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: market-windows-ci-build
+          path: bin\x64\Release\net8.0-windows10.0.19041.0\win-x64\**\*.msix
 
   # MAUI iOS Build
   build-ios:
