@@ -18,7 +18,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Youth")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Release")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0+70290e610c72dc6df4b006565e5aa06e1af65609")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0+2b4fc01f43a7e57099396e83b2206d9dff6fd623")]
 [assembly: System.Reflection.AssemblyProductAttribute("Youth")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Youth")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

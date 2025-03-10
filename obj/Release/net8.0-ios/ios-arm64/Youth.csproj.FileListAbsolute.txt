@@ -499,3 +499,4 @@ C:\Users\dell\workspace\MAUI\Youth\obj\Release\net8.0-ios\ios-arm64\refint\Youth
 C:\Users\dell\workspace\MAUI\Youth\obj\Release\net8.0-ios\ios-arm64\Youth.pdb
 C:\Users\dell\workspace\MAUI\Youth\obj\Release\net8.0-ios\ios-arm64\Youth.genruntimeconfig.cache
 C:\Users\dell\workspace\MAUI\Youth\obj\Release\net8.0-ios\ios-arm64\ref\Youth.dll
+C:\Users\dell\workspace\MAUI\Youth\obj\Release\net8.0-ios\ios-arm64\Youth.sourcelink.json
