@@ -56,10 +56,10 @@
 
 	<ItemGroup>
 		<!-- App Icon -->
-		<MauiIcon Include="Resources\AppIcon\cya_icon.svg" ForegroundFile="Resources\AppIcon\cya_icon.svg" Color="#2E1913" />
+		<MauiIcon Include="Resources\AppIcon\appicon.svg" ForegroundFile="Resources\AppIcon\appiconfg.svg" Color="#2E1913" />
 
 		<!-- Splash Screen -->
-		<MauiSplashScreen Include="Resources\Splash\cya_icon.svg" Color="#2E1913" BaseSize="128,128" />
+		<MauiSplashScreen Include="Resources\Splash\splash.svg" Color="#2E1913" BaseSize="128,128" />
 
 		<!-- Images -->
 		<MauiImage Include="Resources\Images\*" />
@@ -73,32 +73,6 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <None Remove="Resources\AppIcon\%24placeholder%24.scale-100.png" />
-	  <None Remove="Resources\AppIcon\%24placeholder%24.scale-125.png" />
-	  <None Remove="Resources\AppIcon\%24placeholder%24.scale-150.png" />
-	  <None Remove="Resources\AppIcon\%24placeholder%24.scale-200.png" />
-	  <None Remove="Resources\AppIcon\%24placeholder%24.scale-400.png" />
-	  <None Remove="Resources\AppIcon\%24placeholder%24.targetsize-16_altform-lightunplated.png" />
-	  <None Remove="Resources\AppIcon\%24placeholder%24.targetsize-16_altform-unplated.png" />
-	  <None Remove="Resources\AppIcon\%24placeholder%24.targetsize-24_altform-lightunplated.png" />
-	  <None Remove="Resources\AppIcon\%24placeholder%24.targetsize-24_altform-unplated.png" />
-	  <None Remove="Resources\AppIcon\%24placeholder%24.targetsize-256_altform-lightunplated.png" />
-	  <None Remove="Resources\AppIcon\%24placeholder%24.targetsize-256_altform-unplated.png" />
-	  <None Remove="Resources\AppIcon\%24placeholder%24.targetsize-32_altform-lightunplated.png" />
-	  <None Remove="Resources\AppIcon\%24placeholder%24.targetsize-32_altform-unplated.png" />
-	  <None Remove="Resources\AppIcon\%24placeholder%24.targetsize-48_altform-lightunplated.png" />
-	  <None Remove="Resources\AppIcon\%24placeholder%24.targetsize-48_altform-unplated.png" />
-	  <None Remove="Resources\AppIcon\2480x1200.scale-100.png" />
-	  <None Remove="Resources\AppIcon\2480x1200.scale-125.png" />
-	  <None Remove="Resources\AppIcon\2480x1200.scale-150.png" />
-	  <None Remove="Resources\AppIcon\2480x1200.scale-200.png" />
-	  <None Remove="Resources\AppIcon\2480x1200.scale-400.png" />
-	  <None Remove="Resources\AppIcon\BadgeLogo.scale-100.png" />
-	  <None Remove="Resources\AppIcon\BadgeLogo.scale-125.png" />
-	  <None Remove="Resources\AppIcon\BadgeLogo.scale-150.png" />
-	  <None Remove="Resources\AppIcon\BadgeLogo.scale-200.png" />
-	  <None Remove="Resources\AppIcon\BadgeLogo.scale-400.png" />
-	  
 	  <None Remove="Resources\Fonts\fa-solid-900.ttf" />
 	  <None Remove="Resources\Images\access_time.png" />
 	  <None Remove="Resources\Images\account_plus.png" />
