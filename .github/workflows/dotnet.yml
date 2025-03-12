@@ -153,19 +153,14 @@ jobs:
           mkdir -p ~/Library/MobileDevice/Provisioning\ Profiles
           cp /tmp/profile.mobileprovision ~/Library/MobileDevice/Provisioning\ Profiles/
 
-      - name: Build for iOS Simulator (x64)
-        run: |
-          dotnet build Youth.csproj -c Release -f net8.0-ios \
-            -p:RuntimeIdentifier=iossimulator-x64 \
-            -p:CodesignKey="Apple Distribution: My Team Name (TeamID)" \
-            --no-restore
-
       - name: Build for iOS Device (arm64)
         run: |
-          dotnet build Youth.csproj -c Release -f net8.0-ios \
+          dotnet publish Youth.csproj -c Release -f net8.0-ios \
             -p:RuntimeIdentifier=ios-arm64 \
+            -p:PlatformTarget=arm64 \
             -p:CodesignKey="Apple Distribution: My Team Name (TeamID)" \
-            -p:ArchiveOnBuild=true --no-restore
+            -p:ArchiveOnBuild=true \
+            -p:GenerateiOSAppBundle=true --no-restore
 
       - name: List Build Artifacts
         run: ls -alR bin/Release/net8.0-ios
@@ -174,7 +169,7 @@ jobs:
         uses: actions/upload-artifact@v4.3.4
         with:
           name: market-ios-ci-build
-          path: bin/Release/net8.0-ios/**/*.app
+          path: bin/Release/net8.0-ios/**/*.ipa
 
   # MAUI iOS Build
   # build-ios:
