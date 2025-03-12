@@ -27,6 +27,9 @@
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
 	<key>XSAppIconAssets</key>
-	<string>Assets.xcassets/Appicon.appiconset</string>
+	<string>Assets.xcassets/appicon.appiconset</string>
+   
+  <key>NSCameraUsageDescription</key>
+  <string>This app uses barcode scanning to make payments and track orders</string>
 </dict>
 </plist>
