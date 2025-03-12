@@ -51,7 +51,7 @@
 
 	<PropertyGroup Condition="'$(TargetFramework)'=='net8.0-ios'">
 	  <CodesignKey>Apple Distribution: Specioza Nakate (5N4YN56B77)</CodesignKey>
-	  <CodesignProvision>VS: WildCard Development</CodesignProvision>
+	  <CodesignProvision>Automatic</CodesignProvision>
 	</PropertyGroup>
 
 	<ItemGroup>
