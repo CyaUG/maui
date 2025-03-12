@@ -573,6 +573,10 @@
             {
               "name": "Microsoft.MacCatalyst.Runtime.maccatalyst-arm64.net8.0_18.0",
               "version": "[18.0.8319, 18.0.8319]"
+            },
+            {
+              "name": "Microsoft.MacCatalyst.Runtime.maccatalyst-x64.net8.0_18.0",
+              "version": "[18.0.8319, 18.0.8319]"
             }
           ],
           "frameworkReferences": {
@@ -603,6 +607,9 @@
           "#import": []
         },
         "maccatalyst-arm64": {
+          "#import": []
+        },
+        "maccatalyst-x64": {
           "#import": []
         }
       }
