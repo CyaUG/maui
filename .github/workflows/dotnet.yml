@@ -158,7 +158,7 @@ jobs:
           dotnet publish Youth.csproj -c Release -f net8.0-ios \
             -p:RuntimeIdentifier=ios-arm64 \
             -p:PlatformTarget=arm64 \
-            -p:CodesignKey="Apple Distribution: My Team Name (TeamID)" \
+            -p:CodesignKey="Apple Distribution: Specioza Nakate (5N4YN56B77)" \
             -p:ArchiveOnBuild=true \
             -p:GenerateiOSAppBundle=true --no-restore
 
