@@ -1,32 +1,129 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
-<dict>
-	<key>LSRequiresIPhoneOS</key>
-	<true/>
-	<key>UIDeviceFamily</key>
-	<array>
-		<integer>1</integer>
-		<integer>2</integer>
-	</array>
-	<key>UIRequiredDeviceCapabilities</key>
-	<array>
-		<string>arm64</string>
-	</array>
-	<key>UISupportedInterfaceOrientations</key>
-	<array>
-		<string>UIInterfaceOrientationPortrait</string>
-		<string>UIInterfaceOrientationLandscapeLeft</string>
-		<string>UIInterfaceOrientationLandscapeRight</string>
-	</array>
-	<key>UISupportedInterfaceOrientations~ipad</key>
-	<array>
-		<string>UIInterfaceOrientationPortrait</string>
-		<string>UIInterfaceOrientationPortraitUpsideDown</string>
-		<string>UIInterfaceOrientationLandscapeLeft</string>
-		<string>UIInterfaceOrientationLandscapeRight</string>
-	</array>
-	<key>XSAppIconAssets</key>
-	<string>Assets.xcassets/appicon.appiconset</string>
-</dict>
+	<dict>
+		<key>LSRequiresIPhoneOS</key>
+		<true/>
+		<key>UIDeviceFamily</key>
+		<array>
+			<integer>1</integer>
+			<integer>2</integer>
+		</array>
+		<key>UIRequiredDeviceCapabilities</key>
+		<array>
+			<string>arm64</string>
+		</array>
+		<key>UISupportedInterfaceOrientations</key>
+		<array>
+			<string>UIInterfaceOrientationPortrait</string>
+			<string>UIInterfaceOrientationLandscapeLeft</string>
+			<string>UIInterfaceOrientationLandscapeRight</string>
+		</array>
+		<key>UISupportedInterfaceOrientations~ipad</key>
+		<array>
+			<string>UIInterfaceOrientationPortrait</string>
+			<string>UIInterfaceOrientationPortraitUpsideDown</string>
+			<string>UIInterfaceOrientationLandscapeLeft</string>
+			<string>UIInterfaceOrientationLandscapeRight</string>
+		</array>
+		<key>XSAppIconAssets</key>
+		<string>Assets.xcassets/appicon.appiconset</string>
+
+		<key>CFBundleShortVersionString</key>
+		<string>2.0.0</string>
+
+		<key>CFBundleVersion</key>
+		<string>40.0</string>
+		<key>MinimumOSVersion</key>
+		<string>11.0</string>
+		<key>CFBundleName</key>
+		<string>CYA</string>
+		<key>CFBundleDisplayName</key>
+		<string>CYA</string>
+		<key>CFBundleIdentifier</key>
+		<string>com.wagaana.cya</string>
+		
+		<key>NSLocationAlwaysUsageDescription</key>
+		<string>Can we use your location at all times?</string>
+		<key>NSLocationWhenInUseUsageDescription</key>
+		<string>Can we use your location when your app is being used?</string>
+		<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+		<string>Can we use your location at all times?</string>
+		<key>NSContactsUsageDescription</key>
+		<string>Please allow the application to access your Contacts.</string>
+		<key>NSCalendarsUsageDescription</key>
+		<string>Please allow the application to use the Calendar app.</string>
+		<key>NSMicrophoneUsageDescription</key>
+		<string>Please allow the Microphone to be used for audio recording.</string>
+		<key>NSAppleMusicUsageDescription</key>
+		<string>Please allow the application to use Apple Music.</string>
+		<key>NSSiriUsageDescription</key>
+		<string>Please allow Siri to talk to the application</string>
+		<key>NSBluetoothAlwaysUsageDescription</key>
+		<string>Please allow the Bluetooth to be used for sharing resources and to communicate</string>
+		<key>NSCameraUsageDescription</key>
+		<string>Please allow the camera to be used for scanning barcodes</string>
+		<key>UIBackgroundModes</key>
+		<array>
+			<string>fetch</string>
+			<string>remote-notification</string>
+			<string>processing</string>
+		</array>
+		<key>FirebaseAppDelegateProxyEnabled</key>
+		<string>No</string>
+		<key>BGTaskSchedulerPermittedIdentifiers</key>
+		<array>
+			<string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
+		</array>
+		<key>UIRequiresFullScreen</key>
+		<true/>
+		<key>ITSAppUsesNonExemptEncryption</key>
+		<false/>
+		<key>UIApplicationSceneManifest</key>
+		<dict>
+			<key>UIApplicationSupportsMultipleScenes</key>
+			<false/>
+		</dict>
+		<key>LSSupportsOpeningDocumentsInPlace</key>
+		<true/>
+		<key>UIFileSharingEnabled</key>
+		<true/>
+		<key>UISupportsDocumentBrowser</key>
+		<true/>
+		<key>CFBundleDocumentTypes</key>
+		<array>
+			<dict>
+				<key>CFBundleTypeName</key>
+				<string>PDF Document</string>
+				<key>LSHandlerRank</key>
+				<string>Alternate</string>
+				<key>LSItemContentTypes</key>
+				<array>
+					<string>com.adobe.pdf</string>
+				</array>
+			</dict>
+			<dict>
+				<key>CFBundleTypeName</key>
+				<string>Word Document</string>
+				<key>LSHandlerRank</key>
+				<string>Alternate</string>
+				<key>LSItemContentTypes</key>
+				<array>
+					<string>com.microsoft.word.doc</string>
+					<string>org.openxmlformats.wordprocessingml.document</string>
+				</array>
+			</dict>
+			<dict>
+				<key>CFBundleTypeName</key>
+				<string>Excel Document</string>
+				<key>LSHandlerRank</key>
+				<string>Alternate</string>
+				<key>LSItemContentTypes</key>
+				<array>
+					<string>com.microsoft.excel.xls</string>
+					<string>org.openxmlformats.spreadsheetml.sheet</string>
+				</array>
+			</dict>
+		</array>
+	</dict>
 </plist>

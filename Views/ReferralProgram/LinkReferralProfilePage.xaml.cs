@@ -39,9 +39,11 @@ namespace Youth.Views.ReferralProgram
             await Shell.Current.GoToAsync("..");
         }
 
-        private void Handle_OnScanResult(object sender, BarcodeDetectionEventArgs e)
+        public void Handle_OnScanResult(object sender, BarcodeDetectionEventArgs e)
         {
-            var result = e.Results?.FirstOrDefault();
+            if (e?.Results == null) return;
+
+            var result = e.Results.FirstOrDefault();
             if (result is null) return;
 
             Dispatcher.DispatchAsync(async () =>
