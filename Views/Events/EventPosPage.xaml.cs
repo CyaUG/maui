@@ -45,12 +45,11 @@ namespace Youth.Views.Events
             {
                 Action<double> callback = input => MyDraggableView.HeightRequest = input;
                 double startHeight = mainDisplayInfo.Height / 4;
-                double endiendHeight = 0;
+                double endHeight = 0;
                 uint rate = 32;
                 uint length = 500;
                 Easing easing = Easing.SinOut;
-                MyDraggableView.Animate("anim", callback, startHeight, endiendHeight, rate, length, easing);
-
+                MyDraggableView.Animate("anim", callback, startHeight, endHeight, rate, length, easing);
             }
         }
         void TapGestureRecognizer_Tapped(System.Object sender, System.EventArgs e)
@@ -58,11 +57,11 @@ namespace Youth.Views.Events
             var mainDisplayInfo = DeviceDisplay.MainDisplayInfo;
             Action<double> callback = input => MyDraggableView.HeightRequest = input;
             double startHeight = mainDisplayInfo.Height / 4;
-            double endiendHeight = 0;
+            double endHeight = 0;
             uint rate = 32;
             uint length = 500;
             Easing easing = Easing.SinOut;
-            MyDraggableView.Animate("anim", callback, startHeight, endiendHeight, rate, length, easing);
+            MyDraggableView.Animate("anim", callback, startHeight, endHeight, rate, length, easing);
             _viewModel.OnTockenStatusUpdate(false);
         }
 

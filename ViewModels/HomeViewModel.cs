@@ -45,18 +45,17 @@ namespace Youth.ViewModels
             PlasticsGridTappedCommand = new Command(async () => await OpenMainPlasticsPageCommand());
             EventsGridTappedCommand = new Command(async () => await OpenMainEventsPageCommand());
             QuizzesGridTappedCommand = new Command(async () => await OpenMainQuizzesPageCommand());
+            _ = ExecuteLoadMyAccountCommand();
         }
 
         public void OnAppearing()
         {
             UpdateAuthStatus();
-            LoadMyAccountCommand.Execute(userAccount);
+            IsBusy = true;
         }
 
         async Task ExecuteLoadMyAccountCommand()
         {
-            IsBusy = true;
-
             try
             {
                 var serializer = new JsonSerializer();
@@ -70,32 +69,23 @@ namespace Youth.ViewModels
 
                 JObject accObj = await UserAccount.LoadMyProfileAsync();
                 userAccount = accObj.ToObject<UserAccount>(serializer);
-                OnPropertyChanged("userAccount");
-
                 systemSettings = await SystemSettings.fetchSystemSettings();
                 Debug.WriteLine("MainShoppingViewModel: " + systemSettings.currency);
-                OnPropertyChanged("systemSettings");
-
                 JObject dashObj = await DashboardSummary.LoadUserDashboardSummary();
                 dashboardSummary = dashObj["data"].ToObject<DashboardSummary>(serializer);
-                OnPropertyChanged("dashboardSummary");
-
                 JObject quizAccObj = await Quiz.getMyQuizProfile();
                 quizProfile = quizAccObj.ToObject<UserAccount>(serializer);
-                OnPropertyChanged("quizProfile");
-                IsBusy = false;
-                OnPropertyChanged("IsBusy");
-
-
             }
             catch (Exception ex)
             {
                 Debug.WriteLine("HomeViewModel: " + ex);
-                IsBusy = false;
-                OnPropertyChanged("IsBusy");
             }
             finally
             {
+                OnPropertyChanged("userAccount");
+                OnPropertyChanged("systemSettings");
+                OnPropertyChanged("dashboardSummary");
+                OnPropertyChanged("quizProfile");
                 IsBusy = false;
                 OnPropertyChanged("IsBusy");
             }
