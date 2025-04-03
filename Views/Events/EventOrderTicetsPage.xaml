@@ -58,9 +58,6 @@
                         HeightRequest="30"/>
             </StackLayout>
 
-            <RefreshView x:DataType="local:EventOrderTicetsViewModel"
-                    Command="{Binding EventOrderTicetsLoadCommand}"
-                    IsRefreshing="{Binding IsBusy}">
                 <ScrollView VerticalScrollBarVisibility="Never">
                     <StackLayout
                         Padding="10,0,0,10"
@@ -175,7 +172,6 @@
                         </CollectionView>
                     </StackLayout>
                 </ScrollView>
-            </RefreshView>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

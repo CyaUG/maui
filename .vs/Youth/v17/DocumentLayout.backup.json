@@ -3,28 +3,88 @@
   "WorkspaceRootPath": "C:\\Users\\dell\\workspace\\MAUI\\Youth\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{31A8B0CC-8ED8-4652-BFA9-DD86FE8EDD60}|Youth.csproj|c:\\users\\dell\\workspace\\maui\\youth\\viewmodels\\homeviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{31A8B0CC-8ED8-4652-BFA9-DD86FE8EDD60}|Youth.csproj|solutionrelative:viewmodels\\homeviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{31A8B0CC-8ED8-4652-BFA9-DD86FE8EDD60}|Youth.csproj|c:\\users\\dell\\workspace\\maui\\youth\\views\\shopping\\productdetailspage.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{31A8B0CC-8ED8-4652-BFA9-DD86FE8EDD60}|Youth.csproj|solutionrelative:views\\shopping\\productdetailspage.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{31A8B0CC-8ED8-4652-BFA9-DD86FE8EDD60}|Youth.csproj|c:\\users\\dell\\workspace\\maui\\youth\\views\\main\\homepage.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{31A8B0CC-8ED8-4652-BFA9-DD86FE8EDD60}|Youth.csproj|solutionrelative:views\\main\\homepage.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{31A8B0CC-8ED8-4652-BFA9-DD86FE8EDD60}|Youth.csproj|c:\\users\\dell\\workspace\\maui\\youth\\viewmodels\\productdetailsviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{31A8B0CC-8ED8-4652-BFA9-DD86FE8EDD60}|Youth.csproj|solutionrelative:viewmodels\\productdetailsviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{31A8B0CC-8ED8-4652-BFA9-DD86FE8EDD60}|Youth.csproj|c:\\users\\dell\\workspace\\maui\\youth\\app.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{31A8B0CC-8ED8-4652-BFA9-DD86FE8EDD60}|Youth.csproj|solutionrelative:app.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{31A8B0CC-8ED8-4652-BFA9-DD86FE8EDD60}|Youth.csproj|c:\\users\\dell\\workspace\\maui\\youth\\viewmodels\\shoppingcategoriesviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{31A8B0CC-8ED8-4652-BFA9-DD86FE8EDD60}|Youth.csproj|solutionrelative:viewmodels\\shoppingcategoriesviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\dell\\workspace\\MAUI\\Youth\\obj\\Debug\\net8.0-windows10.0.19041.0\\win10-x64\\Platforms\\Windows\\App.g.i.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:obj\\Debug\\net8.0-windows10.0.19041.0\\win10-x64\\Platforms\\Windows\\App.g.i.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{31A8B0CC-8ED8-4652-BFA9-DD86FE8EDD60}|Youth.csproj|c:\\users\\dell\\workspace\\maui\\youth\\viewmodels\\mainshoppingviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{31A8B0CC-8ED8-4652-BFA9-DD86FE8EDD60}|Youth.csproj|solutionrelative:viewmodels\\mainshoppingviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{31A8B0CC-8ED8-4652-BFA9-DD86FE8EDD60}|Youth.csproj|c:\\users\\dell\\workspace\\maui\\youth\\app.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
-      "RelativeMoniker": "D:0:0:{31A8B0CC-8ED8-4652-BFA9-DD86FE8EDD60}|Youth.csproj|solutionrelative:app.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+      "AbsoluteMoniker": "D:0:0:{31A8B0CC-8ED8-4652-BFA9-DD86FE8EDD60}|Youth.csproj|c:\\users\\dell\\workspace\\maui\\youth\\views\\shopping\\shoppingorderspage.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{31A8B0CC-8ED8-4652-BFA9-DD86FE8EDD60}|Youth.csproj|solutionrelative:views\\shopping\\shoppingorderspage.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{31A8B0CC-8ED8-4652-BFA9-DD86FE8EDD60}|Youth.csproj|c:\\users\\dell\\workspace\\maui\\youth\\views\\main\\homepage.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
-      "RelativeMoniker": "D:0:0:{31A8B0CC-8ED8-4652-BFA9-DD86FE8EDD60}|Youth.csproj|solutionrelative:views\\main\\homepage.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+      "AbsoluteMoniker": "D:0:0:{31A8B0CC-8ED8-4652-BFA9-DD86FE8EDD60}|Youth.csproj|c:\\users\\dell\\workspace\\maui\\youth\\viewmodels\\shoppingordersviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{31A8B0CC-8ED8-4652-BFA9-DD86FE8EDD60}|Youth.csproj|solutionrelative:viewmodels\\shoppingordersviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{31A8B0CC-8ED8-4652-BFA9-DD86FE8EDD60}|Youth.csproj|c:\\users\\dell\\workspace\\maui\\youth\\views\\shopping\\subcategoryitemscustompage.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{31A8B0CC-8ED8-4652-BFA9-DD86FE8EDD60}|Youth.csproj|solutionrelative:views\\shopping\\subcategoryitemscustompage.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{31A8B0CC-8ED8-4652-BFA9-DD86FE8EDD60}|Youth.csproj|c:\\users\\dell\\workspace\\maui\\youth\\views\\shopping\\shoppingwishlistpage.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{31A8B0CC-8ED8-4652-BFA9-DD86FE8EDD60}|Youth.csproj|solutionrelative:views\\shopping\\shoppingwishlistpage.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{31A8B0CC-8ED8-4652-BFA9-DD86FE8EDD60}|Youth.csproj|c:\\users\\dell\\workspace\\maui\\youth\\viewmodels\\shoppingwishlistviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{31A8B0CC-8ED8-4652-BFA9-DD86FE8EDD60}|Youth.csproj|solutionrelative:viewmodels\\shoppingwishlistviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{31A8B0CC-8ED8-4652-BFA9-DD86FE8EDD60}|Youth.csproj|c:\\users\\dell\\workspace\\maui\\youth\\views\\shopping\\shoppingorderproductspage.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{31A8B0CC-8ED8-4652-BFA9-DD86FE8EDD60}|Youth.csproj|solutionrelative:views\\shopping\\shoppingorderproductspage.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{31A8B0CC-8ED8-4652-BFA9-DD86FE8EDD60}|Youth.csproj|c:\\users\\dell\\workspace\\maui\\youth\\viewmodels\\shoppingorderproductsviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{31A8B0CC-8ED8-4652-BFA9-DD86FE8EDD60}|Youth.csproj|solutionrelative:viewmodels\\shoppingorderproductsviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{31A8B0CC-8ED8-4652-BFA9-DD86FE8EDD60}|Youth.csproj|c:\\users\\dell\\workspace\\maui\\youth\\views\\shopping\\shoppingcategoriespage.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{31A8B0CC-8ED8-4652-BFA9-DD86FE8EDD60}|Youth.csproj|solutionrelative:views\\shopping\\shoppingcategoriespage.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{31A8B0CC-8ED8-4652-BFA9-DD86FE8EDD60}|Youth.csproj|c:\\users\\dell\\workspace\\maui\\youth\\views\\shopping\\shoppingcartpage.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{31A8B0CC-8ED8-4652-BFA9-DD86FE8EDD60}|Youth.csproj|solutionrelative:views\\shopping\\shoppingcartpage.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{31A8B0CC-8ED8-4652-BFA9-DD86FE8EDD60}|Youth.csproj|c:\\users\\dell\\workspace\\maui\\youth\\viewmodels\\shoppingcartviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{31A8B0CC-8ED8-4652-BFA9-DD86FE8EDD60}|Youth.csproj|solutionrelative:viewmodels\\shoppingcartviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{31A8B0CC-8ED8-4652-BFA9-DD86FE8EDD60}|Youth.csproj|c:\\users\\dell\\workspace\\maui\\youth\\views\\shopping\\searchproductspage.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{31A8B0CC-8ED8-4652-BFA9-DD86FE8EDD60}|Youth.csproj|solutionrelative:views\\shopping\\searchproductspage.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{31A8B0CC-8ED8-4652-BFA9-DD86FE8EDD60}|Youth.csproj|c:\\users\\dell\\workspace\\maui\\youth\\viewmodels\\searchproductsviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{31A8B0CC-8ED8-4652-BFA9-DD86FE8EDD60}|Youth.csproj|solutionrelative:viewmodels\\searchproductsviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{31A8B0CC-8ED8-4652-BFA9-DD86FE8EDD60}|Youth.csproj|c:\\users\\dell\\workspace\\maui\\youth\\views\\shopping\\mainshoppingpage.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{31A8B0CC-8ED8-4652-BFA9-DD86FE8EDD60}|Youth.csproj|solutionrelative:views\\shopping\\mainshoppingpage.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{31A8B0CC-8ED8-4652-BFA9-DD86FE8EDD60}|Youth.csproj|c:\\users\\dell\\workspace\\maui\\youth\\views\\shopping\\deliveryinfoproviderpage.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{31A8B0CC-8ED8-4652-BFA9-DD86FE8EDD60}|Youth.csproj|solutionrelative:views\\shopping\\deliveryinfoproviderpage.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{31A8B0CC-8ED8-4652-BFA9-DD86FE8EDD60}|Youth.csproj|c:\\users\\dell\\workspace\\maui\\youth\\viewmodels\\deliveryinfoproviderviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{31A8B0CC-8ED8-4652-BFA9-DD86FE8EDD60}|Youth.csproj|solutionrelative:viewmodels\\deliveryinfoproviderviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{31A8B0CC-8ED8-4652-BFA9-DD86FE8EDD60}|Youth.csproj|c:\\users\\dell\\workspace\\maui\\youth\\views\\shopping\\checkoutpage.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{31A8B0CC-8ED8-4652-BFA9-DD86FE8EDD60}|Youth.csproj|solutionrelative:views\\shopping\\checkoutpage.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{31A8B0CC-8ED8-4652-BFA9-DD86FE8EDD60}|Youth.csproj|c:\\users\\dell\\workspace\\maui\\youth\\viewmodels\\checkoutviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{31A8B0CC-8ED8-4652-BFA9-DD86FE8EDD60}|Youth.csproj|solutionrelative:viewmodels\\checkoutviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -34,8 +94,268 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 6,
+          "SelectedChildIndex": 13,
           "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "SubCategoryItemsCustomPage.xaml",
+              "DocumentMoniker": "C:\\Users\\dell\\workspace\\MAUI\\Youth\\Views\\Shopping\\SubCategoryItemsCustomPage.xaml",
+              "RelativeDocumentMoniker": "Views\\Shopping\\SubCategoryItemsCustomPage.xaml",
+              "ToolTip": "C:\\Users\\dell\\workspace\\MAUI\\Youth\\Views\\Shopping\\SubCategoryItemsCustomPage.xaml",
+              "RelativeToolTip": "Views\\Shopping\\SubCategoryItemsCustomPage.xaml",
+              "ViewState": "AgIAAAQBAAAAAAAAAAAuwAcBAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2025-04-03T20:08:01.297Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "ShoppingWishListPage.xaml",
+              "DocumentMoniker": "C:\\Users\\dell\\workspace\\MAUI\\Youth\\Views\\Shopping\\ShoppingWishListPage.xaml",
+              "RelativeDocumentMoniker": "Views\\Shopping\\ShoppingWishListPage.xaml",
+              "ToolTip": "C:\\Users\\dell\\workspace\\MAUI\\Youth\\Views\\Shopping\\ShoppingWishListPage.xaml",
+              "RelativeToolTip": "Views\\Shopping\\ShoppingWishListPage.xaml",
+              "ViewState": "AgIAAC4AAAAAAAAAAAD4vzIAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2025-04-03T20:06:30.261Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "ShoppingWishListViewModel.cs",
+              "DocumentMoniker": "C:\\Users\\dell\\workspace\\MAUI\\Youth\\ViewModels\\ShoppingWishListViewModel.cs",
+              "RelativeDocumentMoniker": "ViewModels\\ShoppingWishListViewModel.cs",
+              "ToolTip": "C:\\Users\\dell\\workspace\\MAUI\\Youth\\ViewModels\\ShoppingWishListViewModel.cs",
+              "RelativeToolTip": "ViewModels\\ShoppingWishListViewModel.cs",
+              "ViewState": "AgIAABIAAAAAAAAAAAA9wBwAAAA1AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-03T20:06:56.25Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "ShoppingOrdersViewModel.cs",
+              "DocumentMoniker": "C:\\Users\\dell\\workspace\\MAUI\\Youth\\ViewModels\\ShoppingOrdersViewModel.cs",
+              "RelativeDocumentMoniker": "ViewModels\\ShoppingOrdersViewModel.cs",
+              "ToolTip": "C:\\Users\\dell\\workspace\\MAUI\\Youth\\ViewModels\\ShoppingOrdersViewModel.cs",
+              "RelativeToolTip": "ViewModels\\ShoppingOrdersViewModel.cs",
+              "ViewState": "AgIAABUAAAAAAAAAAAAawBwAAAAzAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-03T20:05:56.076Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "ShoppingOrdersPage.xaml",
+              "DocumentMoniker": "C:\\Users\\dell\\workspace\\MAUI\\Youth\\Views\\Shopping\\ShoppingOrdersPage.xaml",
+              "RelativeDocumentMoniker": "Views\\Shopping\\ShoppingOrdersPage.xaml",
+              "ToolTip": "C:\\Users\\dell\\workspace\\MAUI\\Youth\\Views\\Shopping\\ShoppingOrdersPage.xaml",
+              "RelativeToolTip": "Views\\Shopping\\ShoppingOrdersPage.xaml",
+              "ViewState": "AgIAAEYAAAAAAAAAAAAgwIYAAAAOAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2025-04-03T20:05:29.678Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "ShoppingOrderProductsPage.xaml",
+              "DocumentMoniker": "C:\\Users\\dell\\workspace\\MAUI\\Youth\\Views\\Shopping\\ShoppingOrderProductsPage.xaml",
+              "RelativeDocumentMoniker": "Views\\Shopping\\ShoppingOrderProductsPage.xaml",
+              "ToolTip": "C:\\Users\\dell\\workspace\\MAUI\\Youth\\Views\\Shopping\\ShoppingOrderProductsPage.xaml",
+              "RelativeToolTip": "Views\\Shopping\\ShoppingOrderProductsPage.xaml",
+              "ViewState": "AgIAAEYAAAAAAAAAAAAAAEcAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2025-04-03T20:03:56.204Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "ShoppingOrderProductsViewModel.cs",
+              "DocumentMoniker": "C:\\Users\\dell\\workspace\\MAUI\\Youth\\ViewModels\\ShoppingOrderProductsViewModel.cs",
+              "RelativeDocumentMoniker": "ViewModels\\ShoppingOrderProductsViewModel.cs",
+              "ToolTip": "C:\\Users\\dell\\workspace\\MAUI\\Youth\\ViewModels\\ShoppingOrderProductsViewModel.cs",
+              "RelativeToolTip": "ViewModels\\ShoppingOrderProductsViewModel.cs",
+              "ViewState": "AgIAABYAAAAAAAAAAAAcwB8AAAAxAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-03T20:04:14.36Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "ShoppingCategoriesPage.xaml",
+              "DocumentMoniker": "C:\\Users\\dell\\workspace\\MAUI\\Youth\\Views\\Shopping\\ShoppingCategoriesPage.xaml",
+              "RelativeDocumentMoniker": "Views\\Shopping\\ShoppingCategoriesPage.xaml",
+              "ToolTip": "C:\\Users\\dell\\workspace\\MAUI\\Youth\\Views\\Shopping\\ShoppingCategoriesPage.xaml",
+              "RelativeToolTip": "Views\\Shopping\\ShoppingCategoriesPage.xaml",
+              "ViewState": "AgIAAEcAAAAAAAAAAAAAAEgAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2025-04-03T20:02:19.658Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "ShoppingCategoriesViewModel.cs",
+              "DocumentMoniker": "C:\\Users\\dell\\workspace\\MAUI\\Youth\\ViewModels\\ShoppingCategoriesViewModel.cs",
+              "RelativeDocumentMoniker": "ViewModels\\ShoppingCategoriesViewModel.cs",
+              "ToolTip": "C:\\Users\\dell\\workspace\\MAUI\\Youth\\ViewModels\\ShoppingCategoriesViewModel.cs",
+              "RelativeToolTip": "ViewModels\\ShoppingCategoriesViewModel.cs",
+              "ViewState": "AgIAADkAAAAAAAAAAAAQwD4AAAA6AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-03T20:02:46.187Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "ShoppingCartViewModel.cs",
+              "DocumentMoniker": "C:\\Users\\dell\\workspace\\MAUI\\Youth\\ViewModels\\ShoppingCartViewModel.cs",
+              "RelativeDocumentMoniker": "ViewModels\\ShoppingCartViewModel.cs",
+              "ToolTip": "C:\\Users\\dell\\workspace\\MAUI\\Youth\\ViewModels\\ShoppingCartViewModel.cs",
+              "RelativeToolTip": "ViewModels\\ShoppingCartViewModel.cs",
+              "ViewState": "AgIAAB8AAAAAAAAAAAAcwCUAAAApAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-03T20:01:39.17Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "ShoppingCartPage.xaml",
+              "DocumentMoniker": "C:\\Users\\dell\\workspace\\MAUI\\Youth\\Views\\Shopping\\ShoppingCartPage.xaml",
+              "RelativeDocumentMoniker": "Views\\Shopping\\ShoppingCartPage.xaml",
+              "ToolTip": "C:\\Users\\dell\\workspace\\MAUI\\Youth\\Views\\Shopping\\ShoppingCartPage.xaml",
+              "RelativeToolTip": "Views\\Shopping\\ShoppingCartPage.xaml",
+              "ViewState": "AgIAAD4AAAAAAAAAAAAYwEEAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2025-04-03T20:00:45.115Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 15,
+              "Title": "SearchProductsViewModel.cs",
+              "DocumentMoniker": "C:\\Users\\dell\\workspace\\MAUI\\Youth\\ViewModels\\SearchProductsViewModel.cs",
+              "RelativeDocumentMoniker": "ViewModels\\SearchProductsViewModel.cs",
+              "ToolTip": "C:\\Users\\dell\\workspace\\MAUI\\Youth\\ViewModels\\SearchProductsViewModel.cs",
+              "RelativeToolTip": "ViewModels\\SearchProductsViewModel.cs",
+              "ViewState": "AgIAABMAAAAAAAAAAAAEwBsAAAApAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-03T19:59:46.626Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "SearchProductsPage.xaml",
+              "DocumentMoniker": "C:\\Users\\dell\\workspace\\MAUI\\Youth\\Views\\Shopping\\SearchProductsPage.xaml",
+              "RelativeDocumentMoniker": "Views\\Shopping\\SearchProductsPage.xaml",
+              "ToolTip": "C:\\Users\\dell\\workspace\\MAUI\\Youth\\Views\\Shopping\\SearchProductsPage.xaml",
+              "RelativeToolTip": "Views\\Shopping\\SearchProductsPage.xaml",
+              "ViewState": "AgIAAD8AAAAAAAAAAAAYwEUAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2025-04-03T19:59:13.462Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "ProductDetailsPage.xaml",
+              "DocumentMoniker": "C:\\Users\\dell\\workspace\\MAUI\\Youth\\Views\\Shopping\\ProductDetailsPage.xaml",
+              "RelativeDocumentMoniker": "Views\\Shopping\\ProductDetailsPage.xaml",
+              "ToolTip": "C:\\Users\\dell\\workspace\\MAUI\\Youth\\Views\\Shopping\\ProductDetailsPage.xaml",
+              "RelativeToolTip": "Views\\Shopping\\ProductDetailsPage.xaml",
+              "ViewState": "AgIAABQAAAAAAAAAAAAwwBYAAAA3AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2025-04-03T19:57:29.112Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "ProductDetailsViewModel.cs",
+              "DocumentMoniker": "C:\\Users\\dell\\workspace\\MAUI\\Youth\\ViewModels\\ProductDetailsViewModel.cs",
+              "RelativeDocumentMoniker": "ViewModels\\ProductDetailsViewModel.cs",
+              "ToolTip": "C:\\Users\\dell\\workspace\\MAUI\\Youth\\ViewModels\\ProductDetailsViewModel.cs",
+              "RelativeToolTip": "ViewModels\\ProductDetailsViewModel.cs",
+              "ViewState": "AgIAADMAAAAAAAAAAAAAADoAAAAiAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-03T19:57:55.194Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 16,
+              "Title": "MainShoppingPage.xaml",
+              "DocumentMoniker": "C:\\Users\\dell\\workspace\\MAUI\\Youth\\Views\\Shopping\\MainShoppingPage.xaml",
+              "RelativeDocumentMoniker": "Views\\Shopping\\MainShoppingPage.xaml",
+              "ToolTip": "C:\\Users\\dell\\workspace\\MAUI\\Youth\\Views\\Shopping\\MainShoppingPage.xaml",
+              "RelativeToolTip": "Views\\Shopping\\MainShoppingPage.xaml",
+              "ViewState": "AgIAABwAAAAAAAAAAIAwwCUAAABbAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2025-04-03T19:55:16.464Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "MainShoppingViewModel.cs",
+              "DocumentMoniker": "C:\\Users\\dell\\workspace\\MAUI\\Youth\\ViewModels\\MainShoppingViewModel.cs",
+              "RelativeDocumentMoniker": "ViewModels\\MainShoppingViewModel.cs",
+              "ToolTip": "C:\\Users\\dell\\workspace\\MAUI\\Youth\\ViewModels\\MainShoppingViewModel.cs",
+              "RelativeToolTip": "ViewModels\\MainShoppingViewModel.cs",
+              "ViewState": "AgIAAJUAAAAAAAAAAAApwJwAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-03T19:55:58.375Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 17,
+              "Title": "DeliveryInfoProviderPage.xaml",
+              "DocumentMoniker": "C:\\Users\\dell\\workspace\\MAUI\\Youth\\Views\\Shopping\\DeliveryInfoProviderPage.xaml",
+              "RelativeDocumentMoniker": "Views\\Shopping\\DeliveryInfoProviderPage.xaml",
+              "ToolTip": "C:\\Users\\dell\\workspace\\MAUI\\Youth\\Views\\Shopping\\DeliveryInfoProviderPage.xaml",
+              "RelativeToolTip": "Views\\Shopping\\DeliveryInfoProviderPage.xaml",
+              "ViewState": "AgIAADgAAAAAAAAAAAAAAEEAAABjAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2025-04-03T19:53:43.235Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 18,
+              "Title": "DeliveryInfoProviderViewModel.cs",
+              "DocumentMoniker": "C:\\Users\\dell\\workspace\\MAUI\\Youth\\ViewModels\\DeliveryInfoProviderViewModel.cs",
+              "RelativeDocumentMoniker": "ViewModels\\DeliveryInfoProviderViewModel.cs",
+              "ToolTip": "C:\\Users\\dell\\workspace\\MAUI\\Youth\\ViewModels\\DeliveryInfoProviderViewModel.cs",
+              "RelativeToolTip": "ViewModels\\DeliveryInfoProviderViewModel.cs",
+              "ViewState": "AgIAAFAAAAAAAAAAAADgv1UAAAApAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-03T19:53:51.751Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 19,
+              "Title": "CheckOutPage.xaml",
+              "DocumentMoniker": "C:\\Users\\dell\\workspace\\MAUI\\Youth\\Views\\Shopping\\CheckOutPage.xaml",
+              "RelativeDocumentMoniker": "Views\\Shopping\\CheckOutPage.xaml",
+              "ToolTip": "C:\\Users\\dell\\workspace\\MAUI\\Youth\\Views\\Shopping\\CheckOutPage.xaml",
+              "RelativeToolTip": "Views\\Shopping\\CheckOutPage.xaml",
+              "ViewState": "AgIAADIAAAAAAAAAAAAAAAwBAAAOAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2025-04-03T19:52:15.117Z",
+              "EditorCaption": ""
+            },
             {
               "$type": "Bookmark",
               "Name": "ST:128:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
@@ -50,80 +370,15 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "App.xaml",
-              "DocumentMoniker": "C:\\Users\\dell\\workspace\\MAUI\\Youth\\App.xaml",
-              "RelativeDocumentMoniker": "App.xaml",
-              "ToolTip": "C:\\Users\\dell\\workspace\\MAUI\\Youth\\App.xaml",
-              "RelativeToolTip": "App.xaml",
-              "ViewState": "AgIAAEUAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2025-03-29T14:19:04.354Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "App.xaml.cs",
-              "DocumentMoniker": "C:\\Users\\dell\\workspace\\MAUI\\Youth\\App.xaml.cs",
-              "RelativeDocumentMoniker": "App.xaml.cs",
-              "ToolTip": "C:\\Users\\dell\\workspace\\MAUI\\Youth\\App.xaml.cs",
-              "RelativeToolTip": "App.xaml.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABMAAAAfAAAAAAAAAA==",
+              "DocumentIndex": 20,
+              "Title": "CheckOutViewModel.cs",
+              "DocumentMoniker": "C:\\Users\\dell\\workspace\\MAUI\\Youth\\ViewModels\\CheckOutViewModel.cs",
+              "RelativeDocumentMoniker": "ViewModels\\CheckOutViewModel.cs",
+              "ToolTip": "C:\\Users\\dell\\workspace\\MAUI\\Youth\\ViewModels\\CheckOutViewModel.cs",
+              "RelativeToolTip": "ViewModels\\CheckOutViewModel.cs",
+              "ViewState": "AgIAAFgAAAAAAAAAAAAgwGMAAAAmAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-29T14:18:29.948Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "App.g.i.cs",
-              "DocumentMoniker": "C:\\Users\\dell\\workspace\\MAUI\\Youth\\obj\\Debug\\net8.0-windows10.0.19041.0\\win10-x64\\Platforms\\Windows\\App.g.i.cs",
-              "RelativeDocumentMoniker": "obj\\Debug\\net8.0-windows10.0.19041.0\\win10-x64\\Platforms\\Windows\\App.g.i.cs",
-              "ToolTip": "C:\\Users\\dell\\workspace\\MAUI\\Youth\\obj\\Debug\\net8.0-windows10.0.19041.0\\win10-x64\\Platforms\\Windows\\App.g.i.cs",
-              "RelativeToolTip": "obj\\Debug\\net8.0-windows10.0.19041.0\\win10-x64\\Platforms\\Windows\\App.g.i.cs",
-              "ViewState": "AgIAACIAAAAAAAAAAAAiwEwAAAAGAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-29T14:02:40.409Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "HomeViewModel.cs",
-              "DocumentMoniker": "C:\\Users\\dell\\workspace\\MAUI\\Youth\\ViewModels\\HomeViewModel.cs",
-              "RelativeDocumentMoniker": "ViewModels\\HomeViewModel.cs",
-              "ToolTip": "C:\\Users\\dell\\workspace\\MAUI\\Youth\\ViewModels\\HomeViewModel.cs*",
-              "RelativeToolTip": "ViewModels\\HomeViewModel.cs*",
-              "ViewState": "AgIAACQAAAAAAAAAAAAiwDQAAAAfAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-29T13:58:13.561Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "HomePage.xaml.cs",
-              "DocumentMoniker": "C:\\Users\\dell\\workspace\\MAUI\\Youth\\Views\\Main\\HomePage.xaml.cs",
-              "RelativeDocumentMoniker": "Views\\Main\\HomePage.xaml.cs",
-              "ToolTip": "C:\\Users\\dell\\workspace\\MAUI\\Youth\\Views\\Main\\HomePage.xaml.cs",
-              "RelativeToolTip": "Views\\Main\\HomePage.xaml.cs",
-              "ViewState": "AgIAADYAAAAAAAAAAAAQwD4AAAAmAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-29T12:19:48.685Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "HomePage.xaml",
-              "DocumentMoniker": "C:\\Users\\dell\\workspace\\MAUI\\Youth\\Views\\Main\\HomePage.xaml",
-              "RelativeDocumentMoniker": "Views\\Main\\HomePage.xaml",
-              "ToolTip": "C:\\Users\\dell\\workspace\\MAUI\\Youth\\Views\\Main\\HomePage.xaml",
-              "RelativeToolTip": "Views\\Main\\HomePage.xaml",
-              "ViewState": "AgIAAA8AAAAAAAAAAAAAABgAAAA3AAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2025-03-29T12:19:39.618Z",
+              "WhenOpened": "2025-04-03T19:52:29.578Z",
               "EditorCaption": ""
             }
           ]

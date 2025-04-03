@@ -81,100 +81,98 @@
                 </ActivityIndicator>
             </StackLayout>
 
-            <RefreshView x:DataType="local:PostDetailsViewModel" Command="{Binding LoadPostCommand}" IsRefreshing="{Binding IsBusy}">
-
-                <ScrollView VerticalScrollBarVisibility="Never">
-                    <StackLayout Padding="0,10,0,10"
+            <ScrollView VerticalScrollBarVisibility="Never" VerticalOptions="FillAndExpand">
+                <StackLayout Padding="0,10,0,10"
                             Spacing="10">
 
-                        <StackLayout Padding="5,0,5,0">
-                            <Frame BackgroundColor="{AppThemeBinding Light={StaticResource LightGray}, Dark={StaticResource Background_Mid}}" CornerRadius="10">
-                                <StackLayout Orientation="Vertical" Padding="5">
+                    <StackLayout Padding="5,0,5,0">
+                        <Frame BackgroundColor="{AppThemeBinding Light={StaticResource LightGray}, Dark={StaticResource Background_Mid}}" CornerRadius="10">
+                            <StackLayout Orientation="Vertical" Padding="5">
 
-                                    <StackLayout Orientation="Horizontal">
-                                        <toolkitViews:AvatarView VerticalOptions="Center" HorizontalOptions="Start" Grid.Column="0" Margin="10,0,0,0" x:Name="ProfileImge"
+                                <StackLayout Orientation="Horizontal">
+                                    <toolkitViews:AvatarView VerticalOptions="Center" HorizontalOptions="Start" Grid.Column="0" Margin="10,0,0,0" x:Name="ProfileImge"
                                                          BorderWidth="0" HeightRequest="50" WidthRequest="50" BackgroundColor="Transparent" CornerRadius="10"
                                                                  ImageSource="{Binding safePost.profile_picture, Converter={StaticResource isImageSourceConverter}}">
-                                            <toolkitViews:AvatarView.Shadow>
-                                                <Shadow Opacity="0.3"/>
-                                            </toolkitViews:AvatarView.Shadow>
+                                        <toolkitViews:AvatarView.Shadow>
+                                            <Shadow Opacity="0.3"/>
+                                        </toolkitViews:AvatarView.Shadow>
 
-                                            <toolkitViews:AvatarView.Triggers>
-                                                <DataTrigger
+                                        <toolkitViews:AvatarView.Triggers>
+                                            <DataTrigger
                                                                 Binding="{Binding safePost.ghostModeEnabled}"
                                                                 TargetType="toolkitViews:AvatarView"
                                                                 Value="True">
-                                                    <Setter Property="IsVisible"
+                                                <Setter Property="IsVisible"
                                                                         Value="False"/>
-                                                </DataTrigger>
-                                            </toolkitViews:AvatarView.Triggers>
-                                        </toolkitViews:AvatarView>
+                                            </DataTrigger>
+                                        </toolkitViews:AvatarView.Triggers>
+                                    </toolkitViews:AvatarView>
 
-                                        <toolkitViews:AvatarView IsVisible="{Binding safePost.ghostModeEnabled}" VerticalOptions="Center" HorizontalOptions="Start" Grid.Column="0" Margin="10,0,0,0"
+                                    <toolkitViews:AvatarView IsVisible="{Binding safePost.ghostModeEnabled}" VerticalOptions="Center" HorizontalOptions="Start" Grid.Column="0" Margin="10,0,0,0"
                                                          BorderWidth="0" HeightRequest="50" WidthRequest="50" BackgroundColor="Transparent" CornerRadius="10"
                                                                  ImageSource="https://cya.wagaana.com/images/default_profile.png">
-                                            <toolkitViews:AvatarView.Shadow>
-                                                <Shadow Opacity="0.3"/>
-                                            </toolkitViews:AvatarView.Shadow>
-                                        </toolkitViews:AvatarView>
+                                        <toolkitViews:AvatarView.Shadow>
+                                            <Shadow Opacity="0.3"/>
+                                        </toolkitViews:AvatarView.Shadow>
+                                    </toolkitViews:AvatarView>
 
-                                        <StackLayout Orientation="Vertical"
+                                    <StackLayout Orientation="Vertical"
                                                 Margin="10,0,0,0">
-                                            <Label FontAttributes="Bold">
-                                                <Label.Text>
-                                                    <MultiBinding StringFormat="{}{0} {1} @{2}">
-                                                        <Binding Path="safePost.name"/>
-                                                        <Binding Path="dot"/>
-                                                        <Binding Path="safePost.user_name"/>
-                                                    </MultiBinding>
-                                                </Label.Text>
+                                        <Label FontAttributes="Bold">
+                                            <Label.Text>
+                                                <MultiBinding StringFormat="{}{0} {1} @{2}">
+                                                    <Binding Path="safePost.name"/>
+                                                    <Binding Path="dot"/>
+                                                    <Binding Path="safePost.user_name"/>
+                                                </MultiBinding>
+                                            </Label.Text>
 
-                                                <Label.Triggers>
-                                                    <DataTrigger
+                                            <Label.Triggers>
+                                                <DataTrigger
                                                         Binding="{Binding safePost.ghostModeEnabled}"
                                                         TargetType="Label"
                                                         Value="True">
-                                                        <Setter Property="IsVisible"
+                                                    <Setter Property="IsVisible"
                                                                 Value="False"/>
-                                                    </DataTrigger>
-                                                </Label.Triggers>
-                                            </Label>
-                                            <Label FontAttributes="Bold"
+                                                </DataTrigger>
+                                            </Label.Triggers>
+                                        </Label>
+                                        <Label FontAttributes="Bold"
                                                     Text="Anonymous . @Anonymous"
                                                     IsVisible="{Binding safePost.ghostModeEnabled}"/>
 
-                                            <Label
+                                        <Label
                                                 FontAttributes="Bold"
                                                 Text="{Binding safePost.created_at}"
                                                 VerticalOptions="Center"
                                                 Style="{StaticResource SubTextSemiBold}"/>
-                                        </StackLayout>
                                     </StackLayout>
+                                </StackLayout>
 
-                                    <utils:LinksLabel Padding="5"
+                                <utils:LinksLabel Padding="5"
                                             Style="{StaticResource SubTextSemiBold}"
                                             LinksText="{Binding safePost.message}"/>
 
-                                    <Frame BackgroundColor="{AppThemeBinding Light={StaticResource LightGray}, Dark={StaticResource Background_Mid}}" CornerRadius="10"
+                                <Frame BackgroundColor="{AppThemeBinding Light={StaticResource LightGray}, Dark={StaticResource Background_Mid}}" CornerRadius="10"
                                             HasShadow="True">
-                                        <Grid>
-                                            <Image
+                                    <Grid>
+                                        <Image
                                                 IsVisible="{Binding safePost.isShowingImage}"
                                                 Source="{Binding safePost.fileUrl, Converter={StaticResource isImageSourceConverter}}"
                                                 HeightRequest="170"
                                                 WidthRequest="130"
                                                 Aspect="AspectFill">
-                                            </Image>
+                                        </Image>
 
-                                            <Image
+                                        <Image
                                                 IsVisible="{Binding safePost.isShowingVideo}"
                                                 Source="{Binding safePost.videoId, StringFormat='https://img.youtube.com/vi/{0}/0.jpg'}"
                                                 HeightRequest="170"
                                                 WidthRequest="130"
                                                 Aspect="AspectFill">
-                                            </Image>
+                                        </Image>
 
-                                            <Image
+                                        <Image
                                                 IsVisible="{Binding safePost.isShowingVideo}"
                                                 Margin="0,0,0,0"
                                                 Source="youtube.png"
@@ -182,110 +180,110 @@
                                                 WidthRequest="50"
                                                 HorizontalOptions="CenterAndExpand"
                                                 VerticalOptions="CenterAndExpand"/>
-                                        </Grid>
-                                    </Frame>
+                                    </Grid>
+                                </Frame>
 
 
-                                    <Grid>
-                                        <Grid.RowDefinitions>
-                                            <RowDefinition/>
-                                        </Grid.RowDefinitions>
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition/>
-                                            <ColumnDefinition/>
-                                        </Grid.ColumnDefinitions>
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition/>
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition/>
+                                        <ColumnDefinition/>
+                                    </Grid.ColumnDefinitions>
 
-                                        <BoxView/>
-                                        <Frame BackgroundColor="{AppThemeBinding Light={StaticResource LightGray}, Dark={StaticResource Background_Mid}}" CornerRadius="10"
+                                    <BoxView/>
+                                    <Frame BackgroundColor="{AppThemeBinding Light={StaticResource LightGray}, Dark={StaticResource Background_Mid}}" CornerRadius="10"
                                                 Padding="2,0,2,0">
-                                            <Grid>
-                                                <Grid.ColumnDefinitions>
-                                                    <ColumnDefinition Width="Auto"/>
-                                                    <ColumnDefinition Width="*"/>
-                                                </Grid.ColumnDefinitions>
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="Auto"/>
+                                                <ColumnDefinition Width="*"/>
+                                            </Grid.ColumnDefinitions>
 
-                                                <Label
+                                            <Label
                                                     Margin="0,0,0,0"
                                                     Style="{StaticResource SubTextSemiBold}"
                                                     VerticalOptions="Center"
                                                     HorizontalOptions="Start"
                                                     Text="{Binding safePost.likes}"
                                                     />
-                                                <Label
+                                            <Label
                                                     Grid.Column="1"
                                                     Margin="5,0,0,0"
                                                     Style="{StaticResource SubTextSemiBold}"
                                                     VerticalOptions="Center"
                                                     Text="Likes"/>
-                                            </Grid>
-                                        </Frame>
+                                        </Grid>
+                                    </Frame>
 
-                                        <BoxView Grid.Column="2"
+                                    <BoxView Grid.Column="2"
                                                 HorizontalOptions="End"/>
-                                        <Frame BackgroundColor="{AppThemeBinding Light={StaticResource LightGray}, Dark={StaticResource Background_Mid}}" CornerRadius="10"
+                                    <Frame BackgroundColor="{AppThemeBinding Light={StaticResource LightGray}, Dark={StaticResource Background_Mid}}" CornerRadius="10"
                                                 Grid.Column="2"
                                                 Padding="2,0,2,0"
                                                 HorizontalOptions="End">
-                                            <Grid>
-                                                <Grid.GestureRecognizers>
-                                                    <TapGestureRecognizer
+                                        <Grid>
+                                            <Grid.GestureRecognizers>
+                                                <TapGestureRecognizer
                                                         NumberOfTapsRequired="1"
                                                         Command="{Binding Source={RelativeSource AncestorType={x:Type local:PostDetailsViewModel}}, Path=SafePostNavTap}"
                                                         CommandParameter="{Binding .}"/>
-                                                </Grid.GestureRecognizers>
+                                            </Grid.GestureRecognizers>
 
-                                                <Grid.ColumnDefinitions>
-                                                    <ColumnDefinition Width="Auto"/>
-                                                    <ColumnDefinition Width="*"/>
-                                                </Grid.ColumnDefinitions>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="Auto"/>
+                                                <ColumnDefinition Width="*"/>
+                                            </Grid.ColumnDefinitions>
 
-                                                <Label
+                                            <Label
                                                     Margin="0,0,0,0"
                                                     VerticalOptions="Center"
                                                     Style="{StaticResource SubTextSemiBold}"
                                                     Text="{Binding safePost.comments}"
                                                     
                                                     HorizontalOptions="End"/>
-                                                <Label
+                                            <Label
                                                     Grid.Column="1"
                                                     Margin="5,0,0,0"
                                                     VerticalOptions="Center"
                                                     Style="{StaticResource SubTextSemiBold}"
                                                     Text="Comment"
                                                     HorizontalOptions="End"/>
-                                            </Grid>
-                                        </Frame>
-                                    </Grid>
+                                        </Grid>
+                                    </Frame>
+                                </Grid>
 
-                                    <Grid>
-                                        <Grid.RowDefinitions>
-                                            <RowDefinition Height="35"/>
-                                        </Grid.RowDefinitions>
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="*"/>
-                                            <ColumnDefinition Width="Auto"/>
-                                            <ColumnDefinition Width="*"/>
-                                        </Grid.ColumnDefinitions>
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="35"/>
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
 
-                                        <Frame BackgroundColor="{AppThemeBinding Light={StaticResource LightGray}, Dark={StaticResource Background_Mid}}" CornerRadius="10"
+                                    <Frame BackgroundColor="{AppThemeBinding Light={StaticResource LightGray}, Dark={StaticResource Background_Mid}}" CornerRadius="10"
                                                 Padding="2">
-                                            <Frame BackgroundColor="{AppThemeBinding Light={StaticResource LightGray}, Dark={StaticResource Background_Mid}}" CornerRadius="10"
+                                        <Frame BackgroundColor="{AppThemeBinding Light={StaticResource LightGray}, Dark={StaticResource Background_Mid}}" CornerRadius="10"
                                                     Padding="0,5,5,5"
                                                     >
-                                                <Frame.GestureRecognizers>
-                                                    <TapGestureRecognizer
+                                            <Frame.GestureRecognizers>
+                                                <TapGestureRecognizer
                                                         NumberOfTapsRequired="1"
                                                         Command="{Binding Source={RelativeSource AncestorType={x:Type local:PostDetailsViewModel}}, Path=LikeSafePostNavTap}"
                                                         CommandParameter="{Binding safePost}"/>
-                                                </Frame.GestureRecognizers>
+                                            </Frame.GestureRecognizers>
 
-                                                <Grid>
-                                                    <Grid.ColumnDefinitions>
-                                                        <ColumnDefinition Width="Auto"/>
-                                                        <ColumnDefinition Width="*"/>
-                                                    </Grid.ColumnDefinitions>
+                                            <Grid>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="Auto"/>
+                                                    <ColumnDefinition Width="*"/>
+                                                </Grid.ColumnDefinitions>
 
-                                                    <Image
+                                                <Image
                                                         IsVisible="{Binding safePost.isUnLiked}"
                                                         Margin="0,0,0,0"
                                                         HorizontalOptions="Center"
@@ -294,7 +292,7 @@
                                                             WidthRequest="20"
                                                         VerticalOptions="Center"/>
 
-                                                    <Image
+                                                <Image
                                                         IsVisible="{Binding safePost.likedIt}"
                                                         Margin="0,0,0,0"
                                                         HorizontalOptions="Center"
@@ -303,21 +301,21 @@
                                                             WidthRequest="20"
                                                         VerticalOptions="Center"/>
 
-                                                    <Label
+                                                <Label
                                                         Grid.Column="1"
                                                         Margin="5,0,0,0"
                                                         Style="{StaticResource SubTextSemiBold}"
                                                         VerticalOptions="Center"
                                                         Text="Like"
                                                         />
-                                                </Grid>
-                                            </Frame>
+                                            </Grid>
                                         </Frame>
+                                    </Frame>
 
-                                        <Frame BackgroundColor="{AppThemeBinding Light={StaticResource LightGray}, Dark={StaticResource Background_Mid}}" CornerRadius="10"
+                                    <Frame BackgroundColor="{AppThemeBinding Light={StaticResource LightGray}, Dark={StaticResource Background_Mid}}" CornerRadius="10"
                                                 Grid.Column="1"
                                                 Padding="2">
-                                            <!--
+                                        <!--
                                             <Frame BackgroundColor="{AppThemeBinding Light={StaticResource LightGray}, Dark={StaticResource Background_Mid}}" CornerRadius="10" Padding="5" >
                                                 <Frame.GestureRecognizers>
                                                     <TapGestureRecognizer
@@ -348,35 +346,35 @@
                                                 </Grid>
                                             </Frame>
                                             -->
-                                        </Frame>
+                                    </Frame>
 
-                                        <Frame BackgroundColor="{AppThemeBinding Light={StaticResource LightGray}, Dark={StaticResource Background_Mid}}" CornerRadius="10"
+                                    <Frame BackgroundColor="{AppThemeBinding Light={StaticResource LightGray}, Dark={StaticResource Background_Mid}}" CornerRadius="10"
                                                 Grid.Column="2"
                                                 Padding="2">
-                                            <Frame BackgroundColor="{AppThemeBinding Light={StaticResource LightGray}, Dark={StaticResource Background_Mid}}" CornerRadius="10"
+                                        <Frame BackgroundColor="{AppThemeBinding Light={StaticResource LightGray}, Dark={StaticResource Background_Mid}}" CornerRadius="10"
                                                     Padding="5"
                                                     >
-                                                <Frame.GestureRecognizers>
-                                                    <TapGestureRecognizer
+                                            <Frame.GestureRecognizers>
+                                                <TapGestureRecognizer
                                                         NumberOfTapsRequired="1"
                                                         Command="{Binding Source={RelativeSource AncestorType={x:Type local:PostDetailsViewModel}}, Path=ShareSafePostNavTap}"
                                                         CommandParameter="{Binding safePost}"/>
-                                                </Frame.GestureRecognizers>
+                                            </Frame.GestureRecognizers>
 
-                                                <Grid>
-                                                    <Grid.ColumnDefinitions>
-                                                        <ColumnDefinition Width="*"/>
-                                                        <ColumnDefinition Width="Auto"/>
-                                                    </Grid.ColumnDefinitions>
+                                            <Grid>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="*"/>
+                                                    <ColumnDefinition Width="Auto"/>
+                                                </Grid.ColumnDefinitions>
 
-                                                    <Image
+                                                <Image
                                                         Margin="0,0,0,0"
                                                         HorizontalOptions="End"
                                                         Source="share.png"
                                                         HeightRequest="20"
                                                             WidthRequest="20"
                                                         VerticalOptions="Center"/>
-                                                    <Label
+                                                <Label
                                                         Grid.Column="1"
                                                         Margin="5,0,0,0"
                                                         VerticalOptions="Center"
@@ -384,109 +382,109 @@
                                                         Text="Share"
                                                         
                                                         HorizontalOptions="End"/>
-                                                </Grid>
-                                            </Frame>
+                                            </Grid>
                                         </Frame>
-                                    </Grid>
-                                </StackLayout>
-                            </Frame>
-                        </StackLayout>
+                                    </Frame>
+                                </Grid>
+                            </StackLayout>
+                        </Frame>
+                    </StackLayout>
 
-                        <StackLayout Padding="10,0,10,0">
-                            <Label Padding="10,0,10,0"
+                    <StackLayout Padding="10,0,10,0">
+                        <Label Padding="10,0,10,0"
                                     Text="Discussion"
                                     HorizontalOptions="Start"
                                     
                                     Style="{StaticResource TabHeader}"/>
-                        </StackLayout>
+                    </StackLayout>
 
-                        <StackLayout BindableLayout.ItemsSource="{Binding SafePosts}"
+                    <StackLayout BindableLayout.ItemsSource="{Binding SafePosts}"
                                 IsEnabled="False">
-                            <BindableLayout.ItemTemplate>
-                                <DataTemplate x:DataType="model:SafePost">
-                                    <StackLayout Padding="0,0,0,0"
+                        <BindableLayout.ItemTemplate>
+                            <DataTemplate x:DataType="model:SafePost">
+                                <StackLayout Padding="0,0,0,0"
                                             HorizontalOptions="FillAndExpand">
 
-                                        <Grid>
-                                            <Grid.ColumnDefinitions>
-                                                <ColumnDefinition Width="60"/>
-                                                <ColumnDefinition Width="*"/>
-                                            </Grid.ColumnDefinitions>
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="60"/>
+                                            <ColumnDefinition Width="*"/>
+                                        </Grid.ColumnDefinitions>
 
-                                            <toolkitViews:AvatarView VerticalOptions="Start" HorizontalOptions="Start" Grid.Column="0" Margin="10,0,0,0" x:Name="ProfileImge"
+                                        <toolkitViews:AvatarView VerticalOptions="Start" HorizontalOptions="Start" Grid.Column="0" Margin="10,0,0,0" x:Name="ProfileImge"
                                                          BorderWidth="0" HeightRequest="50" WidthRequest="50" BackgroundColor="Transparent" CornerRadius="10"
                                                                  ImageSource="{Binding profile_picture, Converter={StaticResource isImageSourceConverter}}">
-                                                <toolkitViews:AvatarView.Shadow>
-                                                    <Shadow Opacity="0.3"/>
-                                                </toolkitViews:AvatarView.Shadow>
+                                            <toolkitViews:AvatarView.Shadow>
+                                                <Shadow Opacity="0.3"/>
+                                            </toolkitViews:AvatarView.Shadow>
 
-                                                <toolkitViews:AvatarView.Triggers>
-                                                    <DataTrigger Binding="{Binding ghostModeEnabled}" TargetType="toolkitViews:AvatarView" Value="True">
-                                                        <Setter Property="IsVisible" Value="False"/>
-                                                    </DataTrigger>
-                                                </toolkitViews:AvatarView.Triggers>
-                                            </toolkitViews:AvatarView>
+                                            <toolkitViews:AvatarView.Triggers>
+                                                <DataTrigger Binding="{Binding ghostModeEnabled}" TargetType="toolkitViews:AvatarView" Value="True">
+                                                    <Setter Property="IsVisible" Value="False"/>
+                                                </DataTrigger>
+                                            </toolkitViews:AvatarView.Triggers>
+                                        </toolkitViews:AvatarView>
 
-                                            <toolkitViews:AvatarView IsVisible="{Binding ghostModeEnabled}" VerticalOptions="Start" HorizontalOptions="Start" Grid.Column="0" Margin="10,0,0,0"
+                                        <toolkitViews:AvatarView IsVisible="{Binding ghostModeEnabled}" VerticalOptions="Start" HorizontalOptions="Start" Grid.Column="0" Margin="10,0,0,0"
                                                          BorderWidth="0" HeightRequest="50" WidthRequest="50" BackgroundColor="Transparent" CornerRadius="10"
                                                                  ImageSource="https://cya.wagaana.com/images/default_profile.png">
-                                                <toolkitViews:AvatarView.Shadow>
-                                                    <Shadow Opacity="0.3"/>
-                                                </toolkitViews:AvatarView.Shadow>
-                                            </toolkitViews:AvatarView>
+                                            <toolkitViews:AvatarView.Shadow>
+                                                <Shadow Opacity="0.3"/>
+                                            </toolkitViews:AvatarView.Shadow>
+                                        </toolkitViews:AvatarView>
 
-                                            <Frame BackgroundColor="{AppThemeBinding Light={StaticResource LightGray}, Dark={StaticResource Background_Mid}}"
+                                        <Frame BackgroundColor="{AppThemeBinding Light={StaticResource LightGray}, Dark={StaticResource Background_Mid}}"
                                                    CornerRadius="10" HorizontalOptions="FillAndExpand" HasShadow="True" Margin="5" Grid.Column="1">
-                                                <StackLayout Orientation="Vertical" Padding="5">
-                                                    <StackLayout Orientation="Vertical" Margin="0,0,0,0">
-                                                        <Label FontAttributes="Bold">
-                                                            <Label.Text>
-                                                                <MultiBinding StringFormat="{}{0} {1} @{2}">
-                                                                    <Binding Path="name"/>
-                                                                    <Binding Path="dot"/>
-                                                                    <Binding Path="user_name"/>
-                                                                </MultiBinding>
-                                                            </Label.Text>
+                                            <StackLayout Orientation="Vertical" Padding="5">
+                                                <StackLayout Orientation="Vertical" Margin="0,0,0,0">
+                                                    <Label FontAttributes="Bold">
+                                                        <Label.Text>
+                                                            <MultiBinding StringFormat="{}{0} {1} @{2}">
+                                                                <Binding Path="name"/>
+                                                                <Binding Path="dot"/>
+                                                                <Binding Path="user_name"/>
+                                                            </MultiBinding>
+                                                        </Label.Text>
 
-                                                            <Label.Triggers>
-                                                                <DataTrigger Binding="{Binding ghostModeEnabled}" TargetType="Label" Value="True">
-                                                                    <Setter Property="IsVisible" Value="False"/>
-                                                                </DataTrigger>
-                                                            </Label.Triggers>
-                                                        </Label>
-                                                        <Label FontAttributes="Bold" Text="Anonymous . @Anonymous" IsVisible="{Binding ghostModeEnabled}"/>
+                                                        <Label.Triggers>
+                                                            <DataTrigger Binding="{Binding ghostModeEnabled}" TargetType="Label" Value="True">
+                                                                <Setter Property="IsVisible" Value="False"/>
+                                                            </DataTrigger>
+                                                        </Label.Triggers>
+                                                    </Label>
+                                                    <Label FontAttributes="Bold" Text="Anonymous . @Anonymous" IsVisible="{Binding ghostModeEnabled}"/>
 
-                                                        <Label
+                                                    <Label
                                                             FontAttributes="Bold"
                                                             Text="{Binding created_at}"
                                                             VerticalOptions="Center"
                                                             Style="{StaticResource SubTextSemiBold}"/>
-                                                    </StackLayout>
+                                                </StackLayout>
 
-                                                    <utils:LinksLabel Padding="5"
+                                                <utils:LinksLabel Padding="5"
                                                             Style="{StaticResource SubTextSemiBold}"
                                                             LinksText="{Binding message}"/>
 
-                                                    <Frame BackgroundColor="{AppThemeBinding Light={StaticResource LightGray}, Dark={StaticResource Background_Mid}}" CornerRadius="10"
+                                                <Frame BackgroundColor="{AppThemeBinding Light={StaticResource LightGray}, Dark={StaticResource Background_Mid}}" CornerRadius="10"
                                                             HasShadow="True">
-                                                        <Grid>
-                                                            <Image
+                                                    <Grid>
+                                                        <Image
                                                                 IsVisible="{Binding isShowingImage}"
                                                                 Source="{Binding fileUrl, Converter={StaticResource isImageSourceConverter}}"
                                                                 HeightRequest="170"
                                                                 WidthRequest="130"
                                                                 Aspect="AspectFill">
-                                                            </Image>
+                                                        </Image>
 
-                                                            <Image
+                                                        <Image
                                                                 IsVisible="{Binding isShowingVideo}"
                                                                 Source="{Binding videoId, StringFormat='https://img.youtube.com/vi/{0}/0.jpg'}"
                                                                 HeightRequest="170"
                                                                 WidthRequest="130"
                                                                 Aspect="AspectFill">
-                                                            </Image>
+                                                        </Image>
 
-                                                            <Image
+                                                        <Image
                                                                 IsVisible="{Binding isShowingVideo}"
                                                                 Margin="0,0,0,0"
                                                                 Source="youtube.png"
@@ -494,110 +492,110 @@
                                                                 WidthRequest="50"
                                                                 HorizontalOptions="CenterAndExpand"
                                                                 VerticalOptions="CenterAndExpand"/>
-                                                        </Grid>
-                                                    </Frame>
+                                                    </Grid>
+                                                </Frame>
 
 
-                                                    <Grid>
-                                                        <Grid.RowDefinitions>
-                                                            <RowDefinition Height="30"/>
-                                                        </Grid.RowDefinitions>
-                                                        <Grid.ColumnDefinitions>
-                                                            <ColumnDefinition Width="Auto"/>
-                                                            <ColumnDefinition Width="*"/>
-                                                        </Grid.ColumnDefinitions>
+                                                <Grid>
+                                                    <Grid.RowDefinitions>
+                                                        <RowDefinition Height="30"/>
+                                                    </Grid.RowDefinitions>
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition Width="Auto"/>
+                                                        <ColumnDefinition Width="*"/>
+                                                    </Grid.ColumnDefinitions>
 
-                                                        <BoxView/>
-                                                        <Frame BackgroundColor="{AppThemeBinding Light={StaticResource LightGray}, Dark={StaticResource Background_Mid}}" CornerRadius="10"
+                                                    <BoxView/>
+                                                    <Frame BackgroundColor="{AppThemeBinding Light={StaticResource LightGray}, Dark={StaticResource Background_Mid}}" CornerRadius="10"
                                                                 Padding="2,0,2,0">
-                                                            <Grid>
-                                                                <Grid.ColumnDefinitions>
-                                                                    <ColumnDefinition Width="Auto"/>
-                                                                    <ColumnDefinition Width="*"/>
-                                                                </Grid.ColumnDefinitions>
+                                                        <Grid>
+                                                            <Grid.ColumnDefinitions>
+                                                                <ColumnDefinition Width="Auto"/>
+                                                                <ColumnDefinition Width="*"/>
+                                                            </Grid.ColumnDefinitions>
 
-                                                                <Label
+                                                            <Label
                                                                     Margin="0,0,0,0"
                                                                     Style="{StaticResource SubTextSemiBold}"
                                                                     VerticalOptions="Center"
                                                                     HorizontalOptions="Start"
                                                                     Text="{Binding likes}"
                                                                     />
-                                                                <Label
+                                                            <Label
                                                                     Grid.Column="1"
                                                                     Margin="5,0,0,0"
                                                                     Style="{StaticResource SubTextSemiBold}"
                                                                     VerticalOptions="Center"
                                                                     Text="Likes"/>
-                                                            </Grid>
-                                                        </Frame>
+                                                        </Grid>
+                                                    </Frame>
 
-                                                        <BoxView Grid.Column="2"
+                                                    <BoxView Grid.Column="2"
                                                                 HorizontalOptions="End"/>
-                                                        <Frame BackgroundColor="{AppThemeBinding Light={StaticResource LightGray}, Dark={StaticResource Background_Mid}}" CornerRadius="10"
+                                                    <Frame BackgroundColor="{AppThemeBinding Light={StaticResource LightGray}, Dark={StaticResource Background_Mid}}" CornerRadius="10"
                                                                 Grid.Column="2"
                                                                 Padding="0,0,2,0"
                                                                 HorizontalOptions="End">
-                                                            <Grid>
-                                                                <Grid.GestureRecognizers>
-                                                                    <TapGestureRecognizer
+                                                        <Grid>
+                                                            <Grid.GestureRecognizers>
+                                                                <TapGestureRecognizer
                                                                         NumberOfTapsRequired="1"
                                                                         Command="{Binding Source={RelativeSource AncestorType={x:Type local:PostDetailsViewModel}}, Path=SafePostNavTap}"
                                                                         CommandParameter="{Binding .}"/>
-                                                                </Grid.GestureRecognizers>
+                                                            </Grid.GestureRecognizers>
 
-                                                                <Grid.ColumnDefinitions>
-                                                                    <ColumnDefinition Width="Auto"/>
-                                                                    <ColumnDefinition Width="*"/>
-                                                                </Grid.ColumnDefinitions>
+                                                            <Grid.ColumnDefinitions>
+                                                                <ColumnDefinition Width="Auto"/>
+                                                                <ColumnDefinition Width="*"/>
+                                                            </Grid.ColumnDefinitions>
 
-                                                                <Label
+                                                            <Label
                                                                     Margin="0,0,0,0"
                                                                     VerticalOptions="Center"
                                                                     Style="{StaticResource SubTextSemiBold}"
                                                                     Text="{Binding comments}"
                                                                     
                                                                     HorizontalOptions="End"/>
-                                                                <Label
+                                                            <Label
                                                                     Grid.Column="1"
                                                                     Margin="5,0,0,0"
                                                                     VerticalOptions="Center"
                                                                     Style="{StaticResource SubTextSemiBold}"
                                                                     Text="Comment"
                                                                     HorizontalOptions="End"/>
-                                                            </Grid>
-                                                        </Frame>
-                                                    </Grid>
+                                                        </Grid>
+                                                    </Frame>
+                                                </Grid>
 
-                                                    <Grid>
-                                                        <Grid.RowDefinitions>
-                                                            <RowDefinition Height="35"/>
-                                                        </Grid.RowDefinitions>
-                                                        <Grid.ColumnDefinitions>
-                                                            <ColumnDefinition Width="*"/>
-                                                            <ColumnDefinition Width="Auto"/>
-                                                            <ColumnDefinition Width="*"/>
-                                                        </Grid.ColumnDefinitions>
+                                                <Grid>
+                                                    <Grid.RowDefinitions>
+                                                        <RowDefinition Height="35"/>
+                                                    </Grid.RowDefinitions>
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition Width="*"/>
+                                                        <ColumnDefinition Width="Auto"/>
+                                                        <ColumnDefinition Width="*"/>
+                                                    </Grid.ColumnDefinitions>
 
-                                                        <Frame BackgroundColor="{AppThemeBinding Light={StaticResource LightGray}, Dark={StaticResource Background_Mid}}" CornerRadius="10"
+                                                    <Frame BackgroundColor="{AppThemeBinding Light={StaticResource LightGray}, Dark={StaticResource Background_Mid}}" CornerRadius="10"
                                                                 Padding="2">
-                                                            <Frame BackgroundColor="{AppThemeBinding Light={StaticResource LightGray}, Dark={StaticResource Background_Mid}}" CornerRadius="10"
+                                                        <Frame BackgroundColor="{AppThemeBinding Light={StaticResource LightGray}, Dark={StaticResource Background_Mid}}" CornerRadius="10"
                                                                     Padding="0,5,5,5"
                                                                     >
-                                                                <Frame.GestureRecognizers>
-                                                                    <TapGestureRecognizer
+                                                            <Frame.GestureRecognizers>
+                                                                <TapGestureRecognizer
                                                                         NumberOfTapsRequired="1"
                                                                         Command="{Binding Source={RelativeSource AncestorType={x:Type local:PostDetailsViewModel}}, Path=LikeSafePostNavTap}"
                                                                         CommandParameter="{Binding .}"/>
-                                                                </Frame.GestureRecognizers>
-                                                                
-                                                                <Grid>
-                                                                    <Grid.ColumnDefinitions>
-                                                                        <ColumnDefinition Width="Auto"/>
-                                                                        <ColumnDefinition Width="*"/>
-                                                                    </Grid.ColumnDefinitions>
+                                                            </Frame.GestureRecognizers>
 
-                                                                    <Image
+                                                            <Grid>
+                                                                <Grid.ColumnDefinitions>
+                                                                    <ColumnDefinition Width="Auto"/>
+                                                                    <ColumnDefinition Width="*"/>
+                                                                </Grid.ColumnDefinitions>
+
+                                                                <Image
                                                                         IsVisible="{Binding isUnLiked}"
                                                                         Margin="0,0,0,0"
                                                                         HorizontalOptions="Center"
@@ -606,7 +604,7 @@
                                                                             WidthRequest="20"
                                                                         VerticalOptions="Center"/>
 
-                                                                    <Image
+                                                                <Image
                                                                         IsVisible="{Binding likedIt}"
                                                                         Margin="0,0,0,0"
                                                                         HorizontalOptions="Center"
@@ -615,81 +613,81 @@
                                                                             WidthRequest="20"
                                                                         VerticalOptions="Center"/>
 
-                                                                    <Label
+                                                                <Label
                                                                         Grid.Column="1"
                                                                         Margin="5,0,0,0"
                                                                         Style="{StaticResource SubTextSemiBold}"
                                                                         VerticalOptions="Center"
                                                                         Text="Like"
                                                                         />
-                                                                </Grid>
-                                                            </Frame>
+                                                            </Grid>
                                                         </Frame>
+                                                    </Frame>
 
-                                                        <Frame BackgroundColor="{AppThemeBinding Light={StaticResource LightGray}, Dark={StaticResource Background_Mid}}" CornerRadius="10"
+                                                    <Frame BackgroundColor="{AppThemeBinding Light={StaticResource LightGray}, Dark={StaticResource Background_Mid}}" CornerRadius="10"
                                                                 Grid.Column="1"
                                                                 Padding="2">
-                                                            <Frame BackgroundColor="{AppThemeBinding Light={StaticResource LightGray}, Dark={StaticResource Background_Mid}}" CornerRadius="10"
+                                                        <Frame BackgroundColor="{AppThemeBinding Light={StaticResource LightGray}, Dark={StaticResource Background_Mid}}" CornerRadius="10"
                                                                     Padding="5"
                                                                     >
-                                                                <Frame.GestureRecognizers>
-                                                                    <TapGestureRecognizer
+                                                            <Frame.GestureRecognizers>
+                                                                <TapGestureRecognizer
                                                                         NumberOfTapsRequired="1"
                                                                         Command="{Binding Source={RelativeSource AncestorType={x:Type local:PostDetailsViewModel}}, Path=SafePostNavTap}"
                                                                         CommandParameter="{Binding .}"/>
-                                                                </Frame.GestureRecognizers>
-                                                                
-                                                                <Grid>
-                                                                    <Grid.ColumnDefinitions>
-                                                                        <ColumnDefinition Width="Auto"/>
-                                                                        <ColumnDefinition Width="*"/>
-                                                                    </Grid.ColumnDefinitions>
+                                                            </Frame.GestureRecognizers>
 
-                                                                    <Image
+                                                            <Grid>
+                                                                <Grid.ColumnDefinitions>
+                                                                    <ColumnDefinition Width="Auto"/>
+                                                                    <ColumnDefinition Width="*"/>
+                                                                </Grid.ColumnDefinitions>
+
+                                                                <Image
                                                                         Margin="0,0,0,0"
                                                                         HorizontalOptions="Center"
                                                                         Source="chat.png"
                                                                         HeightRequest="20"
                                                                             WidthRequest="20"
                                                                         VerticalOptions="Center"/>
-                                                                    <Label
+                                                                <Label
                                                                         Grid.Column="1"
                                                                         Margin="5,0,0,0"
                                                                         Style="{StaticResource SubTextSemiBold}"
                                                                         VerticalOptions="Center"
                                                                         Text="Comment"
                                                                         />
-                                                                </Grid>
-                                                            </Frame>
+                                                            </Grid>
                                                         </Frame>
+                                                    </Frame>
 
-                                                        <Frame  BackgroundColor="{AppThemeBinding Light={StaticResource LightGray}, Dark={StaticResource Background_Mid}}" CornerRadius="10"
+                                                    <Frame  BackgroundColor="{AppThemeBinding Light={StaticResource LightGray}, Dark={StaticResource Background_Mid}}" CornerRadius="10"
                                                                 Grid.Column="2"
                                                                 Padding="2">
-                                                            <Frame BackgroundColor="{AppThemeBinding Light={StaticResource LightGray}, Dark={StaticResource Background_Mid}}" CornerRadius="10"
+                                                        <Frame BackgroundColor="{AppThemeBinding Light={StaticResource LightGray}, Dark={StaticResource Background_Mid}}" CornerRadius="10"
                                                                     Padding="5"
                                                                     >
-                                                                <Frame.GestureRecognizers>
-                                                                    <TapGestureRecognizer
+                                                            <Frame.GestureRecognizers>
+                                                                <TapGestureRecognizer
                                                                         NumberOfTapsRequired="1"
                                                                         Command="{Binding Source={RelativeSource AncestorType={x:Type local:PostDetailsViewModel}}, Path=ShareSafePostNavTap}"
                                                                         CommandParameter="{Binding .}"/>
-                                                                </Frame.GestureRecognizers>
-                                                                
-                                                                <Grid>
-                                                                    <Grid.ColumnDefinitions>
-                                                                        <ColumnDefinition Width="*"/>
-                                                                        <ColumnDefinition Width="Auto"/>
-                                                                    </Grid.ColumnDefinitions>
+                                                            </Frame.GestureRecognizers>
 
-                                                                    <Image
+                                                            <Grid>
+                                                                <Grid.ColumnDefinitions>
+                                                                    <ColumnDefinition Width="*"/>
+                                                                    <ColumnDefinition Width="Auto"/>
+                                                                </Grid.ColumnDefinitions>
+
+                                                                <Image
                                                                         Margin="0,0,0,0"
                                                                         HorizontalOptions="End"
                                                                         Source="share.png"
                                                                         HeightRequest="20"
                                                                             WidthRequest="20"
                                                                         VerticalOptions="Center"/>
-                                                                    <Label
+                                                                <Label
                                                                         Grid.Column="1"
                                                                         Margin="5,0,0,0"
                                                                         VerticalOptions="Center"
@@ -697,21 +695,19 @@
                                                                         Text="Share"
                                                                         
                                                                         HorizontalOptions="End"/>
-                                                                </Grid>
-                                                            </Frame>
+                                                            </Grid>
                                                         </Frame>
-                                                    </Grid>
-                                                </StackLayout>
-                                            </Frame>
-                                        </Grid>
-                                    </StackLayout>
-                                </DataTemplate>
-                            </BindableLayout.ItemTemplate>
-                        </StackLayout>
+                                                    </Frame>
+                                                </Grid>
+                                            </StackLayout>
+                                        </Frame>
+                                    </Grid>
+                                </StackLayout>
+                            </DataTemplate>
+                        </BindableLayout.ItemTemplate>
                     </StackLayout>
-                </ScrollView>
-            </RefreshView>
-
+                </StackLayout>
+            </ScrollView>
 
             <!--  Message Entry  -->
             <Frame

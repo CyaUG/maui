@@ -34,32 +34,29 @@
     </ContentPage.Resources>
 
     <ContentPage.Content>
-        <RefreshView x:DataType="vm:ChatViewModel"
-                Command="{Binding LoadMyChatsCommand}"
-                IsRefreshing="{Binding IsBusy}">
-            <StackLayout Orientation="Vertical"
+        <StackLayout Orientation="Vertical"
                     VerticalOptions="StartAndExpand">
-                <StackLayout Orientation="Horizontal"
-                        Spacing="20"/>
-                <StackLayout Orientation="Horizontal"
-                        Spacing="20">
-                    <Label
+            <StackLayout Orientation="Horizontal"
+                             Spacing="20"/>
+            <StackLayout Orientation="Horizontal"
+                             Spacing="20">
+                <Label
                         Text="{Binding Title}"
                         FontAttributes="Bold"
                         FontSize="45"
                         Padding="20"/>
 
-                    <Image Source="account_plus.png"
-                            HorizontalOptions="EndAndExpand"
-                            HeightRequest="40"
-                            Margin="20">
-                        <Image.GestureRecognizers>
-                            <TapGestureRecognizer Tapped="OpenAccountProvider"/>
-                        </Image.GestureRecognizers>
-                    </Image>
-                </StackLayout>
+                <Image Source="account_plus.png"
+                           HorizontalOptions="EndAndExpand"
+                           HeightRequest="40"
+                           Margin="20">
+                    <Image.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OpenAccountProvider"/>
+                    </Image.GestureRecognizers>
+                </Image>
+            </StackLayout>
 
-                <Grid
+            <Grid
                     x:Name="ContactListGrid"
                     Margin="10,10,10,12"
                     IsVisible="True"
@@ -67,11 +64,11 @@
                     HorizontalOptions="StartAndExpand"
                     VerticalOptions="CenterAndExpand">
 
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="*"/>
-                    </Grid.RowDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
 
-                    <ListView
+                <ListView
                         x:Name="ContactListView"
                         Grid.Row="0"
                         HasUnevenRows="True"
@@ -81,116 +78,125 @@
                         x:DataType="vm:ChatViewModel"
                         ItemsSource="{Binding lastChatMessages}"
                         VerticalScrollBarVisibility="Never">
-                        <ListView.ItemTemplate>
-                            <DataTemplate>
-                                <ViewCell>
-                                    <Grid Padding="0" x:DataType="model:LastChatMessage" Margin="0,5,0,15">
-                                        <Grid.GestureRecognizers>
-                                            <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type vm:ChatViewModel}}, Path=ChatTapped}" CommandParameter="{Binding .}" />
-                                        </Grid.GestureRecognizers>
-                                        <Frame BorderColor="Transparent"
-                                                BackgroundColor="{AppThemeBinding Light={StaticResource LightGray}, Dark={StaticResource Background_Mid}}"
-                                                CornerRadius="0"
-                                                HasShadow="False">
-                                            <Frame.Triggers>
-                                                <DataTrigger Binding="{Binding id, Converter={StaticResource isOwnerConverter}}" TargetType="Frame" Value="True">
-                                                    <Setter Property="BorderColor" Value="LightGreen"/>
-                                                </DataTrigger>
-                                            </Frame.Triggers>
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <Grid Padding="0"
+                                            x:DataType="model:LastChatMessage"
+                                            Margin="0,5,0,15">
+                                    <Grid.GestureRecognizers>
+                                        <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type vm:ChatViewModel}}, Path=ChatTapped}"
+                                                    CommandParameter="{Binding .}"/>
+                                    </Grid.GestureRecognizers>
+                                    <Frame BorderColor="Transparent"
+                                               BackgroundColor="{AppThemeBinding Light={StaticResource LightGray}, Dark={StaticResource Background_Mid}}"
+                                               CornerRadius="0"
+                                               HasShadow="False">
+                                        <Frame.Triggers>
+                                            <DataTrigger Binding="{Binding id, Converter={StaticResource isOwnerConverter}}"
+                                                        TargetType="Frame"
+                                                        Value="True">
+                                                <Setter Property="BorderColor"
+                                                            Value="LightGreen"/>
+                                            </DataTrigger>
+                                        </Frame.Triggers>
 
-                                            <StackLayout Orientation="Horizontal">
-                                                <StackLayout Margin="5,0,20,0">
+                                        <StackLayout Orientation="Horizontal">
+                                            <StackLayout Margin="5,0,20,0">
 
-                                                    <toolkitViews:AvatarView BorderWidth="0" HeightRequest="50" WidthRequest="50" BackgroundColor="Transparent" CornerRadius="10"
-                                                                 ImageSource="{Binding ., Converter={StaticResource conversationProfileImageConverter}}">
-                                                        <toolkitViews:AvatarView.Shadow>
-                                                            <Shadow Opacity="0.3"/>
-                                                        </toolkitViews:AvatarView.Shadow>
-                                                    </toolkitViews:AvatarView>
-                                                </StackLayout>
+                                                <toolkitViews:AvatarView BorderWidth="0"
+                                                            HeightRequest="50"
+                                                            WidthRequest="50"
+                                                            BackgroundColor="Transparent"
+                                                            CornerRadius="10"
+                                                                             ImageSource="{Binding ., Converter={StaticResource conversationProfileImageConverter}}">
+                                                    <toolkitViews:AvatarView.Shadow>
+                                                        <Shadow Opacity="0.3"/>
+                                                    </toolkitViews:AvatarView.Shadow>
+                                                </toolkitViews:AvatarView>
+                                            </StackLayout>
 
-                                                <StackLayout VerticalOptions="Center"
-                                                        HorizontalOptions="FillAndExpand">
-                                                    <StackLayout Orientation="Horizontal">
-                                                        <Label FontAttributes="Bold"
+                                            <StackLayout VerticalOptions="Center"
+                                                             HorizontalOptions="FillAndExpand">
+                                                <StackLayout Orientation="Horizontal">
+                                                    <Label FontAttributes="Bold"
                                                                Text="{Binding ., Converter={StaticResource conversationProfileNameConverter}}"
                                                                VerticalOptions="Center"
                                                                HorizontalOptions="StartAndExpand"
                                                                FontSize="Subtitle"/>
 
-                                                        <StackLayout HorizontalOptions="End"
-                                                                VerticalOptions="CenterAndExpand"
-                                                                WidthRequest="130">
-                                                            <Label BackgroundColor="Transparent"
+                                                    <StackLayout HorizontalOptions="End"
+                                                                     VerticalOptions="CenterAndExpand"
+                                                                     WidthRequest="130">
+                                                        <Label BackgroundColor="Transparent"
                                                                    Text="{Binding sentTime, Converter={StaticResource timeElapsedConverter}}"
                                                                    VerticalOptions="Center"
                                                                    HorizontalOptions="EndAndExpand"
                                                                    FontSize="8"/>
-                                                        </StackLayout>
                                                     </StackLayout>
+                                                </StackLayout>
 
-                                                    <Label
+                                                <Label
                                                         FontSize="Small"
                                                         Text="{StaticResource dots}"
                                                         VerticalOptions="Center"
                                                         MaxLines="1"
                                                         IsVisible="{Binding ., Converter={StaticResource isConversationsText}}">
-                                                        <Label.Triggers>
-                                                            <DataTrigger
+                                                    <Label.Triggers>
+                                                        <DataTrigger
                                                                 Binding="{Binding ., Converter={StaticResource isConversationsText}}"
                                                                 TargetType="Label"
                                                                 Value="True">
-                                                                <Setter Property="Text"
+                                                            <Setter Property="Text"
                                                                         Value="{Binding message, Converter={StaticResource htmlEscapeConverter}}"/>
-                                                            </DataTrigger>
-                                                        </Label.Triggers>
-                                                    </Label>
+                                                        </DataTrigger>
+                                                    </Label.Triggers>
+                                                </Label>
 
-                                                    <Label
+                                                <Label
                                                         FontSize="Small"
                                                         Text="{StaticResource image_message}"
                                                         VerticalOptions="Center"
                                                         IsVisible="{Binding ., Converter={StaticResource isConversationImage}}"/>
 
-                                                    <Label
+                                                <Label
                                                         FontSize="Small"
                                                         Text="{StaticResource contact_message}"
                                                         VerticalOptions="Center"
                                                         IsVisible="{Binding ., Converter={StaticResource isConversationContact}}"/>
 
-                                                    <Label
+                                                <Label
                                                         FontSize="Small"
                                                         Text="{StaticResource video_message}"
                                                         VerticalOptions="Center"
                                                         IsVisible="{Binding ., Converter={StaticResource isConversationVideo}}"/>
 
-                                                    <Label
+                                                <Label
                                                         FontSize="Small"
                                                         Text="{StaticResource location_message}"
                                                         VerticalOptions="Center"
                                                         IsVisible="{Binding ., Converter={StaticResource isConversationLocation}}"/>
 
-                                                    <Label
+                                                <Label
                                                         FontSize="Small"
                                                         Text="{StaticResource file_message}"
                                                         VerticalOptions="Center"
                                                         IsVisible="{Binding ., Converter={StaticResource isConversationFile}}"/>
 
-                                                    <Label
+                                                <Label
                                                         FontSize="Small"
                                                         Text="{StaticResource file_audio}"
                                                         VerticalOptions="Center"
                                                         IsVisible="{Binding ., Converter={StaticResource isConversationAudio}}"/>
-                                                </StackLayout>
                                             </StackLayout>
-                                        </Frame>
-                                    </Grid>
-                                </ViewCell>
-                            </DataTemplate>
-                        </ListView.ItemTemplate>
-                    </ListView>
-                </Grid>
-            </StackLayout>
-        </RefreshView>
+                                        </StackLayout>
+                                    </Frame>
+                                </Grid>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </Grid>
+        </StackLayout>
     </ContentPage.Content>
 </ContentPage>

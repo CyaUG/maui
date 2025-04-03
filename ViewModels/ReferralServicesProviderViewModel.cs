@@ -12,21 +12,20 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using Youth.ViewModels.Base;
 
-
-
 namespace Youth.ViewModels
 {
     [QueryProperty(nameof(ReferralId), nameof(ReferralId))]
     internal class ReferralServicesProviderViewModel : BaseViewModel, IReferralServicesProviderViewModel
     {
         private int _referralId;
-        public Command LoadReferralServicesCommand { get; }
+        //public Command LoadReferralServicesCommand { get; }
         public ObservableCollection<ReferralService> ReferralServices { get; }
         public ReferralServicesProviderViewModel()
         {
             Title = "Referral Services";
             ReferralServices = new ObservableCollection<ReferralService>();
-            LoadReferralServicesCommand = new Command(async () => await LoadReferralServices(ReferralId));
+            //LoadReferralServicesCommand = new Command(async () => await LoadReferralServices(ReferralId));
+            _ = LoadReferralServices(ReferralId);
         }
 
         public void GoBack()

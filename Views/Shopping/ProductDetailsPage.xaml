@@ -29,36 +29,29 @@
     </ContentPage.Resources>
 
     <ContentPage.Content>
-            <StackLayout>
-                <StackLayout Orientation="Horizontal" VerticalOptions="Center" Spacing="10" Grid.Row="0" Margin="10,20,10,0">
+        <StackLayout VerticalOptions="FillAndExpand">
+            <StackLayout Orientation="Horizontal" VerticalOptions="Center" Spacing="10" Grid.Row="0" Margin="10,20,10,0">
+                <Image HorizontalOptions="StartAndExpand" HeightRequest="30" Source="back.png" BackgroundColor="transparent" VerticalOptions="CenterAndExpand">
+                    <Image.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding ArrowGoBackCommand}"/>
+                    </Image.GestureRecognizers>
+                </Image>
 
-                    <Image
-                    HorizontalOptions="StartAndExpand"
-                    HeightRequest="30"
-                    Source="back.png"
-                    BackgroundColor="transparent"
-                    VerticalOptions="CenterAndExpand">
-                        <Image.GestureRecognizers>
-                            <TapGestureRecognizer Command="{Binding ArrowGoBackCommand}"/>
-                        </Image.GestureRecognizers>
-                    </Image>
+                <Image Source="Search" HorizontalOptions="EndAndExpand" HeightRequest="30">
+                    <Image.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OpenSearchPage"/>
+                    </Image.GestureRecognizers>
+                </Image>
+                
+                <Image Source="shopping_cart" HorizontalOptions="End" HeightRequest="30">
+                    <Image.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OpenShoppingCart"/>
+                    </Image.GestureRecognizers>
+                </Image>
+            </StackLayout>
 
-                    <Image Source="Search" HorizontalOptions="EndAndExpand" HeightRequest="30">
-                        <Image.GestureRecognizers>
-                            <TapGestureRecognizer Tapped="OpenSearchPage"/>
-                        </Image.GestureRecognizers>
-                    </Image>
-                    <Image Source="shopping_cart" HorizontalOptions="End" HeightRequest="30">
-                        <Image.GestureRecognizers>
-                            <TapGestureRecognizer Tapped="OpenShoppingCart"/>
-                        </Image.GestureRecognizers>
-                    </Image>
-                </StackLayout>
-
-        <RefreshView x:DataType="local:ProductDetailsViewModel" Command="{Binding LoadShoppingProductCommand}" IsRefreshing="{Binding IsBusy}">
-
-                <Grid>
-                    <ScrollView VerticalScrollBarVisibility="Never">
+            <Grid VerticalOptions="FillAndExpand">
+                    <ScrollView VerticalScrollBarVisibility="Never" VerticalOptions="FillAndExpand">
                         <StackLayout Orientation="Vertical">
 
                             <CarouselView ItemsSource="{Binding ShoppingProductGalleryImages}" x:Name="CarouselZoos" HeightRequest="200" IndicatorView="indicatorView">
@@ -102,94 +95,94 @@
                                     <Frame BackgroundColor="{AppThemeBinding Light={StaticResource LightGray}, Dark={StaticResource Background_Mid}}" CornerRadius="10"
                                                 Padding="10"
                                                 HasShadow="True">
-                                            <Frame.GestureRecognizers>
-                                                <TapGestureRecognizer Command="{Binding ShareProductCommand}"/>
-                                            </Frame.GestureRecognizers>
-                                            <Grid>
-                                                <Grid.ColumnDefinitions>
-                                                    <ColumnDefinition Width="Auto"/>
-                                                    <ColumnDefinition Width="*"/>
-                                                </Grid.ColumnDefinitions>
+                                        <Frame.GestureRecognizers>
+                                            <TapGestureRecognizer Command="{Binding ShareProductCommand}"/>
+                                        </Frame.GestureRecognizers>
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="Auto"/>
+                                                <ColumnDefinition Width="*"/>
+                                            </Grid.ColumnDefinitions>
 
-                                                <Image
+                                            <Image
                                                     Margin="5,0,0,0"
                                                     HorizontalOptions="Center"
                                                     Source="share.png"
                                                     HeightRequest="20"
                                                         WidthRequest="20"
                                                     VerticalOptions="Center"/>
-                                                <Label
+                                            <Label
                                                     Grid.Column="1"
                                                     Margin="5,0,0,0"
                                                     VerticalOptions="Center"
                                                     MaxLines="1"
                                                     Text="Share"
                                                     />
-                                            </Grid>
-                                        </Frame>
-                                    
+                                        </Grid>
+                                    </Frame>
+
 
                                     <BoxView Grid.Column="1"/>
                                     <Frame Grid.Column="1" BackgroundColor="{AppThemeBinding Light={StaticResource LightGray}, Dark={StaticResource Background_Mid}}" CornerRadius="10"
                                                 Padding="10"
                                                 HasShadow="True">
-                                            <Frame.GestureRecognizers>
-                                                <TapGestureRecognizer Command="{Binding OpenCommentsCommand}"/>
-                                            </Frame.GestureRecognizers>
-                                            <Grid>
-                                                <Grid.ColumnDefinitions>
-                                                    <ColumnDefinition Width="Auto"/>
-                                                    <ColumnDefinition Width="*"/>
-                                                </Grid.ColumnDefinitions>
+                                        <Frame.GestureRecognizers>
+                                            <TapGestureRecognizer Command="{Binding OpenCommentsCommand}"/>
+                                        </Frame.GestureRecognizers>
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="Auto"/>
+                                                <ColumnDefinition Width="*"/>
+                                            </Grid.ColumnDefinitions>
 
-                                                <Image
+                                            <Image
                                                     Margin="5,0,0,0"
                                                     HorizontalOptions="Center"
                                                     Source="chat.png"
                                                     HeightRequest="20"
                                                         WidthRequest="20"
                                                     VerticalOptions="Center"/>
-                                                <Label
+                                            <Label
                                                     Grid.Column="1"
                                                     Margin="5,0,0,0"
                                                     VerticalOptions="Center"
                                                     Text="Comment"
                                                     MaxLines="1"
                                                     />
-                                            </Grid>
-                                        </Frame>
+                                        </Grid>
+                                    </Frame>
 
 
                                     <BoxView Grid.Column="2"/>
                                     <Frame Grid.Column="2" BackgroundColor="{AppThemeBinding Light={StaticResource LightGray}, Dark={StaticResource Background_Mid}}" CornerRadius="10"
                                                 Padding="10"
                                                 HasShadow="True">
-                                            <Frame.GestureRecognizers>
-                                                <TapGestureRecognizer Command="{Binding OpenContactUsPage}"/>
-                                            </Frame.GestureRecognizers>
-                                            <Grid>
-                                                <Grid.ColumnDefinitions>
-                                                    <ColumnDefinition Width="Auto"/>
-                                                    <ColumnDefinition Width="*"/>
-                                                </Grid.ColumnDefinitions>
+                                        <Frame.GestureRecognizers>
+                                            <TapGestureRecognizer Command="{Binding OpenContactUsPage}"/>
+                                        </Frame.GestureRecognizers>
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="Auto"/>
+                                                <ColumnDefinition Width="*"/>
+                                            </Grid.ColumnDefinitions>
 
-                                                <Image
+                                            <Image
                                                     Margin="5,0,0,0"
                                                     HorizontalOptions="Center"
                                                     Source="alert.png"
                                                     HeightRequest="20"
                                                         WidthRequest="20"
                                                     VerticalOptions="Center"/>
-                                                <Label
+                                            <Label
                                                     Grid.Column="1"
                                                     Margin="5,0,0,0"
                                                     VerticalOptions="Center"
                                                     Text="Report"
                                                     MaxLines="1"
                                                     />
-                                            </Grid>
-                                        </Frame>
-                                    
+                                        </Grid>
+                                    </Frame>
+
                                 </Grid>
 
                                 <StackLayout Spacing="15">
@@ -372,8 +365,7 @@
                                     HorizontalOptions="Center"/>
                         </Frame>
                     </StackLayout>
-                </Grid>
-            </RefreshView>
-            </StackLayout>
+            </Grid>
+        </StackLayout>
     </ContentPage.Content>
 </ContentPage>

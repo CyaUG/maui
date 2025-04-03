@@ -263,44 +263,43 @@
                     </ScrollView>
 
                     <StackLayout Spacing="30">
-                        <RefreshView IsRefreshing="{Binding IsBusy}">
-                            <CollectionView ItemsSource="{Binding ShoppingProducts}"
+                        <CollectionView ItemsSource="{Binding ShoppingProducts}"
                                     SelectionMode="Single">
-                                <CollectionView.ItemTemplate>
-                                    <DataTemplate x:DataType="model:ShoppingProduct">
-                                        <StackLayout>
-                                            <Frame Margin="5"
+                            <CollectionView.ItemTemplate>
+                                <DataTemplate x:DataType="model:ShoppingProduct">
+                                    <StackLayout>
+                                        <Frame Margin="5"
                                                     CornerRadius="10"
                                                    BackgroundColor="{AppThemeBinding Light={StaticResource LightGray}, Dark={StaticResource Background_Mid}}"
                                                    HasShadow="True">
 
-                                                <Frame.GestureRecognizers>
-                                                    <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type local:SubCategoryItemsCustomViewModel}}, Path=ShoppingProductTapCommand}" CommandParameter="{Binding .}" />
-                                                </Frame.GestureRecognizers>
+                                            <Frame.GestureRecognizers>
+                                                <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type local:SubCategoryItemsCustomViewModel}}, Path=ShoppingProductTapCommand}" CommandParameter="{Binding .}" />
+                                            </Frame.GestureRecognizers>
 
-                                                <Grid Padding="10"
+                                            <Grid Padding="10"
                                                       RowDefinitions="Auto, *"
                                                       ColumnDefinitions="Auto, *">
 
-                                                    <Frame Grid.RowSpan="3"
+                                                <Frame Grid.RowSpan="3"
                                                            HeightRequest="60"
                                                            WidthRequest="60"
                                                            CornerRadius="5">
-                                                        <Image
+                                                    <Image
                                                             Source="{Binding imageUrl, Converter={StaticResource isImageSourceConverter}}"
                                                             HeightRequest="60"
                                                             WidthRequest="60"
                                                             Aspect="AspectFill"/>
-                                                    </Frame>
+                                                </Frame>
 
-                                                    <Label Grid.Row="1"
+                                                <Label Grid.Row="1"
                                                             Grid.Column="1"
                                                             Grid.ColumnSpan="2"
                                                             Text="{Binding label}"
                                                             FontAttributes="Bold"
                                                             Padding="10,0,0,0"/>
 
-                                                    <Label IsVisible="{Binding onDiscount}"
+                                                <Label IsVisible="{Binding onDiscount}"
                                                             TextDecorations="Strikethrough"
                                                             Grid.Row="2"
                                                             Grid.Column="1"
@@ -308,48 +307,47 @@
                                                             Padding="10,0,0,0"
                                                             TextColor="Red"
                                                             FontSize="10">
-                                                        <Label.Text>
-                                                            <MultiBinding StringFormat="{}{0} {1}">
-                                                                <Binding Path="currency"/>
-                                                                <Binding Path="sellPrice"/>
-                                                            </MultiBinding>
-                                                        </Label.Text>
-                                                    </Label>
+                                                    <Label.Text>
+                                                        <MultiBinding StringFormat="{}{0} {1}">
+                                                            <Binding Path="currency"/>
+                                                            <Binding Path="sellPrice"/>
+                                                        </MultiBinding>
+                                                    </Label.Text>
+                                                </Label>
 
-                                                    <Label IsVisible="{Binding onDiscount}"
+                                                <Label IsVisible="{Binding onDiscount}"
                                                             Grid.Row="2"
                                                             Grid.Column="2"
                                                             VerticalOptions="End"
                                                             Padding="10,0,0,0"
                                                             FontSize="14">
-                                                        <Label.Text>
-                                                            <MultiBinding StringFormat="{}{0} {1}">
-                                                                <Binding Path="currency"/>
-                                                                <Binding Path="discountPrice"/>
-                                                            </MultiBinding>
-                                                        </Label.Text>
-                                                    </Label>
+                                                    <Label.Text>
+                                                        <MultiBinding StringFormat="{}{0} {1}">
+                                                            <Binding Path="currency"/>
+                                                            <Binding Path="discountPrice"/>
+                                                        </MultiBinding>
+                                                    </Label.Text>
+                                                </Label>
 
-                                                    <Label IsVisible="{Binding offerDiscount}"
+                                                <Label IsVisible="{Binding offerDiscount}"
                                                             Grid.Row="2"
                                                             Grid.ColumnSpan="2"
                                                             VerticalOptions="End"
                                                             Padding="10,0,0,0"
                                                             FontSize="14">
-                                                        <Label.Text>
-                                                            <MultiBinding StringFormat="{}{0} {1}">
-                                                                <Binding Path="currency"/>
-                                                                <Binding Path="sellPrice"/>
-                                                            </MultiBinding>
-                                                        </Label.Text>
-                                                    </Label>
-                                                </Grid>
-                                            </Frame>
-                                        </StackLayout>
-                                    </DataTemplate>
-                                </CollectionView.ItemTemplate>
-                            </CollectionView>
-                        </RefreshView>
+                                                    <Label.Text>
+                                                        <MultiBinding StringFormat="{}{0} {1}">
+                                                            <Binding Path="currency"/>
+                                                            <Binding Path="sellPrice"/>
+                                                        </MultiBinding>
+                                                    </Label.Text>
+                                                </Label>
+                                            </Grid>
+                                        </Frame>
+                                    </StackLayout>
+                                </DataTemplate>
+                            </CollectionView.ItemTemplate>
+                        </CollectionView>
                     </StackLayout>
                 </StackLayout>
             </ScrollView>

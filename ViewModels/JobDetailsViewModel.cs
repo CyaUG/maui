@@ -13,15 +13,13 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using Youth.ViewModels.Base;
 
-
-
 namespace Youth.ViewModels
 {
     [QueryProperty(nameof(JobId), nameof(JobId))]
     public class JobDetailsViewModel : BaseViewModel, IJobDetailsViewModel
     {
         private int jobId;
-        public Command LoadJobDetailsCommand { get; }
+        //public Command LoadJobDetailsCommand { get; }
         public ObservableCollection<JobModel> JobModeles { get; set; }
         public JobModel jobModel { get; set; }
         public Command<JobModel> JobAddressTap { get; }
@@ -40,7 +38,7 @@ namespace Youth.ViewModels
         {
             Title = "Job Info";
             JobModeles = new ObservableCollection<JobModel>();
-            LoadJobDetailsCommand = new Command(async () => LoadJobDetails(JobId));
+            //LoadJobDetailsCommand = new Command(async () => LoadJobDetails(JobId));
             JobAddressTap = new Command<JobModel>(OnJobAddressSelected);
             JobApplyTap = new Command<JobModel>(OnJobApplicationFormRequested);
             OpenContactUsPage = new Command(async () => await ExecuteOpenContactUsPage());
@@ -49,6 +47,7 @@ namespace Youth.ViewModels
             UnLikeJobCommand = new Command(async () => await ExecuteUnLikeJobCommand());
             OpenCommentsCommand = new Command(async () => await ExecuteOpenCommentsCommand());
             OpenJobApplicantsPage = new Command(async () => await ExecuteOpenJobApplicantsPage());
+            LoadJobDetails(JobId);
         }
 
         public bool _isRunning;

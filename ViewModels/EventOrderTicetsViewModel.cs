@@ -13,8 +13,6 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using Youth.ViewModels.Base;
 
-
-
 namespace Youth.ViewModels
 {
     [QueryProperty(nameof(EventId), nameof(EventId))]
@@ -24,15 +22,16 @@ namespace Youth.ViewModels
         public SystemSettings systemSettings { get; set; }
         public UserAccount userAccount { get; set; }
         public ObservableCollection<EventTicketToken> EventTicketTokens { get; }
-        public Command EventOrderTicetsLoadCommand { get; }
+        //public Command EventOrderTicetsLoadCommand { get; }
         public Command<EventTicketToken> EventTicketTokenTapCommand { get; }
 
         public EventOrderTicetsViewModel()
         {
             Title = "Order Tickets";
             EventTicketTokens = new ObservableCollection<EventTicketToken>();
-            EventOrderTicetsLoadCommand = new Command(async () => LoadEventTickets(EventId));
+            //EventOrderTicetsLoadCommand = new Command(async () => LoadEventTickets(EventId));
             EventTicketTokenTapCommand = new Command<EventTicketToken>(OnEventSelected);
+            LoadEventTickets(EventId);
         }
 
         async void OnEventSelected(EventTicketToken mEventTicketToken)

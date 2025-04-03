@@ -19,14 +19,15 @@ namespace Youth.ViewModels
     internal class EventCategoryProviderViewModel : BaseViewModel, IEventCategoryProviderViewModel
     {
         public ObservableCollection<EventCategory> eventCategories { get; set; }
-        public Command LoadEventCategoriesCommand { get; }
+        //public Command LoadEventCategoriesCommand { get; }
         public Command<EventCategory> EventCategoryNavTap { get; }
         public EventCategoryProviderViewModel()
         {
             Title = "Event Categories";
             eventCategories = new ObservableCollection<EventCategory>();
-            LoadEventCategoriesCommand = new Command(async () => await ExecuteLoadEventCategoriesCommand());
+            //LoadEventCategoriesCommand = new Command(async () => await ExecuteLoadEventCategoriesCommand());
             EventCategoryNavTap = new Command<EventCategory>(ExecuteEventCategoryNavTapCommand);
+            _ = ExecuteLoadEventCategoriesCommand();
         }
 
         async void ExecuteEventCategoryNavTapCommand(EventCategory eventCategory)

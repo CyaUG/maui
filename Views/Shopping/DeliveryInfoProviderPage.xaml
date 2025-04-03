@@ -63,11 +63,7 @@
                 </Image>
             </StackLayout>
 
-            <RefreshView x:DataType="local:DeliveryInfoProviderViewModel"
-                    Command="{Binding LoadAccountCommand}"
-                    IsRefreshing="{Binding IsBusy}">
-                <StackLayout Orientation="Vertical">
-                    <ScrollView VerticalScrollBarVisibility="Never">
+                    <ScrollView VerticalScrollBarVisibility="Never" VerticalOptions="FillAndExpand">
                         <StackLayout Orientation="Vertical">
 
                             <Image HeightRequest="200"
@@ -217,7 +213,5 @@
                         </StackLayout>
                     </ScrollView>
                 </StackLayout>
-            </RefreshView>
-        </StackLayout>
     </ContentPage.Content>
 </ContentPage>

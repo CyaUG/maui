@@ -12,7 +12,6 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using Youth.ViewModels.Base;
 
-
 namespace Youth.ViewModels
 {
     public class ShoppingCategoriesViewModel : BaseViewModel, IShoppingCategoriesViewModel
@@ -23,7 +22,7 @@ namespace Youth.ViewModels
         public Command<ShoppingCategory> CategoriesTapCommand { get; }
         public UserAccount userAccount { get; set; }
         public SystemSettings systemSettings { get; set; }
-        public Command ShoppingCategoriesLoadCommand { get; }
+        //public Command ShoppingCategoriesLoadCommand { get; }
 
         public string Title { get; set; }
         public string Categories { get; set; }
@@ -32,8 +31,9 @@ namespace Youth.ViewModels
         {
             Title = "Shopping";
             ShoppingCategories = new ObservableCollection<ShoppingCategory>();
-            ShoppingCategoriesLoadCommand = new Command(async () => await ExecuteShoppingCategoryCommand());
+            //ShoppingCategoriesLoadCommand = new Command(async () => await ExecuteShoppingCategoryCommand());
             CategoriesTapCommand = new Command<ShoppingCategory>(OnShoppingSubCategorySelected);
+            _ = ExecuteShoppingCategoryCommand();
         }
 
         public ShoppingCategory SelectedCategory
@@ -60,7 +60,7 @@ namespace Youth.ViewModels
         {
             UpdateAuthStatus();
             IsBusy = true;
-            ShoppingCategoriesLoadCommand.Execute(this);
+            //ShoppingCategoriesLoadCommand.Execute(this);
         }
 
         async Task ExecuteShoppingCategoryCommand()

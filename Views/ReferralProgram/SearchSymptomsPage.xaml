@@ -41,8 +41,7 @@
                 <Image Source="settings.png" HorizontalOptions="End" HeightRequest="30"/>
             </StackLayout>
 
-            <RefreshView Command="{Binding LoadMySymptomsCommand}" IsRefreshing="{Binding IsBusy}">
-                <ScrollView VerticalScrollBarVisibility="Never">
+                <ScrollView VerticalScrollBarVisibility="Never" VerticalOptions="FillAndExpand">
                     <StackLayout Orientation="Vertical" VerticalOptions="StartAndExpand">
                         <!--  Search Bar  -->
                         <StackLayout x:Name="SearchBar" Grid.Row="0" IsVisible="true" VerticalOptions="Start">
@@ -74,7 +73,6 @@
                         </CollectionView>
                     </StackLayout>
                 </ScrollView>
-            </RefreshView>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

@@ -10,8 +10,6 @@ using System.Diagnostics;
 using System.Text;
 using System.Threading.Tasks;
 using Youth.ViewModels.Base;
-
-
 using Youth.Utils;
 using Youth.ViewModels.Interfaces;
 
@@ -22,7 +20,7 @@ namespace Youth.ViewModels
         public Command PickJobCategoryCommand { get; }
         public Command PickJobTypeCommand { get; }
         public Command PickCoverPictureCommand { get; }
-        public Command LoadEssentialsCommand { get; }
+        //public Command LoadEssentialsCommand { get; }
         public Command AddCustomQuestionCommand { get; }
         public Command PickQuestionSuggestionsCommand { get; }
         public Command PostNewJobCommand { get; }
@@ -143,7 +141,7 @@ namespace Youth.ViewModels
             JobSugestionQuestionNavTap = new Command<JobSugestionQuestion>(OnJobSugestionQuestionSelected);
             DeleteJobSugestionQuestionNavTap = new Command<JobSugestionQuestion>(OnDeleteJobSugestionQuestionSelected);
             PickCoverPictureCommand = new Command(async () => await PickCoverPicture());
-            LoadEssentialsCommand = new Command(async () => await ExecuteLoadEssentialsCommand());
+            //LoadEssentialsCommand = new Command(async () => await ExecuteLoadEssentialsCommand());
             PickJobCategoryCommand = new Command(async () => await OpenJobCategoryPickerPage());
             PickJobTypeCommand = new Command(async () => await OpenPickJobTypePage());
             AddCustomQuestionCommand = new Command(async () => await OpenAddCustomQuestionPage());
@@ -154,6 +152,7 @@ namespace Youth.ViewModels
             LocationAddress = "Current Address";
             JobTypeLabel = "Job Type";
             ApplicationDeadline = "Pick Application Deadline";
+            _ = ExecuteLoadEssentialsCommand();
         }
 
         public void OnJobSugestionQuestionSelected(JobSugestionQuestion jobSugestionQuestion)

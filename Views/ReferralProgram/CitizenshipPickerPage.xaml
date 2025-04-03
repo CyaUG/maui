@@ -62,9 +62,6 @@
                         HeightRequest="30"/>
             </StackLayout>
 
-            <RefreshView x:DataType="local:CitizenshipPickeViewModel"
-                    Command="{Binding LoadCitizenships}"
-                    IsRefreshing="{Binding IsBusy}">
                 <CollectionView ItemsSource="{Binding ReferralAccountCitizenships}" Margin="10" SelectionMode="Single">
                     <CollectionView.ItemTemplate>
                         <DataTemplate x:DataType="model:ReferralAccountCitizenship">
@@ -99,7 +96,6 @@
                         </DataTemplate>
                     </CollectionView.ItemTemplate>
                 </CollectionView>
-            </RefreshView>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

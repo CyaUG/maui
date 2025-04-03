@@ -63,90 +63,87 @@
                         HeightRequest="30"/>
             </StackLayout>
 
-            <RefreshView x:DataType="local:EventTicketsProviderViewModel"
-                    Command="{Binding EventDetailsLoadCommand}"
-                    IsRefreshing="{Binding IsBusy}">
-                <ScrollView VerticalScrollBarVisibility="Never">
-                    <StackLayout Orientation="Vertical"
+            <ScrollView VerticalScrollBarVisibility="Never" VerticalOptions="FillAndExpand">
+                <StackLayout Orientation="Vertical"
                             VerticalOptions="StartAndExpand">
 
-                        <CollectionView ItemsSource="{Binding EventTickets}"
+                    <CollectionView ItemsSource="{Binding EventTickets}"
                                 Margin="10">
-                            <CollectionView.ItemTemplate>
-                                <DataTemplate x:DataType="model:EventTicketModule">
-                                    <Frame HasShadow="True" BackgroundColor="{AppThemeBinding Light={StaticResource LightGray}, Dark={StaticResource Background_Mid}}"
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate x:DataType="model:EventTicketModule">
+                                <Frame HasShadow="True" BackgroundColor="{AppThemeBinding Light={StaticResource LightGray}, Dark={StaticResource Background_Mid}}"
                                             CornerRadius="10"
                                             Margin="2">
 
-                                        <Frame.GestureRecognizers>
-                                            <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type local:EventTicketsProviderViewModel}}, Path=EventTicketsTappedCommand}" CommandParameter="{Binding .}" />
-                                        </Frame.GestureRecognizers>
+                                    <Frame.GestureRecognizers>
+                                        <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type local:EventTicketsProviderViewModel}}, Path=EventTicketsTappedCommand}" CommandParameter="{Binding .}" />
+                                    </Frame.GestureRecognizers>
 
-                                        <StackLayout Padding="5">
-                                            <Grid Padding="5">
-                                                <Grid.ColumnDefinitions>
-                                                    <ColumnDefinition Width="Auto"/>
-                                                    <ColumnDefinition Width="*"/>
-                                                    <ColumnDefinition Width="Auto"/>
-                                                </Grid.ColumnDefinitions>
+                                    <StackLayout Padding="5">
+                                        <Grid Padding="5">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="Auto"/>
+                                                <ColumnDefinition Width="*"/>
+                                                <ColumnDefinition Width="Auto"/>
+                                            </Grid.ColumnDefinitions>
 
-                                                <Frame VerticalOptions="CenterAndExpand" BackgroundColor="{AppThemeBinding Light={StaticResource LightGray}, Dark={StaticResource Background_Mid}}">
-                                                    <Image Source="{Binding imageUrl, Converter={StaticResource isImageSourceConverter}}"
+                                            <Frame VerticalOptions="CenterAndExpand" BackgroundColor="{AppThemeBinding Light={StaticResource LightGray}, Dark={StaticResource Background_Mid}}">
+                                                <Image Source="{Binding imageUrl, Converter={StaticResource isImageSourceConverter}}"
                                                         HeightRequest="50"
                                                         WidthRequest="50"
                                                         VerticalOptions="CenterAndExpand">
 
-                                                        <Image.Triggers>
-                                                            <DataTrigger
+                                                    <Image.Triggers>
+                                                        <DataTrigger
                                                                 Binding="{Binding imageUrl, Converter={StaticResource isStringNullConverter}}"
                                                                 TargetType="Image"
                                                                 Value="True">
-                                                                <Setter Property="Source"
+                                                            <Setter Property="Source"
                                                                         Value="ballot.png"/>
-                                                            </DataTrigger>
-                                                        </Image.Triggers>
-                                                    </Image>
-                                                </Frame>
+                                                        </DataTrigger>
+                                                    </Image.Triggers>
+                                                </Image>
+                                            </Frame>
 
-                                                <StackLayout  Grid.Column="1">
-                                                    <Label Text="{Binding label}"
+                                            <StackLayout  Grid.Column="1">
+                                                <Label Text="{Binding label}"
                                                             FontAttributes="Bold"/>
 
-                                                    <Label IsVisible="{Binding onDiscount}"
+                                                <Label IsVisible="{Binding onDiscount}"
                                                             TextColor="Red"
                                                             FontSize="10"
                                                             TextDecorations="Strikethrough">
-                                                        <Label.Text>
-                                                            <MultiBinding StringFormat="{}{0} {1}">
-                                                                <Binding Path="currency"/>
-                                                                <Binding Path="amount"/>
-                                                            </MultiBinding>
-                                                        </Label.Text>
-                                                    </Label>
+                                                    <Label.Text>
+                                                        <MultiBinding StringFormat="{}{0} {1}">
+                                                            <Binding Path="currency"/>
+                                                            <Binding Path="amount"/>
+                                                        </MultiBinding>
+                                                    </Label.Text>
+                                                </Label>
 
-                                                    <Label IsVisible="{Binding onDiscount}"
+                                                <Label IsVisible="{Binding onDiscount}"
                                                             FontAttributes="Bold"
                                                             FontSize="14">
-                                                        <Label.Text>
-                                                            <MultiBinding StringFormat="{}{0} {1}">
-                                                                <Binding Path="currency"/>
-                                                                <Binding Path="discountPrice"/>
-                                                            </MultiBinding>
-                                                        </Label.Text>
-                                                    </Label>
+                                                    <Label.Text>
+                                                        <MultiBinding StringFormat="{}{0} {1}">
+                                                            <Binding Path="currency"/>
+                                                            <Binding Path="discountPrice"/>
+                                                        </MultiBinding>
+                                                    </Label.Text>
+                                                </Label>
 
-                                                    <Label IsVisible="{Binding offerDiscount}"
+                                                <Label IsVisible="{Binding offerDiscount}"
                                                             FontSize="14">
-                                                        <Label.Text>
-                                                            <MultiBinding StringFormat="{}{0} {1}">
-                                                                <Binding Path="currency"/>
-                                                                <Binding Path="amount"/>
-                                                            </MultiBinding>
-                                                        </Label.Text>
-                                                    </Label>
-                                                </StackLayout>
+                                                    <Label.Text>
+                                                        <MultiBinding StringFormat="{}{0} {1}">
+                                                            <Binding Path="currency"/>
+                                                            <Binding Path="amount"/>
+                                                        </MultiBinding>
+                                                    </Label.Text>
+                                                </Label>
+                                            </StackLayout>
 
-                                                <Image
+                                            <Image
                                                     Grid.Column="2"
                                                     Margin="0,0,10,0"
                                                     HorizontalOptions="End"
@@ -154,15 +151,14 @@
                                                     VerticalOptions="Center"
                                                     HeightRequest="20"
                                                     WidthRequest="20"/>
-                                            </Grid>
-                                        </StackLayout>
-                                    </Frame>
-                                </DataTemplate>
-                            </CollectionView.ItemTemplate>
-                        </CollectionView>
-                    </StackLayout>
-                </ScrollView>
-            </RefreshView>
+                                        </Grid>
+                                    </StackLayout>
+                                </Frame>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+                </StackLayout>
+            </ScrollView>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

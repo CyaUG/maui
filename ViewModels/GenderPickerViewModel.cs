@@ -11,12 +11,11 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using Youth.ViewModels.Base;
 
-
 namespace Youth.ViewModels
 {
     internal class GenderPickerViewModel : BaseViewModel, IGenderPickerViewModel
     {
-        public Command LoadGenders { get; }
+        //public Command LoadGenders { get; }
         public ObservableCollection<Gender> Genders { get; set; }
         public Command<Gender> GenderNavTap { get; }
 
@@ -24,8 +23,9 @@ namespace Youth.ViewModels
         {
             Title = "Genders";
             Genders = new ObservableCollection<Gender>();
-            LoadGenders = new Command(async () => await ExecuteLoadReferralAccountCategoriesCommand());
+            //LoadGenders = new Command(async () => await ExecuteLoadReferralAccountCategoriesCommand());
             GenderNavTap = new Command<Gender>(OnGenderSelected);
+            _ = ExecuteLoadReferralAccountCategoriesCommand();
         }
 
         async void OnGenderSelected(Gender gender)

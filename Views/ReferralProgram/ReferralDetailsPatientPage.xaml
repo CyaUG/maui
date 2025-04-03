@@ -67,10 +67,7 @@
                     </Image>
                 </StackLayout>
 
-                <RefreshView x:DataType="local:ReferralDetailsViewModel"
-                        Command="{Binding RunReferralDetailsMainCommand}"
-                        IsRefreshing="{Binding IsBusy}">
-                    <ScrollView VerticalScrollBarVisibility="Never">
+                    <ScrollView VerticalScrollBarVisibility="Never" VerticalOptions="FillAndExpand">
                         <StackLayout>
                             <Grid HeightRequest="200">
                                 <Image Source="{Binding referral.hc_imageUrl, Converter={StaticResource isImageSourceConverter}}"
@@ -305,7 +302,6 @@
 
                         </StackLayout>
                     </ScrollView>
-                </RefreshView>
             </StackLayout>
 
             <Frame

@@ -55,10 +55,7 @@
                         HeightRequest="30"/>
             </StackLayout>
 
-            <RefreshView x:DataType="local:QuizCategoryQuizzesViewModel"
-                    Command="{Binding LoadQuizCategoryQuizzesCommand}"
-                    IsRefreshing="{Binding IsBusy}">
-                <ScrollView VerticalScrollBarVisibility="Never">
+                <ScrollView VerticalScrollBarVisibility="Never" VerticalOptions="FillAndExpand">
                     <CollectionView ItemsSource="{Binding quizzes}"
                             SelectionMode="Single">
                         <CollectionView.ItemTemplate>
@@ -117,7 +114,6 @@
                         </CollectionView.ItemTemplate>
                     </CollectionView>
                 </ScrollView>
-            </RefreshView>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

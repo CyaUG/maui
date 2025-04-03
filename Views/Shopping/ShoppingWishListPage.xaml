@@ -49,8 +49,7 @@
                 </Image>
             </StackLayout>
 
-            <RefreshView x:DataType="local:ShoppingWishListViewModel" Command="{Binding LoadShoppingWishListCommand}" IsRefreshing="{Binding IsBusy}">
-                <ScrollView VerticalScrollBarVisibility="Never">
+                <ScrollView VerticalScrollBarVisibility="Never" VerticalOptions="FillAndExpand">
                     <StackLayout Padding="10,10,10,10" Spacing="30">
                         <Label Text="{Binding Title}" FontAttributes="Bold" FontSize="45"/>
 
@@ -107,7 +106,6 @@
                         </CollectionView>
                     </StackLayout>
                 </ScrollView>
-            </RefreshView>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

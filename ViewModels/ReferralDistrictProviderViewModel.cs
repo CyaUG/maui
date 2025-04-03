@@ -10,20 +10,21 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using Youth.ViewModels.Base;
 
-
 namespace Youth.ViewModels
 {
     internal class ReferralDistrictProviderViewModel : BaseViewModel, IReferralDistrictProviderViewModel
     {
-        public Command LoadReferralDistrictsCommand { get; }
+        //public Command LoadReferralDistrictsCommand { get; }
         public ObservableCollection<ReferralDistrict> ReferralDistricts { get; set; }
         public Command<ReferralDistrict> ReferralDistrictNavTap { get; }
         public ReferralDistrictProviderViewModel()
         {
             Title = "Referral Districts";
             ReferralDistricts = new ObservableCollection<ReferralDistrict>();
-            LoadReferralDistrictsCommand = new Command(async () => await LoadReferralDistrict());
+            //LoadReferralDistrictsCommand = new Command(async () => await LoadReferralDistrict());
             ReferralDistrictNavTap = new Command<ReferralDistrict>(OnReferralDistrictSelected);
+            _ = LoadReferralDistrict();
+
         }
 
         async void OnReferralDistrictSelected(ReferralDistrict referralDistrict)

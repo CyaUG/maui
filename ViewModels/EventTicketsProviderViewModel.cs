@@ -13,8 +13,6 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using Youth.ViewModels.Base;
 
-
-
 namespace Youth.ViewModels
 {
     [QueryProperty(nameof(EventId), nameof(EventId))]
@@ -26,14 +24,15 @@ namespace Youth.ViewModels
         public Event EventDetails { get; set; }
         public ObservableCollection<EventTicketModule> EventTickets { get; }
         public Command<EventTicketModule> EventTicketsTappedCommand { get; }
-        public Command EventDetailsLoadCommand { get; }
+        //public Command EventDetailsLoadCommand { get; }
 
         public EventTicketsProviderViewModel()
         {
             Title = "Event Tickets";
             EventTickets = new ObservableCollection<EventTicketModule>();
-            EventDetailsLoadCommand = new Command(async () => LoadEventDetails(eventId));
+            //EventDetailsLoadCommand = new Command(async () => LoadEventDetails(eventId));
             EventTicketsTappedCommand = new Command<EventTicketModule>(ExecuteEventTicketsTappedCommand);
+            LoadEventDetails(eventId);
         }
 
         public int EventId

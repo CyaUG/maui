@@ -12,7 +12,6 @@ using System.Text;
 using System.Threading.Tasks;
 using Youth.ViewModels.Base;
 
-
 namespace Youth.ViewModels
 {
     [QueryProperty(nameof(CategoryId), nameof(CategoryId))]
@@ -20,7 +19,7 @@ namespace Youth.ViewModels
     {
         private int categoryId;
         public ObservableCollection<JobModel> JobModeles { get; set; }
-        public Command LoadJobCategoriesCommand { get; }
+        //public Command LoadJobCategoriesCommand { get; }
         public Command<JobModel> JobModelNavTap { get; }
         public JobModel selectedJobModel;
 
@@ -28,8 +27,9 @@ namespace Youth.ViewModels
         {
             Title = "Category Jobs";
             JobModeles = new ObservableCollection<JobModel>();
-            LoadJobCategoriesCommand = new Command(async () => LoadShoppingBrands(CategoryId));
+            //LoadJobCategoriesCommand = new Command(async () => LoadShoppingBrands(CategoryId));
             JobModelNavTap = new Command<JobModel>(OnJobModelSelected);
+            LoadShoppingBrands(CategoryId);
         }
 
         public JobModel SelectedJobModel

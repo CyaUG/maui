@@ -6,7 +6,6 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Text;
 using System.Threading.Tasks;
-
 using System.Collections.ObjectModel;
 using Youth.Views.jobs;
 using Youth.ViewModels.Interfaces;
@@ -16,7 +15,7 @@ namespace Youth.ViewModels
 {
     internal class QuestionSuggestionsViewModel : BaseViewModel, IQuestionSuggestionsViewModel
     {
-        public Command RunMainCommand { get; set; }
+        //public Command RunMainCommand { get; set; }
         public SystemSettings systemSettings { get; set; }
         public Command<JobSugestionQuestion> JobSugestionQuestionNavTap { get; }
         public ObservableCollection<JobSugestionQuestion> JobSugestionQuestions { get; set; }
@@ -24,8 +23,9 @@ namespace Youth.ViewModels
         {
             Title = "Question Suggestions";
             JobSugestionQuestions = new ObservableCollection<JobSugestionQuestion>();
-            RunMainCommand = new Command(async () => await ExecuteMainCommand());
+            //RunMainCommand = new Command(async () => await ExecuteMainCommand());
             JobSugestionQuestionNavTap = new Command<JobSugestionQuestion>(OnJobSugestionQuestionSelected);
+            _ = ExecuteMainCommand();
         }
 
         async void OnJobSugestionQuestionSelected(JobSugestionQuestion jobSugestionQuestion)

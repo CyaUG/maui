@@ -13,15 +13,13 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using Youth.ViewModels.Base;
 
-
-
 namespace Youth.ViewModels
 {
     [QueryProperty(nameof(EventId), nameof(EventId))]
     internal class EventMgmtViewModel : BaseViewModel, IEventMgmtViewModel
     {
         public ObservableCollection<UserAccount> eventManagement { get; }
-        public Command EventDetailsLoadCommand { get; }
+        //public Command EventDetailsLoadCommand { get; }
         public SystemSettings systemSettings { get; set; }
         public UserAccount userAccount { get; set; }
         public Event EventDetails { get; set; }
@@ -29,7 +27,8 @@ namespace Youth.ViewModels
         {
             Title = "Management";
             eventManagement = new ObservableCollection<UserAccount>();
-            EventDetailsLoadCommand = new Command(async () => LoadEventDetails(eventId));
+            //EventDetailsLoadCommand = new Command(async () => LoadEventDetails(eventId));
+            LoadEventDetails(eventId);
         }
 
         private int eventId;

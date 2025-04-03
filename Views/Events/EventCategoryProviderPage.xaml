@@ -43,9 +43,8 @@
                 <Image Source="settings.png" HorizontalOptions="End" HeightRequest="30"/>
             </StackLayout>
 
-            <RefreshView x:DataType="local:EventCategoryProviderViewModel" Command="{Binding LoadEventCategoriesCommand}" IsRefreshing="{Binding IsBusy}">
-                <CollectionView ItemsSource="{Binding eventCategories}" Margin="10" SelectionMode="Single">
-                    <CollectionView.ItemTemplate>
+            <CollectionView ItemsSource="{Binding eventCategories}" Margin="10" SelectionMode="Single">
+                <CollectionView.ItemTemplate>
                         <DataTemplate x:DataType="model:EventCategory">
                             <Frame HasShadow="True" CornerRadius="10" Margin="5" BackgroundColor="{AppThemeBinding Light={StaticResource LightGray}, Dark={StaticResource Background_Mid}}">
                                 <Frame.GestureRecognizers>
@@ -73,8 +72,7 @@
                             </Frame>
                         </DataTemplate>
                     </CollectionView.ItemTemplate>
-                </CollectionView>
-            </RefreshView>
+            </CollectionView>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

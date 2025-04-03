@@ -76,24 +76,19 @@
                     </ActivityIndicator>
                 </StackLayout>
 
-                <RefreshView
-                    x:DataType="local:ComposePostViewModel"
-                    Command="{Binding CloudConfigLoadCommand}"
-                    IsRefreshing="{Binding IsBusy}">
-
-                    <ScrollView VerticalScrollBarVisibility="Never">
-                        <StackLayout Padding="10"
+                <ScrollView VerticalScrollBarVisibility="Never" VerticalOptions="FillAndExpand">
+                    <StackLayout Padding="10"
                                 Spacing="10"
                                 Orientation="Vertical">
-                            <Frame
+                        <Frame
                                 Margin="0,20,0,0"
                                 CornerRadius="20"
                                 HasShadow="False"
                                 BackgroundColor="transparent">
 
-                                <StackLayout Orientation="Horizontal">
+                            <StackLayout Orientation="Horizontal">
 
-                                    <Image
+                                <Image
                                         Margin="10,0,0,0"
                                         x:Name="ProfileImge"
                                         HeightRequest="50"
@@ -102,14 +97,14 @@
                                         VerticalOptions="Start"
                                         WidthRequest="50"
                                         Aspect="AspectFill">
-                                    </Image>
+                                </Image>
 
-                                    <Frame CornerRadius="20"
+                                <Frame CornerRadius="20"
                                             HasShadow="False"
                                             HorizontalOptions="FillAndExpand"
                                             Margin="5"
                                             BackgroundColor="transparent">
-                                        <Editor
+                                    <Editor
                                             x:Name="PostEntry"
                                             BackgroundColor="Transparent"
                                             Placeholder="What's on your mind?."
@@ -118,27 +113,26 @@
                                             HeightRequest="150"
                                             TextChanged="MyEntry_Completed"
                                             Text="{Binding ReplyTextMessage}"/>
-                                    </Frame>
-                                </StackLayout>
-                            </Frame>
+                                </Frame>
+                            </StackLayout>
+                        </Frame>
 
-                            <Frame CornerRadius="10"
+                        <Frame CornerRadius="10"
                                     HasShadow="False"
                                     HeightRequest="170"
                                     BackgroundColor="transparent">
-                                <Grid>
-                                    <Image
+                            <Grid>
+                                <Image
                                         x:Name="ContentImage"
                                         HeightRequest="170"
                                         HorizontalOptions="FillAndExpand"
                                         Aspect="AspectFill">
-                                    </Image>
-                                </Grid>
-                            </Frame>
-                        </StackLayout>
-                    </ScrollView>
-                </RefreshView>
-
+                                </Image>
+                            </Grid>
+                        </Frame>
+                    </StackLayout>
+                </ScrollView>
+                
                 <!--  Comment Entry  -->
                 <StackLayout
                     BackgroundColor="Transparent"

@@ -64,9 +64,6 @@
                         HeightRequest="30"/>
             </StackLayout>
 
-            <RefreshView x:DataType="local:EventOrderDetailsViewModel"
-                    Command="{Binding EventDetailsLoadCommand}"
-                    IsRefreshing="{Binding IsBusy}">
                 <StackLayout Orientation="Vertical">
                     <ScrollView VerticalScrollBarVisibility="Never">
 
@@ -345,7 +342,6 @@
                         </StackLayout>
                     </ScrollView>
                 </StackLayout>
-            </RefreshView>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

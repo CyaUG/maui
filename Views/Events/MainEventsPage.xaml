@@ -68,9 +68,6 @@
                     </Grid>
                 </StackLayout>
 
-                <RefreshView x:DataType="local:MainEventsViewModel"
-                        Command="{Binding LoadEventCategoriesCommand}"
-                        IsRefreshing="{Binding IsBusy}">
                     <ScrollView VerticalScrollBarVisibility="Never">
                         <StackLayout Orientation="Vertical">
                             <Label Style="{StaticResource Header}" FontSize="35" Text="Want to hung out?." Margin="10,30,60,20"/>
@@ -209,7 +206,6 @@
                             </CollectionView>
                         </StackLayout>
                     </ScrollView>
-                </RefreshView>
             </StackLayout>
 
             <Frame

@@ -15,21 +15,22 @@ namespace Youth.ViewModels
     public class SettingsViewModel : BaseViewModel, ISettingsViewModel
     {
         public UserAccount userAccount { get; set; }
-        public Command LoadMyAccountCommand { get; }
+        //public Command LoadMyAccountCommand { get; }
         public ObservableCollection<NotificationModule> Items { get; }
 
         public SettingsViewModel()
         {
             Title = "Settings";
             Items = new ObservableCollection<NotificationModule>();
-            LoadMyAccountCommand = new Command(async () => await ExecuteLoadMyAccountCommand());
+            //LoadMyAccountCommand = new Command(async () => await ExecuteLoadMyAccountCommand());
+            _ = ExecuteLoadMyAccountCommand();
         }
 
         public void OnAppearing()
         {
             UpdateAuthStatus();
             IsBusy = true;
-            LoadMyAccountCommand.Execute(userAccount);
+            //LoadMyAccountCommand.Execute(userAccount);
         }
 
         async Task ExecuteLoadMyAccountCommand()

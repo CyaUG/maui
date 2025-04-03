@@ -12,14 +12,12 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using Youth.ViewModels.Base;
 
-
-
 namespace Youth.ViewModels
 {
     internal class ContactsProviderViewModel : BaseViewModel, IContactsProviderViewModel
     {
         public ObservableCollection<ContactModule> userContacts { get; }
-        public Command ContactsLoadCommand { get; }
+        //public Command ContactsLoadCommand { get; }
         public Command<ContactModule> ContactNavTap { get; }
         public SystemSettings systemSettings { get; set; }
         public UserAccount userAccount { get; set; }
@@ -28,8 +26,9 @@ namespace Youth.ViewModels
         {
             Title = "My Contacts";
             userContacts = new ObservableCollection<ContactModule>();
-            ContactsLoadCommand = new Command(async () => LoadMyContacts());
+            //ContactsLoadCommand = new Command(async () => LoadMyContacts());
             ContactNavTap = new Command<ContactModule>(ExecuteContactNavTap);
+            _ = LoadMyContacts();
         }
 
         public void ExecuteContactNavTap(ContactModule contactModule)
@@ -45,7 +44,7 @@ namespace Youth.ViewModels
         {
             Application.Current.MainPage.Navigation.PopAsync();
         }
-        public async void LoadMyContacts()
+        public async Task LoadMyContacts()
         {
             Debug.WriteLine("ContactsProviderViewModel: LoadMyContacts()");
             IsBusy = true;

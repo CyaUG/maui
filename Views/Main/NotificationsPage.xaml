@@ -30,9 +30,6 @@
         </Style>
     </ContentPage.Resources>
 
-    <RefreshView x:DataType="local:NotificationsViewModel"
-            Command="{Binding LoadNotificationsCommand}"
-            IsRefreshing="{Binding IsBusy}">
         <ScrollView VerticalScrollBarVisibility="Never">
             <Grid>
                 <Grid.RowDefinitions>
@@ -112,5 +109,4 @@
                 </widgets:LoginToContinueWidget>
             </Grid>
         </ScrollView>
-    </RefreshView>
 </ContentPage>

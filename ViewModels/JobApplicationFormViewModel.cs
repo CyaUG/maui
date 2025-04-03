@@ -10,8 +10,6 @@ using System.Diagnostics;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Youth.ViewModels.Base;
-
-
 using System.IO;
 using System.Collections.Generic;
 using Youth.ViewModels.Interfaces;
@@ -24,7 +22,7 @@ namespace Youth.ViewModels
         private int jobId;
         public JobModel jobModel { get; set; }
         private ObservableCollection<JobApplicationQuestion> _JobApplicationQuestions;
-        public Command LoadJobDetailsCommand { get; }
+        //public Command LoadJobDetailsCommand { get; }
         public Command WorkExperienceLoadCommand { get; }
         public Command CollegeLoadCommand { get; }
         public Command HighSchoolLoadCommand { get; }
@@ -117,7 +115,7 @@ namespace Youth.ViewModels
         public JobApplicationFormViewModel()
         {
             Title = "Application Form";
-            LoadJobDetailsCommand = new Command(async () => LoadJobDetails(JobId));
+            //LoadJobDetailsCommand = new Command(async () => LoadJobDetails(JobId));
             WorkExperienceLoadCommand = new Command(async () => await PickWorkExperience());
             CollegeLoadCommand = new Command(async () => await PickCollege());
             HighSchoolLoadCommand = new Command(async () => await PickWorkHighSchool());
@@ -127,6 +125,7 @@ namespace Youth.ViewModels
             collageFile = "...";
             highSchoolFile = "...";
             JobApplicationQuestionAnsTextChage = new Command<JobApplicationQuestion>(OnJobApplicationQuestionSelected);
+            LoadJobDetails(JobId);
         }
 
         public ObservableCollection<JobApplicationQuestion> JobApplicationQuestions

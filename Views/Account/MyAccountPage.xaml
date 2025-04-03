@@ -99,301 +99,298 @@
             </StackLayout>
 
 
-            <RefreshView Command="{Binding AccountLoadCommand}"
-                    IsRefreshing="{Binding IsBusy}">
-                <ScrollView
+            <ScrollView
                     VerticalScrollBarVisibility="Never"
                     VerticalOptions="FillAndExpand"
                     BackgroundColor="Transparent">
-                    <StackLayout>
+                <StackLayout>
 
-                        <Grid HeightRequest="200">
-                            <Image x:Name="CoverImage"
+                    <Grid HeightRequest="200">
+                        <Image x:Name="CoverImage"
                                    Source="{Binding myAccount.cover_picture, Converter={StaticResource isImageSourceConverter}}"
                                    Aspect="AspectFill" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"/>
-                            <Image HeightRequest="40" WidthRequest="40" VerticalOptions="StartAndExpand" HorizontalOptions="EndAndExpand" Margin="10">
-                                <Image.GestureRecognizers>
-                                    <TapGestureRecognizer Tapped="OnSelectCoverImage"/>
-                                </Image.GestureRecognizers>
-                                <Image.Source>
-                                    <FontImageSource FontFamily="{StaticResource FontAwesome}" Glyph="{Static icons:IconFont.Camera}" Color="{AppThemeBinding Light={StaticResource Background_Dark}, Dark={StaticResource White}}" />
-                                </Image.Source>
-                            </Image>
-                        </Grid>
+                        <Image HeightRequest="40" WidthRequest="40" VerticalOptions="StartAndExpand" HorizontalOptions="EndAndExpand" Margin="10">
+                            <Image.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="OnSelectCoverImage"/>
+                            </Image.GestureRecognizers>
+                            <Image.Source>
+                                <FontImageSource FontFamily="{StaticResource FontAwesome}" Glyph="{Static icons:IconFont.Camera}" Color="{AppThemeBinding Light={StaticResource Background_Dark}, Dark={StaticResource White}}" />
+                            </Image.Source>
+                        </Image>
+                    </Grid>
 
-                        <StackLayout Orientation="Vertical" BackgroundColor="Transparent" Margin="10">
-                            <Grid WidthRequest="170" HeightRequest="170" Margin="30,-100,30,10">
-                                <Frame Padding="0" HorizontalOptions="CenterAndExpand" CornerRadius="20" HasShadow="True">
-                                    <StackLayout Orientation="Vertical">
-                                        <Image x:Name="ProfileImage" WidthRequest="170" HeightRequest="170"
+                    <StackLayout Orientation="Vertical" BackgroundColor="Transparent" Margin="10">
+                        <Grid WidthRequest="170" HeightRequest="170" Margin="30,-100,30,10">
+                            <Frame Padding="0" HorizontalOptions="CenterAndExpand" CornerRadius="20" HasShadow="True">
+                                <StackLayout Orientation="Vertical">
+                                    <Image x:Name="ProfileImage" WidthRequest="170" HeightRequest="170"
                                                Source="{Binding myAccount.profile_picture, Converter={StaticResource isImageSourceConverter}}"
                                                Aspect="AspectFill"/>
-                                    </StackLayout>
-                                </Frame>
-                            </Grid>
+                                </StackLayout>
+                            </Frame>
+                        </Grid>
 
-                            <Image HeightRequest="40" WidthRequest="40" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" Margin="30,-35,30,10">
-                                <Image.GestureRecognizers>
-                                    <TapGestureRecognizer Tapped="OnSelectProfileImage"/>
-                                </Image.GestureRecognizers>
-                                <Image.Source>
-                                    <FontImageSource FontFamily="{StaticResource FontAwesome}" Glyph="{Static icons:IconFont.Camera}" Color="{AppThemeBinding Light={StaticResource Background_Dark}, Dark={StaticResource White}}" />
-                                </Image.Source>
-                            </Image>
+                        <Image HeightRequest="40" WidthRequest="40" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" Margin="30,-35,30,10">
+                            <Image.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="OnSelectProfileImage"/>
+                            </Image.GestureRecognizers>
+                            <Image.Source>
+                                <FontImageSource FontFamily="{StaticResource FontAwesome}" Glyph="{Static icons:IconFont.Camera}" Color="{AppThemeBinding Light={StaticResource Background_Dark}, Dark={StaticResource White}}" />
+                            </Image.Source>
+                        </Image>
 
-                            <Label Text="{Binding myAccount.name}" FontAttributes="Bold" HorizontalOptions="CenterAndExpand" HorizontalTextAlignment="Center" FontSize="22"/>
-                            
-                            <Label
+                        <Label Text="{Binding myAccount.name}" FontAttributes="Bold" HorizontalOptions="CenterAndExpand" HorizontalTextAlignment="Center" FontSize="22"/>
+
+                        <Label
                                 Text="{Binding myAccount.user_name, StringFormat='@{0}'}"
                                 FontAttributes="Bold"
                                 FontSize="16"
                                 HorizontalOptions="CenterAndExpand"
                                 HorizontalTextAlignment="Center"/>
 
-                            <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="*"/>
-                                    <ColumnDefinition Width="Auto"/>
-                                </Grid.ColumnDefinitions>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
 
-                                <Frame
+                            <Frame
                                     Margin="5"
                                     Grid.Column="0"
                                     BackgroundColor="{AppThemeBinding Light={StaticResource LightGray}, Dark={StaticResource Background_Mid}}"
                                     CornerRadius="10"
                                     HeightRequest="50"
                                     IsVisible="True">
-                                    <Frame.GestureRecognizers>
-                                        <TapGestureRecognizer Tapped="BtnChangePassword"/>
-                                    </Frame.GestureRecognizers>
+                                <Frame.GestureRecognizers>
+                                    <TapGestureRecognizer Tapped="BtnChangePassword"/>
+                                </Frame.GestureRecognizers>
 
-                                    <StackLayout Orientation="Horizontal"
+                                <StackLayout Orientation="Horizontal"
                                             Padding="15">
-                                        <Image Source="settings_w30.png"
+                                    <Image Source="settings_w30.png"
                                                 HeightRequest="24"
                                                 WidthRequest="24"/>
-                                        <Label Text="Update Password"
+                                    <Label Text="Update Password"
                                                 TextColor="White"
                                                 FontAttributes="Bold"
                                                 Margin="5,0,0,0"/>
-                                    </StackLayout>
-                                </Frame>
+                                </StackLayout>
+                            </Frame>
 
-                                <Frame Grid.Column="1"
+                            <Frame Grid.Column="1"
                                         Margin="5"
                                         BackgroundColor="White"
                                         CornerRadius="5"
                                         HasShadow="True">
-                                    <Frame.GestureRecognizers>
-                                        <TapGestureRecognizer Command="{Binding OpenContactUsPage}"/>
-                                    </Frame.GestureRecognizers>
+                                <Frame.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding OpenContactUsPage}"/>
+                                </Frame.GestureRecognizers>
 
-                                    <StackLayout Padding="5"
+                                <StackLayout Padding="5"
                                             Orientation="Horizontal"
                                             Margin="30,0,30,0">
-                                        <Image Source="chat.png"
+                                    <Image Source="chat.png"
                                                 HeightRequest="24"
                                                 WidthRequest="24"/>
-                                    </StackLayout>
-                                </Frame>
-                            </Grid>
+                                </StackLayout>
+                            </Frame>
+                        </Grid>
 
-                            <BoxView Color="Gray"
+                        <BoxView Color="Gray"
                                     HeightRequest="1"
                                     HorizontalOptions="FillAndExpand"
                                     Margin="5,5,5,0"/>
-                            
-                            <StackLayout Margin="5,0,5,0">
-                                <Grid>
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="40"/>
-                                        <ColumnDefinition Width="*"/>
-                                        <ColumnDefinition Width="30"/>
-                                    </Grid.ColumnDefinitions>
-                                    <Image Grid.Column="0" VerticalOptions="CenterAndExpand" Margin="5,0,0,0">
-                                        <Image.Source>
-                                            <FontImageSource FontFamily="{StaticResource FontAwesome}" Glyph="{Static icons:IconFont.UserCircle}" Color="{AppThemeBinding Light={StaticResource Background_Dark}, Dark={StaticResource White}}" />
-                                        </Image.Source>
-                                    </Image>
-                                    <StackLayout Grid.Column="1" VerticalOptions="CenterAndExpand" Margin="5,0,0,0" Orientation="Vertical">
-                                        <Label Text="Your Name"/>
-                                        <Label Text="{Binding myAccount.name}"/>
-                                    </StackLayout>
-                                    <Image Grid.Column="2" VerticalOptions="CenterAndExpand" Margin="5">
-                                        <Image.GestureRecognizers>
-                                            <TapGestureRecognizer Tapped="OnOpenNameEditor" />
-                                        </Image.GestureRecognizers>
-                                        <Image.Source>
-                                            <FontImageSource FontFamily="{StaticResource FontAwesome}" Glyph="{Static icons:IconFont.Pen}" Color="{AppThemeBinding Light={StaticResource Background_Dark}, Dark={StaticResource White}}" />
-                                        </Image.Source>
-                                    </Image>
-                                </Grid>
-                                <BoxView Color="{StaticResource BorderColor}" HeightRequest="1" HorizontalOptions="FillAndExpand" Margin="5,5,5,0"/>
-                            </StackLayout>
 
-                            <StackLayout Margin="5,0,5,0">
-                                <Grid>
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="40"/>
-                                        <ColumnDefinition Width="*"/>
-                                        <ColumnDefinition Width="30"/>
-                                    </Grid.ColumnDefinitions>
-                                    <Image Grid.Column="0" VerticalOptions="CenterAndExpand" Margin="5,0,0,0">
-                                        <Image.Source>
-                                            <FontImageSource FontFamily="{StaticResource FontAwesome}" Glyph="{Static icons:IconFont.Phone}" Color="{AppThemeBinding Light={StaticResource Background_Dark}, Dark={StaticResource White}}" />
-                                        </Image.Source>
-                                    </Image>
-                                    <StackLayout Grid.Column="1" VerticalOptions="CenterAndExpand" Margin="5,0,0,0" Orientation="Vertical">
-                                        <Label Text="Your Phone"/>
-                                        <Label Text="{Binding myAccount.phone}"/>
-                                    </StackLayout>
-                                    <Image Grid.Column="2" VerticalOptions="CenterAndExpand" Margin="5">
-                                        <Image.GestureRecognizers>
-                                            <TapGestureRecognizer Tapped="OnOpenPhoneEditor" />
-                                        </Image.GestureRecognizers>
-                                        <Image.Source>
-                                            <FontImageSource FontFamily="{StaticResource FontAwesome}" Glyph="{Static icons:IconFont.Pen}" Color="{AppThemeBinding Light={StaticResource Background_Dark}, Dark={StaticResource White}}" />
-                                        </Image.Source>
-                                    </Image>
-                                </Grid>
-                                <BoxView Color="{StaticResource BorderColor}" HeightRequest="1" HorizontalOptions="FillAndExpand" Margin="5,5,5,0"/>
-                            </StackLayout>
-                            
-                            <StackLayout Margin="5,0,5,0">
-                                <Grid>
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="40"/>
-                                        <ColumnDefinition Width="*"/>
-                                    </Grid.ColumnDefinitions>
-                                    <Image Grid.Column="0" VerticalOptions="CenterAndExpand" Margin="5,0,0,0">
-                                        <Image.Source>
-                                            <FontImageSource FontFamily="{StaticResource FontAwesome}" Glyph="{Static icons:IconFont.MailBulk}" Color="{AppThemeBinding Light={StaticResource Background_Dark}, Dark={StaticResource White}}" />
-                                        </Image.Source>
-                                    </Image>
-                                    <StackLayout Grid.Column="1" VerticalOptions="CenterAndExpand" Margin="5,0,0,0" Orientation="Vertical">
-                                        <Label Text="Your Email"/>
-                                        <Label Text="{Binding myAccount.email}"/>
-                                    </StackLayout>
-                                </Grid>
-                                <BoxView Color="{StaticResource BorderColor}" HeightRequest="1" HorizontalOptions="FillAndExpand" Margin="5,5,5,0"/>
-                            </StackLayout>
+                        <StackLayout Margin="5,0,5,0">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="40"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="30"/>
+                                </Grid.ColumnDefinitions>
+                                <Image Grid.Column="0" VerticalOptions="CenterAndExpand" Margin="5,0,0,0">
+                                    <Image.Source>
+                                        <FontImageSource FontFamily="{StaticResource FontAwesome}" Glyph="{Static icons:IconFont.UserCircle}" Color="{AppThemeBinding Light={StaticResource Background_Dark}, Dark={StaticResource White}}" />
+                                    </Image.Source>
+                                </Image>
+                                <StackLayout Grid.Column="1" VerticalOptions="CenterAndExpand" Margin="5,0,0,0" Orientation="Vertical">
+                                    <Label Text="Your Name"/>
+                                    <Label Text="{Binding myAccount.name}"/>
+                                </StackLayout>
+                                <Image Grid.Column="2" VerticalOptions="CenterAndExpand" Margin="5">
+                                    <Image.GestureRecognizers>
+                                        <TapGestureRecognizer Tapped="OnOpenNameEditor" />
+                                    </Image.GestureRecognizers>
+                                    <Image.Source>
+                                        <FontImageSource FontFamily="{StaticResource FontAwesome}" Glyph="{Static icons:IconFont.Pen}" Color="{AppThemeBinding Light={StaticResource Background_Dark}, Dark={StaticResource White}}" />
+                                    </Image.Source>
+                                </Image>
+                            </Grid>
+                            <BoxView Color="{StaticResource BorderColor}" HeightRequest="1" HorizontalOptions="FillAndExpand" Margin="5,5,5,0"/>
+                        </StackLayout>
 
-                            <StackLayout Margin="5,0,5,0">
-                                <Grid>
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="40"/>
-                                        <ColumnDefinition Width="*"/>
-                                        <ColumnDefinition Width="30"/>
-                                    </Grid.ColumnDefinitions>
-                                    <Image Grid.Column="0" VerticalOptions="CenterAndExpand" Margin="5,0,0,0">
-                                        <Image.Source>
-                                            <FontImageSource FontFamily="{StaticResource FontAwesome}" Glyph="{Static icons:IconFont.Map}" Color="{AppThemeBinding Light={StaticResource Background_Dark}, Dark={StaticResource White}}" />
-                                        </Image.Source>
-                                    </Image>
-                                    <StackLayout Grid.Column="1" VerticalOptions="CenterAndExpand" Margin="5,0,0,0" Orientation="Vertical">
-                                        <Label Text="Your Address"/>
-                                        <Label Text="{Binding myAccount.address_label}"/>
-                                    </StackLayout>
-                                    <Image Grid.Column="2" VerticalOptions="CenterAndExpand" Margin="5">
-                                        <Image.GestureRecognizers>
-                                            <TapGestureRecognizer Tapped="OnOpenAddressEditor" />
-                                        </Image.GestureRecognizers>
-                                        <Image.Source>
-                                            <FontImageSource FontFamily="{StaticResource FontAwesome}" Glyph="{Static icons:IconFont.Pen}" Color="{AppThemeBinding Light={StaticResource Background_Dark}, Dark={StaticResource White}}" />
-                                        </Image.Source>
-                                    </Image>
-                                </Grid>
-                                <BoxView Color="{StaticResource BorderColor}" HeightRequest="1" HorizontalOptions="FillAndExpand" Margin="5,5,5,0"/>
-                            </StackLayout>
+                        <StackLayout Margin="5,0,5,0">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="40"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="30"/>
+                                </Grid.ColumnDefinitions>
+                                <Image Grid.Column="0" VerticalOptions="CenterAndExpand" Margin="5,0,0,0">
+                                    <Image.Source>
+                                        <FontImageSource FontFamily="{StaticResource FontAwesome}" Glyph="{Static icons:IconFont.Phone}" Color="{AppThemeBinding Light={StaticResource Background_Dark}, Dark={StaticResource White}}" />
+                                    </Image.Source>
+                                </Image>
+                                <StackLayout Grid.Column="1" VerticalOptions="CenterAndExpand" Margin="5,0,0,0" Orientation="Vertical">
+                                    <Label Text="Your Phone"/>
+                                    <Label Text="{Binding myAccount.phone}"/>
+                                </StackLayout>
+                                <Image Grid.Column="2" VerticalOptions="CenterAndExpand" Margin="5">
+                                    <Image.GestureRecognizers>
+                                        <TapGestureRecognizer Tapped="OnOpenPhoneEditor" />
+                                    </Image.GestureRecognizers>
+                                    <Image.Source>
+                                        <FontImageSource FontFamily="{StaticResource FontAwesome}" Glyph="{Static icons:IconFont.Pen}" Color="{AppThemeBinding Light={StaticResource Background_Dark}, Dark={StaticResource White}}" />
+                                    </Image.Source>
+                                </Image>
+                            </Grid>
+                            <BoxView Color="{StaticResource BorderColor}" HeightRequest="1" HorizontalOptions="FillAndExpand" Margin="5,5,5,0"/>
+                        </StackLayout>
 
-                            <StackLayout Margin="5,0,5,0">
-                                <Grid>
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="40"/>
-                                        <ColumnDefinition Width="*"/>
-                                        <ColumnDefinition Width="30"/>
-                                    </Grid.ColumnDefinitions>
-                                    <Image Grid.Column="0" VerticalOptions="CenterAndExpand" Margin="5,0,0,0">
-                                        <Image.Source>
-                                            <FontImageSource FontFamily="{StaticResource FontAwesome}" Glyph="{Static icons:IconFont.Calendar}" Color="{AppThemeBinding Light={StaticResource Background_Dark}, Dark={StaticResource White}}" />
-                                        </Image.Source>
-                                    </Image>
-                                    <StackLayout Grid.Column="1" VerticalOptions="CenterAndExpand" Margin="5,0,0,0" Orientation="Vertical">
-                                        <Label Text="Date Of Birth"/>
-                                        <Label Text="{Binding myAccount.dob}"/>
-                                    </StackLayout>
-                                    <Image Grid.Column="2" VerticalOptions="CenterAndExpand" Margin="5">
-                                        <Image.GestureRecognizers>
-                                            <TapGestureRecognizer Tapped="OnOpenDateEditor" />
-                                        </Image.GestureRecognizers>
-                                        <Image.Source>
-                                            <FontImageSource FontFamily="{StaticResource FontAwesome}" Glyph="{Static icons:IconFont.Pen}" Color="{AppThemeBinding Light={StaticResource Background_Dark}, Dark={StaticResource White}}" />
-                                        </Image.Source>
-                                    </Image>
-                                </Grid>
-                                <BoxView Color="{StaticResource BorderColor}" HeightRequest="1" HorizontalOptions="FillAndExpand" Margin="5,5,5,0"/>
-                            </StackLayout>
+                        <StackLayout Margin="5,0,5,0">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="40"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <Image Grid.Column="0" VerticalOptions="CenterAndExpand" Margin="5,0,0,0">
+                                    <Image.Source>
+                                        <FontImageSource FontFamily="{StaticResource FontAwesome}" Glyph="{Static icons:IconFont.MailBulk}" Color="{AppThemeBinding Light={StaticResource Background_Dark}, Dark={StaticResource White}}" />
+                                    </Image.Source>
+                                </Image>
+                                <StackLayout Grid.Column="1" VerticalOptions="CenterAndExpand" Margin="5,0,0,0" Orientation="Vertical">
+                                    <Label Text="Your Email"/>
+                                    <Label Text="{Binding myAccount.email}"/>
+                                </StackLayout>
+                            </Grid>
+                            <BoxView Color="{StaticResource BorderColor}" HeightRequest="1" HorizontalOptions="FillAndExpand" Margin="5,5,5,0"/>
+                        </StackLayout>
 
-                            <StackLayout Margin="5,0,5,0">
-                                <Grid>
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="40"/>
-                                        <ColumnDefinition Width="*"/>
-                                        <ColumnDefinition Width="30"/>
-                                    </Grid.ColumnDefinitions>
-                                    <Image Grid.Column="0" VerticalOptions="CenterAndExpand" Margin="5,0,0,0">
-                                        <Image.Source>
-                                            <FontImageSource FontFamily="{StaticResource FontAwesome}" Glyph="{Static icons:IconFont.Language}" Color="{AppThemeBinding Light={StaticResource Background_Dark}, Dark={StaticResource White}}" />
-                                        </Image.Source>
-                                    </Image>
-                                    <StackLayout Grid.Column="1" VerticalOptions="CenterAndExpand" Margin="5,0,0,0" Orientation="Vertical">
-                                        <Label Text="Your Language"/>
-                                        <Label Text="{Binding myAccount.language}"/>
-                                    </StackLayout>
-                                    <Image Grid.Column="2" VerticalOptions="CenterAndExpand" Margin="5">
-                                        <Image.GestureRecognizers>
-                                            <TapGestureRecognizer Tapped="OnOpenLanguageEditor" />
-                                        </Image.GestureRecognizers>
-                                        <Image.Source>
-                                            <FontImageSource FontFamily="{StaticResource FontAwesome}" Glyph="{Static icons:IconFont.Pen}" Color="{AppThemeBinding Light={StaticResource Background_Dark}, Dark={StaticResource White}}" />
-                                        </Image.Source>
-                                    </Image>
-                                </Grid>
-                                <BoxView Color="{StaticResource BorderColor}" HeightRequest="1" HorizontalOptions="FillAndExpand" Margin="5,5,5,0"/>
-                            </StackLayout>
+                        <StackLayout Margin="5,0,5,0">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="40"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="30"/>
+                                </Grid.ColumnDefinitions>
+                                <Image Grid.Column="0" VerticalOptions="CenterAndExpand" Margin="5,0,0,0">
+                                    <Image.Source>
+                                        <FontImageSource FontFamily="{StaticResource FontAwesome}" Glyph="{Static icons:IconFont.Map}" Color="{AppThemeBinding Light={StaticResource Background_Dark}, Dark={StaticResource White}}" />
+                                    </Image.Source>
+                                </Image>
+                                <StackLayout Grid.Column="1" VerticalOptions="CenterAndExpand" Margin="5,0,0,0" Orientation="Vertical">
+                                    <Label Text="Your Address"/>
+                                    <Label Text="{Binding myAccount.address_label}"/>
+                                </StackLayout>
+                                <Image Grid.Column="2" VerticalOptions="CenterAndExpand" Margin="5">
+                                    <Image.GestureRecognizers>
+                                        <TapGestureRecognizer Tapped="OnOpenAddressEditor" />
+                                    </Image.GestureRecognizers>
+                                    <Image.Source>
+                                        <FontImageSource FontFamily="{StaticResource FontAwesome}" Glyph="{Static icons:IconFont.Pen}" Color="{AppThemeBinding Light={StaticResource Background_Dark}, Dark={StaticResource White}}" />
+                                    </Image.Source>
+                                </Image>
+                            </Grid>
+                            <BoxView Color="{StaticResource BorderColor}" HeightRequest="1" HorizontalOptions="FillAndExpand" Margin="5,5,5,0"/>
+                        </StackLayout>
 
-                            <Label
+                        <StackLayout Margin="5,0,5,0">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="40"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="30"/>
+                                </Grid.ColumnDefinitions>
+                                <Image Grid.Column="0" VerticalOptions="CenterAndExpand" Margin="5,0,0,0">
+                                    <Image.Source>
+                                        <FontImageSource FontFamily="{StaticResource FontAwesome}" Glyph="{Static icons:IconFont.Calendar}" Color="{AppThemeBinding Light={StaticResource Background_Dark}, Dark={StaticResource White}}" />
+                                    </Image.Source>
+                                </Image>
+                                <StackLayout Grid.Column="1" VerticalOptions="CenterAndExpand" Margin="5,0,0,0" Orientation="Vertical">
+                                    <Label Text="Date Of Birth"/>
+                                    <Label Text="{Binding myAccount.dob}"/>
+                                </StackLayout>
+                                <Image Grid.Column="2" VerticalOptions="CenterAndExpand" Margin="5">
+                                    <Image.GestureRecognizers>
+                                        <TapGestureRecognizer Tapped="OnOpenDateEditor" />
+                                    </Image.GestureRecognizers>
+                                    <Image.Source>
+                                        <FontImageSource FontFamily="{StaticResource FontAwesome}" Glyph="{Static icons:IconFont.Pen}" Color="{AppThemeBinding Light={StaticResource Background_Dark}, Dark={StaticResource White}}" />
+                                    </Image.Source>
+                                </Image>
+                            </Grid>
+                            <BoxView Color="{StaticResource BorderColor}" HeightRequest="1" HorizontalOptions="FillAndExpand" Margin="5,5,5,0"/>
+                        </StackLayout>
+
+                        <StackLayout Margin="5,0,5,0">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="40"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="30"/>
+                                </Grid.ColumnDefinitions>
+                                <Image Grid.Column="0" VerticalOptions="CenterAndExpand" Margin="5,0,0,0">
+                                    <Image.Source>
+                                        <FontImageSource FontFamily="{StaticResource FontAwesome}" Glyph="{Static icons:IconFont.Language}" Color="{AppThemeBinding Light={StaticResource Background_Dark}, Dark={StaticResource White}}" />
+                                    </Image.Source>
+                                </Image>
+                                <StackLayout Grid.Column="1" VerticalOptions="CenterAndExpand" Margin="5,0,0,0" Orientation="Vertical">
+                                    <Label Text="Your Language"/>
+                                    <Label Text="{Binding myAccount.language}"/>
+                                </StackLayout>
+                                <Image Grid.Column="2" VerticalOptions="CenterAndExpand" Margin="5">
+                                    <Image.GestureRecognizers>
+                                        <TapGestureRecognizer Tapped="OnOpenLanguageEditor" />
+                                    </Image.GestureRecognizers>
+                                    <Image.Source>
+                                        <FontImageSource FontFamily="{StaticResource FontAwesome}" Glyph="{Static icons:IconFont.Pen}" Color="{AppThemeBinding Light={StaticResource Background_Dark}, Dark={StaticResource White}}" />
+                                    </Image.Source>
+                                </Image>
+                            </Grid>
+                            <BoxView Color="{StaticResource BorderColor}" HeightRequest="1" HorizontalOptions="FillAndExpand" Margin="5,5,5,0"/>
+                        </StackLayout>
+
+                        <Label
                                 Margin="10"
                                 Style="{StaticResource SubTextSemiBold}"
                                 Text="By using our application, you agree to our terms of service and privacy policy, please review them before creating an account."
                                 HorizontalTextAlignment="Center"/>
 
-                            <VerticalStackLayout>
-                                <StackLayout Margin="5">
-                                    <Grid>
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="*"/>
-                                            <ColumnDefinition Width="Auto"/>
-                                            <ColumnDefinition Width="*"/>
-                                        </Grid.ColumnDefinitions>
-                                        <Label Text="Delete Account" Margin="5" TextColor="Red" HorizontalOptions="EndAndExpand">
-                                            <Label.GestureRecognizers>
-                                                <TapGestureRecognizer Tapped="BtnDeleteAccount"/>
-                                            </Label.GestureRecognizers>
-                                        </Label>
-                                        <Label Text="|" Grid.Column="1" Margin="5" TextColor="{StaticResource Primary}" HorizontalOptions="CenterAndExpand"/>
-                                        <Label Text="Terms Of Use" Grid.Column="2" Margin="5" TextColor="Orange" HorizontalOptions="StartAndExpand">
-                                            <Label.GestureRecognizers>
-                                                <TapGestureRecognizer Tapped="BtnPrivacyPolicy"/>
-                                            </Label.GestureRecognizers>
-                                        </Label>
-                                    </Grid>
-                                </StackLayout>
-                            </VerticalStackLayout>
-                        </StackLayout>
+                        <VerticalStackLayout>
+                            <StackLayout Margin="5">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Label Text="Delete Account" Margin="5" TextColor="Red" HorizontalOptions="EndAndExpand">
+                                        <Label.GestureRecognizers>
+                                            <TapGestureRecognizer Tapped="BtnDeleteAccount"/>
+                                        </Label.GestureRecognizers>
+                                    </Label>
+                                    <Label Text="|" Grid.Column="1" Margin="5" TextColor="{StaticResource Primary}" HorizontalOptions="CenterAndExpand"/>
+                                    <Label Text="Terms Of Use" Grid.Column="2" Margin="5" TextColor="Orange" HorizontalOptions="StartAndExpand">
+                                        <Label.GestureRecognizers>
+                                            <TapGestureRecognizer Tapped="BtnPrivacyPolicy"/>
+                                        </Label.GestureRecognizers>
+                                    </Label>
+                                </Grid>
+                            </StackLayout>
+                        </VerticalStackLayout>
                     </StackLayout>
-                </ScrollView>
-            </RefreshView>
+                </StackLayout>
+            </ScrollView>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

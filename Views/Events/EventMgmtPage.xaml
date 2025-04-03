@@ -69,9 +69,6 @@
                 </Image>
             </StackLayout>
 
-            <RefreshView x:DataType="local:EventMgmtViewModel"
-                    Command="{Binding EventDetailsLoadCommand}"
-                    IsRefreshing="{Binding IsBusy}" Padding="10">
                 <CollectionView ItemsSource="{Binding eventManagement}"
                         Margin="10"
                         SelectionMode="Single">
@@ -88,7 +85,7 @@
                                                 <ColumnDefinition Width="70"/>
                                                 <ColumnDefinition Width="*"/>
                                             </Grid.ColumnDefinitions>
-                                            
+
                                             <toolkitViews:AvatarView BorderWidth="0" HeightRequest="50" WidthRequest="50" BackgroundColor="Transparent" CornerRadius="10" ImageSource="{Binding profile_picture, Converter={StaticResource isImageSourceConverter}}"
                                                                 HorizontalOptions="FillAndExpand"
                                                                 VerticalOptions="FillAndExpand"
@@ -97,7 +94,7 @@
                                                     <Shadow Opacity="0.3"/>
                                                 </toolkitViews:AvatarView.Shadow>
                                             </toolkitViews:AvatarView>
-                                            
+
                                             <StackLayout Padding="5" Grid.Column="1" Margin="5,0,0,0" VerticalOptions="CenterAndExpand">
                                                 <Label Text="{Binding name}" Padding="0,0,10,0" FontSize="16" FontAttributes="Bold"/>
                                                 <StackLayout Orientation="Horizontal">
@@ -116,7 +113,6 @@
                         </DataTemplate>
                     </CollectionView.ItemTemplate>
                 </CollectionView>
-            </RefreshView>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

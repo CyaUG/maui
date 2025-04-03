@@ -68,12 +68,7 @@
                 </Image>
             </StackLayout>
 
-            <RefreshView
-                x:DataType="local:MyJobApplicationsViewModel"
-                Command="{Binding LoadMyJobApplicationsCommand}"
-                IsRefreshing="{Binding IsBusy}" Padding="10">
-
-                <ScrollView VerticalScrollBarVisibility="Never">
+                <ScrollView VerticalScrollBarVisibility="Never" Padding="10" VerticalOptions="FillAndExpand">
                     <CollectionView ItemsSource="{Binding JobApplications}">
                         <CollectionView.ItemTemplate>
                             <DataTemplate x:DataType="model:JobApplication">
@@ -115,7 +110,6 @@
                         </CollectionView.ItemTemplate>
                     </CollectionView>
                 </ScrollView>
-            </RefreshView>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

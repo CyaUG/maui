@@ -13,14 +13,13 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using Youth.ViewModels.Base;
 
-
 namespace Youth.ViewModels
 {
     internal class MySavedEventsViewModel : BaseViewModel, IMySavedEventsViewModel
     {
         public DashboardSummary dashboardSummary { get; set; }
         public ObservableCollection<Event> Events { get; set; }
-        public Command LoadEventsCommand { get; }
+        //public Command LoadEventsCommand { get; }
         public UserAccount userAccount { get; set; }
         public SystemSettings systemSettings { get; set; }
         public Command<Event> EventNavTap { get; }
@@ -29,9 +28,10 @@ namespace Youth.ViewModels
         {
             Title = " My Saved Events";
             Events = new ObservableCollection<Event>();
-            LoadEventsCommand = new Command(async () => await ExecuteLoadEventsCommand());
+            //LoadEventsCommand = new Command(async () => await ExecuteLoadEventsCommand());
             EventNavTap = new Command<Event>(OnEventSelected);
             SearchGridTappedCommand = new Command(async () => await ExecuteSearchUiCommand());
+            _ = ExecuteLoadEventsCommand();
         }
 
         public Event selectedEvent;

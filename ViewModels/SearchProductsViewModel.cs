@@ -10,13 +10,12 @@ using System.Diagnostics;
 using System.Threading.Tasks;
 using Youth.ViewModels.Base;
 
-
 namespace Youth.ViewModels
 {
     internal class SearchProductsViewModel : BaseViewModel, ISearchProductsViewModel
     {
         public UserAccount userAccount { get; set; }
-        public Command LoadMainCommand { get; }
+        //public Command LoadMainCommand { get; }
         public ObservableCollection<ShoppingProduct> ShoppingProducts { get; }
         public SystemSettings systemSettings { get; set; }
         public Command<ShoppingProduct> ProductDetailNavTap { get; }
@@ -24,8 +23,9 @@ namespace Youth.ViewModels
         {
             Title = "Search Products";
             ShoppingProducts = new ObservableCollection<ShoppingProduct>();
-            LoadMainCommand = new Command(async () => await ExecuteLoadMainCommand());
+            //LoadMainCommand = new Command(async () => await ExecuteLoadMainCommand());
             ProductDetailNavTap = new Command<ShoppingProduct>(OnShoppingProductSelected);
+            _ = ExecuteLoadMainCommand();
         }
 
         async void OnShoppingProductSelected(ShoppingProduct product)

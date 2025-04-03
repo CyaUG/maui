@@ -12,8 +12,6 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using Youth.ViewModels.Base;
 
-
-
 namespace Youth.ViewModels
 {
     [QueryProperty(nameof(PostId), nameof(PostId))]
@@ -22,7 +20,7 @@ namespace Youth.ViewModels
         private int postId;
         public string dot { get; set; }
         public SafePost safePost { get; set; }
-        public Command LoadPostCommand { get; }
+        //public Command LoadPostCommand { get; }
         public ObservableCollection<SafePost> SafePosts { get; set; }
         public Command<SafePost> SafePostNavTap { get; }
         public Command<SafePost> LikeSafePostNavTap { get; }
@@ -35,7 +33,7 @@ namespace Youth.ViewModels
         {
             Title = "Safe Post";
             dot = "";
-            LoadPostCommand = new Command(async () => LoadPostDetails(postId));
+            //LoadPostCommand = new Command(async () => LoadPostDetails(postId));
             safePost = new SafePost();
             safePost.isShowingVideo = false;
             safePost.isShowingImage = false;
@@ -44,6 +42,7 @@ namespace Youth.ViewModels
             LikeSafePostNavTap = new Command<SafePost>(OnLikeSafePost);
             ShareSafePostNavTap = new Command<SafePost>(OnShareSafePost);
             SendPostCommand = new Command(async () => await ExecuteSendPostCommand());
+            LoadPostDetails(postId);
         }
 
         private String videoId;

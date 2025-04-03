@@ -6,7 +6,6 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Text;
 using System.Threading.Tasks;
-
 using System.Collections.ObjectModel;
 using Youth.Views.jobs;
 using Youth.ViewModels.Interfaces;
@@ -16,15 +15,16 @@ namespace Youth.ViewModels
 {
     internal class JobCategoryPickerViewModel : BaseViewModel, IJobCategoryPickerViewModel
     {
-        public Command RunMainCommand { get; }
+        //public Command RunMainCommand { get; }
         public ObservableCollection<JobCategory> JobCategories { get; set; }
         public Command<JobCategory> JobCategoryNavTap { get; }
         public JobCategoryPickerViewModel()
         {
             Title = "Pick Job Category";
             JobCategories = new ObservableCollection<JobCategory>();
-            RunMainCommand = new Command(async () => await ExecuteMainCommand());
+            //RunMainCommand = new Command(async () => await ExecuteMainCommand());
             JobCategoryNavTap = new Command<JobCategory>(OnJobCategorySelected);
+            _ = ExecuteMainCommand();
         }
 
         async void OnJobCategorySelected(JobCategory jobCategory)

@@ -19,7 +19,7 @@ namespace Youth.ViewModels
     {
         private readonly IMainApplicationServices _mainApplicationServices;
         public UserAccount userAccount { get; set; }
-        public Command LoadSafePostsCommand { get; }
+        //public Command LoadSafePostsCommand { get; }
         public ObservableCollection<SafePost> SafePosts { get; set; }
         public Command<SafePost> SafePostNavTap { get; }
         public ICommand LikePostNavTap { get; }
@@ -37,13 +37,14 @@ namespace Youth.ViewModels
             Title = "Safe Space";
             dot = " ◦ ";
             SafePosts = new ObservableCollection<SafePost>();
-            LoadSafePostsCommand = new Command(async () => await ExecuteLoadShoppingWishListCommand());
+            //LoadSafePostsCommand = new Command(async () => await ExecuteLoadShoppingWishListCommand());
             SafePostNavTap = new Command<SafePost>(OnSafePostSelected);
             LikePostNavTap = new Command<SafePost>(OnLikeSafePost);
             SharePostNavTap = new Command<SafePost>(OnShareSafePost);
             OpenAllSafePostsCommand = new Command(async () => await OnOpenAllSafePosts());
             OpenSafePostsPhotosCommand = new Command(async () => await OnOpenSafePostsPhotos());
             OpenSafePostsVideosCommand = new Command(async () => await OnOpenSafePostsVideos());
+            _ = ExecuteLoadShoppingWishListCommand();
         }
 
         async Task OnOpenAllSafePosts()

@@ -42,8 +42,7 @@
                 <Image Source="settings.png" HorizontalOptions="End" HeightRequest="30"/>
             </StackLayout>
 
-            <RefreshView x:DataType="local:CreateReferralProfileViewModel" Command="{Binding LoadEssentialsCommand}" IsRefreshing="{Binding IsBusy}">
-                <ScrollView VerticalScrollBarVisibility="Never">
+                <ScrollView VerticalScrollBarVisibility="Never" VerticalOptions="FillAndExpand">
                     <Grid HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
                         <StackLayout Orientation="Vertical">
                             <Frame Margin="5"
@@ -573,7 +572,6 @@
                         <ActivityIndicator x:Name="ActivityIndicator" HorizontalOptions="CenterAndExpand" IsRunning="False" VerticalOptions="CenterAndExpand"/>
                     </Grid>
                 </ScrollView>
-            </RefreshView>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

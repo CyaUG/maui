@@ -47,9 +47,7 @@
                 <Image Source="settings.png" HorizontalOptions="End" HeightRequest="30"/>
             </StackLayout>
 
-            <RefreshView Command="{Binding LoadSafePostsCommand}"
-                    IsRefreshing="{Binding IsBusy}">
-                <ScrollView VerticalScrollBarVisibility="Never">
+                <ScrollView VerticalScrollBarVisibility="Never" VerticalOptions="FillAndExpand">
                     <StackLayout Padding="0,10,0,10"
                             Spacing="10">
 
@@ -374,14 +372,14 @@
                                                             Padding="2,0,2,0"
                                                             HorizontalOptions="End">
                                                         <Grid>
-                                                            
+
                                                             <Grid.GestureRecognizers>
                                                                 <TapGestureRecognizer
                                                                 NumberOfTapsRequired="1"
                                                                 Command="{Binding Source={RelativeSource AncestorType={x:Type local:SafeSpaceMainViewModel}}, Path=SafePostNavTap}"
                                                                 CommandParameter="{Binding .}"/>
                                                             </Grid.GestureRecognizers>
-                                                            
+
 
                                                             <Grid.ColumnDefinitions>
                                                                 <ColumnDefinition Width="Auto"/>
@@ -418,14 +416,14 @@
                                                         <Frame CornerRadius="10"
                                                                 Padding="0,5,5,5"
                                                                 BackgroundColor="{AppThemeBinding Light={StaticResource LightGray}, Dark={StaticResource Background_Mid}}">
-                                                           
+
                                                             <Frame.GestureRecognizers>
                                                                 <TapGestureRecognizer
                                                                     NumberOfTapsRequired="1"
                                                                     Command="{Binding Source={RelativeSource AncestorType={x:Type local:SafeSpaceMainViewModel}}, Path=LikePostNavTap}"
                                                                     CommandParameter="{Binding .}"/>
                                                             </Frame.GestureRecognizers>
-                                                            
+
 
                                                             <Grid>
                                                                 <Grid.ColumnDefinitions>
@@ -467,14 +465,14 @@
                                                         <Frame CornerRadius="10"
                                                                 Padding="5"
                                                                 BackgroundColor="{AppThemeBinding Light={StaticResource LightGray}, Dark={StaticResource Background_Mid}}">
-                                                           
+
                                                             <Frame.GestureRecognizers>
                                                                 <TapGestureRecognizer
                                                                 NumberOfTapsRequired="1"
                                                                 Command="{Binding Source={RelativeSource AncestorType={x:Type local:SafeSpaceMainViewModel}}, Path=SafePostNavTap}"
                                                                 CommandParameter="{Binding .}"/>
                                                             </Frame.GestureRecognizers>
-                                                           
+
 
                                                             <Grid>
                                                                 <Grid.ColumnDefinitions>
@@ -505,14 +503,14 @@
                                                         <Frame CornerRadius="10"
                                                                 Padding="5"
                                                                 BackgroundColor="{AppThemeBinding Light={StaticResource LightGray}, Dark={StaticResource Background_Mid}}">
-                                                           
+
                                                             <Frame.GestureRecognizers>
                                                                 <TapGestureRecognizer
                                                                 NumberOfTapsRequired="1"
                                                                 Command="{Binding Source={RelativeSource AncestorType={x:Type local:SafeSpaceMainViewModel}}, Path=SharePostNavTap}"
                                                                 CommandParameter="{Binding .}"/>
                                                             </Frame.GestureRecognizers>
-                                                           
+
 
                                                             <Grid>
                                                                 <Grid.ColumnDefinitions>
@@ -547,7 +545,6 @@
 
                     </StackLayout>
                 </ScrollView>
-            </RefreshView>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

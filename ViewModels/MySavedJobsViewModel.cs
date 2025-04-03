@@ -7,7 +7,6 @@ using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Text;
 using System.Threading.Tasks;
-
 using Youth.Views.jobs;
 using Youth.ViewModels.Interfaces;
 using Youth.ViewModels.Base;
@@ -17,7 +16,7 @@ namespace Youth.ViewModels
     internal class MySavedJobsViewModel : BaseViewModel, IMySavedJobsViewModel
     {
         public ObservableCollection<JobModel> JobModeles { get; set; }
-        public Command LoadMySavesJobsCommand { get; }
+        //public Command LoadMySavesJobsCommand { get; }
         public SystemSettings systemSettings { get; set; }
         public Command<JobModel> JobModelNavTap { get; }
 
@@ -26,7 +25,8 @@ namespace Youth.ViewModels
             Title = "Saved Jobs";
             JobModeles = new ObservableCollection<JobModel>();
             JobModelNavTap = new Command<JobModel>(OnJobModelSelected);
-            LoadMySavesJobsCommand = new Command(async () => await ExecuteLoadMySavesJobsCommand());
+            //LoadMySavesJobsCommand = new Command(async () => await ExecuteLoadMySavesJobsCommand());
+            _ = ExecuteLoadMySavesJobsCommand();
         }
 
         async void OnJobModelSelected(JobModel jobModel)

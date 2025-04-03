@@ -64,68 +64,64 @@
                         HeightRequest="30"/>
             </StackLayout>
 
-            <RefreshView x:DataType="local:EventCategoryEventsViewModel"
-                    Command="{Binding LoadEventsCommand}"
-                    IsRefreshing="{Binding IsBusy}">
-                <ScrollView VerticalScrollBarVisibility="Never">
-                    <CollectionView ItemsSource="{Binding Events}"
+            <ScrollView VerticalScrollBarVisibility="Never">
+                <CollectionView ItemsSource="{Binding Events}"
                             SelectionMode="Single">
-                        <CollectionView.ItemTemplate>
-                            <DataTemplate x:DataType="model:Event">
-                                <StackLayout Padding="0,0,10,0">
-                                    <Frame CornerRadius="10"
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate x:DataType="model:Event">
+                            <StackLayout Padding="0,0,10,0">
+                                <Frame CornerRadius="10"
                                             BackgroundColor="{AppThemeBinding Light={StaticResource LightGray}, Dark={StaticResource Background_Mid}}"
                                             HasShadow="True"
                                             Margin="5">
 
-                                        <Frame.GestureRecognizers>
-                                            <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type local:EventCategoryEventsViewModel}}, Path=EventNavTap}" CommandParameter="{Binding .}" />
-                                        </Frame.GestureRecognizers>
-                                        <StackLayout Orientation="Vertical"
+                                    <Frame.GestureRecognizers>
+                                        <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type local:EventCategoryEventsViewModel}}, Path=EventNavTap}" CommandParameter="{Binding .}" />
+                                    </Frame.GestureRecognizers>
+                                    <StackLayout Orientation="Vertical"
                                                 Padding="5">
-                                            <Grid RowDefinitions="Auto, *"
+                                        <Grid RowDefinitions="Auto, *"
                                                     ColumnDefinitions="Auto, *">
-                                                <StackLayout Grid.RowSpan="3"
+                                            <StackLayout Grid.RowSpan="3"
                                                         Orientation="Horizontal"
                                                         VerticalOptions="CenterAndExpand"
                                                         HeightRequest="60"
                                                         WidthRequest="60">
-                                                    <Frame CornerRadius="10">
-                                                        <Image
+                                                <Frame CornerRadius="10">
+                                                    <Image
                                    Source="{Binding imageUrl, Converter={StaticResource isImageSourceConverter}}"
                                                             HeightRequest="70"
                                                             WidthRequest="70"
                                                             Aspect="AspectFill">
-                                                        </Image>
-                                                    </Frame>
-                                                </StackLayout>
+                                                    </Image>
+                                                </Frame>
+                                            </StackLayout>
 
-                                                <StackLayout Orientation="Vertical"
+                                            <StackLayout Orientation="Vertical"
                                                         Grid.Column="1"
                                                         Padding="15,0,0,0">
-                                                    <Label Text="{Binding eventTitle}"
+                                                <Label Text="{Binding eventTitle}"
                                                             FontAttributes="Bold"/>
-                                                    <Label Text="{Binding event_address}"
+                                                <Label Text="{Binding event_address}"
                                                             FontSize="10"/>
-                                                    <StackLayout Orientation="Horizontal">
-                                                        <Label Text="{Binding eventDate, StringFormat='Date: {0:MMMM dd, yyyy}'}"
+                                                <StackLayout Orientation="Horizontal">
+                                                    <Label Text="{Binding eventDate, StringFormat='Date: {0:MMMM dd, yyyy}'}"
                                                                 FontAttributes="Bold"
                                                                 FontSize="10"/>
-                                                        <Label Text="{Binding interested, StringFormat='{0} Going'}"
+                                                    <Label Text="{Binding interested, StringFormat='{0} Going'}"
                                                                 HorizontalOptions="EndAndExpand"
                                                                 FontAttributes="Bold"
                                                                 FontSize="10"/>
-                                                    </StackLayout>
                                                 </StackLayout>
-                                            </Grid>
-                                        </StackLayout>
-                                    </Frame>
-                                </StackLayout>
-                            </DataTemplate>
-                        </CollectionView.ItemTemplate>
-                    </CollectionView>
-                </ScrollView>
-            </RefreshView>
+                                            </StackLayout>
+                                        </Grid>
+                                    </StackLayout>
+                                </Frame>
+                            </StackLayout>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </ScrollView>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

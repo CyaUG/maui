@@ -71,10 +71,7 @@
                 </Image>
             </StackLayout>
 
-            <RefreshView
-                Command="{Binding ShoppingCategoriesLoadCommand}"
-                IsRefreshing="{Binding IsBusy}">
-                <ScrollView VerticalScrollBarVisibility="Never">
+                <ScrollView VerticalScrollBarVisibility="Never" VerticalOptions="FillAndExpand">
                     <StackLayout Padding="10,0,10,10"
                             Spacing="30">
                         <Label Text="{Binding Categories}"
@@ -122,7 +119,6 @@
                         </CollectionView>
                     </StackLayout>
                 </ScrollView>
-            </RefreshView>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

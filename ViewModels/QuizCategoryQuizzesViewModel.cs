@@ -21,16 +21,17 @@ namespace Youth.ViewModels
     public class QuizCategoryQuizzesViewModel : BaseViewModel, IQuizCategoryQuizzesViewModel
     {
         private int _categoryId;
-        public Command LoadQuizCategoryQuizzesCommand { get; }
+        //public Command LoadQuizCategoryQuizzesCommand { get; }
         public ObservableCollection<Quiz> quizzes { get; set; }
         public Command<Quiz> QuizNavTap { get; }
 
         public QuizCategoryQuizzesViewModel()
         {
             Title = "Category Quizzes";
-            LoadQuizCategoryQuizzesCommand = new Command(async () => ExecuteLoadQuizCategoryQuizzesCommand(CategoryId));
+            //LoadQuizCategoryQuizzesCommand = new Command(async () => ExecuteLoadQuizCategoryQuizzesCommand(CategoryId));
             quizzes = new ObservableCollection<Quiz>();
             QuizNavTap = new Command<Quiz>(OnQuizSelected);
+            ExecuteLoadQuizCategoryQuizzesCommand(CategoryId);
         }
 
         async void OnQuizSelected(Quiz quiz)

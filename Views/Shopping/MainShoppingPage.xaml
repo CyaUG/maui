@@ -35,8 +35,7 @@
 
     <ContentPage.Content>
         <StackLayout Padding="10,30,10,10">
-            <RefreshView x:DataType="local:MainShoppingViewModel" Command="{Binding ShoppingCategoriesLoadCommand}" IsRefreshing="{Binding IsBusy}">
-                <ScrollView VerticalScrollBarVisibility="Never">
+            <ScrollView VerticalScrollBarVisibility="Never" VerticalOptions="FillAndExpand">
                     <VerticalStackLayout>
                         <StackLayout Orientation="Horizontal"
                                 VerticalOptions="Center"
@@ -76,11 +75,11 @@
                             <ScrollView HorizontalScrollBarVisibility="Never" HorizontalOptions="FillAndExpand" Orientation="Horizontal">
                                 <HorizontalStackLayout Spacing="8" HorizontalOptions="FillAndExpand">
                                     <Frame WidthRequest="150" HasShadow="False" CornerRadius="5" Padding="10" BackgroundColor="{AppThemeBinding Light={StaticResource LightGray}, Dark={StaticResource Background_Mid}}">
-                                       
+
                                         <Frame.GestureRecognizers>
                                             <TapGestureRecognizer Tapped="OpenShoppingWishList" />
                                         </Frame.GestureRecognizers>
-                                        
+
                                         <Grid>
                                             <Grid.ColumnDefinitions>
                                                 <ColumnDefinition Width="*"/>
@@ -103,11 +102,11 @@
                                     </Frame>
 
                                     <Frame WidthRequest="150" HasShadow="False" CornerRadius="5" Padding="10" BackgroundColor="{AppThemeBinding Light={StaticResource LightGray}, Dark={StaticResource Background_Mid}}">
-                                        
+
                                         <Frame.GestureRecognizers>
                                             <TapGestureRecognizer Tapped="OpenShoppingOrders" />
                                         </Frame.GestureRecognizers>
-                                        
+
                                         <Grid>
                                             <Grid.ColumnDefinitions>
                                                 <ColumnDefinition Width="*"/>
@@ -160,7 +159,7 @@
 
                             <Grid Margin="0,5,0,0">
                                 <Grid.GestureRecognizers>
-                                        <TapGestureRecognizer Command="{Binding OpenMoreShoppingCategoriesLoadCommand}"
+                                    <TapGestureRecognizer Command="{Binding OpenMoreShoppingCategoriesLoadCommand}"
                                                 CommandParameter="{Binding .}"/>
                                 </Grid.GestureRecognizers>
                                 <Grid.ColumnDefinitions>
@@ -174,7 +173,7 @@
                                     </Image.Source>
                                 </Image>
                             </Grid>
-                            
+
                             <Grid>
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="*"/>
@@ -394,7 +393,6 @@
                         </StackLayout>
                     </VerticalStackLayout>
                 </ScrollView>
-            </RefreshView>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

@@ -10,8 +10,6 @@ using System.Diagnostics;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Youth.ViewModels.Base;
-
-
 using System.IO;
 using System.Collections.Generic;
 using Youth.Views.ReferralProgram;
@@ -32,7 +30,7 @@ namespace Youth.ViewModels
         public Command PickCitizenship { get; }
         public Command PickGender { get; }
         public Command PickReferralDistrictProvider { get; }
-        public Command LoadEssentialsCommand { get; }
+        //public Command LoadEssentialsCommand { get; }
         public Command CreateReferralProfileCommand { get; }
         public bool profilePicSelected { get; set; }
         public bool nationalIdSelected { get; set; }
@@ -130,7 +128,7 @@ namespace Youth.ViewModels
         {
             Title = "Create Profile";
             PickProfilePictureCommand = new Command(async () => await PickProfilePicture());
-            LoadEssentialsCommand = new Command(async () => await ExecuteLoadEssentialsCommand());
+            //LoadEssentialsCommand = new Command(async () => await ExecuteLoadEssentialsCommand());
             PickNationalIdCommand = new Command(async () => await PickNationalID());
             PickReferralAccountCategory = new Command(async () => await OpenReferralAccountCategoryPickerPage());
             PickCitizenship = new Command(async () => await OpenCitizenshipPicker());
@@ -147,6 +145,7 @@ namespace Youth.ViewModels
             activeReferralAccountCitizenship.label = "Citizenship";
             activeReferralDistrict = new ReferralDistrict();
             activeReferralDistrict.label = "District";
+            _ = ExecuteLoadEssentialsCommand();
         }
 
         private ReferralAccountCategory _referralAccountCategory;

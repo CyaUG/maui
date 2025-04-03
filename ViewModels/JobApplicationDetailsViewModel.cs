@@ -11,8 +11,6 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using Youth.ViewModels.Base;
-
-
 using Youth.Utils;
 using Youth.ViewModels.Interfaces;
 
@@ -21,7 +19,7 @@ namespace Youth.ViewModels
     [QueryProperty(nameof(ApplicationId), nameof(ApplicationId))]
     internal class JobApplicationDetailsViewModel : BaseViewModel, IJobApplicationDetailsViewModel
     {
-        public Command LoadJobDetailsCommand { get; }
+        //public Command LoadJobDetailsCommand { get; }
         public ObservableCollection<JobQuestionAnswer> JobQuestionAnswers { get; set; }
         public JobModel jobModel { get; set; }
         public JobApplication mJobApplication { get; set; }
@@ -44,7 +42,7 @@ namespace Youth.ViewModels
         {
             Title = "Application Info";
             JobQuestionAnswers = new ObservableCollection<JobQuestionAnswer>();
-            LoadJobDetailsCommand = new Command(async () => LoadJobApplicationDetails(ApplicationId));
+            //LoadJobDetailsCommand = new Command(async () => LoadJobApplicationDetails(ApplicationId));
             JobAddressTap = new Command<JobModel>(OnJobAddressSelected);
             OpenContactUsPage = new Command(async () => await ExecuteOpenContactUsPage());
             SaveJobCommand = new Command(async () => await ExecuteSaveJobCommand());
@@ -56,6 +54,7 @@ namespace Youth.ViewModels
             CollegeLoadCommand = new Command(async () => await ExecuteCollegeLoadCommand());
             HighSchoolLoadCommand = new Command(async () => await ExecuteHighSchoolLoadCommand());
             JobModelNavTap = new Command<JobModel>(OnJobModelSelected);
+            LoadJobApplicationDetails(ApplicationId);
         }
 
         async void OnJobModelSelected(JobModel jobModel)

@@ -66,12 +66,9 @@
                 </Image>
             </StackLayout>
 
-            <RefreshView x:DataType="local:QuestionSuggestionsViewModel"
-                    Command="{Binding RunMainCommand}"
-                    IsRefreshing="{Binding IsBusy}">
                 <CollectionView ItemsSource="{Binding JobSugestionQuestions}"
                         Margin="10"
-                        SelectionMode="Single">
+                        SelectionMode="Single" VerticalOptions="FillAndExpand">
                     <CollectionView.ItemTemplate>
                         <DataTemplate x:DataType="model:JobSugestionQuestion">
                             <StackLayout>
@@ -122,7 +119,6 @@
                         </DataTemplate>
                     </CollectionView.ItemTemplate>
                 </CollectionView>
-            </RefreshView>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

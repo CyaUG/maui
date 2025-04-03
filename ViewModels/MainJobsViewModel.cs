@@ -12,14 +12,13 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using Youth.ViewModels.Base;
 
-
 namespace Youth.ViewModels
 {
     public class MainJobsViewModel : BaseViewModel, IMainJobsViewModel
     {
         public ObservableCollection<JobCategory> JobCategories { get; set; }
         public ObservableCollection<JobModel> JobModeles { get; set; }
-        public Command LoadJobCategoriesCommand { get; }
+        //public Command LoadJobCategoriesCommand { get; }
         public UserAccount userAccount { get; set; }
         public JobCategory selectedJobCategory;
         public JobModel selectedJobModel;
@@ -33,10 +32,11 @@ namespace Youth.ViewModels
             Title = "Jobs";
             JobCategories = new ObservableCollection<JobCategory>();
             JobModeles = new ObservableCollection<JobModel>();
-            LoadJobCategoriesCommand = new Command(async () => await ExecuteLoadJobCategoriesCommand());
+            //LoadJobCategoriesCommand = new Command(async () => await ExecuteLoadJobCategoriesCommand());
             JobCategoryNavTap = new Command<JobCategory>(OnJobCategorySelected);
             JobModelNavTap = new Command<JobModel>(OnJobModelSelected);
             SearchGridTappedCommand = new Command(async () => await ExecuteSearchUiCommand());
+            _ = ExecuteLoadJobCategoriesCommand();
         }
 
         public JobCategory SelectedProduct

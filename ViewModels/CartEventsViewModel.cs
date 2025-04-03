@@ -9,13 +9,12 @@ using System.Diagnostics;
 using System.Threading.Tasks;
 using Youth.ViewModels.Base;
 
-
 namespace Youth.ViewModels
 {
     internal class CartEventsViewModel : BaseViewModel, ICartEventsViewModel
     {
         public UserAccount userAccount { get; set; }
-        public Command LoadMainCommand { get; }
+        //public Command LoadMainCommand { get; }
         public SystemSettings systemSettings { get; set; }
         public ObservableCollection<EventCart> EventCarts { get; }
 
@@ -35,7 +34,8 @@ namespace Youth.ViewModels
         {
             Title = "Cart";
             EventCarts = new ObservableCollection<EventCart>();
-            LoadMainCommand = new Command(async () => await ExecuteLoadMainCommand());
+            //LoadMainCommand = new Command(async () => await ExecuteLoadMainCommand());
+            _ = ExecuteLoadMainCommand();
         }
 
         async Task ExecuteLoadMainCommand()

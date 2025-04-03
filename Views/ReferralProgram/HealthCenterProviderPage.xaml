@@ -63,67 +63,63 @@
                         HeightRequest="30"/>
             </StackLayout>
 
-            <RefreshView x:DataType="local:HealthCenterProviderViewModel"
-                    Command="{Binding RunReferralHCMainCommand}"
-                    IsRefreshing="{Binding IsBusy}">
-                <CollectionView ItemsSource="{Binding HealthCenters}"
+            <CollectionView ItemsSource="{Binding HealthCenters}"
                         Margin="10"
                         SelectionMode="Single">
-                    <CollectionView.ItemTemplate>
-                        <DataTemplate x:DataType="model:HealthCenter">
-                            <StackLayout>
-                                <Frame HasShadow="True" BackgroundColor="{AppThemeBinding Light={StaticResource LightGray}, Dark={StaticResource Background_Mid}}"
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="model:HealthCenter">
+                        <StackLayout>
+                            <Frame HasShadow="True" BackgroundColor="{AppThemeBinding Light={StaticResource LightGray}, Dark={StaticResource Background_Mid}}"
                                         CornerRadius="10"
                                         Margin="2">
-                                    <Frame.GestureRecognizers>
-                                        <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type local:HealthCenterProviderViewModel}}, Path=HealthCenterNavTap}" CommandParameter="{Binding .}" />
-                                    </Frame.GestureRecognizers>
-                                    <StackLayout Padding="2">
+                                <Frame.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type local:HealthCenterProviderViewModel}}, Path=HealthCenterNavTap}" CommandParameter="{Binding .}" />
+                                </Frame.GestureRecognizers>
+                                <StackLayout Padding="2">
 
-                                        <Grid>
-                                            <Grid.ColumnDefinitions>
-                                                <ColumnDefinition Width="70"/>
-                                                <ColumnDefinition Width="*"/>
-                                                <ColumnDefinition Width="30"/>
-                                            </Grid.ColumnDefinitions>
-                                            <Frame
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="70"/>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="30"/>
+                                        </Grid.ColumnDefinitions>
+                                        <Frame
                                                 Grid.Column="0"
                                                 VerticalOptions="StartAndExpand"
                                                 Margin="5"
                                                 CornerRadius="5">
-                                                <Frame.GestureRecognizers>
-                                                    <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type local:HealthCenterProviderViewModel}}, Path=HealthCenterNavTap}" CommandParameter="{Binding .}" />
-                                                </Frame.GestureRecognizers>
-                                                <Image
+                                            <Frame.GestureRecognizers>
+                                                <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type local:HealthCenterProviderViewModel}}, Path=HealthCenterNavTap}" CommandParameter="{Binding .}" />
+                                            </Frame.GestureRecognizers>
+                                            <Image
                                                     Source="{Binding imageUrl, Converter={StaticResource isImageSourceConverter}}"
                                                     HeightRequest="50"
                                                     WidthRequest="50"
                                                     Aspect="AspectFill"/>
-                                            </Frame>
-                                            <StackLayout Grid.Column="1"
+                                        </Frame>
+                                        <StackLayout Grid.Column="1"
                                                     Margin="5,0,0,0">
-                                                <Label Text="{Binding label}"
+                                            <Label Text="{Binding label}"
                                                         Padding="0,0,10,0"
                                                         FontSize="16"
                                                         FontAttributes="Bold"/>
-                                                <Label Text="{Binding address_label}"
+                                            <Label Text="{Binding address_label}"
                                                         VerticalOptions="CenterAndExpand"/>
-                                            </StackLayout>
-                                            <Image
+                                        </StackLayout>
+                                        <Image
                                                 Source="right_arrow.png"
                                                 Grid.Column="2"
                                                 VerticalOptions="CenterAndExpand"
                                                 Margin="5,0,5,0"
                                                 HorizontalOptions="End"
                                                 HeightRequest="30"/>
-                                        </Grid>
-                                    </StackLayout>
-                                </Frame>
-                            </StackLayout>
-                        </DataTemplate>
-                    </CollectionView.ItemTemplate>
-                </CollectionView>
-            </RefreshView>
+                                    </Grid>
+                                </StackLayout>
+                            </Frame>
+                        </StackLayout>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

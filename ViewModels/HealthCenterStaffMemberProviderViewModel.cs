@@ -12,8 +12,6 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using Youth.ViewModels.Base;
 
-
-
 namespace Youth.ViewModels
 {
     [QueryProperty(nameof(HealthCenterId), nameof(HealthCenterId))]
@@ -21,15 +19,16 @@ namespace Youth.ViewModels
     {
         private int _healthCenterId;
         public ObservableCollection<StaffMember> StaffMembers { get; }
-        public Command RunReferralHCMainCommand { get; }
+        //public Command RunReferralHCMainCommand { get; }
         public Command<StaffMember> StaffMemberNavTap { get; }
 
         public HealthCenterStaffMemberProviderViewModel()
         {
             Title = "Staff Members";
             StaffMembers = new ObservableCollection<StaffMember>();
-            RunReferralHCMainCommand = new Command(async () => await LoadHealthCenterStaffMembers(HealthCenterId));
+            //RunReferralHCMainCommand = new Command(async () => await LoadHealthCenterStaffMembers(HealthCenterId));
             StaffMemberNavTap = new Command<StaffMember>(OnStaffMemberSelected);
+            _ = LoadHealthCenterStaffMembers(HealthCenterId);
         }
 
         async void OnStaffMemberSelected(StaffMember mStaffMember)

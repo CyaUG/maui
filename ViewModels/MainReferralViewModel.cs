@@ -17,12 +17,11 @@ using System.Windows.Input;
 using Youth.ViewModels.Base;
 using CommunityToolkit.Mvvm.Input;
 
-
 namespace Youth.ViewModels
 {
     internal partial class MainReferralViewModel : BaseViewModel, IMainReferralViewModel
     {
-        public Command RunReferralMainCommand { get; }
+        //public Command RunReferralMainCommand { get; }
         public Command SafeSpaceCardTappedCommand { get; }
         public Command RevealMyQrCodeTappedCommand { get; }
         public Command OpenCreateReferralProfile { get; }
@@ -51,7 +50,7 @@ namespace Youth.ViewModels
             Title = "Referral Program";
             Symptoms = new ObservableCollection<Symptom>();
             Referrals = new ObservableCollection<Referral>();
-            RunReferralMainCommand = new Command(async () => await ExecuteRunReferralMainCommand());
+            //RunReferralMainCommand = new Command(async () => await ExecuteRunReferralMainCommand());
             SafeSpaceCardTappedCommand = new Command(async () => await ExecuteSafeSpaceCardTappedCommand());
             RevealMyQrCodeTappedCommand = new Command(async () => await ExecuteRevealMyQrCodeTappedCommand());
 
@@ -71,6 +70,7 @@ namespace Youth.ViewModels
             showDoctorReferralConsultations = false;
             showAccountUnderReview = false;
             showReferralAccountNullError = false;
+            _ = ExecuteRunReferralMainCommand();
         }
 
         async void OpenPatientTappedCommand(Referral mReferral)

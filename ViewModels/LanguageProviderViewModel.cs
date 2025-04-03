@@ -19,6 +19,7 @@ namespace Youth.ViewModels
         {
             Title = "Localizations";
             Localizations = new ObservableCollection<Localization>();
+            _ = ExecuteLoadLocalizationsCommand();
         }
 
         [RelayCommand]
