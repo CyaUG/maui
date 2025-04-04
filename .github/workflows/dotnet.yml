@@ -170,31 +170,31 @@ jobs:
         with:
           name: market-ios-ci-build
           path: bin/Release/net8.0-ios/**/*.ipa
-# MAUI MacCatalyst Build
-#  build-mac:
-#    runs-on: macos-latest
-#    name: MacCatalyst Build
-#    steps:
-#
-#      - name: Checkout
-#        uses: actions/checkout@v4
-#
-#      - name: Setup .NET 8
-#        uses: actions/setup-dotnet@v4
-#        with:
-#          dotnet-version: 8.0.x
-#
-#      - name: Install MAUI Workload
-#        run: dotnet workload install maui --ignore-failed-sources
-#
-#      - name: Restore Dependencies
-#        run: dotnet restore Youth.csproj
-#
-#      - name: Build MAUI MacCatalyst
-#        run: dotnet publish Youth.csproj -c Release -f net8.0-maccatalyst --no-restore -p:BuildIpa=True
-#
-#      - name: Upload MacCatalyst Artifact
-#        uses: actions/upload-artifact@v4.3.4
-#        with:
-#          name: market-macos-ci-build
-#          path: bin/Release/net8.0-maccatalyst/maccatalyst-x64/publish/*.pkg
+
+  # MAUI MacCatalyst Build
+  build-mac:
+    runs-on: macos-latest
+    name: MacCatalyst Build
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup .NET 8
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 8.0.x
+
+      - name: Install MAUI Workload
+        run: dotnet workload install maui --ignore-failed-sources
+
+      - name: Restore Dependencies
+        run: dotnet restore Youth.csproj
+
+      - name: Build MAUI MacCatalyst
+        run: dotnet publish Youth.csproj -c Release -f net8.0-maccatalyst --no-restore -p:BuildIpa=True
+
+      - name: Upload MacCatalyst Artifact
+        uses: actions/upload-artifact@v4.3.4
+        with:
+          name: market-macos-ci-build
+          path: bin/Release/net8.0-maccatalyst/maccatalyst-x64/publish/*.pkg
