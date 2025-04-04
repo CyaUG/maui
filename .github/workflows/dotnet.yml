@@ -199,33 +199,29 @@ jobs:
           IOS_CERTIFICATE_PASSWORD: ${{ secrets.IOS_CERTIFICATE_PASSWORD }}
           IOS_PROVISIONING_PROFILE: ${{ secrets.IOS_PROVISIONING_PROFILE }}
         run: |
-          # Unlock Keychain
-          security unlock-keychain
+          # Unlock keychain (no password needed on GitHub-hosted runners)
+          security unlock-keychain ~/Library/Keychains/login.keychain-db || echo "Keychain already unlocked"
 
-          # Validate Secrets
+          # Validate secrets
           if [ -z "$IOS_CERTIFICATE" ] || [ -z "$IOS_CERTIFICATE_PASSWORD" ] || [ -z "$IOS_PROVISIONING_PROFILE" ]; then
             echo "Error: Required secrets are missing."
             exit 1
           fi
 
-          # Decode and Import Certificate
+          # Import certificate
           echo "$IOS_CERTIFICATE" | base64 --decode > /tmp/certificate.p12
           security import /tmp/certificate.p12 -A -P "$IOS_CERTIFICATE_PASSWORD" || {
             echo "Error: Failed to import certificate."
             exit 1
           }
 
-          # List Installed Identities
+          # List installed identities
           security find-identity -p codesigning -v
 
-          # Decode and Install Provisioning Profile
+          # Install provisioning profile
           echo "$IOS_PROVISIONING_PROFILE" | base64 --decode > /tmp/profile.mobileprovision
           mkdir -p ~/Library/MobileDevice/Provisioning\ Profiles
           cp /tmp/profile.mobileprovision ~/Library/MobileDevice/Provisioning\ Profiles/
-
-          # Extract Provisioning Profile Name (optional, update below manually if needed)
-          PROFILE_NAME=$(security cms -D -i /tmp/profile.mobileprovision | /usr/libexec/PlistBuddy -c "Print :Name" /dev/stdin)
-          echo "Provisioning Profile Name: $PROFILE_NAME"
 
       - name: Build for iOS Device (IPA via MSBuild)
         run: |
