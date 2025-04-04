@@ -198,8 +198,7 @@ jobs:
             -f net8.0-maccatalyst \
             -r maccatalyst-x64 \
             --self-contained true \
-            -p:PublishSingleFile=true \
-            -p:EnableMacCatalyst=true
+            -p:PublishSingleFile=false
 
       - name: Upload MacCatalyst Artifact
         uses: actions/upload-artifact@v4.3.4
