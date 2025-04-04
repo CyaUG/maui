@@ -194,12 +194,13 @@ jobs:
         run: dotnet restore Youth.csproj
 
       - name: Validate and Import Certificate and Provisioning Profile
+        id: certs
         env:
           IOS_CERTIFICATE: ${{ secrets.IOS_CERTIFICATE }}
           IOS_CERTIFICATE_PASSWORD: ${{ secrets.IOS_CERTIFICATE_PASSWORD }}
           IOS_PROVISIONING_PROFILE: ${{ secrets.IOS_PROVISIONING_PROFILE }}
         run: |
-          # Unlock keychain (no password needed on GitHub-hosted runners)
+          # Unlock keychain
           security unlock-keychain ~/Library/Keychains/login.keychain-db || echo "Keychain already unlocked"
 
           # Validate secrets
@@ -215,22 +216,29 @@ jobs:
             exit 1
           }
 
-          # List installed identities
+          # List identities
           security find-identity -p codesigning -v
 
-          # Install provisioning profile
+          # Decode and install provisioning profile
           echo "$IOS_PROVISIONING_PROFILE" | base64 --decode > /tmp/profile.mobileprovision
           mkdir -p ~/Library/MobileDevice/Provisioning\ Profiles
-          cp /tmp/profile.mobileprovision ~/Library/MobileDevice/Provisioning\ Profiles/
+          PROFILE_PATH=~/Library/MobileDevice/Provisioning\ Profiles/$(uuidgen).mobileprovision
+          cp /tmp/profile.mobileprovision "$PROFILE_PATH"
 
-      - name: Build for iOS Device (IPA via MSBuild)
+          # Extract UUID from profile
+          UUID=$(/usr/libexec/PlistBuddy -c 'Print :UUID' /dev/stdin <<< $(/usr/bin/security cms -D -i /tmp/profile.mobileprovision))
+          echo "UUID=$UUID" >> $GITHUB_ENV
+
+      - name: Build for iOS Device (IPA via dotnet msbuild)
         run: |
-          msbuild Youth.csproj /t:Build /p:Configuration=Release \
-            /p:Platform=iPhone \
+          dotnet msbuild Youth.csproj /t:Build \
+            /p:Configuration=Release \
+            /p:TargetFramework=net8.0-ios \
             /p:RuntimeIdentifier=ios-arm64 \
+            /p:Platform=iPhone \
             /p:BuildIpa=true \
             /p:CodesignKey="Apple Distribution: Specioza Nakate (5N4YN56B77)" \
-            /p:CodesignProvision="Your Provisioning Profile Name Here"
+            /p:CodesignProvision=${{ env.UUID }}
 
       - name: List Build Artifacts
         run: ls -alR bin/Release/net8.0-ios
