@@ -13,7 +13,6 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using Youth.ViewModels.Base;
 
-
 namespace Youth.ViewModels
 {
     internal class MainEventsViewModel : BaseViewModel, IMainEventsViewModel
@@ -21,7 +20,7 @@ namespace Youth.ViewModels
         public DashboardSummary dashboardSummary { get; set; }
         public ObservableCollection<EventCategory> eventCategories { get; set; }
         public ObservableCollection<Event> Events { get; set; }
-        public Command LoadEventCategoriesCommand { get; }
+        //public Command LoadEventCategoriesCommand { get; }
         public UserAccount userAccount { get; set; }
         public EventCategory selectedEventCategory;
         public Event selectedEvent;
@@ -35,10 +34,11 @@ namespace Youth.ViewModels
             Title = "Events";
             eventCategories = new ObservableCollection<EventCategory>();
             Events = new ObservableCollection<Event>();
-            LoadEventCategoriesCommand = new Command(async () => await ExecuteLoadEventCategoriesCommand());
+            //LoadEventCategoriesCommand = new Command(async () => await ExecuteLoadEventCategoriesCommand());
             EventCategoryNavTap = new Command<EventCategory>(OnEventCategorySelected);
             EventNavTap = new Command<Event>(OnEventSelected);
             SearchGridTappedCommand = new Command(async () => await ExecuteSearchUiCommand());
+            _ = ExecuteLoadEventCategoriesCommand();
         }
 
         public EventCategory SelectedEventCategory

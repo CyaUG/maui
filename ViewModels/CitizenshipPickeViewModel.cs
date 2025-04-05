@@ -13,21 +13,20 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using Youth.ViewModels.Base;
 
-
-
 namespace Youth.ViewModels
 {
     internal class CitizenshipPickeViewModel : BaseViewModel, ICitizenshipPickeViewModel
     {
-        public Command LoadCitizenships { get; }
+        //public Command LoadCitizenships { get; }
         public ObservableCollection<ReferralAccountCitizenship> ReferralAccountCitizenships { get; set; }
         public Command<ReferralAccountCitizenship> ReferralAccountCitizenshipTappedCommand { get; }
         public CitizenshipPickeViewModel()
         {
             Title = "Citizenships";
             ReferralAccountCitizenships = new ObservableCollection<ReferralAccountCitizenship>();
-            LoadCitizenships = new Command(async () => await ExecuteLoadCitizenshipsCommand());
+            //LoadCitizenships = new Command(async () => await ExecuteLoadCitizenshipsCommand());
             ReferralAccountCitizenshipTappedCommand = new Command<ReferralAccountCitizenship>(ExecuteReferralAccountCitizenshipTappedCommand);
+            _ = ExecuteLoadCitizenshipsCommand();
         }
 
         async void ExecuteReferralAccountCitizenshipTappedCommand(ReferralAccountCitizenship mReferralAccountCitizenship)

@@ -19,7 +19,7 @@ namespace Youth.ViewModels
     {
         public UserAccount userAccount { get; set; }
         public SystemSettings systemSettings { get; set; }
-        public Command CloudConfigLoadCommand { get; }
+        //public Command CloudConfigLoadCommand { get; }
         public Command SendPostCommand { get; }
         public ObservableCollection<SafePostAudience> safePostAudiences { get; set; }
         public SafePostAudience activeSafePostAudience { get; set; }
@@ -31,9 +31,10 @@ namespace Youth.ViewModels
         {
             Title = "Compose Post";
             safePostAudiences = new ObservableCollection<SafePostAudience>();
-            CloudConfigLoadCommand = new Command(async () => await ExecuteCloudConfigLoadCommand());
+            //CloudConfigLoadCommand = new Command(async () => await ExecuteCloudConfigLoadCommand());
             SendPostCommand = new Command(async () => await ExecuteSendPostCommand());
             SafePostAudienceNavTap = new Command<SafePostAudience>(OnSafePostAudienceSelected);
+            _ = ExecuteCloudConfigLoadCommand();
         }
 
         private String videoId;

@@ -7,7 +7,6 @@ using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Text;
 using System.Threading.Tasks;
-
 using Youth.Views.jobs;
 using Youth.ViewModels.Interfaces;
 using Youth.ViewModels.Base;
@@ -17,7 +16,7 @@ namespace Youth.ViewModels
     internal class MyActiveListedJobsViewModel : BaseViewModel, IMyActiveListedJobsViewModel
     {
         public ObservableCollection<JobModel> JobModeles { get; set; }
-        public Command LoadMyListedJobsCommand { get; }
+        //public Command LoadMyListedJobsCommand { get; }
         public SystemSettings systemSettings { get; set; }
         public Command<JobModel> JobModelNavTap { get; }
 
@@ -26,7 +25,8 @@ namespace Youth.ViewModels
             Title = "My Listed Jobs";
             JobModeles = new ObservableCollection<JobModel>();
             JobModelNavTap = new Command<JobModel>(OnJobModelSelected);
-            LoadMyListedJobsCommand = new Command(async () => await ExecuteLoadMyListedJobsCommand());
+            //LoadMyListedJobsCommand = new Command(async () => await ExecuteLoadMyListedJobsCommand());
+            _ = ExecuteLoadMyListedJobsCommand();
         }
 
         async void OnJobModelSelected(JobModel jobModel)

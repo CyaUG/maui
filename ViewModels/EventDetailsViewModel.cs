@@ -15,8 +15,6 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using Youth.ViewModels.Base;
 
-
-
 namespace Youth.ViewModels
 {
     [QueryProperty(nameof(EventId), nameof(EventId))]
@@ -27,7 +25,7 @@ namespace Youth.ViewModels
         public UserAccount userAccount { get; set; }
         public Event EventDetails { get; set; }
         public ObservableCollection<UserAccount> eventAttendees { get; }
-        public Command EventDetailsLoadCommand { get; }
+        //public Command EventDetailsLoadCommand { get; }
         public Command OpenEventApplicationPage { get; }
         public Command<Event> EventAddressTap { get; }
         public CustomerCareChatGroup customerCareChatGroup { get; set; }
@@ -54,7 +52,7 @@ namespace Youth.ViewModels
         {
             Title = "Event Info";
             eventAttendees = new ObservableCollection<UserAccount>();
-            EventDetailsLoadCommand = new Command(async () => LoadEventDetails(eventId));
+            //EventDetailsLoadCommand = new Command(async () => LoadEventDetails(eventId));
             OpenEventApplicationPage = new Command(async () => OnOpenEventApplicationPage());
             EventAddressTap = new Command<Event>(OnEventAddressSelected);
 
@@ -63,6 +61,7 @@ namespace Youth.ViewModels
             LikeEventCommand = new Command(async () => await ExecuteLikeEventCommand());
             UnLikeEventCommand = new Command(async () => await ExecuteUnLikeEventCommand());
             OpenCommentsCommand = new Command(async () => await ExecuteOpenCommentsCommand());
+            LoadEventDetails(eventId);
         }
 
         async Task ExecuteSaveEventCommand()

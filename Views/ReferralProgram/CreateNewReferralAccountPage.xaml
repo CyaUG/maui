@@ -64,12 +64,7 @@
                         HeightRequest="30"/>
             </StackLayout>
 
-            <RefreshView
-                x:DataType="local:CreateNewReferralAccountViewModel"
-                Command="{Binding LoadEssentialsCommand}"
-                IsRefreshing="{Binding IsBusy}">
-
-                <ScrollView VerticalScrollBarVisibility="Never">
+                <ScrollView VerticalScrollBarVisibility="Never" VerticalOptions="FillAndExpand">
                     <Grid>
                         <StackLayout Orientation="Vertical" Spacing="5">
                             <Frame Margin="5" Padding="5,5,5,5" BackgroundColor="Transparent" BorderColor="{StaticResource BorderColor}" CornerRadius="20" HasShadow="False">
@@ -533,7 +528,6 @@
                             VerticalOptions="CenterAndExpand"/>
                     </Grid>
                 </ScrollView>
-            </RefreshView>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

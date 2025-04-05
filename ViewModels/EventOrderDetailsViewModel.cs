@@ -12,8 +12,7 @@ using System.Diagnostics;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Youth.ViewModels.Base;
-
-
+using Microsoft.Extensions.Logging;
 
 namespace Youth.ViewModels
 {
@@ -27,7 +26,7 @@ namespace Youth.ViewModels
         public Event EventDetails { get; set; }
         public ObservableCollection<UserAccount> eventAttendees { get; }
         public ObservableCollection<EventTicketToken> EventTicketTokens { get; }
-        public Command EventDetailsLoadCommand { get; }
+        //public Command EventDetailsLoadCommand { get; }
         public Command LoadEventOrderTicetsCommand { get; }
         public Command<Event> EventAddressTap { get; }
 
@@ -36,9 +35,10 @@ namespace Youth.ViewModels
             Title = "Event Info";
             eventAttendees = new ObservableCollection<UserAccount>();
             EventTicketTokens = new ObservableCollection<EventTicketToken>();
-            EventDetailsLoadCommand = new Command(async () => LoadEventDetails(EventId));
+            //EventDetailsLoadCommand = new Command(async () => LoadEventDetails(EventId));
             LoadEventOrderTicetsCommand = new Command(async () => LoadEventOrderTicetsPage());
             EventAddressTap = new Command<Event>(OnEventAddressSelected);
+            LoadEventDetails(EventId);
         }
 
         async void OnEventAddressSelected(Event mEvent)

@@ -20,7 +20,7 @@ namespace Youth.ViewModels
     public class NotificationsViewModel : BaseViewModel, INotificationsViewModel
     {
         private NotificationModule _selectedItem;
-        public Command LoadNotificationsCommand { get; }
+        //public Command LoadNotificationsCommand { get; }
         public Command<NotificationModule> NotificationTapped { get; }
         public ObservableCollection<NotificationModule> NotificationModules { get; set; }
         public NotificationsViewModel()
@@ -28,7 +28,8 @@ namespace Youth.ViewModels
             Title = "Notifications";
             NotificationTapped = new Command<NotificationModule>(OnNotificationSelected);
             NotificationModules = new ObservableCollection<NotificationModule>();
-            LoadNotificationsCommand = new Command(async () => await ExecuteLoadNotificationsCommand());
+            //LoadNotificationsCommand = new Command(async () => await ExecuteLoadNotificationsCommand());
+            _ = ExecuteLoadNotificationsCommand();
         }
 
         async Task ExecuteLoadNotificationsCommand()

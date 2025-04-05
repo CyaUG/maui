@@ -60,10 +60,7 @@
                         HeightRequest="30"/>
             </StackLayout>
 
-            <RefreshView x:DataType="local:ReferralServicesProviderViewModel"
-                    Command="{Binding LoadReferralServicesCommand}"
-                    IsRefreshing="{Binding IsBusy}">
-                <ScrollView VerticalScrollBarVisibility="Never">
+                <ScrollView VerticalScrollBarVisibility="Never" VerticalOptions="FillAndExpand">
                     <StackLayout Orientation="Vertical"
                             VerticalOptions="StartAndExpand">
                         <!--  Search Bar  -->
@@ -125,7 +122,6 @@
                         </StackLayout>
                     </StackLayout>
                 </ScrollView>
-            </RefreshView>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

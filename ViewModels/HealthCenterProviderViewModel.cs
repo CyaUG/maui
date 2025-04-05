@@ -12,21 +12,20 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using Youth.ViewModels.Base;
 
-
-
 namespace Youth.ViewModels
 {
     internal class HealthCenterProviderViewModel : BaseViewModel, IHealthCenterProviderViewModel
     {
-        public Command RunReferralHCMainCommand { get; }
+        //public Command RunReferralHCMainCommand { get; }
         public ObservableCollection<HealthCenter> HealthCenters { get; }
         public Command<HealthCenter> HealthCenterNavTap { get; }
         public HealthCenterProviderViewModel()
         {
             Title = "Health Centers";
             HealthCenters = new ObservableCollection<HealthCenter>();
-            RunReferralHCMainCommand = new Command(async () => await ExecuteReferralHCMainCommand());
+            //RunReferralHCMainCommand = new Command(async () => await ExecuteReferralHCMainCommand());
             HealthCenterNavTap = new Command<HealthCenter>(OnHealthCenterSelected);
+            _ = ExecuteReferralHCMainCommand();
         }
 
         async void OnHealthCenterSelected(HealthCenter healthCenter)

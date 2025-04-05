@@ -14,15 +14,13 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using Youth.ViewModels.Base;
 
-
-
 namespace Youth.ViewModels
 {
     internal class CheckOutViewModel : BaseViewModel, ICheckOutViewModel
     {
         public UserAccount userAccount { get; set; }
         public DeliveryFee mDeliveryFee { get; set; }
-        public Command LoadMainCommand { get; }
+        //public Command LoadMainCommand { get; }
         public SystemSettings systemSettings { get; set; }
         public ObservableCollection<ShoppingCart> ShoppingCarts { get; }
 
@@ -95,10 +93,11 @@ namespace Youth.ViewModels
             Title = "Check Out";
             LocationAddress = "Pick Delivery Info";
             ShoppingCarts = new ObservableCollection<ShoppingCart>();
-            LoadMainCommand = new Command(async () => await ExecuteLoadMainCommand());
+            //LoadMainCommand = new Command(async () => await ExecuteLoadMainCommand());
             PayOnDeliveryCommand = new Command(async () => await ExecutePayOnDeliveryCommand());
             PayWithExchangeCommand = new Command(async () => await ExecutePayWithExchangeCommand());
             OpenDeliveryInfoProviderPageCommand = new Command(async () => await ExecuteOpenDeliveryInfoProviderPageCommand());
+            _ = ExecuteLoadMainCommand();
         }
 
         async Task ExecuteOpenDeliveryInfoProviderPageCommand()

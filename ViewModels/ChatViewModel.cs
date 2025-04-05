@@ -22,7 +22,7 @@ namespace Youth.ViewModels
         public LastChatMessage selectedChatModel;
         public UserAccount userAccount { get; set; }
         public ObservableCollection<LastChatMessage> lastChatMessages { get; set; }
-        public Command LoadMyChatsCommand { get; }
+        //public Command LoadMyChatsCommand { get; }
         public ICommand ChatTapped { get; }
         public Command AddChatCommand { get; }
 
@@ -30,16 +30,17 @@ namespace Youth.ViewModels
         {
             Title = "Chat.";
             lastChatMessages = new ObservableCollection<LastChatMessage>();
-            LoadMyChatsCommand = new Command(async () => await ExecuteLoadMyChatsCommand());
+            //LoadMyChatsCommand = new Command(async () => await ExecuteLoadMyChatsCommand());
             ChatTapped = new Command<LastChatMessage>(OnChatSelected);
             AddChatCommand = new Command(OnAddChat);
+            _ = ExecuteLoadMyChatsCommand();
         }
         public void OnAppearing()
         {
             UpdateAuthStatus();
             IsBusy = true;
             SelectedChat = null;
-            LoadMyChatsCommand.Execute(lastChatMessages);
+            //LoadMyChatsCommand.Execute(lastChatMessages);
         }
 
         async Task ExecuteLoadMyChatsCommand()

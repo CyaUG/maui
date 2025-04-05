@@ -11,7 +11,6 @@ using System.Text;
 using System.Threading.Tasks;
 using Youth.ViewModels.Base;
 
-
 namespace Youth.ViewModels
 {
     [QueryProperty(nameof(InvoiceId), nameof(InvoiceId))]
@@ -21,7 +20,7 @@ namespace Youth.ViewModels
         private InvoiceProduct _invoiceProduct;
         public ObservableCollection<InvoiceProduct> InvoiceProducts { get; }
         public Command<InvoiceProduct> InvoiceProductNavTap { get; }
-        public Command LoadInvoiceProductsCommand { get; }
+        //public Command LoadInvoiceProductsCommand { get; }
         public SystemSettings systemSettings { get; set; }
 
         public ShoppingOrderProductsViewModel()
@@ -29,7 +28,8 @@ namespace Youth.ViewModels
             Title = "Order Items";
             InvoiceProducts = new ObservableCollection<InvoiceProduct>();
             InvoiceProductNavTap = new Command<InvoiceProduct>(OnInvoiceProductSelected);
-            LoadInvoiceProductsCommand = new Command(async () => await ExecuteLoadInvoiceProductsCommand());
+            //LoadInvoiceProductsCommand = new Command(async () => await ExecuteLoadInvoiceProductsCommand());
+            _ = ExecuteLoadInvoiceProductsCommand();
         }
 
         async Task ExecuteLoadInvoiceProductsCommand()

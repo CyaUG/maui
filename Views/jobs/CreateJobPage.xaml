@@ -94,12 +94,7 @@
                 </ActivityIndicator>
             </StackLayout>
 
-            <RefreshView
-                x:DataType="local:CreateJobViewModel"
-                Command="{Binding LoadEssentialsCommand}"
-                IsRefreshing="{Binding IsBusy}">
-
-                <ScrollView VerticalScrollBarVisibility="Never">
+                <ScrollView VerticalScrollBarVisibility="Never" VerticalOptions="FillAndExpand">
                     <StackLayout Orientation="Vertical">
                         <Frame Margin="5"
                                 Padding="5,5,5,5"
@@ -213,19 +208,19 @@
                                             HasShadow="True"
                                             Margin="5"
                                             Padding="5">
-                                        <StackLayout Orientation="Horizontal"
+                                    <StackLayout Orientation="Horizontal"
                                                      HorizontalOptions="FillAndExpand"
                                                      HeightRequest="50">
-                                            <Image Source="dollar.png"
+                                        <Image Source="dollar.png"
                                                     Scale="0.7"
                                                     WidthRequest="40"
                                                     HeightRequest="40"></Image>
-                                            <Entry x:Name="MinSalary"
+                                        <Entry x:Name="MinSalary"
                                                     Placeholder="Min Salary"
                                                     HorizontalOptions="FillAndExpand"
                                                     Text="{Binding MinSalaryValue}"></Entry>
-                                        </StackLayout>
-                                    </Frame>
+                                    </StackLayout>
+                                </Frame>
 
                                 <BoxView Grid.Column="1"/>
                                 <Frame CornerRadius="5" Grid.Column="1"
@@ -233,19 +228,19 @@
                                             HasShadow="True"
                                             Margin="5"
                                             Padding="5">
-                                        <StackLayout Orientation="Horizontal"
+                                    <StackLayout Orientation="Horizontal"
                                                      HorizontalOptions="FillAndExpand"
                                                      HeightRequest="50">
-                                            <Image Source="dollar.png"
+                                        <Image Source="dollar.png"
                                                     Scale="0.7"
                                                     WidthRequest="40"
                                                     HeightRequest="40"></Image>
-                                            <Entry x:Name="MaxSalary"
+                                        <Entry x:Name="MaxSalary"
                                                     Placeholder="Max Salary"
                                                     HorizontalOptions="FillAndExpand"
                                                     Text="{Binding MaxSalaryValue}"></Entry>
-                                        </StackLayout>
-                                    </Frame>
+                                    </StackLayout>
+                                </Frame>
                             </Grid>
                         </StackLayout>
 
@@ -675,7 +670,6 @@
                         </Frame>
                     </StackLayout>
                 </ScrollView>
-            </RefreshView>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

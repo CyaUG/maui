@@ -10,12 +10,11 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using Youth.ViewModels.Base;
 
-
 namespace Youth.ViewModels
 {
     public class ShoppingWishListViewModel : BaseViewModel, IShoppingWishListViewModel
     {
-        public Command LoadShoppingWishListCommand { get; }
+        //public Command LoadShoppingWishListCommand { get; }
         public ObservableCollection<ShoppingProduct> ShoppingProducts { get; }
         public Command<ShoppingProduct> ProductDetailNavTap { get; }
         public ShoppingProduct selectedShoppingProduct;
@@ -25,8 +24,9 @@ namespace Youth.ViewModels
         {
             Title = "WishList";
             ShoppingProducts = new ObservableCollection<ShoppingProduct>();
-            LoadShoppingWishListCommand = new Command(async () => await ExecuteLoadShoppingWishListCommand());
+            //LoadShoppingWishListCommand = new Command(async () => await ExecuteLoadShoppingWishListCommand());
             ProductDetailNavTap = new Command<ShoppingProduct>(OnShoppingProductSelected);
+            _ = ExecuteLoadShoppingWishListCommand();
         }
 
         public ShoppingProduct SelectedProduct

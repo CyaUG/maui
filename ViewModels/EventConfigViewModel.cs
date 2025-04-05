@@ -13,8 +13,6 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using Youth.ViewModels.Base;
 
-
-
 namespace Youth.ViewModels
 {
     [QueryProperty(nameof(EventId), nameof(EventId))]
@@ -25,7 +23,7 @@ namespace Youth.ViewModels
         public UserAccount userAccount { get; set; }
         public Event EventDetails { get; set; }
         public ObservableCollection<UserAccount> eventAttendees { get; }
-        public Command EventDetailsLoadCommand { get; }
+        //public Command EventDetailsLoadCommand { get; }
         public Command OpenEventApplicationPage { get; }
         public Command<Event> EventAddressTap { get; }
         public Command OpemEventMgmtPageCommand { get; }
@@ -35,11 +33,12 @@ namespace Youth.ViewModels
         {
             Title = "Event Info";
             eventAttendees = new ObservableCollection<UserAccount>();
-            EventDetailsLoadCommand = new Command(async () => LoadEventDetails(eventId));
+            //EventDetailsLoadCommand = new Command(async () => LoadEventDetails(eventId));
             OpenEventApplicationPage = new Command(async () => OnOpenEventApplicationPage());
             EventAddressTap = new Command<Event>(OnEventAddressSelected);
             OpemEventMgmtPageCommand = new Command(async () => OnOpemEventMgmtPage());
             OpemEventPosPageCommand = new Command(async () => OnOpemEventPosPage());
+            LoadEventDetails(eventId);
         }
 
         async void OnEventAddressSelected(Event mEvent)

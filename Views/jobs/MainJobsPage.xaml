@@ -91,10 +91,7 @@
                     </Grid>
                 </StackLayout>
 
-                <RefreshView x:DataType="local:MainJobsViewModel"
-                        Command="{Binding LoadJobCategoriesCommand}"
-                        IsRefreshing="{Binding IsBusy}">
-                    <ScrollView VerticalScrollBarVisibility="Never">
+                    <ScrollView VerticalScrollBarVisibility="Never" VerticalOptions="FillAndExpand">
                         <StackLayout Orientation="Vertical"
                                 Spacing="15">
                             <Label FontSize="35"
@@ -256,7 +253,6 @@
                             </CollectionView>
                         </StackLayout>
                     </ScrollView>
-                </RefreshView>
             </StackLayout>
 
             <Frame

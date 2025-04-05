@@ -66,11 +66,8 @@
                     </Image.GestureRecognizers>
                 </Image>
             </StackLayout>
-
-            <RefreshView x:DataType="local:ContactsProviderViewModel"
-                    Command="{Binding ContactsLoadCommand}"
-                    IsRefreshing="{Binding IsBusy}">
-                <CollectionView ItemsSource="{Binding userContacts}"
+            
+            <CollectionView ItemsSource="{Binding userContacts}"
                         Margin="10"
                         SelectionMode="Single">
                     <CollectionView.ItemTemplate>
@@ -127,7 +124,6 @@
                         </DataTemplate>
                     </CollectionView.ItemTemplate>
                 </CollectionView>
-            </RefreshView>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

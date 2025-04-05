@@ -62,9 +62,6 @@
                         HeightRequest="30"/>
             </StackLayout>
 
-            <RefreshView x:DataType="local:LanguageProviderViewModel"
-                    Command="{Binding LoadLocalizationsCommand}"
-                    IsRefreshing="{Binding IsBusy}">
                 <CollectionView x:Name="Localizations"
                         ItemsSource="{Binding Localizations}"
                         Margin="10,30,10,10"
@@ -119,7 +116,6 @@
                         </DataTemplate>
                     </CollectionView.ItemTemplate>
                 </CollectionView>
-            </RefreshView>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

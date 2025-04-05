@@ -13,14 +13,12 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using Youth.ViewModels.Base;
 
-
-
 namespace Youth.ViewModels
 {
     internal class SearchUsersViewModel : BaseViewModel, ISearchUsersViewModel
     {
         public ObservableCollection<UserAccount> UserAccounts { get; }
-        public Command UsersLoadCommand { get; }
+        //public Command UsersLoadCommand { get; }
         public Command<UserAccount> AccountNavTap { get; }
         public SystemSettings systemSettings { get; set; }
         public UserAccount userAccount { get; set; }
@@ -29,8 +27,9 @@ namespace Youth.ViewModels
         {
             Title = "Search Users";
             UserAccounts = new ObservableCollection<UserAccount>();
-            UsersLoadCommand = new Command(async () => FilterUsers());
+            //UsersLoadCommand = new Command(async () => FilterUsers());
             AccountNavTap = new Command<UserAccount>(ExecuteContactNavTap);
+            FilterUsers();
         }
 
         private async void ExecuteContactNavTap(UserAccount userAccount)

@@ -61,9 +61,6 @@
                         HeightRequest="30"/>
             </StackLayout>
 
-            <RefreshView x:DataType="local:ReferralDistrictProviderViewModel"
-                    Command="{Binding LoadReferralDistrictsCommand}"
-                    IsRefreshing="{Binding IsBusy}">
                 <CollectionView ItemsSource="{Binding ReferralDistricts}"
                         Margin="10"
                         SelectionMode="Single">
@@ -97,7 +94,6 @@
                         </DataTemplate>
                     </CollectionView.ItemTemplate>
                 </CollectionView>
-            </RefreshView>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

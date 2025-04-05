@@ -12,12 +12,11 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using Youth.ViewModels.Base;
 
-
 namespace Youth.ViewModels
 {
     internal class ReferralAccountProviderViewModel : BaseViewModel, IReferralAccountProviderViewModel
     {
-        public Command LoadReferralAccountsCommand { get; set; }
+        //public Command LoadReferralAccountsCommand { get; set; }
         private string searchText;
         public ObservableCollection<ReferralAccount> ReferralAccounts { get; set; }
         public Command<ReferralAccount> ReferralAccountNavTap { get; }
@@ -27,10 +26,11 @@ namespace Youth.ViewModels
         {
             Title = "Referral Accounts";
             ReferralAccounts = new ObservableCollection<ReferralAccount>();
-            LoadReferralAccountsCommand = new Command(async () => await FilterReferralAccounts());
+            //LoadReferralAccountsCommand = new Command(async () => await FilterReferralAccounts());
             ReferralAccountNavTap = new Command<ReferralAccount>(OnReferralAccountSelected);
             ScanReferralCardPageCommand = new Command(async () => await OpenScanReferralCardPage());
             CreateNewReferralAccountCommand = new Command(async () => await ExecuteCreateNewReferralAccountPage());
+            _ = FilterReferralAccounts();
         }
 
         async Task OpenScanReferralCardPage()

@@ -13,8 +13,6 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using Youth.ViewModels.Base;
 
-
-
 namespace Youth.ViewModels
 {
     [QueryProperty(nameof(CategoryId), nameof(CategoryId))]
@@ -23,7 +21,7 @@ namespace Youth.ViewModels
         private int categoryId;
         public ObservableCollection<Event> Events { get; set; }
         public Command<Event> EventNavTap { get; }
-        public Command LoadEventsCommand { get; }
+        //public Command LoadEventsCommand { get; }
         public Event selectedEvent;
 
         public EventCategoryEventsViewModel()
@@ -31,7 +29,8 @@ namespace Youth.ViewModels
             Title = "Category Events";
             Events = new ObservableCollection<Event>();
             EventNavTap = new Command<Event>(OnEventSelected);
-            LoadEventsCommand = new Command(async () => LoadEventsEvents(categoryId));
+            //LoadEventsCommand = new Command(async () => LoadEventsEvents(categoryId));
+            LoadEventsEvents(categoryId);
         }
 
         public Event SelectedEvent

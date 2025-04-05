@@ -57,10 +57,7 @@
                 </Image>
             </StackLayout>
 
-            <RefreshView x:DataType="local:CheckOutViewModel"
-                    Command="{Binding LoadMainCommand}"
-                    IsRefreshing="{Binding IsBusy}">
-                <ScrollView VerticalScrollBarVisibility="Never">
+                <ScrollView VerticalScrollBarVisibility="Never" VerticalOptions="FillAndExpand">
                     <StackLayout Padding="10,10,10,10"
                             Spacing="10">
 
@@ -267,7 +264,6 @@
                         </Frame>
                     </StackLayout>
                 </ScrollView>
-            </RefreshView>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

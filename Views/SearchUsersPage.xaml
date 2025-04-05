@@ -67,10 +67,7 @@
                 </Image>
             </StackLayout>
 
-            <RefreshView x:DataType="local:SearchUsersViewModel"
-                    Command="{Binding UsersLoadCommand}"
-                    IsRefreshing="{Binding IsBusy}">
-                <ScrollView VerticalScrollBarVisibility="Never">
+                <ScrollView VerticalScrollBarVisibility="Never" VerticalOptions="FillAndExpand">
                     <StackLayout Orientation="Vertical"
                             VerticalOptions="StartAndExpand">
                         <!--  Search Bar  -->
@@ -141,7 +138,6 @@
                         </CollectionView>
                     </StackLayout>
                 </ScrollView>
-            </RefreshView>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

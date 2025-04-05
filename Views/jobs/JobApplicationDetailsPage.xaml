@@ -65,10 +65,7 @@
                         HeightRequest="30"/>
             </StackLayout>
 
-            <RefreshView x:DataType="local:JobApplicationDetailsViewModel"
-                    Command="{Binding LoadJobDetailsCommand}"
-                    IsRefreshing="{Binding IsBusy}">
-                <ScrollView VerticalScrollBarVisibility="Never" Padding="0,0,0,12">
+                <ScrollView VerticalScrollBarVisibility="Never" Padding="0,0,0,12" VerticalOptions="FillAndExpand">
 
                     <StackLayout Orientation="Vertical">
 
@@ -106,23 +103,23 @@
                                                 Padding="10"
                                                BackgroundColor="{AppThemeBinding Light={StaticResource LightGray}, Dark={StaticResource Background_Mid}}"
                                                 HasShadow="True">
-                                            <Frame.GestureRecognizers>
-                                                <TapGestureRecognizer Command="{Binding SaveJobCommand}"/>
-                                            </Frame.GestureRecognizers>
-                                            <Grid>
-                                                <Grid.ColumnDefinitions>
-                                                    <ColumnDefinition Width="Auto"/>
-                                                    <ColumnDefinition Width="*"/>
-                                                </Grid.ColumnDefinitions>
+                                        <Frame.GestureRecognizers>
+                                            <TapGestureRecognizer Command="{Binding SaveJobCommand}"/>
+                                        </Frame.GestureRecognizers>
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="Auto"/>
+                                                <ColumnDefinition Width="*"/>
+                                            </Grid.ColumnDefinitions>
 
-                                                <Image
+                                            <Image
                                                     Margin="5,0,0,0"
                                                     HorizontalOptions="Center"
                                                     Source="save.png"
                                                     HeightRequest="20"
                                                         WidthRequest="20"
                                                     VerticalOptions="Center"/>
-                                                <Label
+                                            <Label
                                                     Grid.Column="1"
                                                     Margin="5,0,0,0"
                                                     
@@ -130,8 +127,8 @@
                                                     MaxLines="1"
                                                     Text="Save"
                                                     />
-                                            </Grid>
-                                        </Frame>
+                                        </Grid>
+                                    </Frame>
 
 
                                     <BoxView Grid.Column="1"/>
@@ -140,23 +137,23 @@
                                                 Padding="10"
                                                BackgroundColor="{AppThemeBinding Light={StaticResource LightGray}, Dark={StaticResource Background_Mid}}"
                                                 HasShadow="True">
-                                            <Frame.GestureRecognizers>
-                                                <TapGestureRecognizer Command="{Binding OpenCommentsCommand}"/>
-                                            </Frame.GestureRecognizers>
-                                            <Grid>
-                                                <Grid.ColumnDefinitions>
-                                                    <ColumnDefinition Width="Auto"/>
-                                                    <ColumnDefinition Width="*"/>
-                                                </Grid.ColumnDefinitions>
+                                        <Frame.GestureRecognizers>
+                                            <TapGestureRecognizer Command="{Binding OpenCommentsCommand}"/>
+                                        </Frame.GestureRecognizers>
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="Auto"/>
+                                                <ColumnDefinition Width="*"/>
+                                            </Grid.ColumnDefinitions>
 
-                                                <Image
+                                            <Image
                                                     Margin="5,0,0,0"
                                                     HorizontalOptions="Center"
                                                     Source="chat.png"
                                                     HeightRequest="20"
                                                         WidthRequest="20"
                                                     VerticalOptions="Center"/>
-                                                <Label
+                                            <Label
                                                     Grid.Column="1"
                                                     Margin="5,0,0,0"
                                                     
@@ -164,8 +161,8 @@
                                                     Text="Comments"
                                                     MaxLines="1"
                                                     />
-                                            </Grid>
-                                        </Frame>
+                                        </Grid>
+                                    </Frame>
 
                                     <BoxView Grid.Column="2"/>
                                     <Frame CornerRadius="10"
@@ -173,23 +170,23 @@
                                                 Padding="10"
                                                BackgroundColor="{AppThemeBinding Light={StaticResource LightGray}, Dark={StaticResource Background_Mid}}"
                                                 HasShadow="True">
-                                            <Frame.GestureRecognizers>
-                                                <TapGestureRecognizer Command="{Binding OpenContactUsPage}"/>
-                                            </Frame.GestureRecognizers>
-                                            <Grid>
-                                                <Grid.ColumnDefinitions>
-                                                    <ColumnDefinition Width="Auto"/>
-                                                    <ColumnDefinition Width="*"/>
-                                                </Grid.ColumnDefinitions>
+                                        <Frame.GestureRecognizers>
+                                            <TapGestureRecognizer Command="{Binding OpenContactUsPage}"/>
+                                        </Frame.GestureRecognizers>
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="Auto"/>
+                                                <ColumnDefinition Width="*"/>
+                                            </Grid.ColumnDefinitions>
 
-                                                <Image
+                                            <Image
                                                     Margin="5,0,0,0"
                                                     HorizontalOptions="Center"
                                                     Source="alert.png"
                                                     HeightRequest="20"
                                                         WidthRequest="20"
                                                     VerticalOptions="Center"/>
-                                                <Label
+                                            <Label
                                                     Grid.Column="1"
                                                     Margin="5,0,0,0"
                                                     VerticalOptions="Center"
@@ -197,9 +194,9 @@
                                                     Text="Report"
                                                     MaxLines="1"
                                                     />
-                                            </Grid>
-                                        </Frame>
-                                   
+                                        </Grid>
+                                    </Frame>
+
                                 </Grid>
 
                                 <Grid>
@@ -608,7 +605,6 @@
                         </StackLayout>
                     </StackLayout>
                 </ScrollView>
-            </RefreshView>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

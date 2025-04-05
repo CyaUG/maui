@@ -48,199 +48,196 @@
                 <Label Text="{Binding Title}" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" />
                 <Image Source="settings.png" HorizontalOptions="End" HeightRequest="30"/>
             </StackLayout>
+            
+            <Grid>
+                <ScrollView VerticalScrollBarVisibility="Never" Padding="0,0,0,100" VerticalOptions="FillAndExpand">
+                    <StackLayout>
+                        <Image Source="{Binding EventDetails.imageUrl, Converter={StaticResource isImageSourceConverter}}" HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand" Aspect="AspectFill" Margin="0"/>
 
-            <RefreshView x:DataType="local:EventDetailsViewModel" Command="{Binding EventDetailsLoadCommand}" IsRefreshing="{Binding IsBusy}">
-                <Grid>
-                    <ScrollView VerticalScrollBarVisibility="Never" Padding="0,0,0,100">
+                        <StackLayout Orientation="Vertical" Padding="10">
+                            <Label Text="{Binding EventDetails.eventTitle}" FontAttributes="Bold" FontSize="34"/>
 
-                        <VerticalStackLayout>
+                            <StackLayout Spacing="15">
+                                <Label Text="{Binding EventDetails.eventDate}" FontAttributes="Bold" FontSize="17"/>
 
-                            <Image Source="{Binding EventDetails.imageUrl, Converter={StaticResource isImageSourceConverter}}" HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand" Aspect="AspectFill" Margin="0"/>
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition/>
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition/>
+                                        <ColumnDefinition/>
+                                        <ColumnDefinition/>
+                                    </Grid.ColumnDefinitions>
 
-                            <StackLayout Orientation="Vertical" Padding="10">
-                                <Label Text="{Binding EventDetails.eventTitle}" FontAttributes="Bold" FontSize="34"/>
-
-                                <StackLayout Spacing="15">
-                                    <Label Text="{Binding EventDetails.eventDate}" FontAttributes="Bold" FontSize="17"/>
-
-                                    <Grid>
-                                        <Grid.RowDefinitions>
-                                            <RowDefinition/>
-                                        </Grid.RowDefinitions>
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition/>
-                                            <ColumnDefinition/>
-                                            <ColumnDefinition/>
-                                        </Grid.ColumnDefinitions>
-
-                                        <BoxView/>
-                                        <Frame CornerRadius="10"
+                                    <BoxView/>
+                                    <Frame CornerRadius="10"
                                                     Padding="10"
                                                     BackgroundColor="{AppThemeBinding Light={StaticResource LightGray}, Dark={StaticResource Background_Mid}}"
                                                     HasShadow="True">
-                                            <Frame.GestureRecognizers>
-                                                <TapGestureRecognizer Command="{Binding SaveEventCommand}"/>
-                                            </Frame.GestureRecognizers>
-                                            <Grid>
-                                                <Grid.ColumnDefinitions>
-                                                    <ColumnDefinition Width="Auto"/>
-                                                    <ColumnDefinition Width="*"/>
-                                                </Grid.ColumnDefinitions>
+                                        <Frame.GestureRecognizers>
+                                            <TapGestureRecognizer Command="{Binding SaveEventCommand}"/>
+                                        </Frame.GestureRecognizers>
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="Auto"/>
+                                                <ColumnDefinition Width="*"/>
+                                            </Grid.ColumnDefinitions>
 
-                                                <Image
+                                            <Image
                                                         Margin="5,0,0,0"
                                                         HorizontalOptions="Center"
                                                         Source="save.png"
                                                         HeightRequest="20"
                                                             WidthRequest="20"
                                                         VerticalOptions="Center"/>
-                                                <Label
+                                            <Label
                                                         Grid.Column="1"
                                                         Margin="5,0,0,0"
                                                         VerticalOptions="Center"
                                                         MaxLines="1"
                                                         Text="Save"
                                                         />
-                                            </Grid>
-                                        </Frame>
-
-                                        <BoxView Grid.Column="1"/>
-                                        <Frame Grid.Column="1" CornerRadius="10" Padding="10" Margin="5,0" BackgroundColor="{AppThemeBinding Light={StaticResource LightGray}, Dark={StaticResource Background_Mid}}" HasShadow="True">
-                                            <Frame.GestureRecognizers>
-                                                <TapGestureRecognizer Command="{Binding OpenCommentsCommand}"/>
-                                            </Frame.GestureRecognizers>
-                                            <Grid>
-                                                <Grid.ColumnDefinitions>
-                                                    <ColumnDefinition Width="Auto"/>
-                                                    <ColumnDefinition Width="*"/>
-                                                </Grid.ColumnDefinitions>
-
-                                                <Image Margin="5,0,0,0" HorizontalOptions="Center" Source="chat.png" HeightRequest="20" WidthRequest="20" VerticalOptions="Center"/>
-                                                <Label Grid.Column="1" Margin="5,0,0,0" VerticalOptions="Center" Text="Comment" MaxLines="1" />
-                                            </Grid>
-                                        </Frame>
-
-                                        <BoxView Grid.Column="2"/>
-                                        <Frame CornerRadius="10"  Padding="10" Grid.Column="2" BackgroundColor="{AppThemeBinding Light={StaticResource LightGray}, Dark={StaticResource Background_Mid}}" HasShadow="True">
-                                            <Frame.GestureRecognizers>
-                                                <TapGestureRecognizer Command="{Binding OpenContactUsPage}"/>
-                                            </Frame.GestureRecognizers>
-                                            <Grid>
-                                                <Grid.ColumnDefinitions>
-                                                    <ColumnDefinition Width="Auto"/>
-                                                    <ColumnDefinition Width="*"/>
-                                                </Grid.ColumnDefinitions>
-
-                                                <Image Margin="5,0,0,0" HorizontalOptions="Center" Source="alert.png" HeightRequest="20" WidthRequest="20" VerticalOptions="Center"/>
-                                                <Label Grid.Column="1" Margin="5,0,0,0" VerticalOptions="Center" Text="Report" MaxLines="1" />
-                                            </Grid>
-                                        </Frame>
-                                    </Grid>
-
-                                    <Grid>
-                                        <Grid.RowDefinitions>
-                                            <RowDefinition/>
-                                        </Grid.RowDefinitions>
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition/>
-                                            <ColumnDefinition/>
-                                        </Grid.ColumnDefinitions>
-
-                                        <BoxView/>
-                                        <Frame CornerRadius="10" BackgroundColor="Transparent" Padding="2,0,2,0">
-                                            <Grid>
-                                                <Grid.ColumnDefinitions>
-                                                    <ColumnDefinition Width="Auto"/>
-                                                    <ColumnDefinition Width="*"/>
-                                                </Grid.ColumnDefinitions>
-
-                                                <Image IsVisible="{Binding EventDetails.isUnLiked}" Margin="0,0,0,0" HorizontalOptions="Center" Source="like.png" HeightRequest="20" WidthRequest="20" VerticalOptions="CenterAndExpand">
-                                                    <Image.GestureRecognizers>
-                                                        <TapGestureRecognizer Command="{Binding LikeEventCommand}"/>
-                                                    </Image.GestureRecognizers>
-                                                </Image>
-
-                                                <Image IsVisible="{Binding EventDetails.likedIt}" Margin="0,0,0,0" HorizontalOptions="Center" Source="liked.png" HeightRequest="20" WidthRequest="20" VerticalOptions="CenterAndExpand">
-                                                    <Image.GestureRecognizers>
-                                                        <TapGestureRecognizer Command="{Binding UnLikeEventCommand}"/>
-                                                    </Image.GestureRecognizers>
-                                                </Image>
-
-                                                <Label Grid.Column="1" Margin="5,0,0,0" VerticalOptions="CenterAndExpand" Text="{Binding EventDetails.likes}" />
-                                            </Grid>
-                                        </Frame>
-
-                                        <BoxView Grid.Column="2" HorizontalOptions="End"/>
-                                        <Frame CornerRadius="10" Grid.Column="2" Padding="2,0,2,0" BackgroundColor="Transparent" HorizontalOptions="End">
-                                            <Grid>
-                                                <Grid.GestureRecognizers>
-                                                    <TapGestureRecognizer Command="{Binding OpenCommentsCommand}"/>
-                                                </Grid.GestureRecognizers>
-
-                                                <Grid.ColumnDefinitions>
-                                                    <ColumnDefinition Width="Auto"/>
-                                                    <ColumnDefinition Width="*"/>
-                                                </Grid.ColumnDefinitions>
-
-                                                <Label Margin="0,0,0,0" VerticalOptions="Center" Text="{Binding EventDetails.totalComments}" HorizontalOptions="End"/>
-                                                <Label Grid.Column="1" Margin="5,0,0,0" VerticalOptions="Center" Text="Comment" HorizontalOptions="End"/>
-                                            </Grid>
-                                        </Frame>
-                                    </Grid>
-
-                                    <Label Text="Job Description" FontSize="12" FontAttributes="Bold"/>
-                                    <Label Text="{Binding EventDetails.description}" FontSize="14"/>
-
-                                    <Label Text="Address" FontSize="12" FontAttributes="Bold" />
-                                    <Frame CornerRadius="10" HasShadow="True">
-                                        <Frame.GestureRecognizers>
-                                            <TapGestureRecognizer Command="{Binding EventAddressTap}" CommandParameter="{Binding EventDetails}"/>
-                                        </Frame.GestureRecognizers>
-                                        <Grid>
-                                            <Image
-                                                Source="{Binding EventDetails.event_address_image, Converter={StaticResource isImageSourceConverter}}"
-                                                HeightRequest="170" HorizontalOptions="FillAndExpand" Aspect="AspectFill">
-                                            </Image>
                                         </Grid>
                                     </Frame>
 
-                                    <StackLayout Orientation="Horizontal" Spacing="14">
-                                        <StackLayout.GestureRecognizers>
-                                            <TapGestureRecognizer Command="{Binding EventAddressTap}" CommandParameter="{Binding EventDetails}"/>
-                                        </StackLayout.GestureRecognizers>
-                                        <Image Source="address.png" WidthRequest="30" HorizontalOptions="Start"/>
-                                        <Label Text="{Binding EventDetails.event_address}" FontSize="14" VerticalOptions="Center"/>
-                                    </StackLayout>
+                                    <BoxView Grid.Column="1"/>
+                                    <Frame Grid.Column="1" CornerRadius="10" Padding="10" Margin="5,0" BackgroundColor="{AppThemeBinding Light={StaticResource LightGray}, Dark={StaticResource Background_Mid}}" HasShadow="True">
+                                        <Frame.GestureRecognizers>
+                                            <TapGestureRecognizer Command="{Binding OpenCommentsCommand}"/>
+                                        </Frame.GestureRecognizers>
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="Auto"/>
+                                                <ColumnDefinition Width="*"/>
+                                            </Grid.ColumnDefinitions>
 
-                                    <Label Text="Listed By" FontSize="12" FontAttributes="Bold" />
+                                            <Image Margin="5,0,0,0" HorizontalOptions="Center" Source="chat.png" HeightRequest="20" WidthRequest="20" VerticalOptions="Center"/>
+                                            <Label Grid.Column="1" Margin="5,0,0,0" VerticalOptions="Center" Text="Comment" MaxLines="1" />
+                                        </Grid>
+                                    </Frame>
 
-                                    <StackLayout Orientation="Horizontal">
-                                        <StackLayout Margin="5,0,20,0">
-                                            <toolkitViews:AvatarView BorderWidth="0" HeightRequest="50" WidthRequest="50" BackgroundColor="Transparent" CornerRadius="10"
-                                                                     ImageSource="{Binding EventDetails.profile_picture, Converter={StaticResource isImageSourceConverter}}" HorizontalOptions="Center" Margin="0,0,0,0">
-                                                <toolkitViews:AvatarView.Shadow>
-                                                    <Shadow Opacity="0.3"/>
-                                                </toolkitViews:AvatarView.Shadow>
-                                                <toolkitViews:AvatarView.GestureRecognizers>
-                                                    <TapGestureRecognizer/>
-                                                </toolkitViews:AvatarView.GestureRecognizers>
-                                            </toolkitViews:AvatarView>
-                                        </StackLayout>
+                                    <BoxView Grid.Column="2"/>
+                                    <Frame CornerRadius="10"  Padding="10" Grid.Column="2" BackgroundColor="{AppThemeBinding Light={StaticResource LightGray}, Dark={StaticResource Background_Mid}}" HasShadow="True">
+                                        <Frame.GestureRecognizers>
+                                            <TapGestureRecognizer Command="{Binding OpenContactUsPage}"/>
+                                        </Frame.GestureRecognizers>
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="Auto"/>
+                                                <ColumnDefinition Width="*"/>
+                                            </Grid.ColumnDefinitions>
 
-                                        <StackLayout VerticalOptions="Center">
-                                            <Label FontAttributes="Bold" FontSize="Small" Text="{Binding EventDetails.name}" VerticalOptions="Center">
-                                            </Label>
-                                            <Label FontSize="Small" Text="{Binding EventDetails.user_name, StringFormat='@{0}'}" VerticalOptions="Center">
-                                            </Label>
-                                        </StackLayout>
-                                    </StackLayout>
+                                            <Image Margin="5,0,0,0" HorizontalOptions="Center" Source="alert.png" HeightRequest="20" WidthRequest="20" VerticalOptions="Center"/>
+                                            <Label Grid.Column="1" Margin="5,0,0,0" VerticalOptions="Center" Text="Report" MaxLines="1" />
+                                        </Grid>
+                                    </Frame>
+                                </Grid>
 
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition/>
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition/>
+                                        <ColumnDefinition/>
+                                    </Grid.ColumnDefinitions>
+
+                                    <BoxView/>
+                                    <Frame CornerRadius="10" BackgroundColor="Transparent" Padding="2,0,2,0">
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="Auto"/>
+                                                <ColumnDefinition Width="*"/>
+                                            </Grid.ColumnDefinitions>
+
+                                            <Image IsVisible="{Binding EventDetails.isUnLiked}" Margin="0,0,0,0" HorizontalOptions="Center" Source="like.png" HeightRequest="20" WidthRequest="20" VerticalOptions="CenterAndExpand">
+                                                <Image.GestureRecognizers>
+                                                    <TapGestureRecognizer Command="{Binding LikeEventCommand}"/>
+                                                </Image.GestureRecognizers>
+                                            </Image>
+
+                                            <Image IsVisible="{Binding EventDetails.likedIt}" Margin="0,0,0,0" HorizontalOptions="Center" Source="liked.png" HeightRequest="20" WidthRequest="20" VerticalOptions="CenterAndExpand">
+                                                <Image.GestureRecognizers>
+                                                    <TapGestureRecognizer Command="{Binding UnLikeEventCommand}"/>
+                                                </Image.GestureRecognizers>
+                                            </Image>
+
+                                            <Label Grid.Column="1" Margin="5,0,0,0" VerticalOptions="CenterAndExpand" Text="{Binding EventDetails.likes}" />
+                                        </Grid>
+                                    </Frame>
+
+                                    <BoxView Grid.Column="2" HorizontalOptions="End"/>
+                                    <Frame CornerRadius="10" Grid.Column="2" Padding="2,0,2,0" BackgroundColor="Transparent" HorizontalOptions="End">
+                                        <Grid>
+                                            <Grid.GestureRecognizers>
+                                                <TapGestureRecognizer Command="{Binding OpenCommentsCommand}"/>
+                                            </Grid.GestureRecognizers>
+
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="Auto"/>
+                                                <ColumnDefinition Width="*"/>
+                                            </Grid.ColumnDefinitions>
+
+                                            <Label Margin="0,0,0,0" VerticalOptions="Center" Text="{Binding EventDetails.totalComments}" HorizontalOptions="End"/>
+                                            <Label Grid.Column="1" Margin="5,0,0,0" VerticalOptions="Center" Text="Comment" HorizontalOptions="End"/>
+                                        </Grid>
+                                    </Frame>
+                                </Grid>
+
+                                <Label Text="Job Description" FontSize="12" FontAttributes="Bold"/>
+                                <Label Text="{Binding EventDetails.description}" FontSize="14"/>
+
+                                <Label Text="Address" FontSize="12" FontAttributes="Bold" />
+                                <Frame CornerRadius="10" HasShadow="True">
+                                    <Frame.GestureRecognizers>
+                                        <TapGestureRecognizer Command="{Binding EventAddressTap}" CommandParameter="{Binding EventDetails}"/>
+                                    </Frame.GestureRecognizers>
+                                    <Grid>
+                                        <Image
+                                                Source="{Binding EventDetails.event_address_image, Converter={StaticResource isImageSourceConverter}}"
+                                                HeightRequest="170" HorizontalOptions="FillAndExpand" Aspect="AspectFill">
+                                        </Image>
+                                    </Grid>
+                                </Frame>
+
+                                <StackLayout Orientation="Horizontal" Spacing="14">
+                                    <StackLayout.GestureRecognizers>
+                                        <TapGestureRecognizer Command="{Binding EventAddressTap}" CommandParameter="{Binding EventDetails}"/>
+                                    </StackLayout.GestureRecognizers>
+                                    <Image Source="address.png" WidthRequest="30" HorizontalOptions="Start"/>
+                                    <Label Text="{Binding EventDetails.event_address}" FontSize="14" VerticalOptions="Center"/>
                                 </StackLayout>
-                            </StackLayout>
-                        </VerticalStackLayout>
-                    </ScrollView>
 
-                    <StackLayout Orientation="Horizontal"
+                                <Label Text="Listed By" FontSize="12" FontAttributes="Bold" />
+
+                                <StackLayout Orientation="Horizontal">
+                                    <StackLayout Margin="5,0,20,0">
+                                        <toolkitViews:AvatarView BorderWidth="0" HeightRequest="50" WidthRequest="50" BackgroundColor="Transparent" CornerRadius="10"
+                                                                     ImageSource="{Binding EventDetails.profile_picture, Converter={StaticResource isImageSourceConverter}}" HorizontalOptions="Center" Margin="0,0,0,0">
+                                            <toolkitViews:AvatarView.Shadow>
+                                                <Shadow Opacity="0.3"/>
+                                            </toolkitViews:AvatarView.Shadow>
+                                            <toolkitViews:AvatarView.GestureRecognizers>
+                                                <TapGestureRecognizer/>
+                                            </toolkitViews:AvatarView.GestureRecognizers>
+                                        </toolkitViews:AvatarView>
+                                    </StackLayout>
+
+                                    <StackLayout VerticalOptions="Center">
+                                        <Label FontAttributes="Bold" FontSize="Small" Text="{Binding EventDetails.name}" VerticalOptions="Center">
+                                        </Label>
+                                        <Label FontSize="Small" Text="{Binding EventDetails.user_name, StringFormat='@{0}'}" VerticalOptions="Center">
+                                        </Label>
+                                    </StackLayout>
+                                </StackLayout>
+
+                            </StackLayout>
+                        </StackLayout>
+                    </StackLayout>
+                </ScrollView>
+                
+                <StackLayout Orientation="Horizontal"
                             Spacing="14"
                             Margin="0,0,0,0"
                             VerticalOptions="End"
@@ -265,8 +262,7 @@
                                     HorizontalOptions="Center"/>
                         </Frame>
                     </StackLayout>
-                </Grid>
-            </RefreshView>
+            </Grid>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

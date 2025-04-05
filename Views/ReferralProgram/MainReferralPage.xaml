@@ -64,10 +64,7 @@
                             HeightRequest="30"/>
                 </StackLayout>
 
-                <RefreshView x:DataType="local:MainReferralViewModel"
-                        Command="{Binding RunReferralMainCommand}"
-                        IsRefreshing="{Binding IsBusy}">
-                    <ScrollView VerticalScrollBarVisibility="Never">
+                    <ScrollView VerticalScrollBarVisibility="Never" VerticalOptions="FillAndExpand">
                         <StackLayout Orientation="Vertical"
                                 Spacing="20">
                             <Label Style="{StaticResource Header}"
@@ -536,7 +533,6 @@
 
                         </StackLayout>
                     </ScrollView>
-                </RefreshView>
             </StackLayout>
 
             <Button Text="+"

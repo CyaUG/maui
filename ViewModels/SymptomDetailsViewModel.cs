@@ -22,11 +22,12 @@ namespace Youth.ViewModels
         public Symptom symptom { get; set; }
         public UserAccount userAccount { get; set; }
         public ReferralAccount referralAccount { get; set; }
-        public Command LoadSymptomDetailsCommand { get; }
+        //public Command LoadSymptomDetailsCommand { get; }
         public SymptomDetailsViewModel()
         {
             Title = "Symptom Info";
-            LoadSymptomDetailsCommand = new Command(async () => await LoadSymptomDetails(SymptomId));
+            //LoadSymptomDetailsCommand = new Command(async () => await LoadSymptomDetails(SymptomId));
+            _ = LoadSymptomDetails(SymptomId);
         }
         public int SymptomId
         {

@@ -13,8 +13,6 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using Youth.ViewModels.Base;
 
-
-
 namespace Youth.ViewModels
 {
     internal class DeliveryInfoProviderViewModel : BaseViewModel, IDeliveryInfoProviderViewModel
@@ -77,14 +75,15 @@ namespace Youth.ViewModels
         }
 
         public Command SetAddressCommand { get; set; }
-        public Command LoadAccountCommand { get; set; }
+        //public Command LoadAccountCommand { get; set; }
 
         public DeliveryInfoProviderViewModel()
         {
             Title = "Delivery Info";
             LocationAddress = "Tap To Pick Location";
             SetAddressCommand = new Command(async () => await ExecuteSetAddressCommand());
-            LoadAccountCommand = new Command(async () => await ExecuteLoadAccountCommand());
+            //LoadAccountCommand = new Command(async () => await ExecuteLoadAccountCommand());
+            _ = ExecuteLoadAccountCommand();
         }
         async Task ExecuteSetAddressCommand()
         {

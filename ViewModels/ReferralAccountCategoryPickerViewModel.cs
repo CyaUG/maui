@@ -11,12 +11,11 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using Youth.ViewModels.Base;
 
-
 namespace Youth.ViewModels
 {
     internal class ReferralAccountCategoryPickerViewModel : BaseViewModel, IReferralAccountCategoryPickerViewModel
     {
-        public Command LoadReferralAccountCategories { get; }
+        //public Command LoadReferralAccountCategories { get; }
         public ObservableCollection<ReferralAccountCategory> ReferralAccountCategories { get; set; }
         public Command<ReferralAccountCategory> ReferralAccountCategoryNavTap { get; }
 
@@ -24,8 +23,9 @@ namespace Youth.ViewModels
         {
             Title = "Account Categories";
             ReferralAccountCategories = new ObservableCollection<ReferralAccountCategory>();
-            LoadReferralAccountCategories = new Command(async () => await ExecuteLoadReferralAccountCategoriesCommand());
+            //LoadReferralAccountCategories = new Command(async () => await ExecuteLoadReferralAccountCategoriesCommand());
             ReferralAccountCategoryNavTap = new Command<ReferralAccountCategory>(OnReferralAccountCategorySelected);
+            _ = ExecuteLoadReferralAccountCategoriesCommand();
         }
 
         async void OnReferralAccountCategorySelected(ReferralAccountCategory referralAccountCategory)

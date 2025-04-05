@@ -64,73 +64,69 @@
                         HeightRequest="30"/>
             </StackLayout>
 
-            <RefreshView x:DataType="local:JobCategoryJobsViewModel"
-                    Command="{Binding LoadJobCategoriesCommand}"
-                    IsRefreshing="{Binding IsBusy}" Padding="10">
-                <ScrollView VerticalScrollBarVisibility="Never">
-                    <CollectionView ItemsSource="{Binding JobModeles}">
-                        <CollectionView.ItemTemplate>
-                            <DataTemplate x:DataType="model:JobModel">
-                                <StackLayout Padding="0,0,10,0">
-                                    <Frame CornerRadius="10"
+            <ScrollView VerticalScrollBarVisibility="Never" VerticalOptions="FillAndExpand">
+                <CollectionView ItemsSource="{Binding JobModeles}">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate x:DataType="model:JobModel">
+                            <StackLayout Padding="0,0,10,0">
+                                <Frame CornerRadius="10"
                                             BackgroundColor="{AppThemeBinding Light={StaticResource LightGray}, Dark={StaticResource Background_Mid}}"
                                             HasShadow="True"
                                             Margin="5">
 
-                                        <Frame.GestureRecognizers>
-                                            <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type local:JobCategoryJobsViewModel}}, Path=JobModelNavTap}" CommandParameter="{Binding .}" />
-                                        </Frame.GestureRecognizers>
+                                    <Frame.GestureRecognizers>
+                                        <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type local:JobCategoryJobsViewModel}}, Path=JobModelNavTap}" CommandParameter="{Binding .}" />
+                                    </Frame.GestureRecognizers>
 
-                                        <StackLayout Orientation="Vertical" Padding="5">
-                                            <Grid RowDefinitions="Auto, *" ColumnDefinitions="Auto, *">
-                                                <StackLayout Grid.RowSpan="3"
+                                    <StackLayout Orientation="Vertical" Padding="5">
+                                        <Grid RowDefinitions="Auto, *" ColumnDefinitions="Auto, *">
+                                            <StackLayout Grid.RowSpan="3"
                                                                 Orientation="Horizontal"
                                                                 VerticalOptions="CenterAndExpand"
                                                                 HeightRequest="60"
                                                                 WidthRequest="60">
 
 
-                                                    <toolkitViews:AvatarView BorderWidth="0" HeightRequest="50" WidthRequest="50" BackgroundColor="Transparent" CornerRadius="10" ImageSource="{Binding profile_picture, Converter={StaticResource isImageSourceConverter}}"
+                                                <toolkitViews:AvatarView BorderWidth="0" HeightRequest="50" WidthRequest="50" BackgroundColor="Transparent" CornerRadius="10" ImageSource="{Binding profile_picture, Converter={StaticResource isImageSourceConverter}}"
                                                                 HorizontalOptions="Start"
                                                                 VerticalOptions="Start"
                                                                 Margin="0,0,0,0">
-                                                        <toolkitViews:AvatarView.Shadow>
-                                                            <Shadow Opacity="0.3"/>
-                                                        </toolkitViews:AvatarView.Shadow>
-                                                    </toolkitViews:AvatarView>
+                                                    <toolkitViews:AvatarView.Shadow>
+                                                        <Shadow Opacity="0.3"/>
+                                                    </toolkitViews:AvatarView.Shadow>
+                                                </toolkitViews:AvatarView>
 
-                                                    <toolkitViews:AvatarView BorderWidth="0" HeightRequest="50" WidthRequest="50" BackgroundColor="Transparent" CornerRadius="10" ImageSource="{Binding imageUrl, Converter={StaticResource isImageSourceConverter}}"
+                                                <toolkitViews:AvatarView BorderWidth="0" HeightRequest="50" WidthRequest="50" BackgroundColor="Transparent" CornerRadius="10" ImageSource="{Binding imageUrl, Converter={StaticResource isImageSourceConverter}}"
                                                                 HorizontalOptions="Start"
                                                                 VerticalOptions="End"
                                                                 Margin="-35,0,0,0">
-                                                        <toolkitViews:AvatarView.Shadow>
-                                                            <Shadow Opacity="0.3"/>
-                                                        </toolkitViews:AvatarView.Shadow>
-                                                    </toolkitViews:AvatarView>
-                                                </StackLayout>
+                                                    <toolkitViews:AvatarView.Shadow>
+                                                        <Shadow Opacity="0.3"/>
+                                                    </toolkitViews:AvatarView.Shadow>
+                                                </toolkitViews:AvatarView>
+                                            </StackLayout>
 
-                                                <StackLayout Orientation="Vertical"
+                                            <StackLayout Orientation="Vertical"
                                                         Grid.Column="1"
                                                         Padding="15,0,0,0">
-                                                    <Label Text="{Binding jobTitle}"
+                                                <Label Text="{Binding jobTitle}"
                                                             FontAttributes="Bold"/>
-                                                    <Label Text="{Binding businessName}"
+                                                <Label Text="{Binding businessName}"
                                                             FontSize="10"/>
-                                                    <Label Text="{Binding app_deadline, StringFormat='Deadline: {0}'}"
+                                                <Label Text="{Binding app_deadline, StringFormat='Deadline: {0}'}"
                                                             FontSize="8"/>
-                                                    <Label Text="{Binding job_type}"
+                                                <Label Text="{Binding job_type}"
                                                             FontAttributes="Bold"
                                                             FontSize="10"/>
-                                                </StackLayout>
-                                            </Grid>
-                                        </StackLayout>
-                                    </Frame>
-                                </StackLayout>
-                            </DataTemplate>
-                        </CollectionView.ItemTemplate>
-                    </CollectionView>
-                </ScrollView>
-            </RefreshView>
+                                            </StackLayout>
+                                        </Grid>
+                                    </StackLayout>
+                                </Frame>
+                            </StackLayout>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </ScrollView>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

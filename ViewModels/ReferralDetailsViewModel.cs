@@ -14,8 +14,6 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using Youth.ViewModels.Base;
 
-
-
 namespace Youth.ViewModels
 {
     [QueryProperty(nameof(ReferralId), nameof(ReferralId))]
@@ -32,7 +30,7 @@ namespace Youth.ViewModels
         public Referral referral { get; set; }
         public CustomerCareChatGroup customerCareChatGroup { get; set; }
         public ObservableCollection<ReferralService> ReferralServices { get; }
-        public Command RunReferralDetailsMainCommand { get; }
+        //public Command RunReferralDetailsMainCommand { get; }
         public Command OpenHealthCenterMap { get; }
         public Command OpenContactUsPage { get; }
         public Command OpenContactAssigneePage { get; }
@@ -45,7 +43,7 @@ namespace Youth.ViewModels
         {
             Title = "Referral Details";
             ReferralServices = new ObservableCollection<ReferralService>();
-            RunReferralDetailsMainCommand = new Command(async () => await LoadReferralDetails(ReferralId));
+            //RunReferralDetailsMainCommand = new Command(async () => await LoadReferralDetails(ReferralId));
             OpenHealthCenterMap = new Command(async () => await ExecuteHealthCenterMap());
             OpenContactUsPage = new Command(async () => await ExecuteOpenContactUsPage());
             OpenContactAssigneePage = new Command(async () => await ExecuteOpenContactAssigneePage());
@@ -54,6 +52,7 @@ namespace Youth.ViewModels
             OpenScheduleApointmentPage = new Command(async () => await ExecuteOpenScheduleApointmentPage());
             OpenReferralServicesProviderPage = new Command(async () => await ExecuteOpenReferralServicesProviderPage());
             GenderNavTap = new Command<Gender>(OnGenderSelected);
+            _ = LoadReferralDetails(ReferralId);
         }
 
         async void OnGenderSelected(Gender gender)

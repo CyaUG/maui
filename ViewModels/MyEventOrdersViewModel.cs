@@ -13,14 +13,13 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using Youth.ViewModels.Base;
 
-
 namespace Youth.ViewModels
 {
     internal class MyEventOrdersViewModel : BaseViewModel, IMyEventOrdersViewModel
     {
         public DashboardSummary dashboardSummary { get; set; }
         public ObservableCollection<EventsOrder> EventsOrders { get; set; }
-        public Command LoadEventsCommand { get; }
+        //public Command LoadEventsCommand { get; }
         public UserAccount userAccount { get; set; }
         public SystemSettings systemSettings { get; set; }
         public Command<EventsOrder> EventsOrderNavTap { get; }
@@ -29,9 +28,10 @@ namespace Youth.ViewModels
         {
             Title = "My Orders";
             EventsOrders = new ObservableCollection<EventsOrder>();
-            LoadEventsCommand = new Command(async () => await ExecuteLoadEventsCommand());
+            //LoadEventsCommand = new Command(async () => await ExecuteLoadEventsCommand());
             EventsOrderNavTap = new Command<EventsOrder>(OnEventsOrderSelected);
             SearchGridTappedCommand = new Command(async () => await ExecuteSearchUiCommand());
+            _ = ExecuteLoadEventsCommand();
         }
 
         public EventsOrder selectedEventsOrder;

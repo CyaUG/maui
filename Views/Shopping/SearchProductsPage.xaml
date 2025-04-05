@@ -68,10 +68,7 @@
                 </Image>
             </StackLayout>
 
-            <RefreshView x:DataType="local:SearchProductsViewModel"
-                    Command="{Binding LoadMainCommand}"
-                    IsRefreshing="{Binding IsBusy}">
-                <ScrollView VerticalScrollBarVisibility="Never">
+                <ScrollView VerticalScrollBarVisibility="Never" VerticalOptions="FillAndExpand">
                     <StackLayout Orientation="Vertical"
                             VerticalOptions="StartAndExpand">
                         <!--  Search Bar  -->
@@ -106,7 +103,7 @@
                                         <Frame.GestureRecognizers>
                                             <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type local:SearchProductsViewModel}}, Path=ProductDetailNavTap}" CommandParameter="{Binding .}" />
                                         </Frame.GestureRecognizers>
-                                        
+
                                         <StackLayout>
 
                                             <Frame>
@@ -161,7 +158,6 @@
                         </CollectionView>
                     </StackLayout>
                 </ScrollView>
-            </RefreshView>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

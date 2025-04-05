@@ -13,9 +13,6 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using Youth.ViewModels.Base;
 
-
-
-
 namespace Youth.ViewModels
 {
     class MyAccountViewModel : BaseViewModel, IMyAccountViewModel
@@ -28,7 +25,7 @@ namespace Youth.ViewModels
         public Command OpenContactUsPage { get; }
         public Command BlockUserCommand { get; }
         public Command UpdateProfileCommand { get; }
-        public Command AccountLoadCommand { get; }
+        //public Command AccountLoadCommand { get; }
         public CustomerCareChatGroup customerCareChatGroup { get; set; }
         public MyAccountViewModel()
         {
@@ -38,7 +35,8 @@ namespace Youth.ViewModels
             OpenContactUsPage = new Command(async () => await ExecuteOpenContactUsPage());
             BlockUserCommand = new Command(async () => await ExecuteBlockUserCommand());
             UpdateProfileCommand = new Command(async () => await ExecuteUpdateProfileCommand());
-            AccountLoadCommand = new Command(async () => await LoadAccount());
+            //AccountLoadCommand = new Command(async () => await LoadAccount());
+            _ = LoadAccount();
         }
 
         private FileResult mProfilePicture;

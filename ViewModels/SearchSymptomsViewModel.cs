@@ -12,12 +12,11 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using Youth.ViewModels.Base;
 
-
 namespace Youth.ViewModels
 {
     internal class SearchSymptomsViewModel : BaseViewModel, ISearchSymptomsViewModel
     {
-        public Command LoadMySymptomsCommand { get; }
+        //public Command LoadMySymptomsCommand { get; }
         public ObservableCollection<Symptom> Symptoms { get; set; }
         public Command<Symptom> SymptomTappedCommand { get; }
 
@@ -26,8 +25,9 @@ namespace Youth.ViewModels
         {
             Title = "Search Symptoms";
             Symptoms = new ObservableCollection<Symptom>();
-            LoadMySymptomsCommand = new Command(async () => await ExecuteLoadMySymptomsCommand());
+            //LoadMySymptomsCommand = new Command(async () => await ExecuteLoadMySymptomsCommand());
             SymptomTappedCommand = new Command<Symptom>(OpenSymptonTappedCommand);
+            _ = ExecuteLoadMySymptomsCommand();
         }
 
         async void OpenSymptonTappedCommand(Symptom mSymptom)

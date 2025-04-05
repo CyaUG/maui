@@ -67,12 +67,7 @@
                         HeightRequest="30"/>
             </StackLayout>
 
-            <RefreshView
-                x:DataType="local:CartEventsViewModel"
-                Command="{Binding LoadMainCommand}"
-                IsRefreshing="{Binding IsBusy}">
-                <StackLayout Orientation="Vertical"
-                        VerticalOptions="FillAndExpand">
+                <StackLayout Orientation="Vertical" VerticalOptions="FillAndExpand">
                     <ScrollView VerticalScrollBarVisibility="Never"
                             VerticalOptions="FillAndExpand">
                         <AbsoluteLayout HorizontalOptions="FillAndExpand"
@@ -313,7 +308,6 @@
                         </Frame>
                     </StackLayout>
                 </StackLayout>
-            </RefreshView>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

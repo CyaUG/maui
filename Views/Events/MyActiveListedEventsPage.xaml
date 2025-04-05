@@ -64,10 +64,7 @@
                         HeightRequest="30"/>
             </StackLayout>
 
-            <RefreshView x:DataType="local:MyActiveListedEventsViewModel"
-                    Command="{Binding LoadEventsCommand}"
-                    IsRefreshing="{Binding IsBusy}">
-                <ScrollView VerticalScrollBarVisibility="Never">
+            <ScrollView VerticalScrollBarVisibility="Never" VerticalOptions="FillAndExpand">
                     <CollectionView ItemsSource="{Binding Events}">
                         <CollectionView.ItemTemplate>
                             <DataTemplate x:DataType="model:Event">
@@ -125,7 +122,6 @@
                         </CollectionView.ItemTemplate>
                     </CollectionView>
                 </ScrollView>
-            </RefreshView>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

@@ -66,11 +66,8 @@
                     </Image.GestureRecognizers>
                 </Image>
             </StackLayout>
-
-            <RefreshView x:DataType="local:JobCategoryPickerViewModel"
-                    Command="{Binding RunMainCommand}"
-                    IsRefreshing="{Binding IsBusy}">
-                <CollectionView ItemsSource="{Binding JobCategories}"
+            
+            <CollectionView ItemsSource="{Binding JobCategories}"
                         Margin="10"
                         SelectionMode="Single">
                     <CollectionView.ItemTemplate>
@@ -104,7 +101,6 @@
                         </DataTemplate>
                     </CollectionView.ItemTemplate>
                 </CollectionView>
-            </RefreshView>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

@@ -10,12 +10,11 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using Youth.ViewModels.Base;
 
-
 namespace Youth.ViewModels
 {
     public class ShoppingOrdersViewModel : BaseViewModel, IShoppingOrdersViewModel
     {
-        public Command LoadShoppingOrdersCommand { get; }
+        //public Command LoadShoppingOrdersCommand { get; }
         public Command<ShoppingOrder> ShoppingOrderTapedCommand { get; }
         public ObservableCollection<ShoppingOrder> ShoppingOrders { get; }
         private ShoppingOrder _shoppingOrder;
@@ -26,7 +25,8 @@ namespace Youth.ViewModels
             Title = "Orders";
             ShoppingOrders = new ObservableCollection<ShoppingOrder>();
             ShoppingOrderTapedCommand = new Command<ShoppingOrder>(OnShoppingOrderTaped);
-            LoadShoppingOrdersCommand = new Command(async () => await ExecuteLoadShoppingOrdersCommand());
+            //LoadShoppingOrdersCommand = new Command(async () => await ExecuteLoadShoppingOrdersCommand());
+            _ = ExecuteLoadShoppingOrdersCommand();
         }
 
         public ShoppingOrder ShoppingOrder

@@ -14,8 +14,6 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using Youth.ViewModels.Base;
 
-
-
 namespace Youth.ViewModels
 {
     [QueryProperty(nameof(ProductId), nameof(ProductId))]
@@ -24,7 +22,7 @@ namespace Youth.ViewModels
         public ShoppingProduct shoppingProduct { get; set; }
         private int productId;
         public ICommand ArrowGoBackCommand { get; set; }
-        public Command LoadShoppingProductCommand { get; }
+        //public Command LoadShoppingProductCommand { get; }
         public Command LoadAddToCartPageCommand { get; }
         public ObservableCollection<ShoppingProductColorOption> ShoppingProductColorOptions { get; set; }
         public ObservableCollection<ShoppingProductSizeOption> ShoppingProductSizeOptions { get; }
@@ -49,7 +47,7 @@ namespace Youth.ViewModels
             ShoppingProductSizeOptions = new ObservableCollection<ShoppingProductSizeOption>();
             ShoppingProductSpecifications = new ObservableCollection<ShoppingProductSpecification>();
             ShoppingProductGalleryImages = new ObservableCollection<ShoppingProductGallery>();
-            LoadShoppingProductCommand = new Command(async () => LoadItemId(ProductId));
+            //LoadShoppingProductCommand = new Command(async () => LoadItemId(ProductId));
             LoadAddToCartPageCommand = new Command(async () => OnAddToCartPageSelected());
             ColorOptionTapped = new Command<ShoppingProductColorOption>(ExecuteColorOptionTappedCommand);
             SizeOptionTapped = new Command<ShoppingProductSizeOption>(ExecuteSizeOptionTappedCommand);
@@ -58,6 +56,7 @@ namespace Youth.ViewModels
             OpenContactUsPage = new Command(async () => await ExecuteOpenContactUsPage());
             ShareProductCommand = new Command(async () => await ExecuteShareProductCommand());
             OpenCommentsCommand = new Command(async () => await ExecuteOpenCommentsCommand());
+            LoadItemId(ProductId);
         }
 
         async Task ExecuteShareProductCommand()

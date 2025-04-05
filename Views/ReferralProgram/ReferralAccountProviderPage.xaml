@@ -69,10 +69,7 @@
                     </Image>
                 </StackLayout>
 
-                <RefreshView x:DataType="local:ReferralAccountProviderViewModel"
-                        Command="{Binding LoadReferralAccountsCommand}"
-                        IsRefreshing="{Binding IsBusy}">
-                    <ScrollView VerticalScrollBarVisibility="Never">
+                    <ScrollView VerticalScrollBarVisibility="Never" VerticalOptions="FillAndExpand">
                         <StackLayout Orientation="Vertical"
                                 VerticalOptions="StartAndExpand">
                             <!--  Search Bar  -->
@@ -141,7 +138,6 @@
                             </CollectionView>
                         </StackLayout>
                     </ScrollView>
-                </RefreshView>
             </StackLayout>
 
             <Button Text="+"

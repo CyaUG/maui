@@ -70,12 +70,7 @@
                 </Image>
             </StackLayout>
 
-            <RefreshView
-                x:DataType="local:ShoppingOrdersViewModel"
-                Command="{Binding LoadShoppingOrdersCommand}"
-                IsRefreshing="{Binding IsBusy}">
-
-                <ScrollView VerticalScrollBarVisibility="Never">
+                <ScrollView VerticalScrollBarVisibility="Never" VerticalOptions="FillAndExpand">
                     <StackLayout Padding="10,10,10,10"
                             Spacing="30">
                         <Label Text="{Binding Title}"
@@ -135,7 +130,6 @@
                         </CollectionView>
                     </StackLayout>
                 </ScrollView>
-            </RefreshView>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

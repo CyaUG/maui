@@ -64,14 +64,9 @@
                 </Image>
             </StackLayout>
 
-            <RefreshView
-                x:DataType="local:ShoppingCartViewModel"
-                Command="{Binding LoadMainCommand}"
-                IsRefreshing="{Binding IsBusy}">
                 <StackLayout Orientation="Vertical"
                         VerticalOptions="FillAndExpand">
-                    <ScrollView VerticalScrollBarVisibility="Never"
-                            VerticalOptions="FillAndExpand">
+                    <ScrollView VerticalScrollBarVisibility="Never" VerticalOptions="FillAndExpand">
                         <StackLayout Padding="10,10,10,10"
                                 Spacing="30">
                             <Label Text="{Binding Title}"
@@ -290,7 +285,6 @@
                         </Frame>
                     </StackLayout>
                 </StackLayout>
-            </RefreshView>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

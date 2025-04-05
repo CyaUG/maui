@@ -13,13 +13,11 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using Youth.ViewModels.Base;
 
-
-
 namespace Youth.ViewModels
 {
     public class MainQuizzesViewModel : BaseViewModel, IMainQuizzesViewModel
     {
-        public Command LoadQuizLeadBoadCommand { get; }
+        //public Command LoadQuizLeadBoadCommand { get; }
         public UserAccount quizProfile { get; set; }
         public ObservableCollection<UserAccount> quizLeaderBoard { get; set; }
         public ObservableCollection<QuizCategory> quizCategories { get; set; }
@@ -67,10 +65,11 @@ namespace Youth.ViewModels
             quizLeaderBoard = new ObservableCollection<UserAccount>();
             quizCategories = new ObservableCollection<QuizCategory>();
             quizzes = new ObservableCollection<Quiz>();
-            LoadQuizLeadBoadCommand = new Command(async () => await ExecuteLoadQuizLeadBoadCommand());
+            //LoadQuizLeadBoadCommand = new Command(async () => await ExecuteLoadQuizLeadBoadCommand());
             QuizCategoryNavTap = new Command<QuizCategory>(OnQuizCategorySelected);
             QuizNavTap = new Command<Quiz>(OnQuizSelected);
             QuizLeaderBoardNavTap = new Command(OnQuizLeaderBoardSelected);
+            _ = ExecuteLoadQuizLeadBoadCommand();
         }
 
         async void OnQuizCategorySelected(QuizCategory quizCategory)
@@ -195,7 +194,7 @@ namespace Youth.ViewModels
         {
             UpdateAuthStatus();
             IsBusy = true;
-            LoadQuizLeadBoadCommand.Execute(this);
+            //LoadQuizLeadBoadCommand.Execute(this);
         }
     }
 }

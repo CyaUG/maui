@@ -220,10 +220,7 @@
                 </StackLayout>
             </Grid>
 
-            <RefreshView x:DataType="local:MainQuizzesViewModel"
-                    Command="{Binding LoadQuizLeadBoadCommand}"
-                    IsRefreshing="{Binding IsBusy}">
-                <ScrollView VerticalScrollBarVisibility="Never">
+                <ScrollView VerticalScrollBarVisibility="Never" VerticalOptions="FillAndExpand">
                     <StackLayout Orientation="Vertical" Spacing="5">
                         <StackLayout Orientation="Horizontal"
                                 HorizontalOptions="CenterAndExpand">
@@ -344,7 +341,6 @@
                         </CollectionView>
                     </StackLayout>
                 </ScrollView>
-            </RefreshView>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

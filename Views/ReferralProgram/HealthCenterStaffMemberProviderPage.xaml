@@ -63,9 +63,6 @@
                         HeightRequest="30"/>
             </StackLayout>
 
-            <RefreshView x:DataType="local:HealthCenterStaffMemberProviderViewModel"
-                    Command="{Binding RunReferralHCMainCommand}"
-                    IsRefreshing="{Binding IsBusy}">
                 <CollectionView ItemsSource="{Binding StaffMembers}"
                         Margin="10"
                         SelectionMode="Single">
@@ -123,7 +120,6 @@
                         </DataTemplate>
                     </CollectionView.ItemTemplate>
                 </CollectionView>
-            </RefreshView>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

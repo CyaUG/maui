@@ -62,11 +62,7 @@
                         HeightRequest="30"/>
             </StackLayout>
 
-            <RefreshView x:DataType="local:SymptomDetailsViewModel"
-                    Command="{Binding LoadSymptomDetailsCommand}"
-                    IsRefreshing="{Binding IsBusy}">
-                <StackLayout Orientation="Vertical">
-                    <ScrollView VerticalScrollBarVisibility="Never">
+                    <ScrollView VerticalScrollBarVisibility="Never" VerticalOptions="FillAndExpand">
 
                         <StackLayout Orientation="Vertical">
 
@@ -88,8 +84,7 @@
                             </StackLayout>
                         </StackLayout>
                     </ScrollView>
-                </StackLayout>
-            </RefreshView>
+
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
