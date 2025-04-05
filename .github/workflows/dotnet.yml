@@ -153,14 +153,26 @@ jobs:
           mkdir -p ~/Library/MobileDevice/Provisioning\ Profiles
           cp /tmp/profile.mobileprovision ~/Library/MobileDevice/Provisioning\ Profiles/
 
-      - name: Build for iOS Device (arm64)
-        run: |
-          dotnet publish Youth.csproj -c Release -f net8.0-ios \
-            -p:RuntimeIdentifier=ios-arm64 \
-            -p:PlatformTarget=arm64 \
-            -p:CodesignKey="iPhone Distribution: Specioza Nakate (5N4YN56B77)" \
-            -p:ArchiveOnBuild=true \
-            -p:GenerateiOSAppBundle=true --no-restore
+        - name: Build for iOS Device (arm64)
+          run: |
+            dotnet publish Youth.csproj -c Release -f net8.0-ios \
+              -p:RuntimeIdentifier=ios-arm64 \
+              -p:PlatformTarget=arm64 \
+              -p:CodesignKey="iPhone Distribution: Specioza Nakate (5N4YN56B77)" \
+              -p:ArchiveOnBuild=true \
+              -p:GenerateiOSAppBundle=true \
+              -p:UseInterpreter=true \
+              -p:PublishTrimmed=false \
+              --no-restore
+
+      # - name: Build for iOS Device (arm64)
+      #   run: |
+      #     dotnet publish Youth.csproj -c Release -f net8.0-ios \
+      #       -p:RuntimeIdentifier=ios-arm64 \
+      #       -p:PlatformTarget=arm64 \
+      #       -p:CodesignKey="iPhone Distribution: Specioza Nakate (5N4YN56B77)" \
+      #       -p:ArchiveOnBuild=true \
+      #       -p:GenerateiOSAppBundle=true --no-restore
 
       - name: List Build Artifacts
         run: ls -alR bin/Release/net8.0-ios
